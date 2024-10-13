@@ -1,0 +1,36 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug MyQtApp",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/release/MyQtApp.exe", // Đường dẫn tới file thực thi
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}", // Thư mục làm việc
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:\\mingw64\\bin\\gdb.exe", // Đường dẫn tới gdb
+            "setupCommands": [
+                {
+                    "text": "-enable-pretty-printing",
+                    "description": "Enable pretty printing for gdb",
+                    "ignoreFailures": true
+                },
+                {
+                    "text": "set print frame-arguments all",
+                    "description": "Print all frame arguments",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build", // Tên tác vụ biên dịch đã được định nghĩa trong tasks.json
+            "logging": {
+                "engineLogging": true,
+                "trace": true,
+                "traceResponse": true
+            }
+        }
+    ]
+}

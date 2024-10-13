@@ -16,15 +16,21 @@ public:
     Vector(long capacity = 100);
     Vector(const Vector &vector);
     Vector(initializer_list<DataType> list);
-
+    ~Vector();
 
     Vector& operator = (const Vector & other);
-    Vector& opeartor [] (int position)
+    DataType& operator [] (int position);
+
+    bool isEmpty();
+    bool isFull();
     void pushback(DataType value);
     void pushfront(DataType value);
     void popback();
     void popfront();
     void remove(int position);
+
+    long getSize();
+    long getCapacity();
 
     
 };
