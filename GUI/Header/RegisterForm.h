@@ -1,4 +1,5 @@
 #pragma once
+#include "Controller/RegisterFormController.h"
 #include <QWidget>
 #include <QLineEdit>
 #include <QCheckBox>
@@ -14,16 +15,16 @@ private:
     QLineEdit *phonenumberEdit;
     QDateEdit *birthdayEdit;
     QLineEdit *addressEdit;
-    QComboBox *gender;
+    QLineEdit *genderEdit;
     QPushButton *confirmButton;
     QPushButton *exitButton;
-
 public :
+    RegisterFormController *control;
     RegisterForm(QWidget *parent = nullptr);
-// signals:
-//     void closed();
+signals:
+    void closed();
 
-// private slots:
-//     void onConfirmRegisterClicked();
-//     void onExitClicked();
+private slots:
+    void onConfirmRegisterClicked();
+    //void onExitClicked();
 };

@@ -1,4 +1,5 @@
 #include "GUI/Header/RegisterForm.h"
+#include "Controller/RegisterFormController.h"
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QLineEdit>
@@ -10,7 +11,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QPixmap>
-
+#include <QMessageBox>
 RegisterForm::RegisterForm(QWidget *parent) : QWidget(parent) {
     QFile file("Resource/style.css");
     if (file.open(QFile::ReadOnly | QFile::Text)) {
@@ -37,10 +38,9 @@ RegisterForm::RegisterForm(QWidget *parent) : QWidget(parent) {
     addressEdit->setPlaceholderText("Enter your address...");
     birthdayEdit = new QDateEdit(this);
     birthdayEdit->setCalendarPopup(true); 
-    gender = new QComboBox(this);
-    gender->addItem("Male");
-    gender->addItem("Female");
-    gender->addItem("Other");
+    genderEdit = new QLineEdit(this);
+    // gender->addItem("Male");
+    // gender->addItem("Female");
     confirmButton = new QPushButton("Comfirm", this);
     exitButton = new QPushButton("Exit", this);
     
@@ -61,7 +61,7 @@ RegisterForm::RegisterForm(QWidget *parent) : QWidget(parent) {
     infomation->addWidget(birthdayEdit,1,1);
     infomation->addItem(new QSpacerItem(30, 40, QSizePolicy::Expanding, QSizePolicy::Minimum), 1, 2); 
     infomation->addWidget(genderLabel,1,3);
-    infomation->addWidget(gender,1,4);
+    infomation->addWidget(genderEdit,1,4);
 
     firstnameLabel->setFixedSize(120,40);
     lastnameLabel->setFixedSize(120,40);
@@ -74,7 +74,7 @@ RegisterForm::RegisterForm(QWidget *parent) : QWidget(parent) {
     birthdayLabel->setFixedSize(120,40);
     birthdayEdit->setFixedSize(380,40);
     genderLabel->setFixedSize(120,40);
-    gender->setFixedSize(380,40);
+    genderEdit->setFixedSize(380,40);
 
 
     firstnameLabel->setObjectName("inputTitle");
@@ -88,7 +88,7 @@ RegisterForm::RegisterForm(QWidget *parent) : QWidget(parent) {
     phonenumberEdit->setObjectName("inputArea");
     addressEdit->setObjectName("inputArea");
     birthdayEdit->setObjectName("inputArea");
-    gender->setObjectName("inputArea");
+    genderEdit->setObjectName("inputArea");
     confirmButton->setObjectName("confirmButton");
     exitButton->setObjectName("cancelButton");
 
@@ -127,4 +127,33 @@ RegisterForm::RegisterForm(QWidget *parent) : QWidget(parent) {
     mainLayout->addSpacing(10);  
     mainLayout->addWidget(button);
     setLayout(mainLayout);
+
+    connect(confirmButton, &QPushButton::clicked, this, &RegisterForm :: onConfirmRegisterClicked );
+    //connect(exitButton,&QPushButton::clicked, this, &RegisterForm :: onExitClicked);
+}
+
+void RegisterForm :: onConfirmRegisterClicked(){
+    QString firstname = firstnameEdit->text();
+    QString lastname = lastnameEdit->text();
+    QString birthday = birthdayEdit->text();
+    QString phone = phonenumberEdit->text();
+    QString address = addressEdit->text();
+    QString gender = genderEdit->text();
+    if(firstname.isEmpty() || lastname.isEmpty() ||birthday.isEmpty() || phone.isEmpty() || address.isEmpty() || gender.isEmpty() ) {
+        QMessageBox::warning(this, "Input Error", "Please enter all of blanks.");
+    }
+
+    if (control) {
+    control->SaveUserInformation(firstname.toStdString(), lastname.toStdString(),
+                    address.toStdString(), phone.toStdString(),
+                    birthday.toStdString(), gender.toStdString());
+} else {
+    QMessageBox::critical(this, "Error", "Controller not initialized.");
+}
+    QMessageBox::information(this,"Success","Create user successfull");
+        this->hide();
+
+        RegisterForm *mainWindow = new RegisterForm();
+        mainWindow->resize(1000, 600);
+        mainWindow->show();
 }

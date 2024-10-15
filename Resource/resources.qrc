@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
     <file>Background.png</file>
-    <file>BackgroundGroup.png</file> <!-- Background image -->
-    <file>style.css</file>       <!-- CSS file -->
+    <file>BackgroundGroup.png</file> 
+    <file>style.css</file>   
     </qresource>
 </RCC>

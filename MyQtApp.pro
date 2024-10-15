@@ -4,10 +4,15 @@ CONFIG += c++11
 
 # Thêm các thư mục con vào project
 SOURCES += MainApplication.cpp \
-           GUI/Source/RegisterForm.cpp  # Sửa lại dấu \ thành dấu / cho đúng
-
-HEADERS += GUI/Header/RegisterForm.h  # Sửa lại dấu \ thành dấu / cho đúng
-
+           GUI/Source/RegisterForm.cpp \
+           Controller/RegisterFormController.cpp \ 
+           Object/User.cpp \
+           Handle/UserInformationHandle.cpp 
+HEADERS += GUI/Header/RegisterForm.h  \
+           Controller/RegisterFormController.h \
+           Object/User.h \
+           Handle/UserInformationHandle.h \
+           Datastructures/Datastructures.h
 # Thêm thư viện cần thiết
 QT += widgets
 
