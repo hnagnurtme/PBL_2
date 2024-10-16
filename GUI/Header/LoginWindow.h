@@ -2,6 +2,8 @@
 #define LOGINWINDOW_H
 
 #include "Controller/LoginController.h"
+#include "GUI/Header/RegisterWindow.h"
+#include "GUI/Header/ForgotPasswordWindow.h"
 #include <QWidget>
 #include <QLineEdit>
 #include <QCheckBox>

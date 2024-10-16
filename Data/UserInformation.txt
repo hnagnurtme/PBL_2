@@ -12,4 +12,4 @@ Nguyễn,Trung Ánh,101010101,01062005,1/1/2000,Nam
 Nguyễn,Trung Ánh,101010101,01062005,1/1/2000,Nam
 Nguyễn,Trung Ánh,101010101,01062005,1/1/2000,Nam
 Nguyễn,Trung Ánh,101010101,01062005,1/1/2000,Nam
-
+Nguyen Van,Trung Anh,Dang Chat,0768406235,1/6/2005,Nam

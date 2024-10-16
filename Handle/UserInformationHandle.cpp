@@ -21,3 +21,13 @@ void UserInformationHandle::SaveUserInformation(const User &user) {
     listUsers.pushback(user);
     
 }
+
+void UserInformationHandle::SaveAccount(const string &email, const string &password) {
+    ofstream file("Data/Account.txt", ios::app);
+    if (file.is_open()) {
+        file << email << "," << password << "\n";
+        file.close();
+    } else {
+        cerr << "Unable to open file for writing." << endl;
+    }
+}

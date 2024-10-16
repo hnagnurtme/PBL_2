@@ -1,14 +1,15 @@
 #include <iostream>
 #include <fstream>
-#include "DataStructures/DataStructures.h"
-#include "Handle/LoginHandle.h"
 #include <string>
 #include <sstream>
-#include <random> 
+#include <random>
 #include <chrono>
-#include <map>
+#include "DataStructures/DataStructures.h"
+#include "Handle/LoginHandle.h"
 
-bool LoginHandle :: loginAuthentication(const string &email, const string &password) {
+using namespace std;
+
+bool LoginHandle::loginAuthentication(const string &email, const string &password) {
     ifstream file("Data/Account.txt");
     string line;
     bool found = false;
@@ -27,140 +28,124 @@ bool LoginHandle :: loginAuthentication(const string &email, const string &passw
         }
         file.close();
     } else {
-        cerr << "Unable to open the account file." << endl;
         return false;
     }
 
-    return found; 
-};
+    return found;
+}
 
 void LoginHandle::saveAccount(const string &email, const string &password) {
     ofstream file("Data/Account.txt", ios::app);
     if (file.is_open()) {
         file << email << "," << password << "\n";
         file.close();
-    } else {
-        cerr << "Unable to open file for writing." << endl;
     }
 }
 
-bool LoginHandle::generateOTP(const string& email, const Vector<pair<string, string>>& accounts) {
-    for (int i = 0; i < accounts.getSize(); ++i) {
-        const auto& account = accounts[i];
-        if (account.first == email) {
-            random_device rd;
-            mt19937 gen(rd());
-            uniform_int_distribution<> distr(100000, 999999);
-            string otp = to_string(distr(gen)); 
-            auto creationTime = chrono::steady_clock::now(); 
-            ofstream file("Data/OTPRequest.txt", ios::app);
-            if (file.is_open()) {
-                file << "Email: " << email << "\n";
-                file << "OTP: " << otp << "\n";
-                file << "Creation Time: " << chrono::duration_cast<chrono::seconds>(creationTime.time_since_epoch()).count() << "\n\n";
-                file.close();
-            } else {
-                cerr << "Không thể mở file OTPRequest.txt để ghi." << endl;
-                return false;
-            }
+string LoginHandle::generateOTP(const string &email) {
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dis(0, 9);
 
-            return true; 
-        }
+    string otp;
+    for (int i = 0; i < 6; ++i) {
+        otp += to_string(dis(gen));
     }
-    return false; 
+
+    ofstream file("Data/OTPRequest.txt", ios::app);
+    if (file.is_open()) {
+        file << "Email: " << email << "\n";
+        file << "OTP: " << otp << "\n";
+        file.close();
+    }
+
+    return otp;
 }
 
-bool LoginHandle::sendRequestRecover(const string &email) {
-    ifstream file("Data/Account.txt");
+bool LoginHandle::sendrequestRecover(const string &email) {
+    ifstream inFile("Data/Account.txt");
+    if (!inFile.is_open()) {
+        return false;
+    }
+
     string line;
-    Vector<pair<string, string>> accounts; 
-    while (getline(file, line)) {
-        size_t commaPos = line.find(',');
-        if (commaPos != string::npos) {
-            string emailInFile = line.substr(0, commaPos);
-            string passwordInFile = line.substr(commaPos + 1);
-            accounts.pushback(make_pair(emailInFile, passwordInFile));
+    bool found = false;
+
+    while (getline(inFile, line)) {
+        stringstream ss(line);
+        string fileEmail, password;
+
+        if (getline(ss, fileEmail, ',') && getline(ss, password)) {
+            if (fileEmail == email) {
+                string otp = generateOTP(email);
+                listOTP.pushback({fileEmail, otp});
+                found = true;
+                break;
+            }
         }
     }
-    file.close(); 
-    return generateOTP(email, accounts);
+
+    inFile.close();
+    return found;
 }
 
 bool LoginHandle::authentiacationRequest(const string &otp) {
     ifstream file("Data/OTPRequest.txt");
-    string line, fileEmail, fileOTP;
-    long long fileCreationTime = 0;
-
+    string line, fileOTP;
     while (getline(file, line)) {
         if (line.find("OTP:") != string::npos) {
-            fileOTP = line.substr(5); 
-        }
-        if (line.find("Creation Time:") != string::npos) {
-            istringstream iss(line.substr(14));
-            iss >> fileCreationTime; 
+            fileOTP = line.substr(5);
         }
     }
     file.close();
-    auto currentTime = chrono::steady_clock::now();
-    auto currentEpochTime = chrono::duration_cast<chrono::seconds>(currentTime.time_since_epoch()).count();
-    if ((currentEpochTime - fileCreationTime) > 30) {
-        cout << "OTP đã hết hạn!" << endl;
-        return false;
-    }
-
-    if (otp == fileOTP) {
-        return true;
-    } else {
-        cout << "OTP không đúng!" << endl;
-        return false; 
-    }
+    return (otp == fileOTP);
 }
 
 bool LoginHandle::recoverPassword(const string &otp, const string &newPassword) {
     ifstream otpFile("Data/OTPRequest.txt");
     string line;
     string email;
-    bool otpFound = false; 
+    bool otpFound = false;
 
     while (getline(otpFile, line)) {
         if (line.find("OTP: " + otp) != string::npos) {
-            getline(otpFile, line); 
+            getline(otpFile, line);
             istringstream iss(line);
-            getline(iss, email, ':'); 
-            email.erase(0, email.find_first_not_of(" \t")); 
+            getline(iss, email, ':');
+            email.erase(0, email.find_first_not_of(" \t"));
             otpFound = true;
-            break; 
+            break;
         }
     }
 
-    otpFile.close(); 
+    otpFile.close();
 
     if (!otpFound) {
-        return false; 
+        return false;
     }
 
     ifstream userFile("Data/Account.txt");
-    string updatedContent;
+    ofstream tempFile("Data/TempAccount.txt");
     bool userFound = false;
 
     while (getline(userFile, line)) {
         istringstream iss(line);
         string storedEmail, storedPassword;
-        getline(iss, storedEmail, ','); 
-        getline(iss, storedPassword); 
+        getline(iss, storedEmail, ',');
+        getline(iss, storedPassword);
 
         if (storedEmail == email) {
-            storedPassword = newPassword; 
+            storedPassword = newPassword;
             userFound = true;
         }
-        updatedContent += storedEmail + "," + storedPassword + "\n";
+        tempFile << storedEmail + "," + storedPassword + "\n";
     }
 
-    userFile.close(); 
+    userFile.close();
+    tempFile.close();
 
-    ofstream outFile("Data/Account.txt");
-    outFile << updatedContent;
-    outFile.close();
+    remove("Data/Account.txt");
+    rename("Data/TempAccount.txt", "Data/Account.txt");
 
     return userFound;
 }

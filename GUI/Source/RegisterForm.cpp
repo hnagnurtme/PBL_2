@@ -13,6 +13,7 @@
 #include <QPixmap>
 #include <QMessageBox>
 RegisterForm::RegisterForm(QWidget *parent) : QWidget(parent) {
+    control = new RegisterFormController();
     QFile file("Resource/style.qss");
     if (file.open(QFile::ReadOnly | QFile::Text)) {
         QTextStream stream(&file);
@@ -165,11 +166,15 @@ void RegisterForm :: onConfirmRegisterClicked(){
 
 void RegisterForm :: onExitClicked(){
     QMessageBox::warning(this, "Not Save", "Your account had not created yet");
+    LoginWindow *loginWindow  = new LoginWindow();
+    loginWindow->show();
     this->hide();
 }
 
 
 void RegisterForm :: ongotoHomepageClicked(){
     QMessageBox::information(this,"Success","Create user successfull");
+    LoginWindow *loginWindow  = new LoginWindow();
+    loginWindow->show();
     this->hide();
 }

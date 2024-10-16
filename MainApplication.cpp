@@ -1,8 +1,8 @@
 #include <QApplication>
-#include "GUI/Header/Login.h"
+#include "GUI/Header/ForgotPasswordWindow.h"
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
-    LoginWindow registerForm;
+    ForgotPassWordWindow registerForm;
     registerForm.show();
     return app.exec();
 }

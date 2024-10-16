@@ -1,4 +1,4 @@
-#include "GUI/Header/Login.h"
+#include "GUI/Header/LoginWindow.h"
 #include "Controller/RegisterFormController.h"
 #include <QWidget>
 #include <QVBoxLayout>
@@ -14,6 +14,7 @@
 #include <QMessageBox>
 
 LoginWindow::LoginWindow(QWidget *parent) : QWidget(parent) {
+    control = new LoginController();
     QFile file("Resource/style.qss");
     if (file.open(QFile::ReadOnly | QFile::Text)) {
         QTextStream stream(&file);
@@ -77,6 +78,7 @@ LoginWindow::LoginWindow(QWidget *parent) : QWidget(parent) {
     intro->addWidget(imageLabel);
     intro->addWidget(title);
     intro->setContentsMargins(30, 10, 30, 10);
+    
 
     QGroupBox *introBox = new QGroupBox();
     introBox->setLayout(intro);
@@ -99,7 +101,6 @@ LoginWindow::LoginWindow(QWidget *parent) : QWidget(parent) {
 void LoginWindow::onLoginButtonClicked() {
     QString email = emailEdit->text();
     QString password = passwordEdit->text();
-
     if (email.isEmpty() || password.isEmpty()) {
         QMessageBox::warning(this, "Input Error", "Please enter both email and password.");
         return;
@@ -118,10 +119,14 @@ void LoginWindow::onLoginButtonClicked() {
 }
 
 void LoginWindow::onForgotPasswordButtonClicked() {
+    ForgotPassWordWindow *forgotPasswordWindow = new ForgotPassWordWindow();
+    forgotPasswordWindow->show();
     this->hide();
     
 }
 
 void LoginWindow::onRegisterButtonClicked() {
+    RegisterWindow *registerWindow = new RegisterWindow();
+    registerWindow->show();
     this->hide();
 }

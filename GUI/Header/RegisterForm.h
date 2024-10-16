@@ -1,5 +1,6 @@
 #pragma once
 #include "Controller/RegisterFormController.h"
+#include "GUI/Header/LoginWindow.h"
 #include <QWidget>
 #include <QLineEdit>
 #include <QCheckBox>

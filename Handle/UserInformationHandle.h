@@ -7,4 +7,5 @@ private:
     Vector<User> listUsers;
 public:
     void SaveUserInformation(const User &user);
+    void SaveAccount(const string &email, const string &password);
 };

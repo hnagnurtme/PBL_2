@@ -12,8 +12,8 @@ class Vector {
 
 private:
     DataType* data;
-    long size;
     long capacity;
+    long size;
 public:
     Vector(long capacity = 1000);
     Vector(const Vector &vector);

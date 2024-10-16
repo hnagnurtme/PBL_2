@@ -79,6 +79,7 @@
         "xtree": "cpp",
         "xutility": "cpp",
         "*.tcc": "cpp",
-        "qvboxlayout": "cpp"
+        "qvboxlayout": "cpp",
+        "qpushbutton": "cpp"
     }
 }

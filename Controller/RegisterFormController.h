@@ -7,4 +7,5 @@ class RegisterFormController{
 public: 
     UserInformationHandle save;
     void SaveUserInformation(string firstname, string lastname, string address, string phone, string birthday, string gender);
+    void SaveAccount(const string &email, const string &password);
 };

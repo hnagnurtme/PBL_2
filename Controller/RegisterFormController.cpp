@@ -4,3 +4,7 @@ void RegisterFormController::SaveUserInformation(string firstname, string lastna
     User newUser(firstname,lastname,address,phone,birthday,gender);
     save.SaveUserInformation(newUser);
 }
+
+void RegisterFormController:: SaveAccount(const string &email, const string &password){
+    save.SaveAccount(email,password);
+}

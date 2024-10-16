@@ -12,7 +12,7 @@ private:
     string gender;
 
 public:
-    User(string firstname, string lastname, string address, string phone, string birthday, string gender);
+    User(string firstname ="", string lastname ="", string address="", string phone="", string birthday="", string gender="");
     
     string getFirstName() const;
     string getLastName() const;
