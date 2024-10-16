@@ -97,6 +97,23 @@ LoginWindow::LoginWindow(QWidget *parent) : QWidget(parent) {
 }
 
 void LoginWindow::onLoginButtonClicked() {
+    QString email = emailEdit->text();
+    QString password = passwordEdit->text();
+
+    if (email.isEmpty() || password.isEmpty()) {
+        QMessageBox::warning(this, "Input Error", "Please enter both email and password.");
+        return;
+    }
+    if (control) {
+    if(control->authenLogin(email.toStdString(),password.toStdString())){
+        QMessageBox::information(this, "Login Successful......", "Welcome!");
+        this->hide();
+        
+    }
+
+    } else {
+    QMessageBox::critical(this, "Error", "Controller not initialized.");
+    }
     this->hide();
 }
 

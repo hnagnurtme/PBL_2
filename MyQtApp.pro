@@ -6,15 +6,21 @@ CONFIG += c++11
 SOURCES += MainApplication.cpp \
            GUI/Source/RegisterForm.cpp \
            GUI/Source/Login.cpp \
-           Controller/RegisterFormController.cpp \ 
+           Controller/RegisterFormController.cpp \
            Object/User.cpp \
-           Handle/UserInformationHandle.cpp 
+           Handle/UserInformationHandle.cpp \
+           Handle/LoginHandle.cpp \
+           Controller/LoginController.cpp
+
 HEADERS += GUI/Header/RegisterForm.h  \
            GUI/Header/Login.h \
            Controller/RegisterFormController.h \
            Object/User.h \
            Handle/UserInformationHandle.h \
-           Datastructures/Datastructures.h
+           Handle/LoginHandle.h \
+           Datastructures/Datastructures.h \
+           Controller/LoginController.h
+
 # Thêm thư viện cần thiết
 QT += widgets
 

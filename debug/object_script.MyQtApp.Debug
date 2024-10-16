@@ -1,0 +1,11 @@
+debug/MainApplication.o
+debug/RegisterForm.o
+debug/Login.o
+debug/RegisterFormController.o
+debug/User.o
+debug/UserInformationHandle.o
+debug/LoginHandle.o
+debug/LoginController.o
+debug/qrc_resources.o
+debug/moc_RegisterForm.o
+debug/moc_Login.o

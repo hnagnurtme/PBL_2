@@ -1,6 +1,7 @@
 #ifndef LOGINWINDOW_H
 #define LOGINWINDOW_H
 
+#include "Controller/LoginController.h"
 #include <QWidget>
 #include <QLineEdit>
 #include <QCheckBox>
@@ -10,6 +11,7 @@ class LoginWindow : public QWidget {
     Q_OBJECT
 
 public:
+    LoginController *control;
     LoginWindow(QWidget *parent = nullptr);
 
 private slots:
