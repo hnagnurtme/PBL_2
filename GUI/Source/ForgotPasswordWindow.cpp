@@ -128,7 +128,6 @@ void ForgotPassWordWindow::confirmOTP(){
     }
 }
 void ForgotPassWordWindow::backtoLogin(){
-    QMessageBox::warning(this, "Not Save", "Your account had not created yet");
     LoginWindow *loginWindow  = new LoginWindow();
     loginWindow->show();
     this->hide();
