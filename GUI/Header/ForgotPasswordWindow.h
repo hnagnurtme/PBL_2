@@ -3,6 +3,7 @@
 #include "Controller/LoginController.h"
 #include "GUI/Header/RegisterWindow.h"
 #include "GUI/Header/LoginWindow.h"
+#include "GUI/Header/ChangePassword.h"
 #include <QWidget>
 #include <QLineEdit>
 #include <QPushButton>

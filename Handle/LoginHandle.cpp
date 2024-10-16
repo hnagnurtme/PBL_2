@@ -102,17 +102,20 @@ bool LoginHandle::authentiacationRequest(const string &otp) {
 }
 
 bool LoginHandle::recoverPassword(const string &otp, const string &newPassword) {
+    // Đọc file OTPRequest.txt
     ifstream otpFile("Data/OTPRequest.txt");
     string line;
     string email;
     bool otpFound = false;
 
+    // Tìm kiếm OTP trong file
     while (getline(otpFile, line)) {
         if (line.find("OTP: " + otp) != string::npos) {
             getline(otpFile, line);
             istringstream iss(line);
             getline(iss, email, ':');
-            email.erase(0, email.find_first_not_of(" \t"));
+            email.erase(0, email.find_first_not_of(" \t")); // Xóa khoảng trắng ở đầu
+            email.erase(email.find_last_not_of(" \t") + 1); // Xóa khoảng trắng ở cuối
             otpFound = true;
             break;
         }
@@ -121,9 +124,10 @@ bool LoginHandle::recoverPassword(const string &otp, const string &newPassword) 
     otpFile.close();
 
     if (!otpFound) {
-        return false;
+        return false; // Không tìm thấy OTP
     }
 
+    // Đọc file Account.txt và cập nhật mật khẩu
     ifstream userFile("Data/Account.txt");
     ofstream tempFile("Data/TempAccount.txt");
     bool userFound = false;
@@ -134,18 +138,24 @@ bool LoginHandle::recoverPassword(const string &otp, const string &newPassword) 
         getline(iss, storedEmail, ',');
         getline(iss, storedPassword);
 
+        // Cắt bỏ khoảng trắng cho email đã lưu
+        storedEmail.erase(0, storedEmail.find_first_not_of(" \t")); // Xóa khoảng trắng ở đầu
+        storedEmail.erase(storedEmail.find_last_not_of(" \t") + 1); // Xóa khoảng trắng ở cuối
+
+        // So sánh email đã lưu với email tìm được từ OTP
         if (storedEmail == email) {
-            storedPassword = newPassword;
+            storedPassword = newPassword; // Cập nhật mật khẩu mới
             userFound = true;
         }
-        tempFile << storedEmail + "," + storedPassword + "\n";
+        tempFile << storedEmail + "," + storedPassword + "\n"; // Ghi vào file tạm
     }
 
     userFile.close();
     tempFile.close();
 
+    // Xóa file cũ và đổi tên file tạm
     remove("Data/Account.txt");
     rename("Data/TempAccount.txt", "Data/Account.txt");
 
-    return userFound;
+    return userFound; // Trả về true nếu đã tìm thấy và cập nhật thành công
 }

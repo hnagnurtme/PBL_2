@@ -14,3 +14,4 @@ release/moc_RegisterForm.o
 release/moc_LoginWindow.o
 release/moc_RegisterWindow.o
 release/moc_ForgotPasswordWindow.o
+release/moc_ChangePassword.o

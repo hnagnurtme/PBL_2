@@ -14,3 +14,4 @@ debug/moc_RegisterForm.o
 debug/moc_LoginWindow.o
 debug/moc_RegisterWindow.o
 debug/moc_ForgotPasswordWindow.o
+debug/moc_ChangePassword.o

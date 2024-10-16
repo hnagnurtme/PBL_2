@@ -1,5 +1,9 @@
 #include "Controller/LoginController.h"
+LoginController ::LoginController(){
+    LoginHandle authenciation;
+    LoginHandle request;
 
+}
 bool LoginController :: authenLogin(const string &email, const string &password){
     if(authenciation.loginAuthentication(email,password)) return true;
     else return false;
@@ -16,5 +20,6 @@ bool LoginController ::authentiacationRequest(const string &otp){
 }
 
 bool LoginController :: recoverPassword(const string &otp,const string &newpassword){
-    return true;
+    if(authenciation.recoverPassword(otp,newpassword)) return true;
+    else return false;
 }
