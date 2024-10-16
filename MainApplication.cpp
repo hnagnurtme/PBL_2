@@ -1,8 +1,8 @@
 #include <QApplication>
-#include "GUI/Header/RegisterForm.h"
+#include "GUI/Header/Login.h"
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
-    RegisterForm registerForm;
+    LoginWindow registerForm;
     registerForm.show();
     return app.exec();
 }

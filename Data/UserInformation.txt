@@ -12,5 +12,4 @@ Nguyễn,Trung Ánh,101010101,01062005,1/1/2000,Nam
 Nguyễn,Trung Ánh,101010101,01062005,1/1/2000,Nam
 Nguyễn,Trung Ánh,101010101,01062005,1/1/2000,Nam
 Nguyễn,Trung Ánh,101010101,01062005,1/1/2000,Nam
-dssds,dssds,dssds,dssdsd,1/1/2000,dssdsds
-dsdsd,dsds,dssds,dsdsd,1/1/2000,dsdsdsd
+

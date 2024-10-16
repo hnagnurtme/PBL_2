@@ -1,0 +1,56 @@
+#inputTitle {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #3272D4, stop:1 #5A9BF4); 
+    color: white; 
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid #AAAAAA; 
+    border-radius: 5px; 
+    padding: 10px;
+}
+
+#inputArea {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #BDDDFD, stop:1 #E0F1FF); 
+    color: #112950; 
+    border: 1px solid #AAAAAA;
+    border-radius: 5px; 
+    padding: 10px; 
+    font-size: 12px;
+}
+
+#confirmButton {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #112950, stop:1 #1A4C72); 
+    color: white; 
+    border-radius: 5px; 
+    padding: 10px; 
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#cancelButton {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #D4696A, stop:1 #E68385); 
+    color: white; 
+    border-radius: 5px; 
+    padding: 10px; 
+    font-size: 16px;
+    font-weight: bold;
+}
+#titleLabel {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #ff7e5f, stop:1 #feb47b);
+    font-size: 20px;                            
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+}
+QGroupBox {
+    background-repeat: no-repeat; 
+    background-position: center;
+    color: white; 
+    border: 1px solid #AAAAAA; 
+    border-radius: 5px; 
+    padding: 10px;         
+}

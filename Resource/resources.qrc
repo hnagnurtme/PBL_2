@@ -2,6 +2,6 @@
     <qresource prefix="/">
     <file>Background.png</file>
     <file>BackgroundGroup.png</file> 
-    <file>style.css</file>   
+    <file>style.qss</file>   
     </qresource>
 </RCC>

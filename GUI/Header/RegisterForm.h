@@ -18,6 +18,7 @@ private:
     QLineEdit *genderEdit;
     QPushButton *confirmButton;
     QPushButton *exitButton;
+    QPushButton *gotoHomePageButton;
 public :
     RegisterFormController *control;
     RegisterForm(QWidget *parent = nullptr);
@@ -26,5 +27,6 @@ signals:
 
 private slots:
     void onConfirmRegisterClicked();
-    //void onExitClicked();
+    void onExitClicked();
+    void ongotoHomepageClicked();
 };

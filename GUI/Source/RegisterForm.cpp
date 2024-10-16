@@ -13,7 +13,7 @@
 #include <QPixmap>
 #include <QMessageBox>
 RegisterForm::RegisterForm(QWidget *parent) : QWidget(parent) {
-    QFile file("Resource/style.css");
+    QFile file("Resource/style.qss");
     if (file.open(QFile::ReadOnly | QFile::Text)) {
         QTextStream stream(&file);
         QString style = stream.readAll();
@@ -39,9 +39,8 @@ RegisterForm::RegisterForm(QWidget *parent) : QWidget(parent) {
     birthdayEdit = new QDateEdit(this);
     birthdayEdit->setCalendarPopup(true); 
     genderEdit = new QLineEdit(this);
-    // gender->addItem("Male");
-    // gender->addItem("Female");
     confirmButton = new QPushButton("Comfirm", this);
+    gotoHomePageButton  = new QPushButton("Go to Homepage",this);
     exitButton = new QPushButton("Exit", this);
     
     QGridLayout *fullname = new QGridLayout;
@@ -91,6 +90,7 @@ RegisterForm::RegisterForm(QWidget *parent) : QWidget(parent) {
     genderEdit->setObjectName("inputArea");
     confirmButton->setObjectName("confirmButton");
     exitButton->setObjectName("cancelButton");
+    gotoHomePageButton->setObjectName("confirmButton");
 
     QGroupBox *name = new QGroupBox;
     QGroupBox *infor = new QGroupBox;
@@ -98,10 +98,12 @@ RegisterForm::RegisterForm(QWidget *parent) : QWidget(parent) {
     infor->setLayout(infomation);
 
     QHBoxLayout *buttonLayout = new QHBoxLayout;
-    buttonLayout->addWidget(confirmButton);
-    buttonLayout->addSpacing(100);
     buttonLayout->addWidget(exitButton);
-    buttonLayout->setContentsMargins(30, 20, 30, 20);
+    buttonLayout->addSpacing(100);
+    buttonLayout->addWidget(gotoHomePageButton);
+    buttonLayout->addSpacing(100);
+    buttonLayout->addWidget(confirmButton);
+    buttonLayout->setContentsMargins(30, 10, 30, 10);
     QGroupBox *button = new QGroupBox;
     button->setLayout(buttonLayout);
 
@@ -129,7 +131,8 @@ RegisterForm::RegisterForm(QWidget *parent) : QWidget(parent) {
     setLayout(mainLayout);
 
     connect(confirmButton, &QPushButton::clicked, this, &RegisterForm :: onConfirmRegisterClicked );
-    //connect(exitButton,&QPushButton::clicked, this, &RegisterForm :: onExitClicked);
+    connect(exitButton,&QPushButton::clicked, this, &RegisterForm :: onExitClicked);
+    connect(gotoHomePageButton,&QPushButton::clicked,this,&RegisterForm::ongotoHomepageClicked);
 }
 
 void RegisterForm :: onConfirmRegisterClicked(){
@@ -141,19 +144,32 @@ void RegisterForm :: onConfirmRegisterClicked(){
     QString gender = genderEdit->text();
     if(firstname.isEmpty() || lastname.isEmpty() ||birthday.isEmpty() || phone.isEmpty() || address.isEmpty() || gender.isEmpty() ) {
         QMessageBox::warning(this, "Input Error", "Please enter all of blanks.");
+        return;
     }
 
     if (control) {
     control->SaveUserInformation(firstname.toStdString(), lastname.toStdString(),
                     address.toStdString(), phone.toStdString(),
                     birthday.toStdString(), gender.toStdString());
-} else {
+    } else {
     QMessageBox::critical(this, "Error", "Controller not initialized.");
-}
+    }
     QMessageBox::information(this,"Success","Create user successfull");
         this->hide();
 
         RegisterForm *mainWindow = new RegisterForm();
         mainWindow->resize(1000, 600);
         mainWindow->show();
+}
+
+
+void RegisterForm :: onExitClicked(){
+    QMessageBox::warning(this, "Not Save", "Your account had not created yet");
+    this->hide();
+}
+
+
+void RegisterForm :: ongotoHomepageClicked(){
+    QMessageBox::information(this,"Success","Create user successfull");
+    this->hide();
 }
