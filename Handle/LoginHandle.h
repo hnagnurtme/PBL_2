@@ -15,6 +15,6 @@ public:
     void saveAccount(const string &email, const string &password);
     bool sendrequestRecover(const string &email);
     string generateOTP(const string &email);
-    bool authentiacationRequest(const string &otp);
-    bool recoverPassword(const string &otp,const string &newpassword);
+    bool authentiacationRequest(const string &otp , string &email);
+    bool recoverPassword(const string &email,const string &newpassword);
 };

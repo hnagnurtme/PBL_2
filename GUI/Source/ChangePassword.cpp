@@ -69,22 +69,19 @@ ChangePasswordWindow::ChangePasswordWindow(QWidget *parent, const string &otp): 
 void ChangePasswordWindow::sendButtonClicked() {
     QString password = passwordRecover->text().trimmed();
     QString confirmPassword = passwordRecoverConfirm->text().trimmed();
-
     if (password.isEmpty() || confirmPassword.isEmpty()) {
-        QMessageBox::warning(this, "Input Error", "Please fill in both fields.");
+        QMessageBox::warning(this, "Input Error", "Please fill in both password fields.");
         return;
     }
     if (password != confirmPassword) {
         QMessageBox::warning(this, "Password Mismatch", "Passwords do not match.");
         return;
     }
-
-    if (control->recoverPassword(otpEnter, password.toStdString())) {
+    if (control->recoverPassword(password.toStdString())) {
         QMessageBox::information(this, "Success", "Password has been changed successfully.");
     } else {
         QMessageBox::warning(this, "Error", "Failed to recover password.");
     }
-
     this->close();
 }
 

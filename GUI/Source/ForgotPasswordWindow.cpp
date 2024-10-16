@@ -116,7 +116,7 @@ void ForgotPassWordWindow::confirmOTP(){
         QMessageBox::warning(this, "Invalid Input", "Please enter the OTP.");
         return;
     }
-    if(control->authentiacationRequest(otpEntered.toStdString())){
+    if(control->authenticationRequest(otpEntered.toStdString())){
         QMessageBox::information(this, "Success", "OTP is valid. You can now reset your password");
         ChangePasswordWindow *changpasswordWindow = new ChangePasswordWindow(this,otpEntered.toStdString());
         changpasswordWindow->setWindowFlag(Qt::Window);

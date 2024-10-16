@@ -89,73 +89,51 @@ bool LoginHandle::sendrequestRecover(const string &email) {
     return found;
 }
 
-bool LoginHandle::authentiacationRequest(const string &otp) {
+bool LoginHandle::authentiacationRequest(const string &otp, string &email) {
     ifstream file("Data/OTPRequest.txt");
     string line, fileOTP;
-    while (getline(file, line)) {
-        if (line.find("OTP:") != string::npos) {
-            fileOTP = line.substr(5);
-        }
-    }
-    file.close();
-    return (otp == fileOTP);
-}
-
-bool LoginHandle::recoverPassword(const string &otp, const string &newPassword) {
-    // Đọc file OTPRequest.txt
-    ifstream otpFile("Data/OTPRequest.txt");
-    string line;
-    string email;
     bool otpFound = false;
 
-    // Tìm kiếm OTP trong file
-    while (getline(otpFile, line)) {
-        if (line.find("OTP: " + otp) != string::npos) {
-            getline(otpFile, line);
-            istringstream iss(line);
-            getline(iss, email, ':');
-            email.erase(0, email.find_first_not_of(" \t")); // Xóa khoảng trắng ở đầu
-            email.erase(email.find_last_not_of(" \t") + 1); // Xóa khoảng trắng ở cuối
+    while (getline(file, line)) {
+        if (line.find("OTP:") != string::npos) {
+            fileOTP = line.substr(5); 
+        } else if (line.find("Email:") != string::npos) {
+            email = line.substr(7);
+            email.erase(0, email.find_first_not_of(" \t"));
+        }
+
+        if (!fileOTP.empty() && fileOTP == otp) {
             otpFound = true;
             break;
         }
     }
 
-    otpFile.close();
+    file.close();
+    return otpFound;
+}
 
-    if (!otpFound) {
-        return false; // Không tìm thấy OTP
-    }
-
-    // Đọc file Account.txt và cập nhật mật khẩu
+bool LoginHandle::recoverPassword(const string &email, const string &newPassword) {
+    string line;
     ifstream userFile("Data/Account.txt");
     ofstream tempFile("Data/TempAccount.txt");
-    bool userFound = false;
 
+    bool userFound = false;
     while (getline(userFile, line)) {
         istringstream iss(line);
         string storedEmail, storedPassword;
         getline(iss, storedEmail, ',');
         getline(iss, storedPassword);
-
-        // Cắt bỏ khoảng trắng cho email đã lưu
-        storedEmail.erase(0, storedEmail.find_first_not_of(" \t")); // Xóa khoảng trắng ở đầu
-        storedEmail.erase(storedEmail.find_last_not_of(" \t") + 1); // Xóa khoảng trắng ở cuối
-
-        // So sánh email đã lưu với email tìm được từ OTP
+        storedEmail.erase(0, storedEmail.find_first_not_of(" \t"));
+        storedEmail.erase(storedEmail.find_last_not_of(" \t") + 1);
         if (storedEmail == email) {
-            storedPassword = newPassword; // Cập nhật mật khẩu mới
+            storedPassword = newPassword;
             userFound = true;
         }
-        tempFile << storedEmail + "," + storedPassword + "\n"; // Ghi vào file tạm
+        tempFile << storedEmail + "," + storedPassword + "\n";
     }
-
     userFile.close();
     tempFile.close();
-
-    // Xóa file cũ và đổi tên file tạm
     remove("Data/Account.txt");
     rename("Data/TempAccount.txt", "Data/Account.txt");
-
-    return userFound; // Trả về true nếu đã tìm thấy và cập nhật thành công
+    return userFound;
 }

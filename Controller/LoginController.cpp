@@ -1,25 +1,20 @@
 #include "Controller/LoginController.h"
-LoginController ::LoginController(){
-    LoginHandle authenciation;
-    LoginHandle request;
 
-}
-bool LoginController :: authenLogin(const string &email, const string &password){
-    if(authenciation.loginAuthentication(email,password)) return true;
-    else return false;
+string LoginController :: emailRecover ="";
+
+bool LoginController::authenLogin(const string &email, const string &password) {
+    return authentication.loginAuthentication(email, password);
 }
 
-bool LoginController :: sendRequestRecover(const string &email){
-    if(request.sendrequestRecover(email)) return true;
-    else return false;
+bool LoginController::sendRequestRecover(const string &email) {
+    emailRecover = email;  
+    return request.sendrequestRecover(email);
 }
 
-bool LoginController ::authentiacationRequest(const string &otp){
-    if( authenciation.authentiacationRequest(otp)) return true;
-    else return false;
+bool LoginController::authenticationRequest(const string &otp) {
+    return authentication.authentiacationRequest(otp, emailRecover);
 }
 
-bool LoginController :: recoverPassword(const string &otp,const string &newpassword){
-    if(authenciation.recoverPassword(otp,newpassword)) return true;
-    else return false;
+bool LoginController::recoverPassword(const string &newpassword) {
+    return authentication.recoverPassword(emailRecover, newpassword);
 }
