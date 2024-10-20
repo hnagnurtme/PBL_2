@@ -93,6 +93,7 @@ void ForgotPassWordWindow:: sendOTPRequest(){
         QMessageBox::warning(this, "Input Error", "Please enter your email.");
         return;
     }
+    
     if (control == nullptr) {
     QMessageBox::critical(this, "Error", "Control is not initialized.");
     return;

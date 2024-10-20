@@ -12,6 +12,8 @@
 #include <QTextStream>
 #include <QPixmap>
 #include <QMessageBox>
+#include <QAnimationDriver> 
+
 
 LoginWindow::LoginWindow(QWidget *parent) : QWidget(parent) {
     control = new LoginController();
@@ -64,6 +66,7 @@ LoginWindow::LoginWindow(QWidget *parent) : QWidget(parent) {
     QGroupBox *buttonBox = new QGroupBox();
     buttonBox->setLayout(buttonLayout);
 
+    
     QVBoxLayout *intro = new QVBoxLayout;
     QLabel *imageLabel = new QLabel();
     QLabel *title = new QLabel("Welcome My Book Store");
@@ -90,7 +93,14 @@ LoginWindow::LoginWindow(QWidget *parent) : QWidget(parent) {
     mainLayout->addWidget(loginBox);
     mainLayout->addSpacing(10);
     mainLayout->addWidget(buttonBox);
-    setLayout(mainLayout);
+    
+
+
+    QHBoxLayout *layout = new QHBoxLayout;
+    layout->addLayout(mainLayout);
+    layout->addWidget(introBox);
+    setLayout(layout);
+    // setLayout(mainLayout);
 
     connect(confirmButton, &QPushButton::clicked, this, &LoginWindow::onLoginButtonClicked);
     connect(registerButton, &QPushButton::clicked, this, &LoginWindow::onRegisterButtonClicked);
@@ -99,8 +109,8 @@ LoginWindow::LoginWindow(QWidget *parent) : QWidget(parent) {
 }
 
 void LoginWindow::onLoginButtonClicked() {
-    QString email = emailEdit->text();
-    QString password = passwordEdit->text();
+    QString email = emailEdit->text().trimmed();;
+    QString password = passwordEdit->text().trimmed();;
     if (email.isEmpty() || password.isEmpty()) {
         QMessageBox::warning(this, "Input Error", "Please enter both email and password.");
         return;
@@ -108,8 +118,11 @@ void LoginWindow::onLoginButtonClicked() {
     if (control) {
     if(control->authenLogin(email.toStdString(),password.toStdString())){
         QMessageBox::information(this, "Login Successful......", "Welcome!");
-        this->hide();
         
+    }
+    else{
+        QMessageBox::warning(this, "Incorrect Password", "Please check both email and password.");
+        return;
     }
 
     } else {

@@ -54,3 +54,20 @@ QGroupBox {
     border-radius: 5px; 
     padding: 10px;         
 }
+
+QMessageBox {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #a0c4ff, stop:1 #f0f0f0); /* Gradient từ xanh dương nhạt sang màu xám nhạt */
+    color: #333; /* Màu chữ */
+    border: 1px solid #888; /* Đường viền */
+}
+
+QMessageBox QPushButton {
+    background-color: #4CAF50; /* Màu nền cho nút */
+    color: white; /* Màu chữ cho nút */
+    padding: 5px 10px; /* Khoảng cách padding cho nút */
+}
+
+QMessageBox QPushButton:hover {
+    background-color: #45a049; /* Màu nền cho nút khi di chuột */
+}

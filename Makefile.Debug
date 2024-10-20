@@ -149,9 +149,9 @@ compiler_rcc_clean:
 	-$(DEL_FILE) debug\qrc_resources.cpp
 debug/qrc_resources.cpp: Resource/resources.qrc \
 		C:/QT/6.7.3/mingw_64/bin/rcc.exe \
-		Resource/BackgroundGroup.png \
 		Resource/Background.png \
-		Resource/style.qss
+		Resource/style.qss \
+		Resource/BACKGROUND1.png
 	C:\QT\6.7.3\mingw_64\bin\rcc.exe -name resources --no-zstd Resource\resources.qrc -o debug\qrc_resources.cpp
 
 compiler_moc_predefs_make_all: debug/moc_predefs.h
@@ -2121,7 +2121,9 @@ debug/LoginWindow.o: GUI/Source/LoginWindow.cpp GUI/Header/LoginWindow.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qfile.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qfiledevice.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/QTextStream \
-		C:/QT/6.7.3/mingw_64/include/QtGui/QPixmap
+		C:/QT/6.7.3/mingw_64/include/QtGui/QPixmap \
+		C:/QT/6.7.3/mingw_64/include/QtCore/QAnimationDriver \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qabstractanimation.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\LoginWindow.o GUI\Source\LoginWindow.cpp
 
 debug/RegisterWindow.o: GUI/Source/RegisterWindow.cpp GUI/Header/RegisterWindow.h \

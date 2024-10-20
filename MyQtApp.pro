@@ -28,7 +28,7 @@ HEADERS += GUI/Header/RegisterForm.h  \
            GUI/Header/ChangePassword.h
 
 # Thêm thư viện cần thiết
-QT += widgets
+QT += widgets 
 
 # Khai báo tài nguyên
 RESOURCES += Resource/resources.qrc
