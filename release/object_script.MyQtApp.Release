@@ -9,9 +9,13 @@ release/LoginHandle.o
 release/LoginController.o
 release/ForgotPasswordWindow.o
 release/ChangePassword.o
+release/HomePageAdmin.o
+release/GiaoDienKhachHang.o
 release/qrc_resources.o
 release/moc_RegisterForm.o
 release/moc_LoginWindow.o
 release/moc_RegisterWindow.o
 release/moc_ForgotPasswordWindow.o
 release/moc_ChangePassword.o
+release/moc_HomePageAdmin.o
+release/moc_GiaoDienKhachHang.o

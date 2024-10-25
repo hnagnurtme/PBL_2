@@ -1,3 +1,4 @@
+#include "GUI/Header/HomePageAdmin.h"
 #include "GUI/Header/LoginWindow.h"
 #include "Controller/RegisterFormController.h"
 #include <QWidget>
@@ -24,7 +25,7 @@ LoginWindow::LoginWindow(QWidget *parent) : QWidget(parent) {
         this->setStyleSheet(style); 
     }
 
-    setFixedSize(1100, 700);
+    setFixedSize(600,400);
     setWindowTitle("Login");
 
     QLabel *emailLabel = new QLabel("Email Address:");
@@ -66,41 +67,14 @@ LoginWindow::LoginWindow(QWidget *parent) : QWidget(parent) {
     QGroupBox *buttonBox = new QGroupBox();
     buttonBox->setLayout(buttonLayout);
 
-    
-    QVBoxLayout *intro = new QVBoxLayout;
-    QLabel *imageLabel = new QLabel();
-    QLabel *title = new QLabel("Welcome My Book Store");
-    title->setObjectName("titleLabel");
-    title->setAlignment(Qt::AlignCenter);
-    QPixmap pixmap("Resource\\Background.png");
-    if (pixmap.isNull()) {
-        imageLabel->setText("Image not found");
-    } else {
-        imageLabel->setPixmap(pixmap.scaled(size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    }
-    intro->addWidget(imageLabel);
-    intro->addWidget(title);
-    intro->setContentsMargins(30, 10, 30, 10);
-    
-
-    QGroupBox *introBox = new QGroupBox();
-    introBox->setLayout(intro);
-    
-    
     QVBoxLayout *mainLayout = new QVBoxLayout;
-    mainLayout->addWidget(introBox);
     mainLayout->addSpacing(10);
     mainLayout->addWidget(loginBox);
     mainLayout->addSpacing(10);
     mainLayout->addWidget(buttonBox);
     
 
-
-    QHBoxLayout *layout = new QHBoxLayout;
-    layout->addLayout(mainLayout);
-    layout->addWidget(introBox);
-    setLayout(layout);
-    // setLayout(mainLayout);
+    setLayout(mainLayout);
 
     connect(confirmButton, &QPushButton::clicked, this, &LoginWindow::onLoginButtonClicked);
     connect(registerButton, &QPushButton::clicked, this, &LoginWindow::onRegisterButtonClicked);
@@ -118,7 +92,9 @@ void LoginWindow::onLoginButtonClicked() {
     if (control) {
     if(control->authenLogin(email.toStdString(),password.toStdString())){
         QMessageBox::information(this, "Login Successful......", "Welcome!");
-        
+        HomePageAdmin *homepageAdmin = new HomePageAdmin();
+        homepageAdmin->show();
+        this->close();
     }
     else{
         QMessageBox::warning(this, "Incorrect Password", "Please check both email and password.");

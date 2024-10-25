@@ -80,6 +80,7 @@
         "xutility": "cpp",
         "*.tcc": "cpp",
         "qvboxlayout": "cpp",
-        "qpushbutton": "cpp"
+        "qpushbutton": "cpp",
+        "temp": "cpp"
     }
 }

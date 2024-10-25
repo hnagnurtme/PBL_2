@@ -13,7 +13,9 @@ SOURCES += MainApplication.cpp \
            Handle/LoginHandle.cpp \
            Controller/LoginController.cpp \
            GUI/Source/ForgotPasswordWindow.cpp \
-           GUI/Source/ChangePassword.cpp
+           GUI/Source/ChangePassword.cpp \
+           GUI/Source/HomePageAdmin.cpp \
+           GUI/Source/GiaoDienKhachHang.cpp
 
 HEADERS += GUI/Header/RegisterForm.h  \
            GUI/Header/LoginWindow.h \
@@ -25,7 +27,11 @@ HEADERS += GUI/Header/RegisterForm.h  \
            Datastructures/Datastructures.h \
            Controller/LoginController.h \
            GUI/Header/ForgotPasswordWindow.h \
-           GUI/Header/ChangePassword.h
+           GUI/Header/ChangePassword.h \
+           Object/NhanVien.h \
+           GUI/Header/HomePageAdmin.h \
+           GUI/Header/GiaoDienKhachHang.h
+
 
 # Thêm thư viện cần thiết
 QT += widgets 

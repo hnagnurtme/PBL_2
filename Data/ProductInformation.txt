@@ -1,0 +1,20 @@
+1,Resource/SANPHAM/dongho.png,SP001,Đồng hồ,1000000
+2,Resource/SANPHAM/donghodeban.png,SP002,Đồng hồ để bàn,500000
+3,Resource/SANPHAM/sacduphong.png,SP003,Sạc dự phòng,300000
+4,Resource/SANPHAM/tainghe.png,SP004,Tai nghe,250000
+5,Resource/SANPHAM/dongho.png,SP005,Điện thoại,1500000
+6,Resource/SANPHAM/donghodeban.png,SP006,Laptop,20000000
+7,Resource/SANPHAM/sacduphong.png,SP007,Máy tính bảng,7000000
+8,Resource/SANPHAM/tainghe.png,SP008,Loa Bluetooth,1200000
+9,Resource/SANPHAM/dongho.png,SP009,Bàn phím cơ,800000
+10,Resource/SANPHAM/donghodeban.png,SP010,Chuột không dây,600000
+11,Resource/SANPHAM/sacduphong.png,SP011,Pin sạc,200000
+12,Resource/SANPHAM/tainghe.png,SP012,Bộ sạc nhanh,150000
+13,Resource/SANPHAM/dongho.png,SP013,Máy in,5000000
+14,Resource/SANPHAM/donghodeban.png,SP014,Tủ lạnh,7000000
+15,Resource/SANPHAM/sacduphong.png,SP015,Điều hòa,9000000
+16,Resource/SANPHAM/tainghe.png,SP016,Quạt đứng,500000
+17,Resource/SANPHAM/dongho.png,SP017,Đèn bàn,300000
+18,Resource/SANPHAM/donghodeban.png,SP018,Bình đun siêu tốc,400000
+19,Resource/SANPHAM/sacduphong.png,SP019,Nồi cơm điện,1000000
+20,Resource/SANPHAM/tainghe.png,SP020,Lò vi sóng,2500000

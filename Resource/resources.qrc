@@ -1,7 +1,11 @@
 <RCC>
     <qresource prefix="/">
-    <file>Background.png</file>
-    <file>style.qss</file>   
-    <file>BACKGROUND1.png</file>
+        <file>Background.png</file>
+        <file>style.qss</file>   
+        <file>BACKGROUND1.png</file>
+        <file>SANPHAM/dongho.png</file>
+        <file>SANPHAM/donghodeban.png</file>
+        <file>SANPHAM/sacduphong.png</file>
+        <file>SANPHAM/tainghe.png</file>
     </qresource>
 </RCC>

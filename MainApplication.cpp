@@ -1,8 +1,9 @@
 #include <QApplication>
-#include "GUI/Header/LoginWindow.h"
+#include "GUI/Header/GiaoDienKhachHang.h"
+
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
-    LoginWindow registerForm;
-    registerForm.show();
+    GiaoDienKhachHang window;
+    window.show();
     return app.exec();
 }
