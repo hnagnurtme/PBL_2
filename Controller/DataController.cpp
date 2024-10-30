@@ -129,3 +129,22 @@ Cart DataController::loadCartData(const string& customerID) {
     file.close();
     return cart;
 }
+
+#include <filesystem>
+
+void DataController::saveInvoiceData(const Invoice& invoice) {
+    string directory = "Data/InvoiceInformation";
+    string filename = directory + "/" + invoice.getCustomerId() + "_Invoice_" + invoice.getInvoiceId() + ".txt"; 
+
+    filesystem::create_directories(directory);
+
+    ofstream outFile(filename); 
+
+    if (outFile.is_open()) {
+        outFile << invoice.displayInvoice(); 
+        outFile.close(); 
+    } else {
+        cout << "Unable to open file for writing." << endl;
+    }
+}
+

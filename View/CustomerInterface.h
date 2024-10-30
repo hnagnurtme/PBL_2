@@ -1,5 +1,4 @@
 #pragma once
-
 #include <QMap>
 #include <QWidget>
 #include <QTableWidget>
@@ -10,11 +9,14 @@
 #include <QVector>
 #include <QStringList>
 #include <QTextEdit>
+#include <QDateEdit>
 #include <QLabel>
 #include <QString>
 #include "Model/Cart.h"
 #include "Model/Customer.h"
+#include "Model/Invoice.h"
 #include <string>
+#include <QComboBox>
 using namespace std;
 class CustomerInterface : public QWidget {
     Q_OBJECT
@@ -32,6 +34,8 @@ private slots:
     void payment();
     void checkout();
     void cartOrigin();
+    void onDeliveryDateChanged();
+    void onPaymentMethodChanged();
 signals:
 private:
     string customerID ;
@@ -52,6 +56,10 @@ private:
     QTableWidget *cartTable;
     QTableWidget *ordersTable;
     QLabel *totalPrice;
+    QLabel *dateLabel;
+    QDateEdit *deliveryDateEdit;
+    QComboBox *paymentMethodComboBox; 
+    QLabel *paymentMethodLabel;
     void addProducts(int row, bool fromCart);
     void deleteProducts(int row, bool fromCart);
     void addProductsData();

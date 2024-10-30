@@ -62,7 +62,7 @@ string Cart::getCustomerID() const {
     return customerID;
 }
 
-bool Cart::contains(const std::string& productId) const {
+bool Cart::contains(const string& productId) const {
     for (long i = 0; i < items.getSize(); ++i) {
         if (items[i].getFirst().getProductId() == productId) {
             return true; 
@@ -85,7 +85,7 @@ void Cart::reduceItem(const string& productId, int quantity) {
 }
 
 
-int Cart::getItemQuantity(const std::string& productId) const {
+int Cart::getItemQuantity(const string& productId) const {
     for (long i = 0; i < items.getSize(); ++i) {
         if (items[i].getFirst().getProductId() == productId) {
             return items[i].getSecond(); 

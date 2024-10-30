@@ -1,5 +1,7 @@
 #include "View/CustomerInterface.h"
 #include "Model/Product.h"
+#include "Model/Invoice.h"
+#include "Model/Orders.h"
 #include "Datastructures/Vector.h"
 #include "Controller/DataController.h"
 #include <QVBoxLayout>
@@ -16,6 +18,8 @@
 #include <QStackedWidget>
 #include <QDate>
 #include <QDir>
+#include <QComboBox>
+#include <QDateEdit>
 CustomerInterface::CustomerInterface(QWidget *parent) : QWidget(parent) {
     customerID ="USER001";
     cart.setCartID(customerID);
@@ -95,6 +99,25 @@ CustomerInterface::CustomerInterface(QWidget *parent) : QWidget(parent) {
     paymentButton->setVisible(false);
     paymentButton->setObjectName("confirmButton");
     connect(paymentButton, &QPushButton::clicked, this, &CustomerInterface::payment);
+    dateLabel = new QLabel("Choose delivery date:");
+    dateLabel->setObjectName("inputArea");
+    dateLabel->setVisible(false);
+    deliveryDateEdit = new QDateEdit();
+    deliveryDateEdit->setVisible(false);
+    deliveryDateEdit->setCalendarPopup(true);
+    deliveryDateEdit->setMinimumDate(QDate::currentDate());
+    connect(deliveryDateEdit, &QDateEdit::dateChanged, this, &CustomerInterface::onDeliveryDateChanged);
+
+    paymentMethodLabel = new QLabel("Payment Method:", this);
+    paymentMethodLabel->setObjectName("inputArea");
+    paymentMethodLabel->setVisible(false);
+    paymentMethodComboBox = new QComboBox(this);
+    paymentMethodComboBox->addItem("Credit Card");
+    paymentMethodComboBox->addItem("Bank Transfer");
+    paymentMethodComboBox->addItem("Cash on Delivery");
+    paymentMethodComboBox->setVisible(false);
+    connect(paymentMethodComboBox, &QComboBox::currentIndexChanged, this, &CustomerInterface::onPaymentMethodChanged);
+
     totalPrice = new QLabel();
     totalPrice->setObjectName("inputArea");
     placeOrdersButton = new QPushButton("Place Oders");
@@ -113,7 +136,13 @@ CustomerInterface::CustomerInterface(QWidget *parent) : QWidget(parent) {
     QGroupBox *invoiceGroupBox = new QGroupBox();
     QVBoxLayout *invoiceLayout = new QVBoxLayout(invoiceGroupBox);
     invoiceLayout->addWidget(invoiceDisplay);
+    invoiceLayout->addWidget(dateLabel);
+    invoiceLayout->addWidget(deliveryDateEdit);
+    invoiceLayout->addWidget(paymentMethodLabel);
+    invoiceLayout->addWidget(paymentMethodComboBox);
     invoiceLayout->addWidget(paymentButton);
+
+
 
     QHBoxLayout *cartAndInvoiceLayout = new QHBoxLayout();
     QGroupBox *cartAndInvoiceBox = new QGroupBox();
@@ -344,16 +373,53 @@ void CustomerInterface::showAccount() {
 void CustomerInterface::checkout() {
 }
 
-void CustomerInterface::showInvoice(){
+void CustomerInterface::showInvoice() { 
+
     invoiceDisplay->setVisible(true);
+    invoiceDisplay->setText("");
     paymentButton->setVisible(true);
     placeOrdersButton->setVisible(false);
+    dateLabel->setVisible(true);
+    deliveryDateEdit->setVisible(true);
+    paymentMethodComboBox->setVisible(true);
+    paymentMethodLabel->setVisible(true);
 }
 
+
+void CustomerInterface::payment() {
+    QDate deliveryDate = deliveryDateEdit->date();
+    QString deliveryDateString = deliveryDate.toString("yyyy-MM-dd");
+    QString paymentMethod = paymentMethodComboBox->currentText();
+    Invoice invoice(cart);
+    invoice.setDeliveryDate(deliveryDateString.toStdString());
+    invoice.setPaymentMethod(paymentMethod.toStdString());
+
+    DataController saveInvoiceData;
+    saveInvoiceData.saveInvoiceData(invoice);
+}
+
+
+void CustomerInterface::onDeliveryDateChanged() {
+    QDate deliveryDate = deliveryDateEdit->date();
+    QString deliveryDateString = deliveryDate.toString("yyyy-MM-dd");
+    QString paymentMethod = paymentMethodComboBox->currentText();
+    Invoice invoice(cart);
+    invoice.setDeliveryDate(deliveryDateString.toStdString());
+    invoice.setPaymentMethod(paymentMethod.toStdString());
+    string invoiceInfo = invoice.displayInvoice(); 
+    invoiceDisplay->setVisible(true);
+    invoiceDisplay->setText(QString::fromStdString(invoiceInfo));
+}
+void CustomerInterface::onPaymentMethodChanged(){
+    QDate deliveryDate = deliveryDateEdit->date();
+    QString deliveryDateString = deliveryDate.toString("yyyy-MM-dd");
+    QString paymentMethod = paymentMethodComboBox->currentText();
+    Invoice invoice(cart);
+    invoice.setDeliveryDate(deliveryDateString.toStdString());
+    invoice.setPaymentMethod(paymentMethod.toStdString());
+    string invoiceInfo = invoice.displayInvoice(); 
+    invoiceDisplay->setVisible(true);
+    invoiceDisplay->setText(QString::fromStdString(invoiceInfo));
+}
 void CustomerInterface::showOrders(){
 }
-
-void CustomerInterface::payment(){
-
-}
-

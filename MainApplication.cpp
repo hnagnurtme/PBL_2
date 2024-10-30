@@ -1,5 +1,5 @@
 #include <QApplication>
-#include "View/GiaoDienKhachHang.h"
+#include "View/CustomerInterface.h"
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);

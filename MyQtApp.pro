@@ -9,6 +9,8 @@ SOURCES += MainApplication.cpp \
            Model/Product.cpp \
            Model/Cart.cpp \
            Model/User.cpp \
+           Model/Orders.cpp \
+           Model/Invoice.cpp \
            View/CustomerInterface.cpp
 HEADERS +=  Controller/DataController.h \
             Datastructures/Pair.h \
@@ -16,6 +18,8 @@ HEADERS +=  Controller/DataController.h \
             Model/Product.h \
             Model/Cart.h \
             Model/User.h \
+            Model/Orders.h \
+            Model/Invoice.h \
             View/CustomerInterface.h
            
 # Thêm thư viện cần thiết

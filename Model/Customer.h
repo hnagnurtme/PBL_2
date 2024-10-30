@@ -1,14 +1,14 @@
 #pragma once
 #include "Model/User.h"
 #include "Model/Cart.h"
-#include "Model/Manager.h"
+#include "Model/Orders.h"
 #include "Datastructures/Vector.h"
 #include <string>
 using namespace std;
 class Customer : public User {
 private:
     Cart cart;
-    Vector<Order> orderHistory;
+    Vector<Orders> orderHistory;
 
 public:
     void viewCart() const;

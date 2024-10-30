@@ -12,7 +12,6 @@ class Cart {
 private:
     Vector<Pair<Product, int>> items;
     string customerID;
-
 public:
     Cart(string id ="");
     void setCartID(string id);
@@ -22,7 +21,7 @@ public:
     void displayCartItems() const;
     Vector<Pair<Product, int>> getItems() const;
     string getCustomerID() const;
-    bool contains(const std::string& productId) const;
+    bool contains(const string& productId) const;
     void reduceItem(const string& productId, int quantity);
-    int getItemQuantity(const std::string& productId) const;
+    int getItemQuantity(const string& productId) const;
 };
