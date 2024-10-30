@@ -79,8 +79,13 @@
         "xtree": "cpp",
         "xutility": "cpp",
         "*.tcc": "cpp",
-        "qvboxlayout": "cpp",
-        "qpushbutton": "cpp",
-        "temp": "cpp"
+        "cstdarg": "cpp",
+        "cwctype": "cpp",
+        "deque": "cpp",
+        "memory_resource": "cpp",
+        "string_view": "cpp",
+        "numbers": "cpp",
+        "semaphore": "cpp",
+        "codecvt": "cpp"
     }
 }

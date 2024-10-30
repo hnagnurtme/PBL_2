@@ -19,6 +19,132 @@
     font-size: 12px;
 }
 
+#checkoutButton {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #112950, stop:1 #1A4C72); 
+    color: white; 
+    border-radius: 5px; 
+    padding: 10px; 
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#showAccountButton {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #D4696A, stop:1 #E68385); 
+    color: white; 
+    border-radius: 5px; 
+    padding: 10px; 
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#titleLabel {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #ff7e5f, stop:1 #feb47b);
+    font-size: 20px;                            
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+QHeaderView::section {
+    background-color: lightgray; 
+    padding: 4px;
+    font-size: 16px; /* Thay đổi cỡ chữ ở đây nếu cần */
+    font-weight: bold;
+    color: black; 
+    border: 1px solid gray;
+}
+
+QTableWidget {
+    gridline-color: gray; 
+    font-size: 16px; /* Thay đổi cỡ chữ ở đây nếu cần */
+    background-color: #f0f0f0; 
+}
+
+QTableWidget::item {
+    padding: 6px; 
+    border: 1px solid lightgray;
+    font-size: 16px; /* Thay đổi cỡ chữ ở đây nếu cần */
+}
+
+QTableWidget::item:selected {
+    background-color: #87CEFA; 
+    color: white; 
+}
+
+QTableWidget::item:hover {
+    background-color: #ADD8E6; 
+}
+
+QPushButton {
+    color: white; 
+    font-size: 16px;
+    border-radius: 10px; 
+    padding: 10px 20px; 
+}
+
+QPushButton#showOverviewButton {
+    background-color: #4CAF50; 
+    border: 2px solid #4CAF50; 
+}
+
+QPushButton#showOverviewButton:hover {
+    background-color: #45a049; 
+}
+
+QPushButton#showOverviewButton:pressed {
+    background-color: #2e7d32; 
+}
+
+QPushButton#showProductsButton {
+    background-color: #2196F3; 
+    border: 2px solid #2196F3; 
+}
+
+QPushButton#showProductsButton:hover {
+    background-color: #1976D2; 
+}
+
+QPushButton#showProductsButton:pressed {
+    background-color: #1565C0; 
+}
+
+QPushButton#showCartButton {
+    background-color: #FF9800; 
+    border: 2px solid #FF9800; 
+}
+
+QPushButton#showCartButton:hover {
+    background-color: #FB8C00; 
+}
+
+QPushButton#showCartButton:pressed {
+    background-color: #EF6C00; 
+}
+
+QPushButton#showOrdersButton {
+    background-color: #F44336; 
+    border: 2px solid #F44336; 
+}
+
+QPushButton#showOrdersButton:hover {
+    background-color: #E53935; 
+}
+
+QPushButton#showOrdersButton:pressed {
+    background-color: #D32F2F; 
+}
+
+QPushButton#showAccountButton:hover {
+    background-color: #E53935; 
+}
+
+QPushButton#showAccountButton:pressed {
+    background-color: #D32F2F; 
+}
+
 #confirmButton {
     background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
                                 stop:0 #112950, stop:1 #1A4C72); 
@@ -38,116 +164,3 @@
     font-size: 16px;
     font-weight: bold;
 }
-#titleLabel {
-    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
-                                stop:0 #ff7e5f, stop:1 #feb47b);
-    font-size: 20px;                            
-    color: white;
-    padding: 10px;
-    border-radius: 8px;
-}
-
-QHeaderView::section {
-    background-color: lightgray; /* Màu nền cho tiêu đề */
-    padding: 4px;
-    font-size: 14px;
-    font-weight: bold;
-    color: black; /* Màu chữ cho tiêu đề */
-    border: 1px solid gray;
-}
-
-QTableWidget {
-    gridline-color: gray; /* Màu lưới trong bảng */
-    font-size: 12px;
-    background-color: #f0f0f0; /* Màu nền cho bảng */
-}
-
-QTableWidget::item {
-    padding: 6px; /* Độ dày của các ô */
-    border: 1px solid lightgray;
-}
-
-QTableWidget::item:selected {
-    background-color: #87CEFA; /* Màu nền khi ô được chọn */
-    color: white; /* Màu chữ khi ô được chọn */
-}
-
-QTableWidget::item:hover {
-    background-color: #ADD8E6; /* Màu nền khi hover qua ô */
-}
-QPushButton {
-    color: white; /* Màu chữ */
-    font-size: 16px;
-    border-radius: 10px; /* Bo tròn các góc */
-    padding: 10px 20px; /* Khoảng cách nội dung trong nút */
-}
-
-QPushButton#btnTongQuan {
-    background-color: #4CAF50; /* Màu nền mặc định (xanh lá cây) */
-    border: 2px solid #4CAF50; /* Viền cùng màu với nền */
-}
-
-QPushButton#btnTongQuan:hover {
-    background-color: #45a049; /* Màu nền khi hover */
-}
-
-QPushButton#btnTongQuan:pressed {
-    background-color: #2e7d32; /* Màu nền khi nhấn */
-}
-
-QPushButton#btnNhanVien {
-    background-color: #2196F3; /* Màu nền mặc định (xanh da trời) */
-    border: 2px solid #2196F3; /* Viền cùng màu với nền */
-}
-
-QPushButton#btnNhanVien:hover {
-    background-color: #1976D2; /* Màu nền khi hover */
-}
-
-QPushButton#btnNhanVien:pressed {
-    background-color: #1565C0; /* Màu nền khi nhấn */
-}
-
-QPushButton#btnHoaDon {
-    background-color: #FF9800; /* Màu nền mặc định (cam) */
-    border: 2px solid #FF9800; /* Viền cùng màu với nền */
-}
-
-QPushButton#btnHoaDon:hover {
-    background-color: #FB8C00; /* Màu nền khi hover */
-}
-
-QPushButton#btnHoaDon:pressed {
-    background-color: #EF6C00; /* Màu nền khi nhấn */
-}
-
-QPushButton#btnHangHoa {
-    background-color: #F44336; /* Màu nền mặc định (đỏ) */
-    border: 2px solid #F44336; /* Viền cùng màu với nền */
-}
-
-QPushButton#btnHangHoa:hover {
-    background-color: #E53935; /* Màu nền khi hover */
-}
-
-QPushButton#btnHangHoa:pressed {
-    background-color: #D32F2F; /* Màu nền khi nhấn */
-}
-
-QPushButton#confirmButton:hover {
-    background-color: #E53935; /* Màu nền khi hover */
-}
-
-QPushButton#cancelButton:pressed {
-    background-color: #D32F2F; /* Màu nền khi nhấn */
-}
-
-QPushButton#cancelButton:hover {
-    background-color: #E53935; /* Màu nền khi hover */
-}
-
-QPushButton#confirmButton:pressed {
-    background-color: #D32F2F; /* Màu nền khi nhấn */
-}
-
-

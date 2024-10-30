@@ -1,40 +1,25 @@
+# MyQtApp.pro
 TEMPLATE = app
 TARGET = MyQtApp
 CONFIG += c++11
 
 # Thêm các thư mục con vào project
 SOURCES += MainApplication.cpp \
-           GUI/Source/RegisterForm.cpp \
-           GUI/Source/LoginWindow.cpp \
-           GUI/Source/RegisterWindow.cpp \
-           Controller/RegisterFormController.cpp \
-           Object/User.cpp \
-           Handle/UserInformationHandle.cpp \
-           Handle/LoginHandle.cpp \
-           Controller/LoginController.cpp \
-           GUI/Source/ForgotPasswordWindow.cpp \
-           GUI/Source/ChangePassword.cpp \
-           GUI/Source/HomePageAdmin.cpp \
-           GUI/Source/GiaoDienKhachHang.cpp
-
-HEADERS += GUI/Header/RegisterForm.h  \
-           GUI/Header/LoginWindow.h \
-           GUI/Header/RegisterWindow.h \
-           Controller/RegisterFormController.h \
-           Object/User.h \
-           Handle/UserInformationHandle.h \
-           Handle/LoginHandle.h \
-           Datastructures/Datastructures.h \
-           Controller/LoginController.h \
-           GUI/Header/ForgotPasswordWindow.h \
-           GUI/Header/ChangePassword.h \
-           Object/NhanVien.h \
-           GUI/Header/HomePageAdmin.h \
-           GUI/Header/GiaoDienKhachHang.h
-
-
+           Controller/DataController.cpp \
+           Model/Product.cpp \
+           Model/Cart.cpp \
+           Model/User.cpp \
+           View/CustomerInterface.cpp
+HEADERS +=  Controller/DataController.h \
+            Datastructures/Pair.h \
+            Datastructures/Vector.h \
+            Model/Product.h \
+            Model/Cart.h \
+            Model/User.h \
+            View/CustomerInterface.h
+           
 # Thêm thư viện cần thiết
-QT += widgets 
+QT += widgets
 
 # Khai báo tài nguyên
 RESOURCES += Resource/resources.qrc

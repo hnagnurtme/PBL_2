@@ -1,11 +1,15 @@
 <RCC>
     <qresource prefix="/">
-        <file>Background.png</file>
         <file>style.qss</file>   
-        <file>BACKGROUND1.png</file>
-        <file>SANPHAM/dongho.png</file>
-        <file>SANPHAM/donghodeban.png</file>
-        <file>SANPHAM/sacduphong.png</file>
-        <file>SANPHAM/tainghe.png</file>
+        <file>SANPHAM/PRD001.png</file>
+        <file>SANPHAM/PRD002.png</file>
+        <file>SANPHAM/PRD003.png</file>
+        <file>SANPHAM/PRD004.png</file>
+        <file>SANPHAM/PRD005.png</file>
+        <file>SANPHAM/PRD006.png</file>
+        <file>SANPHAM/PRD007.png</file>
+        <file>SANPHAM/PRD008.png</file>
+        <file>SANPHAM/PRD009.png</file>
+        <file>SANPHAM/PRD010.png</file>
     </qresource>
 </RCC>
