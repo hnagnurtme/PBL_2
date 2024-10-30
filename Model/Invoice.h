@@ -36,6 +36,8 @@ public:
     void setTotalAmount(double amount);
     double getTotalAmount() const;
 
+    Vector<Pair<Product, int>> getProducts() const;
+
     void setDeliveryDate(const string& deliveryDate);
     void setPaymentMethod(const string& paymentMethod);
 };

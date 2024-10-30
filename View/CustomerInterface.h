@@ -34,6 +34,7 @@ private slots:
     void payment();
     void checkout();
     void cartOrigin();
+    void clearCart();
     void onDeliveryDateChanged();
     void onPaymentMethodChanged();
 signals:
@@ -51,6 +52,7 @@ private:
     QStackedWidget *stackWidget;
     QTextEdit *invoiceDisplay ;
     QPushButton *paymentButton;
+    QPushButton *clearCartButton;
     QPushButton *placeOrdersButton;
     QTableWidget *productTable;
     QTableWidget *cartTable;

@@ -9,9 +9,11 @@ using namespace std;
 
 class DataController {
 public:
+    DataController();
     Product findProductById(const string& productId);
-    
+    void saveProductsData(const Vector<Product>& product);
     Vector<Product> loadProductData(); 
+    void removeProduct(const Invoice &invoice);
     void saveCartData(const Cart& cart);       
     Cart loadCartData(const string& customerID);
     void saveInvoiceData(const Invoice& invoice);
@@ -19,6 +21,6 @@ public:
 private:
     string invoicesFileName;
     string productFileName;
-    Product parseProduct(const string& line);
+    Product parseProduct(const string& line);   
 };
 

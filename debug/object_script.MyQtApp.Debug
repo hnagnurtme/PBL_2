@@ -1,0 +1,10 @@
+debug/MainApplication.o
+debug/DataController.o
+debug/Product.o
+debug/Cart.o
+debug/User.o
+debug/Orders.o
+debug/Invoice.o
+debug/CustomerInterface.o
+debug/qrc_resources.o
+debug/moc_CustomerInterface.o

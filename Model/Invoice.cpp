@@ -38,7 +38,9 @@ string Invoice::displayInvoice() const {
     }
     return ss.str();
 }
-
+Vector<Pair<Product, int>> Invoice:: getProducts() const{
+    return products;
+}
 
 string Invoice::getInvoiceId() const {
     return invoiceId;

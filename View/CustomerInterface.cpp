@@ -123,9 +123,13 @@ CustomerInterface::CustomerInterface(QWidget *parent) : QWidget(parent) {
     placeOrdersButton = new QPushButton("Place Oders");
     placeOrdersButton->setObjectName("confirmButton");
     connect(placeOrdersButton, &QPushButton::clicked, this, &CustomerInterface::showInvoice);
+    clearCartButton = new QPushButton("Clear Cart");
+    clearCartButton->setObjectName("cancelButton");
+    connect(clearCartButton, &QPushButton::clicked, this, &CustomerInterface::clearCart);
     QGroupBox *placeOrderBox = new QGroupBox();
     QHBoxLayout *placeOrdersLayout = new QHBoxLayout(placeOrderBox);
     placeOrdersLayout->addWidget(totalPrice);
+    placeOrdersLayout->addWidget(clearCartButton);
     placeOrdersLayout->addWidget(placeOrdersButton);
 
     QGroupBox *cartAndPlaceOrdersBox = new QGroupBox();
@@ -168,7 +172,6 @@ void CustomerInterface::addProductsData() {
     productTable->setRowCount(0);
 
     DataController productData;
-    productData.setProductFileName("D:/PBL/Data/ProductInformation.csv");
     Vector<Product> products = productData.loadProductData(); 
 
     size_t productCount = products.getSize(); 
@@ -353,7 +356,12 @@ void CustomerInterface::showCart() {
     cartData.saveCartData(cart); 
 }
 
-
+void CustomerInterface::clearCart() {
+    cart.clearCart();
+    DataController cartData;
+    cartData.saveCartData(cart); 
+    showCart();
+}
 
 
 
@@ -387,15 +395,7 @@ void CustomerInterface::showInvoice() {
 
 
 void CustomerInterface::payment() {
-    QDate deliveryDate = deliveryDateEdit->date();
-    QString deliveryDateString = deliveryDate.toString("yyyy-MM-dd");
-    QString paymentMethod = paymentMethodComboBox->currentText();
-    Invoice invoice(cart);
-    invoice.setDeliveryDate(deliveryDateString.toStdString());
-    invoice.setPaymentMethod(paymentMethod.toStdString());
-
-    DataController saveInvoiceData;
-    saveInvoiceData.saveInvoiceData(invoice);
+    {}
 }
 
 

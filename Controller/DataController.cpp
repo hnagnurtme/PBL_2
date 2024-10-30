@@ -8,10 +8,52 @@
 #include <iostream>
 #include <algorithm>
 #include <filesystem>
+#include <stdexcept>
 using namespace std;
-
+DataController:: DataController(){
+    productFileName = "D:/PBL/Data/ProductInformation.csv";
+}
 void DataController:: setProductFileName(const string& filename){
     productFileName = filename;
+}
+
+void DataController::saveProductsData(const Vector<Product>& products) {
+    // const string tempFileName = "temp_" + productFileName; 
+    // ofstream tempFile(tempFileName);
+    
+    // if (!tempFile.is_open()) {
+    //     throw runtime_error("Không thể mở file để ghi: " + tempFileName);
+    // }
+
+    // for (int i = 0; i < products.getSize(); ++i) {
+    //     const Product& product = products[i];
+        
+    //     tempFile << product.getProductId() << ";"
+    //              << product.getName() << ";"
+    //              << product.getCategory() << ";"
+    //              << product.getPrice() << ";"
+    //              << product.getStock() << ";"
+    //              << product.getDescription() << ";";
+
+    //     Vector<string> colors = product.getColors();
+    //     tempFile << "{";
+    //     for (int j = 0; j < colors.getSize(); ++j) {
+    //         tempFile << colors[j];
+    //         if (j < colors.getSize() - 1) {
+    //             tempFile << ",";
+    //         }
+    //     }
+    //     tempFile << "};";
+    //     tempFile << product.getBrand() << "\n";
+    // }
+    // tempFile.close();
+
+    // if (remove(productFileName.c_str()) != 0) {
+    //     throw runtime_error("Không thể xóa file: " + productFileName);
+    // }
+    // if (rename(tempFileName.c_str(), productFileName.c_str()) != 0) {
+    //     throw runtime_error("Không thể đổi tên file: " + tempFileName);
+    // }
 }
 
 
@@ -19,7 +61,7 @@ Vector<Product> DataController::loadProductData() {
     Vector<Product> products;
     ifstream file(productFileName);
 
-    std::cout << "Trying to open file: " << productFileName << std::endl; 
+    cout << "Trying to open file: " << productFileName << endl; 
 
     if (!file.is_open()) {
         throw runtime_error("Không thể mở file: " + productFileName);
@@ -66,6 +108,30 @@ Product DataController::parseProduct(const string& line) {
 
     return Product(id, name, category, price, stock, description,colors, brand);
 }
+void DataController::removeProduct(const Invoice &invoice) {
+    // Vector<Pair<Product, int>> invoiceProducts = invoice.getProducts();
+    // Vector<Product> productList = loadProductData(); 
+
+    // for (int i = 0; i < invoiceProducts.getSize(); ++i) {
+    //     const string& productId = invoiceProducts[i].getFirst().getProductId();
+    //     int quantityToRemove = invoiceProducts[i].getSecond();
+
+    //     for (int j = 0; j < productList.getSize(); ++j) {
+    //         if (productList[j].getProductId() == productId) {
+    //             int currentStock = productList[j].getStock();
+    //             if (currentStock <= quantityToRemove) {
+    //                 productList.remove(j); 
+    //                 --j; 
+    //             } else {
+    //                 productList[j].setStock(currentStock - quantityToRemove);
+    //             }
+    //             break; 
+    //         }
+    //     }
+    // }
+    // saveProductsData(productList); 
+}
+
 
 void DataController::saveCartData(const Cart& cart) {
     string folderPath = "Data/CartInformation";
@@ -129,8 +195,6 @@ Cart DataController::loadCartData(const string& customerID) {
     file.close();
     return cart;
 }
-
-#include <filesystem>
 
 void DataController::saveInvoiceData(const Invoice& invoice) {
     string directory = "Data/InvoiceInformation";
