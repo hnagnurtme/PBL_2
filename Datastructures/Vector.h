@@ -9,13 +9,15 @@ class Node {
 public:
     DataType data;
     Node* next;
-    Node(const DataType& value) : data(value), next(nullptr) {}
+    Node* prev;
+    Node(const DataType& value) : data(value), next(nullptr), prev(nullptr) {}
 };
 
 template <typename DataType>
 class Vector {
 private:
     Node<DataType>* head;
+    Node<DataType>* tail;
     long size;
 
 public:
@@ -38,10 +40,10 @@ public:
 };
 
 template <typename DataType>
-Vector<DataType>::Vector() : head(nullptr), size(0) {}
+Vector<DataType>::Vector() : head(nullptr), tail(nullptr), size(0) {}
 
 template <typename DataType>
-Vector<DataType>::Vector(const Vector &vector) : head(nullptr), size(0) {
+Vector<DataType>::Vector(const Vector &vector) : head(nullptr), tail(nullptr), size(0) {
     Node<DataType>* current = vector.head;
     while (current) {
         pushback(current->data);
@@ -50,7 +52,7 @@ Vector<DataType>::Vector(const Vector &vector) : head(nullptr), size(0) {
 }
 
 template <typename DataType>
-Vector<DataType>::Vector(std::initializer_list<DataType> list) : head(nullptr), size(0) {
+Vector<DataType>::Vector(std::initializer_list<DataType> list) : head(nullptr), tail(nullptr), size(0) {
     for (const auto& item : list) {
         pushback(item);
     }
@@ -121,6 +123,11 @@ void Vector<DataType>::deleteElement(const DataType& value) {
         if (current->next->data == value) {
             Node<DataType>* temp = current->next;
             current->next = current->next->next;
+            if (current->next) {
+                current->next->prev = current;
+            } else {
+                tail = current;
+            }
             delete temp;
             size--;
             return;
@@ -151,12 +158,11 @@ void Vector<DataType>::pushback(const DataType& value) {
     Node<DataType>* newNode = new Node<DataType>(value);
     if (isEmpty()) {
         head = newNode;
+        tail = newNode;
     } else {
-        Node<DataType>* current = head;
-        while (current->next) {
-            current = current->next;
-        }
-        current->next = newNode;
+        tail->next = newNode;
+        newNode->prev = tail;
+        tail = newNode;
     }
     size++;
 }
@@ -164,8 +170,14 @@ void Vector<DataType>::pushback(const DataType& value) {
 template <typename DataType>
 void Vector<DataType>::pushfront(const DataType& value) {
     Node<DataType>* newNode = new Node<DataType>(value);
-    newNode->next = head;
-    head = newNode;
+    if (isEmpty()) {
+        head = newNode;
+        tail = newNode;
+    } else {
+        newNode->next = head;
+        head->prev = newNode;
+        head = newNode;
+    }
     size++;
 }
 
@@ -177,13 +189,12 @@ void Vector<DataType>::popback() {
     if (size == 1) {
         delete head;
         head = nullptr;
+        tail = nullptr;
     } else {
-        Node<DataType>* current = head;
-        while (current->next->next) {
-            current = current->next;
-        }
-        delete current->next;
-        current->next = nullptr;
+        Node<DataType>* temp = tail;
+        tail = tail->prev;
+        tail->next = nullptr;
+        delete temp;
     }
     size--;
 }
@@ -195,6 +206,11 @@ void Vector<DataType>::popfront() {
     }
     Node<DataType>* temp = head;
     head = head->next;
+    if (head) {
+        head->prev = nullptr;
+    } else {
+        tail = nullptr;
+    }
     delete temp;
     size--;
 }
@@ -206,15 +222,17 @@ void Vector<DataType>::remove(int position) {
     }
     if (position == 0) {
         popfront();
+    } else if (position == size - 1) {
+        popback();
     } else {
         Node<DataType>* current = head;
-        for (int i = 0; i < position - 1; ++i) {
+        for (int i = 0; i < position; ++i) {
             current = current->next;
         }
-        Node<DataType>* temp = current->next;
-        current->next = temp->next;
+        Node<DataType>* temp = current;
+        current->prev->next = current->next;
+        current->next->prev = current->prev;
         delete temp;
         size--;
     }
 }
-

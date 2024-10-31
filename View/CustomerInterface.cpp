@@ -21,8 +21,9 @@
 #include <QComboBox>
 #include <memory>
 #include <QDateEdit>
+
 CustomerInterface::CustomerInterface(QWidget *parent) : QWidget(parent) {
-    customerID ="USER001";
+    customerID ="USER002";
     cart.setCartID(customerID);
     QFile file("Resource/style.qss");
     if (file.open(QFile::ReadOnly | QFile::Text)) {
