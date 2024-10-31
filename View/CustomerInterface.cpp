@@ -19,6 +19,7 @@
 #include <QDate>
 #include <QDir>
 #include <QComboBox>
+#include <memory>
 #include <QDateEdit>
 CustomerInterface::CustomerInterface(QWidget *parent) : QWidget(parent) {
     customerID ="USER001";
@@ -171,9 +172,9 @@ void CustomerInterface::addProductsData() {
     productTable->clearContents();
     productTable->setRowCount(0);
 
-    DataController productData;
-    Vector<Product> products = productData.loadProductData(); 
-
+    DataController *productData = new DataController();;
+    Vector<Product> products = productData->loadProductData(); 
+    delete productData;
     size_t productCount = products.getSize(); 
     int row = 0;
 
@@ -301,7 +302,6 @@ void CustomerInterface::cartOrigin(){
 }
 
 void CustomerInterface::showCart() {
-    
     cartTable->clear();
     cartTable->setColumnCount(6);
     cartTable->setHorizontalHeaderLabels({"No.", "Product Name", "Product ID", "Price", "Quantity", "Action"});
@@ -363,9 +363,6 @@ void CustomerInterface::clearCart() {
     showCart();
 }
 
-
-
-
 void CustomerInterface::showOverview() {
     {}
 }
@@ -382,7 +379,6 @@ void CustomerInterface::checkout() {
 }
 
 void CustomerInterface::showInvoice() { 
-
     invoiceDisplay->setVisible(true);
     invoiceDisplay->setText("");
     paymentButton->setVisible(true);
@@ -395,7 +391,25 @@ void CustomerInterface::showInvoice() {
 
 
 void CustomerInterface::payment() {
-    {}
+    QMessageBox::information(this,"Payment","Successfull");
+    unique_ptr<DataController> datacontroller = make_unique<DataController>();
+    QDate deliveryDate = deliveryDateEdit->date();
+    QString deliveryDateString = deliveryDate.toString("yyyy-MM-dd");
+    QString paymentMethod = paymentMethodComboBox->currentText();
+    Invoice invoice(cart);
+    invoice.setDeliveryDate(deliveryDateString.toStdString());
+    invoice.setPaymentMethod(paymentMethod.toStdString());
+    datacontroller->saveInvoiceData(invoice);
+    datacontroller->removeProduct(invoice);
+    cart.clearCart();
+    invoiceDisplay->setText("");
+    paymentMethodLabel->setVisible(false);
+    paymentMethodComboBox->setVisible(false);
+    deliveryDateEdit->setVisible(false);
+    dateLabel->setVisible(false);
+    paymentButton->setVisible(false);
+    placeOrdersButton->setVisible(true);
+    showProducts();
 }
 
 
