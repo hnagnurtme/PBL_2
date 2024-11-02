@@ -170,7 +170,6 @@ Cart DataController::loadCartData(const string& customerID) {
         if (!(ss >> quantity)) continue; 
         ss.ignore(); 
 
-        
         if (!name.empty() && !id.empty() && quantity > 0) {
             Product product(id, name, "", price, 0, "", Vector<string>(), ""); 
             cart.addItem(product, quantity); 

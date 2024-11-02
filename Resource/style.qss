@@ -1,47 +1,33 @@
+
+* {
+    transition: all 0.3s ease; 
+}
+
 #inputTitle {
     background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
-                                stop:0 #3272D4, stop:1 #5A9BF4); 
-    color: white; 
+                                stop:0 #114b5f, stop:1 #028090); 
+    color: #fff; 
     font-size: 16px;
     font-weight: bold;
-    border: 1px solid #AAAAAA; 
+    border: 1px solid #028090; 
     border-radius: 5px; 
     padding: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #inputArea {
     background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
-                                stop:0 #BDDDFD, stop:1 #E0F1FF); 
-    color: #112950; 
-    border: 1px solid #AAAAAA;
+                                stop:0 #e0f7f9, stop:1 #b3e1e5); 
+    color: #114b5f; 
+    border: 1px solid #b3e1e5;
     border-radius: 5px; 
     padding: 10px; 
     font-size: 12px;
 }
 
-#checkoutButton {
-    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
-                                stop:0 #112950, stop:1 #1A4C72); 
-    color: white; 
-    border-radius: 5px; 
-    padding: 10px; 
-    font-size: 16px;
-    font-weight: bold;
-}
-
-#showAccountButton {
-    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
-                                stop:0 #D4696A, stop:1 #E68385); 
-    color: white; 
-    border-radius: 5px; 
-    padding: 10px; 
-    font-size: 16px;
-    font-weight: bold;
-}
-
 #titleLabel {
     background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
-                                stop:0 #ff7e5f, stop:1 #feb47b);
+                                stop:0 #028090, stop:1 #114b5f);
     font-size: 20px;                            
     color: white;
     padding: 10px;
@@ -49,204 +35,179 @@
 }
 
 QHeaderView::section {
-    background-color: lightgray; 
+    background-color: #114b5f; 
     padding: 4px;
-    font-size: 16px; /* Thay đổi cỡ chữ ở đây nếu cần */
+    font-size: 16px; 
     font-weight: bold;
-    color: black; 
-    border: 1px solid gray;
+    color: #f5f5f5; 
+    border: 1px solid #028090;
 }
 
 QTableWidget {
-    gridline-color: gray; 
-    font-size: 16px; /* Thay đổi cỡ chữ ở đây nếu cần */
-    background-color: #f0f0f0; 
+    gridline-color: #dcdcdc; 
+    font-size: 16px; 
+    background-color: #f9f9f9; 
 }
 
 QTableWidget::item {
     padding: 6px; 
-    border: 1px solid lightgray;
-    font-size: 16px; /* Thay đổi cỡ chữ ở đây nếu cần */
+    border: 1px solid #e0e0e0;
+    font-size: 16px;
 }
 
 QTableWidget::item:selected {
-    background-color: #87CEFA; 
+    background-color: #028090; 
     color: white; 
 }
 
 QTableWidget::item:hover {
-    background-color: #ADD8E6; 
+    background-color: #B2BFC4; 
 }
 
 QPushButton {
-    color: white; 
-    font-size: 16px;
-    border-radius: 10px; 
-    padding: 10px 20px; 
-}
-
-QPushButton#showOverviewButton {
-    background-color: #4CAF50; 
-    border: 2px solid #4CAF50; 
-}
-
-QPushButton#showOverviewButton:hover {
-    background-color: #45a049; 
-}
-
-QPushButton#showOverviewButton:pressed {
-    background-color: #2e7d32; 
-}
-
-QPushButton#showProductsButton {
-    background-color: #2196F3; 
-    border: 2px solid #2196F3; 
-}
-
-QPushButton#showProductsButton:hover {
-    background-color: #1976D2; 
-}
-
-QPushButton#showProductsButton:pressed {
-    background-color: #1565C0; 
-}
-
-QPushButton#showCartButton {
-    background-color: #FF9800; 
-    border: 2px solid #FF9800; 
-}
-
-QPushButton#showCartButton:hover {
-    background-color: #FB8C00; 
-}
-
-QPushButton#showCartButton:pressed {
-    background-color: #EF6C00; 
-}
-
-QPushButton#showOrdersButton {
-    background-color: #F44336; 
-    border: 2px solid #F44336; 
-}
-
-QPushButton#showOrdersButton:hover {
-    background-color: #E53935; 
-}
-
-QPushButton#showOrdersButton:pressed {
-    background-color: #D32F2F; 
-}
-
-QPushButton#showAccountButton:hover {
-    background-color: #E53935; 
-}
-
-QPushButton#showAccountButton:pressed {
-    background-color: #D32F2F; 
-}
-
-#confirmButton {
     background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
-                                stop:0 #112950, stop:1 #1A4C72); 
-    color: white; 
-    border-radius: 5px; 
-    padding: 10px; 
+                                stop:0 #028090, stop:1 #114b5f);
+    color: #fff; 
     font-size: 16px;
+    border-radius: 5px; 
+    padding: 10px 20px;
+    border: none;
     font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.1s ease;
 }
 
-#cancelButton {
-    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
-                                stop:0 #D4696A, stop:1 #E68385); 
-    color: white; 
-    border-radius: 5px; 
-    padding: 10px; 
-    font-size: 16px;
-    font-weight: bold;
+QPushButton:hover {
+    background-color: #50c9c3;
+    transform: scale(1.05);
 }
+
+QPushButton:pressed {
+    background-color: #b3e1e5;
+    transform: scale(0.95);
+}
+
+QPushButton#cancelButton {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #fff, stop:1 #e0f7f9);
+    color: #028090;
+    border: 1px solid #028090;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+QPushButton#cancelButton:hover {
+    background-color: #c3e8ea;
+    transform: scale(1.05);
+}
+
+QPushButton#cancelButton:pressed {
+    background-color: #b3e1e5;
+    transform: scale(0.95);
+}
+
+/* Confirm Button Style */
+QPushButton#confirmButton {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #028090, stop:1 #028099);
+    color: #e0f7f9;
+    border: 1px solid #e0f7f9;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+QPushButton#confirmButton:hover {
+    background-color: #00a3a3;
+    transform: scale(1.05);
+}
+
+QPushButton#confirmButton:pressed {
+    background-color: #017a7a;
+    transform: scale(0.95);
+}
+
+
+/* ComboBox Style */
+QComboBox {
+    background-color: #e0f7f9;
+    color: #495057;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 5px;
+    min-width: 150px;
+    transition: border-color 0.3s ease;
+}
+
+QComboBox:hover {
+    border-color: #028090;
+}
+
+/* DateEdit Style */
 QDateEdit {
     border: 1px solid #5A5A5A;
     border-radius: 5px;
     padding: 5px 10px;
-    background-color: #f9f9f9;
-    color: #333333;
+    background-color: #fafafa;
+    color: #2f4f4f;
     font-size: 14px;
+    transition: border-color 0.3s ease;
 }
 
-QDateEdit::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 20px;
-    border-left: 1px solid #5A5A5A;
+QDateEdit:hover {
+    border-color: #028090;
 }
 
-QDateEdit::down-arrow {
-    image: url(:/icons/calendar-icon.png); /* Đảm bảo đường dẫn chính xác cho icon */
-    width: 12px;
-    height: 12px;
+QLineEdit {
+    background-color: #f0f0f0;             
+    border: 1px solid #028090;             
+    border-radius: 8px;                    
+    padding: 5px 10px;                
+    font-size: 16px; 
+    transition: border-color 0.3s ease;                     
+    color: #028090;                        
 }
 
-QCalendarWidget QToolButton {
-    height: 25px;
-    width: 80px;
-    color: white;
-    background-color: #5A5A5A;
-    font-size: 12px;
-    icon-size: 20px, 20px;
+QMessageBox {
+    background-color: #f0f0f0;             
+    border: 1px solid #028090;             
+    border-radius: 8px;                    
+    padding: 5px 10px;                
+    font-size: 16px; 
+    transition: border-color 0.3s ease;                     
+    color: #028090;       
+    min-width: 400px;          
+    min-height: 200px;        
 }
 
-QCalendarWidget QMenu {
-    width: 150px;
-    left: 20px;
+QMessageBox QLabel {
+
+    font-size: 16px;                            
+    color: #028090;
+    padding: 10px;
+    border-radius: 8px;
 }
 
-QCalendarWidget QSpinBox {
-    width: 50px;
-    font-size: 12px;
+QMessageBox QPushButton {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #028090, stop:1 #028099);
+    color: #e0f7f9;
+    border: 1px solid #e0f7f9;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.1s ease;
 }
 
-QCalendarWidget QAbstractItemView:enabled {
-    font-size: 12px;
-    color: black;
-    background-color: #f9f9f9;
-    selection-background-color: #5A5A5A;
-    selection-color: white;
+QMessageBox QPushButton:hover {
+    background-color: #00a3a3;
+    transform: scale(1.05);
 }
 
-QCalendarWidget QAbstractItemView:disabled {
-    color: #d3d3d3;
-}
-QComboBox {
-    background-color: #f2f2f2;
-    color: #333333;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    padding: 5px;
-    min-width: 150px;
-}
 
-QComboBox::drop-down {
-    background-color: #f2f2f2;
-    border: none;
-}
-
-QComboBox::indicator {
-    width: 20px;
-    height: 20px;
-}
-
-QComboBox::hover {
-    background-color: #e6e6e6;
-}
-
-QComboBox::focus {
-    border: 1px solid #66afe9;
-    background-color: #ffffff;
-}
-
-QComboBox QAbstractItemView {
-    background-color: #ffffff;
-    color: #333333;
-    selection-background-color: #66afe9;
-    selection-color: #ffffff;
+QMessageBox QPushButton:pressed {
+    background-color: #017a7a;
+    transform: scale(0.95);
 }

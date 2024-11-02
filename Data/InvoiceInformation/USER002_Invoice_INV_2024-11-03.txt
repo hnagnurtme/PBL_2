@@ -1,0 +1,8 @@
+Invoice ID: INV_2024-11-03
+Customer ID: USER002
+Invoice Date: 2024-11-03
+Delivery Date: 2024-11-13
+Payment Method: Bank Transfer
+Total Amount: $800
+Products:
+- Product Name: Điện thoại Xiaomi Mi 11, Quantity: 1

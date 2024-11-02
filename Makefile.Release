@@ -397,6 +397,10 @@ release/moc_CustomerInterface.cpp: View/CustomerInterface.h \
 		Model/Invoice.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QComboBox \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qcombobox.h \
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/QMessageBox \
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/qmessagebox.h \
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/qdialog.h \
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
 		release/moc_predefs.h \
 		C:/QT/6.7.3/mingw_64/bin/moc.exe
 	C:\QT\6.7.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/PBL2/release/moc_predefs.h -IC:/QT/6.7.3/mingw_64/mkspecs/win32-g++ -ID:/PBL2 -IC:/QT/6.7.3/mingw_64/include -IC:/QT/6.7.3/mingw_64/include/QtWidgets -IC:/QT/6.7.3/mingw_64/include/QtGui -IC:/QT/6.7.3/mingw_64/include/QtCore -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/mingw64/x86_64-w64-mingw32/include View\CustomerInterface.h -o release\moc_CustomerInterface.cpp
@@ -665,7 +669,11 @@ release/MainApplication.o: MainApplication.cpp C:/QT/6.7.3/mingw_64/include/QtWi
 		Model/Orders.h \
 		Model/Invoice.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QComboBox \
-		C:/QT/6.7.3/mingw_64/include/QtWidgets/qcombobox.h
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/qcombobox.h \
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/QMessageBox \
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/qmessagebox.h \
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/qdialog.h \
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/qdialogbuttonbox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\MainApplication.o MainApplication.cpp
 
 release/DataController.o: Controller/DataController.cpp Controller/DataController.h \
@@ -955,6 +963,10 @@ release/CustomerInterface.o: View/CustomerInterface.cpp View/CustomerInterface.h
 		Model/Invoice.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QComboBox \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qcombobox.h \
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/QMessageBox \
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/qmessagebox.h \
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/qdialog.h \
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
 		Controller/DataController.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QVBoxLayout \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qboxlayout.h \
@@ -964,10 +976,6 @@ release/CustomerInterface.o: View/CustomerInterface.cpp View/CustomerInterface.h
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QHBoxLayout \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QHeaderView \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qheaderview.h \
-		C:/QT/6.7.3/mingw_64/include/QtWidgets/QMessageBox \
-		C:/QT/6.7.3/mingw_64/include/QtWidgets/qmessagebox.h \
-		C:/QT/6.7.3/mingw_64/include/QtWidgets/qdialog.h \
-		C:/QT/6.7.3/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QTableWidgetItem \
 		C:/QT/6.7.3/mingw_64/include/QtCore/QFile \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qfile.h \

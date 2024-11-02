@@ -23,5 +23,4 @@ void User::displayInfo() const {
 
 void User::recoverPassword() {
     cout << "Recovering password for user: " << name << endl;
-    // Logic to recover password, e.g., sending a recovery email
 }

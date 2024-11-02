@@ -93,3 +93,8 @@ int Cart::getItemQuantity(const string& productId) const {
     }
     return 0; 
 }
+
+
+bool Cart:: isEmptyCart(){
+    return items.isEmpty();
+}

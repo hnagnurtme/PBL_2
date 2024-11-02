@@ -24,4 +24,5 @@ public:
     bool contains(const string& productId) const;
     void reduceItem(const string& productId, int quantity);
     int getItemQuantity(const string& productId) const;
+    bool isEmptyCart();
 };

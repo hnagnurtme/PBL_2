@@ -17,12 +17,14 @@
 #include "Model/Invoice.h"
 #include <string>
 #include <QComboBox>
+#include <QMessageBox>
 using namespace std;
 class CustomerInterface : public QWidget {
     Q_OBJECT
 
 public:
     CustomerInterface(QWidget *parent = nullptr);
+    void showMessage(QWidget *parent, QMessageBox::Icon iconType, const QString &message);
 private slots:
     void showOverview();
     void showProducts();
