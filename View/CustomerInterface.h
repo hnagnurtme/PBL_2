@@ -24,7 +24,7 @@ class CustomerInterface : public QWidget {
 
 public:
     CustomerInterface(QWidget *parent = nullptr);
-    void showMessage(QWidget *parent, QMessageBox::Icon iconType, const QString &message);
+    void showMessage(QWidget *parent, bool status, const QString &message);
 private slots:
     void showOverview();
     void showProducts();
@@ -66,5 +66,6 @@ private:
     QLabel *paymentMethodLabel;
     void addProducts(int row, bool fromCart);
     void deleteProducts(int row, bool fromCart);
+    void addFavouriteProducts(int row);
     void addProductsData();
 };

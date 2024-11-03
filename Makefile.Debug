@@ -131,6 +131,13 @@ compiler_rcc_clean:
 debug/qrc_resources.cpp: Resource/resources.qrc \
 		C:/QT/6.7.3/mingw_64/bin/rcc.exe \
 		Resource/style.qss \
+		Resource/ICON/ICON4.png \
+		Resource/ICON/ICON2.png \
+		Resource/ICON/ICON6.png \
+		Resource/ICON/ICON5.png \
+		Resource/ICON/ICON3.png \
+		Resource/ICON/ICON7.png \
+		Resource/ICON/ICON1.png \
 		Resource/SANPHAM/PRD004.png \
 		Resource/SANPHAM/PRD001.png \
 		Resource/SANPHAM/PRD010.png \

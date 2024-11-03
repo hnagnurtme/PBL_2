@@ -23,9 +23,12 @@
 #include <QDateEdit>
 
 
-void CustomerInterface::showMessage(QWidget *parent, QMessageBox::Icon iconType, const QString &message) {
+void CustomerInterface::showMessage(QWidget *parent, bool status, const QString &message) {
     QMessageBox messageBox(parent);
-    messageBox.setIcon(iconType);
+    QString icon_path = (status) ? "Resource/ICON/ICON7.png" : "Resource/ICON/ICON6.png";
+    QPixmap originalPixmap(icon_path);
+    QPixmap scaledPixmap = originalPixmap.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    messageBox.setIconPixmap(scaledPixmap);
     messageBox.setText(message);
     messageBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
     messageBox.setFixedSize(400, 200);
@@ -80,19 +83,21 @@ CustomerInterface::CustomerInterface(QWidget *parent) : QWidget(parent) {
     stackWidget = new QStackedWidget();
     QLineEdit *searchLineEdit = new QLineEdit();
     searchLineEdit->setFixedHeight(50);
+    QIcon searchIcon("Resource/ICON/ICON5.png"); 
+    searchLineEdit->addAction(searchIcon, QLineEdit::LeadingPosition);
     searchLineEdit->setPlaceholderText("Search by product name...");
     connect(searchLineEdit, &QLineEdit::textChanged, this, &CustomerInterface::filterProducts);
 
     productTable = new QTableWidget(5, 6);
     productTable->setHorizontalHeaderLabels({"No.", "Description", "Product ID", "Product Name", "Price", "Quantity", "Add to Cart"});
-    productTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    productTable->setColumnWidth(0, 50);
+
 
     QGroupBox *productGroupBox = new QGroupBox();
     QVBoxLayout *productLayout = new QVBoxLayout(productGroupBox);
     productLayout->addWidget(searchLineEdit);
     productLayout->addSpacing(20);
     productLayout->addWidget(productTable);
+    productTable->setFixedSize(1250,700);
 
     cartTable = new QTableWidget(0, 6);
     cartTable->setHorizontalHeaderLabels({"No.", "Product Name", "Product ID" ,"Price", "Quantity", "Action"});
@@ -205,11 +210,22 @@ void CustomerInterface::addProductsData() {
             productTable->setItem(row, 1, new QTableWidgetItem("Không có ảnh"));
         }
 
-        QPushButton *addProductsButton = new QPushButton("Add");
+        QPushButton *addProductsButton = new QPushButton();
+        QIcon addIcon("Resource/ICON/ICON2.png"); 
+        addProductsButton->setIcon(addIcon);
+        addProductsButton->setIconSize(QSize(35, 35));
         connect(addProductsButton, &QPushButton::clicked, [this, row]() { addProducts(row, false); });
+
+        QPushButton *addFavouriteButton = new QPushButton();
+        QIcon heartIcon("Resource/ICON/ICON1.png"); 
+        addFavouriteButton->setIcon(heartIcon);
+        addFavouriteButton->setIconSize(QSize(35, 35));
+        connect(addFavouriteButton, &QPushButton::clicked, [this, row]() { addFavouriteProducts(row); });
 
         QHBoxLayout *actionLayout = new QHBoxLayout();
         actionLayout->addWidget(addProductsButton);
+        actionLayout->addSpacing(5);
+        actionLayout->addWidget(addFavouriteButton);
 
         QWidget *actionWidget = new QWidget();
         actionWidget->setLayout(actionLayout);
@@ -225,6 +241,7 @@ void CustomerInterface::addProductsData() {
     if (productTable->rowCount() == 0) {
         qDebug() << "Product table is empty.";
     }
+    
 }
 
 
@@ -237,10 +254,18 @@ void CustomerInterface::showProducts() {
     for (int row = 0; row < productTable->rowCount(); ++row) {
         productTable->setRowHeight(row, rowHeight);
     }
+    int columnWigth = 150;
+    for (int column = 0; column < productTable->columnCount(); ++column) {
+        productTable->setColumnWidth(column, columnWigth);
+    }
+    productTable->setColumnWidth(6,200);
+    productTable->setColumnWidth(3,300);
+    productTable->setColumnWidth(0,100);
+
+
 
     productTable->setHorizontalHeaderLabels({"No.", "Description", "Product ID", "Product Name", "Price", "Quantity", "Add to Cart"});
     addProductsData();
-
     stackWidget->setCurrentIndex(0);
 }
 void CustomerInterface::addProducts(int row, bool fromCart) {
@@ -315,10 +340,16 @@ void CustomerInterface::showCart() {
         cartTable->setItem(i, 3, new QTableWidgetItem(QString::number(items[i].getFirst().getPrice())));
         cartTable->setItem(i, 4, new QTableWidgetItem(QString::number(items[i].getSecond())));
 
-        QPushButton *addButton = new QPushButton("+");
+        QPushButton *addButton = new QPushButton();
+        QIcon addIcon("Resource/ICON/ICON4.png"); 
+        addButton->setIcon(addIcon);
+        addButton->setIconSize(QSize(25, 25));
         connect(addButton, &QPushButton::clicked, [this, i]() { addProducts(i, true); });
 
-        QPushButton *deleteButton = new QPushButton("-");
+        QPushButton *deleteButton = new QPushButton();
+        QIcon delIcon("Resource/ICON/ICON3.png"); 
+        deleteButton->setIcon(delIcon);
+        deleteButton->setIconSize(QSize(25, 25));
         deleteButton->setObjectName("cancelButton");
         connect(deleteButton, &QPushButton::clicked, [this, i]() { deleteProducts(i, true); });
 
@@ -378,9 +409,13 @@ void CustomerInterface::showAccount() {
 void CustomerInterface::checkout() {
 }
 
+void CustomerInterface::addFavouriteProducts(int row){
+
+}
+
 void CustomerInterface::showInvoice() { 
     if (cart.isEmptyCart()){
-        showMessage(this, QMessageBox::Warning, "Cart is already empty");
+        showMessage(this, false, "Cart is already empty");
         return;
     }
     invoiceDisplay->setVisible(true);
@@ -395,7 +430,7 @@ void CustomerInterface::showInvoice() {
 
 
 void CustomerInterface::payment() {
-    showMessage(this,QMessageBox::Information,"Payment Successfull");
+    showMessage(this,true,"Successfully completed your purchase");
     unique_ptr<DataController> datacontroller = make_unique<DataController>();
     QDate deliveryDate = deliveryDateEdit->date();
     QString deliveryDateString = deliveryDate.toString("yyyy-MM-dd");
