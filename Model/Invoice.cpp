@@ -33,13 +33,12 @@ string Invoice::displayInvoice() const {
     ss << "Total Amount: $" << totalAmount << "\n";
     ss << "Products:\n";
     for (int i = 0; i < products.getSize(); ++i) {
-        ss << "- Product Name: " << products[i].getFirst()->getName()  
+        ss << "- Product Name: " << products[i].getFirst()->getName() 
            << ", Quantity: " << products[i].getSecond() << "\n";
     }
     return ss.str();
 }
-
-Vector<Pair<Product*, int>> Invoice::getProducts() const {
+Vector<Pair<Product*, int>> Invoice:: getProducts() const{
     return products;
 }
 

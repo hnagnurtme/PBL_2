@@ -1,0 +1,8 @@
+Invoice ID: INV_2024-11-06
+Customer ID: USER002
+Invoice Date: 2024-11-06
+Delivery Date: 2024-11-14
+Payment Method: Bank Transfer
+Total Amount: $1400
+Products:
+- Product Name: Điện thoại Oppo Find X3, Quantity: 2

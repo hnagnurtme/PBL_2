@@ -94,11 +94,11 @@ Product DataController::parseProduct(const string& line) {
     return Product(id, name, category, price, stock, description,colors, brand);
 }
 void DataController::removeProduct(const Invoice &invoice) {
-    Vector<Pair<Product, int>> invoiceProducts = invoice.getProducts();
+    Vector<Pair<Product*, int>> invoiceProducts = invoice.getProducts();
     Vector<Product> productList = loadProductData(); 
 
     for (int i = 0; i < invoiceProducts.getSize(); ++i) {
-        const string& productId = invoiceProducts[i].getFirst().getProductId();
+        const string& productId = invoiceProducts[i].getFirst()->getProductId();
         int quantityToRemove = invoiceProducts[i].getSecond();
 
         for (int j = 0; j < productList.getSize(); ++j) {
@@ -130,13 +130,13 @@ void DataController::saveCartData(const Cart& cart) {
         return;
     }
     file << "Product Name,Product ID,Price,Quantity\n";
-    const Vector<Pair<Product, int>>& cartItems = cart.getItems();
+    const Vector<Pair<Product*, int>>& cartItems = cart.getItems();
     for (long i = 0; i < cartItems.getSize(); ++i) {
-        const Product& product = cartItems[i].getFirst();
+        const Product* product = cartItems[i].getFirst();
         int quantity = cartItems[i].getSecond();
-        file << product.getName() << ","
-            << product.getProductId() << ","
-            << product.getPrice() << ","
+        file << product->getName() << ","
+            << product->getProductId() << ","
+            << product->getPrice() << ","
             << quantity << "\n";
     }
     file.close();
@@ -171,7 +171,7 @@ Cart DataController::loadCartData(const string& customerID) {
         ss.ignore(); 
 
         if (!name.empty() && !id.empty() && quantity > 0) {
-            Product product(id, name, "", price, 0, "", Vector<string>(), ""); 
+            Product *product = new Product(id, name, "", price, 0, "", Vector<string>(), ""); 
             cart.addItem(product, quantity); 
         }
     }

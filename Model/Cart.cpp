@@ -76,7 +76,6 @@ bool Cart::contains(const string& productId) const {
     }
     return false; 
 }
-
 void Cart::reduceItem(const string& productId, int quantity) {
     for (long i = 0; i < items.getSize(); ++i) {
         if (items[i].getFirst()->getProductId() == productId) {
@@ -90,6 +89,7 @@ void Cart::reduceItem(const string& productId, int quantity) {
         }
     }
 }
+
 
 int Cart::getItemQuantity(const string& productId) const {
     for (long i = 0; i < items.getSize(); ++i) {
