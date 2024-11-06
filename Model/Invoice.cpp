@@ -10,15 +10,15 @@ Invoice::Invoice() : customerId(""), totalAmount(0.0) {
 }
 
 Invoice::Invoice(const Cart& cart) : customerId(cart.getCustomerID()), totalAmount(0.0) {
-    products = cart.getItems();
+    products = cart.getItems(); 
     for (int i = 0; i < products.getSize(); ++i) {
-        totalAmount += products[i].getFirst().getPrice() * products[i].getSecond();
+        totalAmount += products[i].getFirst()->getPrice() * products[i].getSecond();
     }
     setInvoiceDate();
     invoiceId = "INV_" + getInvoiceDate();
 }
 
-Invoice::Invoice(const string& invoiceId, const string& customerId, const Vector<Pair<Product, int>>& products, double totalAmount)
+Invoice::Invoice(const string& invoiceId, const string& customerId, const Vector<Pair<Product*, int>>& products, double totalAmount)
     : invoiceId(invoiceId), customerId(customerId), products(products), totalAmount(totalAmount) {
     setInvoiceDate();
 }
@@ -33,12 +33,13 @@ string Invoice::displayInvoice() const {
     ss << "Total Amount: $" << totalAmount << "\n";
     ss << "Products:\n";
     for (int i = 0; i < products.getSize(); ++i) {
-        ss << "- Product Name: " << products[i].getFirst().getName() 
+        ss << "- Product Name: " << products[i].getFirst()->getName()  
            << ", Quantity: " << products[i].getSecond() << "\n";
     }
     return ss.str();
 }
-Vector<Pair<Product, int>> Invoice:: getProducts() const{
+
+Vector<Pair<Product*, int>> Invoice::getProducts() const {
     return products;
 }
 

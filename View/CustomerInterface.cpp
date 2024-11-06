@@ -271,22 +271,28 @@ void CustomerInterface::showProducts() {
     stackWidget->setCurrentIndex(0);
 }
 void CustomerInterface::addProducts(int row, bool fromCart) {
-    QString tenSanPham, giaSanPham, productId;
+    QString productName, productPrice, productId;
 
     if (fromCart) {
         if (cartTable->item(row, 0) == nullptr) return;
-        tenSanPham = cartTable->item(row, 1)->text();
-        giaSanPham = cartTable->item(row, 2)->text();
-        productId = QString::fromStdString(cart->getItems()[row].getFirst().getProductId());
+        productName = cartTable->item(row, 1)->text();
+        productPrice = cartTable->item(row, 2)->text();
+        productId = QString::fromStdString(cart->getItems()[row].getFirst()->getProductId());
     } else {
         if (productTable->item(row, 3) == nullptr) return;
-        tenSanPham = productTable->item(row, 3)->text();
-        giaSanPham = productTable->item(row, 4)->text();
+        productName = productTable->item(row, 3)->text();
+        productPrice = productTable->item(row, 4)->text();
         productId = productTable->item(row, 2)->text();
     }
 
-    Product product(productId.toStdString(), tenSanPham.toStdString(), "", giaSanPham.toDouble(), 0, "", Vector<string>(), "");
-    cart->addItem(product, 1); 
+    bool ok;
+    double price = productPrice.toDouble(&ok);
+    if (!ok) {
+        return;
+    }
+
+    Product* product = new Product(productId.toStdString(), productName.toStdString(), "", price, 0, "", Vector<string>(), "");
+    cart->addItem(product, 1);
 
     if (fromCart) {
         showCart();
@@ -300,7 +306,7 @@ void CustomerInterface::deleteProducts(int row, bool fromCart) {
 
     if (fromCart) {
         if (cartTable->item(row, 0) == nullptr) return;
-        productId = QString::fromStdString(cart->getItems()[row].getFirst().getProductId());
+        productId = QString::fromStdString(cart->getItems()[row].getFirst()->getProductId());
     } else {
         if (productTable->item(row, 2) == nullptr) return;
         productId = productTable->item(row, 2)->text();
@@ -318,30 +324,30 @@ void CustomerInterface::deleteProducts(int row, bool fromCart) {
     }
 }
 
-void CustomerInterface::cartOrigin(){
+
+void CustomerInterface::cartOrigin() {
     unique_ptr<DataController> cartData = make_unique<DataController>();
     unique_ptr<Cart> cartOrigin = make_unique<Cart>(cartData->loadCartData(customerID));
 
     for (long i = 0; i < cartOrigin->getItems().getSize(); ++i) {
-        const Product& product = cartOrigin->getItems()[i].getFirst();
+        const Product* product = cartOrigin->getItems()[i].getFirst(); 
         int quantity = cartOrigin->getItems()[i].getSecond();
         cart->addItem(product, quantity);
     }
-
-    
 }
+
 
 void CustomerInterface::showCart() {
     cartTable->clear();
     cartTable->setColumnCount(6);
     cartTable->setHorizontalHeaderLabels({"No.", "Product Name", "Product ID", "Price", "Quantity", "Action"});
-    Vector<Pair<Product, int>> items = cart->getItems(); 
+    Vector<Pair<Product*, int>> items = cart->getItems(); 
     cartTable->setRowCount(items.getSize());
     for (int i = 0; i < items.getSize(); ++i) {
         cartTable->setItem(i, 0, new QTableWidgetItem(QString::number(i + 1)));
-        cartTable->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(items[i].getFirst().getName())));
-        cartTable->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(items[i].getFirst().getProductId())));
-        cartTable->setItem(i, 3, new QTableWidgetItem(QString::number(items[i].getFirst().getPrice())));
+        cartTable->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(items[i].getFirst()->getName())));
+        cartTable->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(items[i].getFirst()->getProductId())));
+        cartTable->setItem(i, 3, new QTableWidgetItem(QString::number(items[i].getFirst()->getPrice())));
         cartTable->setItem(i, 4, new QTableWidgetItem(QString::number(items[i].getSecond())));
 
         QPushButton *addButton = new QPushButton(this);
@@ -374,12 +380,12 @@ void CustomerInterface::showCart() {
     cartTable->setColumnWidth(1, 250);
     cartTable->setColumnWidth(5, 125);
     double totalprice = 0.0;
-    const Vector<Pair<Product, int>>& cartItems = cart->getItems(); 
+    const Vector<Pair<Product*, int>>& cartItems = cart->getItems(); 
 
     for (long i = 0; i < cartItems.getSize(); ++i) {
-        const Product& product = cartItems[i].getFirst();
+        const Product* product = cartItems[i].getFirst();
         int soLuong = cartItems[i].getSecond(); 
-        double gia = product.getPrice();
+        double gia = product->getPrice();
         totalprice += gia * soLuong; 
     }
 
