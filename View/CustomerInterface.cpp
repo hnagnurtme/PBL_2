@@ -35,24 +35,25 @@ void CustomerInterface::showMessage(QWidget *parent, bool status, const QString 
     messageBox.exec();
 }
 CustomerInterface::CustomerInterface(QWidget *parent) : QWidget(parent) {
-    customerID ="USER002";
-    cart.setCartID(customerID);
+    customerID = "USER002";
+    cart = new Cart(customerID);
+
     QFile file("Resource/style.qss");
     if (file.open(QFile::ReadOnly | QFile::Text)) {
         QTextStream stream(&file);
         QString style = stream.readAll();
-        this->setStyleSheet(style);
+        setStyleSheet(style);
     }
 
     setFixedSize(1500, 800);
     setWindowTitle("Customer Homepage");
 
-    showOverviewButton = new QPushButton("Overview");
-    showProductsButton = new QPushButton("Products");
-    showCartButton = new QPushButton("Cart");
-    showOrdersButton = new QPushButton("Orders");
-    showAccountButton = new QPushButton("Account");
-    checkoutButton = new QPushButton("Logout");
+    showOverviewButton = new QPushButton("Overview", this);
+    showProductsButton = new QPushButton("Products", this);
+    showCartButton = new QPushButton("Cart", this);
+    showOrdersButton = new QPushButton("Orders", this);
+    showAccountButton = new QPushButton("Account", this);
+    checkoutButton = new QPushButton("Logout", this);
     checkoutButton->setObjectName("cancelButton");
 
     connect(showOverviewButton, &QPushButton::clicked, this, &CustomerInterface::showOverview);
@@ -62,7 +63,7 @@ CustomerInterface::CustomerInterface(QWidget *parent) : QWidget(parent) {
     connect(showAccountButton, &QPushButton::clicked, this, &CustomerInterface::showAccount);
     connect(checkoutButton, &QPushButton::clicked, this, &CustomerInterface::checkout);
 
-    QWidget *menuWidget = new QWidget();
+    QWidget *menuWidget = new QWidget(this);
     QVBoxLayout *menuLayout = new QVBoxLayout(menuWidget);
     menuWidget->setFixedSize(200, 800);
 
@@ -80,38 +81,38 @@ CustomerInterface::CustomerInterface(QWidget *parent) : QWidget(parent) {
     menuLayout->addWidget(checkoutButton);
     menuLayout->addSpacing(50);
 
-    stackWidget = new QStackedWidget();
-    QLineEdit *searchLineEdit = new QLineEdit();
+    stackWidget = new QStackedWidget(this);
+    QLineEdit *searchLineEdit = new QLineEdit(this);
     searchLineEdit->setFixedHeight(50);
     QIcon searchIcon("Resource/ICON/ICON5.png"); 
     searchLineEdit->addAction(searchIcon, QLineEdit::LeadingPosition);
     searchLineEdit->setPlaceholderText("Search by product name...");
     connect(searchLineEdit, &QLineEdit::textChanged, this, &CustomerInterface::filterProducts);
 
-    productTable = new QTableWidget(5, 6);
+    productTable = new QTableWidget(5, 6, this);
     productTable->setHorizontalHeaderLabels({"No.", "Description", "Product ID", "Product Name", "Price", "Quantity", "Add to Cart"});
 
-
-    QGroupBox *productGroupBox = new QGroupBox();
+    QGroupBox *productGroupBox = new QGroupBox(this);
     QVBoxLayout *productLayout = new QVBoxLayout(productGroupBox);
     productLayout->addWidget(searchLineEdit);
     productLayout->addSpacing(20);
     productLayout->addWidget(productTable);
-    productTable->setFixedSize(1250,700);
+    productTable->setFixedSize(1250, 700);
 
-    cartTable = new QTableWidget(0, 6);
-    cartTable->setHorizontalHeaderLabels({"No.", "Product Name", "Product ID" ,"Price", "Quantity", "Action"});
+    cartTable = new QTableWidget(0, 6, this);
+    cartTable->setHorizontalHeaderLabels({"No.", "Product Name", "Product ID", "Price", "Quantity", "Action"});
     cartTable->setFixedSize(750, 650);
 
-    invoiceDisplay = new QTextEdit("Invoice");
+    invoiceDisplay = new QTextEdit("Invoice", this);
     invoiceDisplay->setVisible(false);
-    paymentButton = new QPushButton("Payment");
+    paymentButton = new QPushButton("Payment", this);
     paymentButton->setVisible(false);
     connect(paymentButton, &QPushButton::clicked, this, &CustomerInterface::payment);
-    dateLabel = new QLabel("Choose delivery date:");
+
+    dateLabel = new QLabel("Choose delivery date:", this);
     dateLabel->setObjectName("inputArea");
     dateLabel->setVisible(false);
-    deliveryDateEdit = new QDateEdit();
+    deliveryDateEdit = new QDateEdit(this);
     deliveryDateEdit->setVisible(false);
     deliveryDateEdit->setCalendarPopup(true);
     deliveryDateEdit->setMinimumDate(QDate::currentDate());
@@ -127,25 +128,26 @@ CustomerInterface::CustomerInterface(QWidget *parent) : QWidget(parent) {
     paymentMethodComboBox->setVisible(false);
     connect(paymentMethodComboBox, &QComboBox::currentIndexChanged, this, &CustomerInterface::onPaymentMethodChanged);
 
-    totalPrice = new QLabel();
+    totalPrice = new QLabel(this);
     totalPrice->setObjectName("inputArea");
-    placeOrdersButton = new QPushButton("Place Oders");
+    placeOrdersButton = new QPushButton("Place Orders", this);
     connect(placeOrdersButton, &QPushButton::clicked, this, &CustomerInterface::showInvoice);
-    clearCartButton = new QPushButton("Clear Cart");
+    clearCartButton = new QPushButton("Clear Cart", this);
     clearCartButton->setObjectName("cancelButton");
     connect(clearCartButton, &QPushButton::clicked, this, &CustomerInterface::clearCart);
-    QGroupBox *placeOrderBox = new QGroupBox();
+
+    QGroupBox *placeOrderBox = new QGroupBox(this);
     QHBoxLayout *placeOrdersLayout = new QHBoxLayout(placeOrderBox);
     placeOrdersLayout->addWidget(totalPrice);
     placeOrdersLayout->addWidget(clearCartButton);
     placeOrdersLayout->addWidget(placeOrdersButton);
 
-    QGroupBox *cartAndPlaceOrdersBox = new QGroupBox();
+    QGroupBox *cartAndPlaceOrdersBox = new QGroupBox(this);
     QVBoxLayout *cartAndPlaceOrderLayout = new QVBoxLayout(cartAndPlaceOrdersBox);
     cartAndPlaceOrderLayout->addWidget(cartTable);
     cartAndPlaceOrderLayout->addWidget(placeOrderBox);
 
-    QGroupBox *invoiceGroupBox = new QGroupBox();
+    QGroupBox *invoiceGroupBox = new QGroupBox(this);
     QVBoxLayout *invoiceLayout = new QVBoxLayout(invoiceGroupBox);
     invoiceLayout->addWidget(invoiceDisplay);
     invoiceLayout->addWidget(dateLabel);
@@ -154,26 +156,26 @@ CustomerInterface::CustomerInterface(QWidget *parent) : QWidget(parent) {
     invoiceLayout->addWidget(paymentMethodComboBox);
     invoiceLayout->addWidget(paymentButton);
 
-
-
     QHBoxLayout *cartAndInvoiceLayout = new QHBoxLayout();
-    QGroupBox *cartAndInvoiceBox = new QGroupBox();
+    QGroupBox *cartAndInvoiceBox = new QGroupBox(this);
     cartAndInvoiceBox->setLayout(cartAndInvoiceLayout);
     cartAndInvoiceLayout->addWidget(cartAndPlaceOrdersBox);
     cartAndInvoiceLayout->addWidget(invoiceGroupBox);
 
     stackWidget->addWidget(productGroupBox);
     stackWidget->addWidget(cartAndInvoiceBox);
+
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
     QHBoxLayout *layout = new QHBoxLayout();
     layout->addWidget(menuWidget);
     layout->addWidget(stackWidget);
     mainLayout->addLayout(layout);
     setLayout(mainLayout);
+
     cartOrigin();
     showProducts();
-
 }
+
 
 void CustomerInterface::addProductsData() {
     productTable->clearContents();
@@ -275,7 +277,7 @@ void CustomerInterface::addProducts(int row, bool fromCart) {
         if (cartTable->item(row, 0) == nullptr) return;
         tenSanPham = cartTable->item(row, 1)->text();
         giaSanPham = cartTable->item(row, 2)->text();
-        productId = QString::fromStdString(cart.getItems()[row].getFirst().getProductId());
+        productId = QString::fromStdString(cart->getItems()[row].getFirst().getProductId());
     } else {
         if (productTable->item(row, 3) == nullptr) return;
         tenSanPham = productTable->item(row, 3)->text();
@@ -284,7 +286,7 @@ void CustomerInterface::addProducts(int row, bool fromCart) {
     }
 
     Product product(productId.toStdString(), tenSanPham.toStdString(), "", giaSanPham.toDouble(), 0, "", Vector<string>(), "");
-    cart.addItem(product, 1); 
+    cart->addItem(product, 1); 
 
     if (fromCart) {
         showCart();
@@ -298,16 +300,16 @@ void CustomerInterface::deleteProducts(int row, bool fromCart) {
 
     if (fromCart) {
         if (cartTable->item(row, 0) == nullptr) return;
-        productId = QString::fromStdString(cart.getItems()[row].getFirst().getProductId());
+        productId = QString::fromStdString(cart->getItems()[row].getFirst().getProductId());
     } else {
         if (productTable->item(row, 2) == nullptr) return;
         productId = productTable->item(row, 2)->text();
     }
 
-    if (!productId.isEmpty() && cart.contains(productId.toStdString())) {
-        cart.reduceItem(productId.toStdString(), 1);
-        if (cart.getItemQuantity(productId.toStdString()) == 0) {
-            cart.removeItem(productId.toStdString());
+    if (!productId.isEmpty() && cart->contains(productId.toStdString())) {
+        cart->reduceItem(productId.toStdString(), 1);
+        if (cart->getItemQuantity(productId.toStdString()) == 0) {
+            cart->removeItem(productId.toStdString());
         }
     }
 
@@ -317,21 +319,23 @@ void CustomerInterface::deleteProducts(int row, bool fromCart) {
 }
 
 void CustomerInterface::cartOrigin(){
-    DataController cartData;
-    Cart cartOrigin = cartData.loadCartData(customerID); 
+    unique_ptr<DataController> cartData = make_unique<DataController>();
+    unique_ptr<Cart> cartOrigin = make_unique<Cart>(cartData->loadCartData(customerID));
 
-    for (long i = 0; i < cartOrigin.getItems().getSize(); ++i) {
-        const Product& product = cartOrigin.getItems()[i].getFirst();
-        int quantity = cartOrigin.getItems()[i].getSecond();
-        cart.addItem(product, quantity);
+    for (long i = 0; i < cartOrigin->getItems().getSize(); ++i) {
+        const Product& product = cartOrigin->getItems()[i].getFirst();
+        int quantity = cartOrigin->getItems()[i].getSecond();
+        cart->addItem(product, quantity);
     }
+
+    
 }
 
 void CustomerInterface::showCart() {
     cartTable->clear();
     cartTable->setColumnCount(6);
     cartTable->setHorizontalHeaderLabels({"No.", "Product Name", "Product ID", "Price", "Quantity", "Action"});
-    Vector<Pair<Product, int>> items = cart.getItems(); 
+    Vector<Pair<Product, int>> items = cart->getItems(); 
     cartTable->setRowCount(items.getSize());
     for (int i = 0; i < items.getSize(); ++i) {
         cartTable->setItem(i, 0, new QTableWidgetItem(QString::number(i + 1)));
@@ -340,20 +344,20 @@ void CustomerInterface::showCart() {
         cartTable->setItem(i, 3, new QTableWidgetItem(QString::number(items[i].getFirst().getPrice())));
         cartTable->setItem(i, 4, new QTableWidgetItem(QString::number(items[i].getSecond())));
 
-        QPushButton *addButton = new QPushButton();
+        QPushButton *addButton = new QPushButton(this);
         QIcon addIcon("Resource/ICON/ICON4.png"); 
         addButton->setIcon(addIcon);
         addButton->setIconSize(QSize(25, 25));
         connect(addButton, &QPushButton::clicked, [this, i]() { addProducts(i, true); });
 
-        QPushButton *deleteButton = new QPushButton();
+        QPushButton *deleteButton = new QPushButton(this);
         QIcon delIcon("Resource/ICON/ICON3.png"); 
         deleteButton->setIcon(delIcon);
         deleteButton->setIconSize(QSize(25, 25));
         deleteButton->setObjectName("cancelButton");
         connect(deleteButton, &QPushButton::clicked, [this, i]() { deleteProducts(i, true); });
 
-        QWidget *actionWidget = new QWidget();
+        QWidget *actionWidget = new QWidget(this);
         QHBoxLayout *layout = new QHBoxLayout(actionWidget);
         layout->addWidget(addButton);
         layout->addWidget(deleteButton);
@@ -370,7 +374,7 @@ void CustomerInterface::showCart() {
     cartTable->setColumnWidth(1, 250);
     cartTable->setColumnWidth(5, 125);
     double totalprice = 0.0;
-    const Vector<Pair<Product, int>>& cartItems = cart.getItems(); 
+    const Vector<Pair<Product, int>>& cartItems = cart->getItems(); 
 
     for (long i = 0; i < cartItems.getSize(); ++i) {
         const Product& product = cartItems[i].getFirst();
@@ -383,14 +387,15 @@ void CustomerInterface::showCart() {
     totalPrice->setStyleSheet("font-weight: bold; font-size: 16pt;");
     totalPrice->setFixedHeight(40);
     stackWidget->setCurrentIndex(1);
-    DataController cartData;
-    cartData.saveCartData(cart); 
+    unique_ptr<DataController> cartData = make_unique<DataController>();
+    cartData->saveCartData(*cart); 
+
 }
 
 void CustomerInterface::clearCart() {
-    cart.clearCart();
-    DataController cartData;
-    cartData.saveCartData(cart); 
+    cart->clearCart();
+    unique_ptr<DataController> cartData = make_unique<DataController>();
+    cartData->saveCartData(*cart); 
     showCart();
 }
 
@@ -414,7 +419,7 @@ void CustomerInterface::addFavouriteProducts(int row){
 }
 
 void CustomerInterface::showInvoice() { 
-    if (cart.isEmptyCart()){
+    if (cart->isEmptyCart()){
         showMessage(this, false, "Cart is already empty");
         return;
     }
@@ -435,12 +440,12 @@ void CustomerInterface::payment() {
     QDate deliveryDate = deliveryDateEdit->date();
     QString deliveryDateString = deliveryDate.toString("yyyy-MM-dd");
     QString paymentMethod = paymentMethodComboBox->currentText();
-    Invoice invoice(cart);
+    Invoice invoice(*cart);
     invoice.setDeliveryDate(deliveryDateString.toStdString());
     invoice.setPaymentMethod(paymentMethod.toStdString());
     datacontroller->saveInvoiceData(invoice);
     datacontroller->removeProduct(invoice);
-    cart.clearCart();
+    cart->clearCart();
     invoiceDisplay->setText("");
     paymentMethodLabel->setVisible(false);
     paymentMethodComboBox->setVisible(false);
@@ -456,7 +461,7 @@ void CustomerInterface::onDeliveryDateChanged() {
     QDate deliveryDate = deliveryDateEdit->date();
     QString deliveryDateString = deliveryDate.toString("yyyy-MM-dd");
     QString paymentMethod = paymentMethodComboBox->currentText();
-    Invoice invoice(cart);
+    Invoice invoice(*cart);
     invoice.setDeliveryDate(deliveryDateString.toStdString());
     invoice.setPaymentMethod(paymentMethod.toStdString());
     string invoiceInfo = invoice.displayInvoice(); 
@@ -467,7 +472,7 @@ void CustomerInterface::onPaymentMethodChanged(){
     QDate deliveryDate = deliveryDateEdit->date();
     QString deliveryDateString = deliveryDate.toString("yyyy-MM-dd");
     QString paymentMethod = paymentMethodComboBox->currentText();
-    Invoice invoice(cart);
+    Invoice invoice(*cart);
     invoice.setDeliveryDate(deliveryDateString.toStdString());
     invoice.setPaymentMethod(paymentMethod.toStdString());
     string invoiceInfo = invoice.displayInvoice(); 
@@ -478,3 +483,6 @@ void CustomerInterface::showOrders(){
 }
 
 
+CustomerInterface::~CustomerInterface() {
+    delete cart;
+}

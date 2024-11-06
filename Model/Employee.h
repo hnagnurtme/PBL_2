@@ -6,7 +6,6 @@ using namespace std;
 class Employee : public User {
 private:
     string position;
-
 public:
     void createInvoice(const Orders& order);
 };

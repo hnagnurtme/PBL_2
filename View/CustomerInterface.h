@@ -25,6 +25,7 @@ class CustomerInterface : public QWidget {
 public:
     CustomerInterface(QWidget *parent = nullptr);
     void showMessage(QWidget *parent, bool status, const QString &message);
+    ~CustomerInterface();
 private slots:
     void showOverview();
     void showProducts();
@@ -42,8 +43,7 @@ private slots:
 signals:
 private:
     string customerID ;
-    Cart cart;
-    QVector<QStringList> gioHang;
+    Cart *cart;
     QPushButton *showOverviewButton;
     QPushButton *showProductsButton;
     QPushButton *checkoutButton;

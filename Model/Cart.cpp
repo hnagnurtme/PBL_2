@@ -11,6 +11,10 @@ Cart::Cart(string id) : customerID(id) {}
 void Cart:: setCartID(string id){
     customerID = id; 
 }
+
+Cart::Cart(const Cart& other) : customerID(other.customerID) {
+    items = other.items;
+}
 void Cart::addItem(const Product& product, int quantity) {
     if (quantity <= 0) {
         cerr << "Quantity must be greater than 0." << endl;
@@ -98,3 +102,4 @@ int Cart::getItemQuantity(const string& productId) const {
 bool Cart:: isEmptyCart(){
     return items.isEmpty();
 }
+
