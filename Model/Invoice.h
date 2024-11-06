@@ -6,7 +6,8 @@
 #include "Model/Cart.h"
 
 using namespace std;
-
+class Product;
+class Cart;
 class Invoice {
 private:
     string invoiceId;

@@ -271,35 +271,27 @@ void CustomerInterface::showProducts() {
     stackWidget->setCurrentIndex(0);
 }
 void CustomerInterface::addProducts(int row, bool fromCart) {
-    QString productName, productPrice, productId;
+    QString tenSanPham, giaSanPham, productId;
 
     if (fromCart) {
         if (cartTable->item(row, 0) == nullptr) return;
-        productName = cartTable->item(row, 1)->text();
-        productPrice = cartTable->item(row, 2)->text();
+        tenSanPham = cartTable->item(row, 1)->text();
+        giaSanPham = cartTable->item(row, 2)->text();
         productId = QString::fromStdString(cart->getItems()[row].getFirst()->getProductId());
     } else {
         if (productTable->item(row, 3) == nullptr) return;
-        productName = productTable->item(row, 3)->text();
-        productPrice = productTable->item(row, 4)->text();
+        tenSanPham = productTable->item(row, 3)->text();
+        giaSanPham = productTable->item(row, 4)->text();
         productId = productTable->item(row, 2)->text();
     }
 
-    bool ok;
-    double price = productPrice.toDouble(&ok);
-    if (!ok) {
-        return;
-    }
-
-    Product* product = new Product(productId.toStdString(), productName.toStdString(), "", price, 0, "", Vector<string>(), "");
-    cart->addItem(product, 1);
+    Product *product = new Product(productId.toStdString(), tenSanPham.toStdString(), "", giaSanPham.toDouble(), 0, "", Vector<string>(), "");
+    cart->addItem(product, 1); 
 
     if (fromCart) {
         showCart();
     }
 }
-
-
 
 void CustomerInterface::deleteProducts(int row, bool fromCart) {
     QString productId;

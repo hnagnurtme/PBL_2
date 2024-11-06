@@ -7,7 +7,7 @@
 #include <iostream>
 
 using namespace std;
-
+class Product;
 class Cart {
 private:
     Vector<Pair<Product*, int>> items;
@@ -26,4 +26,6 @@ public:
     void reduceItem(const string& productId, int quantity);
     int getItemQuantity(const string& productId) const;
     bool isEmptyCart();
+
+    void addProductToCart(Product* , int count);
 };

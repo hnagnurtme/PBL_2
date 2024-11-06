@@ -7,8 +7,8 @@
 using namespace std;
 class Customer : public User {
 private:
-    Cart cart;
-    Vector<Orders> orderHistory;
+    Cart *cart;
+    Vector<Orders*> *orderHistory;
 
 public:
     void viewCart() const;

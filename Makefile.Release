@@ -397,11 +397,11 @@ release/moc_CustomerInterface.cpp: View/CustomerInterface.h \
 		Model/Cart.h \
 		Model/User.h \
 		Model/Product.h \
+		Model/Invoice.h \
 		Datastructures/Vector.h \
 		Datastructures/Pair.h \
 		Model/Customer.h \
 		Model/Orders.h \
-		Model/Invoice.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QComboBox \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qcombobox.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QMessageBox \
@@ -670,11 +670,11 @@ release/MainApplication.o: MainApplication.cpp C:/QT/6.7.3/mingw_64/include/QtWi
 		Model/Cart.h \
 		Model/User.h \
 		Model/Product.h \
+		Model/Invoice.h \
 		Datastructures/Vector.h \
 		Datastructures/Pair.h \
 		Model/Customer.h \
 		Model/Orders.h \
-		Model/Invoice.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QComboBox \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qcombobox.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QMessageBox \
@@ -686,21 +686,24 @@ release/MainApplication.o: MainApplication.cpp C:/QT/6.7.3/mingw_64/include/QtWi
 release/DataController.o: Controller/DataController.cpp Controller/DataController.h \
 		Model/Product.h \
 		Model/User.h \
+		Model/Invoice.h \
 		Datastructures/Vector.h \
 		Datastructures/Pair.h \
-		Model/Cart.h \
-		Model/Invoice.h
+		Model/Cart.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\DataController.o Controller\DataController.cpp
 
 release/Product.o: Model/Product.cpp Model/Product.h \
 		Model/User.h \
+		Model/Invoice.h \
 		Datastructures/Vector.h \
-		Datastructures/Pair.h
+		Datastructures/Pair.h \
+		Model/Cart.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\Product.o Model\Product.cpp
 
 release/Cart.o: Model/Cart.cpp Model/Cart.h \
 		Model/User.h \
 		Model/Product.h \
+		Model/Invoice.h \
 		Datastructures/Vector.h \
 		Datastructures/Pair.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\Cart.o Model\Cart.cpp
@@ -963,11 +966,11 @@ release/CustomerInterface.o: View/CustomerInterface.cpp View/CustomerInterface.h
 		Model/Cart.h \
 		Model/User.h \
 		Model/Product.h \
+		Model/Invoice.h \
 		Datastructures/Vector.h \
 		Datastructures/Pair.h \
 		Model/Customer.h \
 		Model/Orders.h \
-		Model/Invoice.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QComboBox \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qcombobox.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QMessageBox \

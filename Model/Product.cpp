@@ -77,3 +77,10 @@ void Product::displayInfo() const {
 bool Product::isAvailable(int requestedQuantity) const {
     return requestedQuantity <= stock;
 }
+
+void Product:: addInvoiceToProduct(Invoice* invoice){
+    productInInvoice.pushback(invoice);
+}
+void Product:: addCartToProduct(Cart* cart){
+    productInCart.pushback(cart);
+}
