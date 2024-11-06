@@ -10,13 +10,20 @@ Invoice::Invoice() : customerId(""), totalAmount(0.0) {
 }
 
 Invoice::Invoice(const Cart& cart) : customerId(cart.getCustomerID()), totalAmount(0.0) {
-    products = cart.getItems(); 
-    for (int i = 0; i < products.getSize(); ++i) {
-        totalAmount += products[i].getFirst()->getPrice() * products[i].getSecond();
+    Vector<Pair<Product*, int>> productsInCart = cart.getItems(); 
+
+    for (int i = 0; i < productsInCart.getSize(); ++i) {
+        Product* product = productsInCart[i].getFirst();
+        int quantity = productsInCart[i].getSecond();
+
+        addProductToInvoice(product, quantity); 
+        totalAmount += product->getPrice() * quantity;
     }
+
     setInvoiceDate();
     invoiceId = "INV_" + getInvoiceDate();
 }
+
 
 Invoice::Invoice(const string& invoiceId, const string& customerId, const Vector<Pair<Product*, int>>& products, double totalAmount)
     : invoiceId(invoiceId), customerId(customerId), products(products), totalAmount(totalAmount) {
@@ -84,4 +91,8 @@ void Invoice::setDeliveryDate(const string& deliveryDate) {
 
 void Invoice::setPaymentMethod(const string& paymentMethod) {
     this->paymentMethod = paymentMethod;
+}
+
+void Invoice:: addProductToInvoice(Product* product ,int count){
+    products.pushback(Pair<Product*, int>(const_cast<Product*>(product), count));
 }

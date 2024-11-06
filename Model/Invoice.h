@@ -41,4 +41,7 @@ public:
 
     void setDeliveryDate(const string& deliveryDate);
     void setPaymentMethod(const string& paymentMethod);
+
+    void  addProductToInvoice(Product* , int count);
+
 };
