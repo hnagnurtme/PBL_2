@@ -16,7 +16,7 @@ public:
     Cart(string id ="");
     Cart(const Cart&);
     void setCartID(string id);
-    void addItem(const Product* product, int quantity);
+    void addItem(Product* product, int quantity);
     void removeItem(string productId);
     void clearCart();
     void displayCartItems() const;

@@ -4,6 +4,7 @@
 #include "Datastructures/Pair.h"
 #include "Model/Product.h"
 #include "Model/Cart.h"
+#include <mutex>
 
 using namespace std;
 class Product;
@@ -32,6 +33,7 @@ public:
     void setCustomerId(const string& id);
     
     void setInvoiceDate();
+    void setInvoiceDate(const string& date);
     string getInvoiceDate() const;
 
     void setTotalAmount(double amount);
@@ -40,8 +42,12 @@ public:
     Vector<Pair<Product*, int>> getProducts() const;
 
     void setDeliveryDate(const string& deliveryDate);
+    string getDeliveryDate() ;
     void setPaymentMethod(const string& paymentMethod);
+    string getPaymentMethod();
 
     void  addProductToInvoice(Product* , int count);
 
+    void setInvoiceID(int count);
+    string generateCounterID();
 };

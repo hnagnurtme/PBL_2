@@ -1,10 +1,11 @@
 #include "Model/Orders.h"
-
+#include <iomanip>
+#include <sstream>
 Orders::Orders() : customerID("") {}
 
 Orders::Orders(const string& customerId) : customerID(customerId) {}
 
-void Orders::addInvoice(const Invoice& invoice) {
+void Orders::addInvoice(Invoice* invoice) {
     invoices.pushback(invoice);
 }
 
@@ -14,4 +15,25 @@ string Orders::getCustomerID() const {
 
 void Orders::setCustomerID(const string& id) {
     customerID = id;
+}
+
+
+Vector<Invoice*> Orders::  getInvoice() const{
+    return invoices;
+}
+
+Orders ::Orders(const Orders& other){
+    customerID = other.customerID;
+    invoices = other.invoices;
+}
+
+string Orders::displayOrders() const {
+    stringstream ss;
+    for (int i = 0; i < invoices.getSize(); ++i) {
+        ss << invoices[i]->displayInvoice();  
+        if (i < invoices.getSize() - 1) {
+            ss << "\n";  
+    }
+    return ss.str();
+}
 }

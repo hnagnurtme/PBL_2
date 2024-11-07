@@ -1,7 +1,16 @@
-PRD001;Điện thoại Samsung Galaxy S21;Điện thoại;1000;6;Resource/SANPHAM/PRD001.png;{#FF66CC,#006600,#000088,#FFCC33};Samsung
-PRD002;Điện thoại iPhone 13;Điện thoại;1200;7;Resource/SANPHAM/PRD002.png;{#FF66CC,#006600,#000088,#FFCC33};Apple
-PRD003;Điện thoại Xiaomi Mi 11;Điện thoại;800;21;Resource/SANPHAM/PRD003.png;{#FF66CC,#006600,#000088,#FFCC33};Xiaomi
-PRD005;Điện thoại Google Pixel 6;Điện thoại;900;26;Resource/SANPHAM/PRD005.png;{#FF66CC,#006600,#000088,#FFCC33};Google
-PRD007;Điện thoại Oppo Find X3;Điện thoại;700;28;Resource/SANPHAM/PRD007.png;{#FF66CC,#006600,#000088,#FFCC33};Oppo
-PRD008;Điện thoại Vivo X60;Điện thoại;750;24;Resource/SANPHAM/PRD008.png;{#FF66CC,#006600,#000088,#FFCC33};Vivo
-PRD010;Điện thoại Realme GT;Điện thoại;600;42;Resource/SANPHAM/PRD010.png;{#FF66CC,#006600,#000088,#FFCC33};Realme
+PRD001;Điện thoại Samsung Galaxy S21;Điện thoại;1000;4;Resource/SANPHAM/PRD001.png;{#FF66CC,#006600,#000088,#FFCC33};Samsung
+PRD002;Điện thoại iPhone 13;Điện thoại;1200;2;Resource/SANPHAM/PRD002.png;{#FF66CC,#006600,#000088,#FFCC33};Apple
+PRD003;Điện thoại Xiaomi Mi 11;Điện thoại;800;3;Resource/SANPHAM/PRD003.png;{#FF66CC,#006600,#000088,#FFCC33};Xiaomi
+PRD005;Điện thoại Google Pixel 6;Điện thoại;900;2;Resource/SANPHAM/PRD005.png;{#FF66CC,#006600,#000088,#FFCC33};Google
+PRD007;Điện thoại Oppo Find X3;Điện thoại;700;27;Resource/SANPHAM/PRD007.png;{#FF66CC,#006600,#000088,#FFCC33};Oppo
+PRD008;Điện thoại Vivo X60;Điện thoại;750;19;Resource/SANPHAM/PRD008.png;{#FF66CC,#006600,#000088,#FFCC33};Vivo
+PRD010;Điện thoại Realme GT;Điện thoại;600;36;Resource/SANPHAM/PRD010.png;{#FF66CC,#006600,#000088,#FFCC33};Realme
+PRD011;Điện thoại OnePlus 9 Pro;Điện thoại;1400;16;Resource/SANPHAM/PRD001.png;{#FF66CC,#006600,#000088,#FFCC33};OnePlus
+PRD012;Điện thoại Sony Xperia 5 II;Điện thoại;1100;12;Resource/SANPHAM/PRD002.png;{#FF66CC,#006600,#000088,#FFCC33};Sony
+PRD013;Điện thoại Motorola Edge 20;Điện thoại;950;19;Resource/SANPHAM/PRD003.png;{#FF66CC,#006600,#000088,#FFCC33};Motorola
+PRD014;Điện thoại Nokia 8.3 5G;Điện thoại;1050;9;Resource/SANPHAM/PRD005.png;{#FF66CC,#006600,#000088,#FFCC33};Nokia
+PRD015;Điện thoại Huawei P40 Pro;Điện thoại;1200;11;Resource/SANPHAM/PRD007.png;{#FF66CC,#006600,#000088,#FFCC33};Huawei
+PRD016;Điện thoại LG Velvet;Điện thoại;750;10;Resource/SANPHAM/PRD008.png;{#FF66CC,#006600,#000088,#FFCC33};LG
+PRD017;Điện thoại Asus ZenFone 8;Điện thoại;950;9;Resource/SANPHAM/PRD010.png;{#FF66CC,#006600,#000088,#FFCC33};Asus
+PRD018;Điện thoại Xiaomi Redmi Note 10;Điện thoại;500;6;Resource/SANPHAM/PRD001.png;{#FF66CC,#006600,#000088,#FFCC33};Xiaomi
+PRD020;Điện thoại Vivo V21 5G;Điện thoại;780;1;Resource/SANPHAM/PRD003.png;{#FF66CC,#006600,#000088,#FFCC33};Vivo

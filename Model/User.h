@@ -3,15 +3,33 @@
 using namespace std;
 class User {
 protected:
-    int userId;
+    string userId;
     string name;
     string email;
     string phone;
     string password;
+    string address;
+    string recoveryCode;
 
 public:
-    void login(const string& email, const string& password);
+    User();
+    User(string id, const string& name, const string& email, const string& phone, const string& password, const string& address);
+    bool login(const string email, const string password);
     void logout();
     void displayInfo() const;
     void recoverPassword();
+    void addRecoveryOption(const string& method, const string& info);
+    void sendRecoveryCode();
+
+    string getUserId() const;
+    string getName() const;
+    string getEmail() const;
+    string getPhone() const;
+    string getPassword() const;
+
+    void setUserId(string id);
+    void setName(const string& name);
+    void setEmail(const string& email);
+    void setPhone(const string& phone);
+    void setPassword(const string& password);
 };

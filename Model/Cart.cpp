@@ -17,19 +17,24 @@ Cart::Cart(const Cart& other) : customerID(other.customerID) {
     items = other.items; 
 }
 
-void Cart::addItem(const Product* product, int quantity) {
+
+
+void Cart::addItem(Product* product, int quantity) {
     if (quantity <= 0) {
         cerr << "Quantity must be greater than 0." << endl;
         return;
     }
+    
     for (int i = 0; i < items.getSize(); ++i) {
         if (items[i].getFirst()->getProductId() == product->getProductId()) {
             items[i].setSecond(items[i].getSecond() + quantity);
             return;
         }
     }
-    items.pushback(Pair<Product*, int>(const_cast<Product*>(product), quantity));
+    
+    items.pushback(Pair<Product*, int>(product, quantity));
 }
+
 
 void Cart::removeItem(string productId) {
     for (int i = 0; i < items.getSize(); ++i) {

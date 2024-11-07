@@ -23,7 +23,7 @@ private:
 public:
     Vector();
     Vector(const Vector &vector);
-    Vector(std::initializer_list<DataType> list);
+    Vector(initializer_list<DataType> list);
     Vector<DataType>& operator=(const Vector &other);
     DataType& operator[](int position);
     const DataType& operator[](int position) const;
@@ -37,8 +37,24 @@ public:
     void popback();
     void popfront();
     void remove(int position);
+    void clear();
 };
 
+template <typename DataType>
+void Vector<DataType>::clear(){
+    Node<DataType>* current = head;
+        Node<DataType>* nextNode = nullptr;
+
+        while (current != nullptr) {
+            nextNode = current->next;
+            delete current;
+            current = nextNode;
+        }
+
+        head = nullptr;
+        tail = nullptr;
+        size = 0;
+}
 template <typename DataType>
 Vector<DataType>::Vector() : head(nullptr), tail(nullptr), size(0) {}
 

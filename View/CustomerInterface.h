@@ -18,6 +18,7 @@
 #include <string>
 #include <QComboBox>
 #include <QMessageBox>
+#include "Model/Customer.h"
 using namespace std;
 class CustomerInterface : public QWidget {
     Q_OBJECT
@@ -37,13 +38,14 @@ private slots:
     void payment();
     void checkout();
     void cartOrigin();
+    void ordersOrigin();
     void clearCart();
     void onDeliveryDateChanged();
     void onPaymentMethodChanged();
+    
 signals:
 private:
-    string customerID ;
-    Cart *cart;
+    Customer* customer;
     QPushButton *showOverviewButton;
     QPushButton *showProductsButton;
     QPushButton *checkoutButton;
@@ -64,8 +66,10 @@ private:
     QDateEdit *deliveryDateEdit;
     QComboBox *paymentMethodComboBox; 
     QLabel *paymentMethodLabel;
+    QGroupBox *overviewBox;
     void addProducts(int row, bool fromCart);
     void deleteProducts(int row, bool fromCart);
     void addFavouriteProducts(int row);
     void addProductsData();
+    void showInvoiceDetail(int row);
 };

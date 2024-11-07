@@ -11,6 +11,7 @@ SOURCES += MainApplication.cpp \
            Model/User.cpp \
            Model/Orders.cpp \
            Model/Invoice.cpp \
+           Model/Customer.cpp \
            View/CustomerInterface.cpp
 HEADERS +=  Controller/DataController.h \
             Datastructures/Pair.h \
@@ -20,10 +21,12 @@ HEADERS +=  Controller/DataController.h \
             Model/User.h \
             Model/Orders.h \
             Model/Invoice.h \
+            Model/Customer.h \
             View/CustomerInterface.h
            
 # Thêm thư viện cần thiết
 QT += widgets
+QT += charts
 
 # Khai báo tài nguyên
 RESOURCES += Resource/resources.qrc

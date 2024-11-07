@@ -142,6 +142,163 @@ void DataController::saveCartData(const Cart& cart) {
     file.close();
 }
 
+Invoice DataController::loadInvoiceData(const string& invoiceID, const string& customerID) {
+    string directory = "Data/InvoiceInformation";
+    string filename = directory + "/" + customerID + "_Invoice_" + invoiceID + ".txt"; 
+
+    Invoice invoice;
+
+    ifstream inFile(filename); 
+
+    if (inFile.is_open()) {
+        string line;
+
+        getline(inFile, line);
+        invoice.setInvoiceId(line.substr(12));
+
+        getline(inFile, line);
+        invoice.setCustomerId(line.substr(14));
+
+        getline(inFile, line);
+        invoice.setInvoiceDate(line.substr(14));
+
+        getline(inFile, line);
+        invoice.setDeliveryDate(line.substr(15));
+
+        getline(inFile, line);
+        invoice.setPaymentMethod(line.substr(16));
+
+        getline(inFile, line);
+        invoice.setTotalAmount(stod(line.substr(14)));
+
+        while (getline(inFile, line)) {
+            if (line.empty()) break;
+
+            stringstream ss(line);
+            string productName, productId;
+            double price = 0.0;
+            int quantity = 0;
+            
+            getline(ss, productName, ',');  
+            getline(ss, productId, ',');   
+
+            if (!(ss >> price)) continue;  
+            ss.ignore();  
+
+            if (!(ss >> quantity)) continue; 
+            ss.ignore(); 
+
+            if (!productName.empty() && !productId.empty() && quantity > 0) {
+                Product* product = new Product(productId, productName, "", price, 0, "", Vector<string>(), "");
+                invoice.addProductToInvoice(product, quantity);
+            }
+        }
+
+        inFile.close();
+    } else {
+        cout << "Unable to open file: " << filename << endl;
+    }
+
+    return invoice;
+}
+
+
+
+
+void DataController::saveInvoiceData(const Invoice& invoice) {
+    string directory = "Data/InvoiceInformation";
+    string filename = directory + "/" + invoice.getCustomerId() + "_Invoice_" + invoice.getInvoiceId() + ".txt"; 
+
+    filesystem::create_directories(directory);
+
+    ofstream outFile(filename); 
+
+    if (outFile.is_open()) {
+        outFile << invoice.displayInvoice(); 
+        outFile.close(); 
+    } else {
+        cout << "Unable to open file for writing." << endl;
+    }
+}
+
+void DataController::saveOrdersData(const Orders& orders) {
+    string directory = "Data/OrdersInfomation";
+    string filename = directory + "/" + orders.getCustomerID() + ".csv";
+    
+    filesystem::create_directories(directory);
+
+    ofstream outFile(filename);  
+
+    Vector<Invoice*> newInvoices = orders.getInvoice();
+    
+    if (outFile.is_open()) {
+        outFile << "InvoiceID,PlaceOrderDate,DeliveryDate,TotalAmount,PaymentMethod\n";
+
+        for (int i = 0; i < newInvoices.getSize(); i++) {
+            string invoiceID = newInvoices[i]->getInvoiceId();
+            string invoiceDate = newInvoices[i]->getInvoiceDate();
+            string invoiceDeliveryDate = newInvoices[i]->getDeliveryDate();
+            double invoiceTotalAmount = newInvoices[i]->getTotalAmount();
+            string invoicePaymentMethod = newInvoices[i]->getPaymentMethod();
+            
+            outFile << invoiceID << ","
+                    << invoiceDate << ","
+                    << invoiceDeliveryDate << ","
+                    << invoiceTotalAmount << ","
+                    << invoicePaymentMethod << "\n";
+        }
+        
+        outFile.close();
+    } else {
+        cout << "Unable to open file for writing." << endl;
+    }
+}
+
+Orders DataController::loadOrdersData(const string& customerID) {
+    string directory = "Data/OrdersInfomation";
+    string filename = directory + "/" + customerID + ".csv";
+
+    Orders orders(customerID); 
+
+    ifstream inFile(filename);
+    if (!inFile.is_open()) {
+        cout << "Unable to open file for reading." << endl;
+        return orders; 
+    }
+
+    string line;
+    getline(inFile, line);  
+
+    while (getline(inFile, line)) {
+        stringstream ss(line);
+        string invoiceID, invoiceDate, invoiceDeliveryDate, paymentMethod;
+        double totalAmount;
+
+        getline(ss, invoiceID, ',');
+        getline(ss, invoiceDate, ',');
+        getline(ss, invoiceDeliveryDate, ',');
+
+        string totalAmountStr;
+        getline(ss, totalAmountStr, ',');
+        totalAmount = stod(totalAmountStr);
+
+        getline(ss, paymentMethod, ',');
+
+        Invoice* invoice = new Invoice();
+        invoice->setInvoiceId(invoiceID);
+        invoice->setInvoiceDate(invoiceDate);
+        invoice->setDeliveryDate(invoiceDeliveryDate);
+        invoice->setTotalAmount(totalAmount);
+        invoice->setPaymentMethod(paymentMethod);
+
+        orders.addInvoice(invoice);
+    }
+
+    inFile.close();
+    return orders; 
+}
+
+
 Cart DataController::loadCartData(const string& customerID) {
     Cart cart(customerID);
     string filePath = "Data/CartInformation/" + customerID + "_cart.csv";
@@ -180,19 +337,26 @@ Cart DataController::loadCartData(const string& customerID) {
     return cart;
 }
 
-void DataController::saveInvoiceData(const Invoice& invoice) {
-    string directory = "Data/InvoiceInformation";
-    string filename = directory + "/" + invoice.getCustomerId() + "_Invoice_" + invoice.getInvoiceId() + ".txt"; 
-
-    filesystem::create_directories(directory);
-
-    ofstream outFile(filename); 
+void DataController::printOrdersToFile(const Orders& orders) {
+    string tempFilename = "Data/OrdersInfomation/temp_orders_output.csv";
+    ofstream outFile(tempFilename);
 
     if (outFile.is_open()) {
-        outFile << invoice.displayInvoice(); 
-        outFile.close(); 
+        outFile << "InvoiceID,PlaceOrderDate,DeliveryDate,TotalAmount,PaymentMethod\n";  // Tiêu đề file CSV
+
+        Vector<Invoice*> invoices = orders.getInvoice();
+        for (int i = 0; i < invoices.getSize(); i++) {
+            Invoice* invoice = invoices[i];
+            outFile << invoice->getInvoiceId() << ","
+                    << invoice->getInvoiceDate() << ","
+                    << invoice->getDeliveryDate() << ","
+                    << invoice->getTotalAmount() << ","
+                    << invoice->getPaymentMethod() << "\n";
+        }
+
+        outFile.close();
+        cout << "Orders data has been written to temp_orders_output.csv for verification." << endl;
     } else {
         cout << "Unable to open file for writing." << endl;
     }
 }
-

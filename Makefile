@@ -288,7 +288,10 @@ Makefile: MyQtApp.pro C:/QT/6.7.3/mingw_64/mkspecs/win32-g++/qmake.conf C:/QT/6.
 		C:/QT/6.7.3/mingw_64/mkspecs/features/yacc.prf \
 		C:/QT/6.7.3/mingw_64/mkspecs/features/lex.prf \
 		MyQtApp.pro \
+		C:/QT/6.7.3/mingw_64/lib/Qt6Charts.prl \
+		C:/QT/6.7.3/mingw_64/lib/Qt6OpenGLWidgets.prl \
 		C:/QT/6.7.3/mingw_64/lib/Qt6Widgets.prl \
+		C:/QT/6.7.3/mingw_64/lib/Qt6OpenGL.prl \
 		C:/QT/6.7.3/mingw_64/lib/Qt6Gui.prl \
 		C:/QT/6.7.3/mingw_64/lib/Qt6Core.prl \
 		C:/QT/6.7.3/mingw_64/lib/Qt6EntryPoint.prl \
@@ -513,7 +516,10 @@ C:/QT/6.7.3/mingw_64/mkspecs/features/exceptions.prf:
 C:/QT/6.7.3/mingw_64/mkspecs/features/yacc.prf:
 C:/QT/6.7.3/mingw_64/mkspecs/features/lex.prf:
 MyQtApp.pro:
+C:/QT/6.7.3/mingw_64/lib/Qt6Charts.prl:
+C:/QT/6.7.3/mingw_64/lib/Qt6OpenGLWidgets.prl:
 C:/QT/6.7.3/mingw_64/lib/Qt6Widgets.prl:
+C:/QT/6.7.3/mingw_64/lib/Qt6OpenGL.prl:
 C:/QT/6.7.3/mingw_64/lib/Qt6Gui.prl:
 C:/QT/6.7.3/mingw_64/lib/Qt6Core.prl:
 C:/QT/6.7.3/mingw_64/lib/Qt6EntryPoint.prl:

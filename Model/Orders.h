@@ -8,12 +8,17 @@ using namespace std;
 class Orders {
 private:
     string customerID;
-    Vector<Invoice> invoices;
+    Vector<Invoice*> invoices;
 
 public:
     Orders();
+    Orders(const Orders& other);
     Orders(const string& customerId);
-    void addInvoice(const Invoice& invoice);
+    void addInvoice(Invoice* invoice);
     string getCustomerID() const;
     void setCustomerID(const string& id);
+    Vector<Invoice*> getInvoice() const;
+
+    string displayOrders() const;
+
 };

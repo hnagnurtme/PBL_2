@@ -1,9 +1,0 @@
-Invoice ID: INV_2024-11-02
-Customer ID: USER002
-Invoice Date: 2024-11-02
-Delivery Date: 2024-12-17
-Payment Method: Bank Transfer
-Total Amount: $2200
-Products:
-- Product Name: Điện thoại iPhone 13, Quantity: 1
-- Product Name: Điện thoại Samsung Galaxy S21, Quantity: 1

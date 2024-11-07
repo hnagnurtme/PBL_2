@@ -5,6 +5,7 @@ release/Cart.o
 release/User.o
 release/Orders.o
 release/Invoice.o
+release/Customer.o
 release/CustomerInterface.o
 release/qrc_resources.o
 release/moc_CustomerInterface.o

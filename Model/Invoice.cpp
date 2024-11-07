@@ -3,6 +3,11 @@
 #include <ctime>
 #include <iomanip>
 #include <sstream>
+#include <random>
+
+void Invoice::setInvoiceID(int count){
+    invoiceId = "INV_" + to_string(count);
+}
 
 Invoice::Invoice() : customerId(""), totalAmount(0.0) {
     setInvoiceDate();
@@ -45,6 +50,8 @@ string Invoice::displayInvoice() const {
     }
     return ss.str();
 }
+
+
 Vector<Pair<Product*, int>> Invoice:: getProducts() const{
     return products;
 }
@@ -96,3 +103,16 @@ void Invoice::setPaymentMethod(const string& paymentMethod) {
 void Invoice:: addProductToInvoice(Product* product ,int count){
     products.pushback(Pair<Product*, int>(const_cast<Product*>(product), count));
 }
+
+string Invoice:: getPaymentMethod(){
+    return paymentMethod;
+}
+
+string Invoice::getDeliveryDate(){
+    return deliveryDate;
+}
+
+void Invoice:: setInvoiceDate(const string& date){
+    invoiceDate = date;
+}
+

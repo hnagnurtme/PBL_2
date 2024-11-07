@@ -1,8 +1,12 @@
 {
   "files.associations": {
+    "*.h": "cpp",
     "string": "cpp",
-    "fstream": "cpp",
     "iostream": "cpp",
+    "qapplication": "cpp",
+    "qwidget": "cpp",
+    "qmainwindow": "cpp",
+    "fstream": "cpp",
     "xstring": "cpp",
     "utility": "cpp",
     "random": "cpp",
@@ -86,7 +90,9 @@
     "string_view": "cpp",
     "numbers": "cpp",
     "semaphore": "cpp",
-    "codecvt": "cpp"
+    "codecvt": "cpp",
+    "qpushbutton": "cpp",
+    "qpainter": "cpp"
   },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",
