@@ -24,6 +24,8 @@ public:
     
     void printOrdersToFile(const Orders& orders);
 
+    bool findInvoiceByInvoiceID(const string& userID, const string& invoiceID , string& invoice);
+
 private:
     string invoicesFileName;
     string productFileName;

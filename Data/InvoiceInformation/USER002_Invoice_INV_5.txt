@@ -1,0 +1,11 @@
+Invoice ID: INV_5
+Customer ID: USER002
+Invoice Date: 2024-11-07
+Delivery Date: 2024-11-22
+Payment Method: Cash on Delivery
+Total Amount: $10400
+Products:
+- Product Name: Điện thoại Realme GT, Quantity: 2
+- Product Name: Điện thoại OnePlus 9 Pro, Quantity: 2
+- Product Name: Điện thoại Oppo Find X3, Quantity: 7
+- Product Name: Điện thoại Vivo X60, Quantity: 2

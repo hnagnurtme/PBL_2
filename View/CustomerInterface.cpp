@@ -40,7 +40,7 @@ void CustomerInterface::showMessage(QWidget *parent, bool status, const QString 
     messageBox.setIconPixmap(scaledPixmap);
     messageBox.setText(message);
     messageBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-    messageBox.setFixedSize(400, 200);
+    messageBox.setFixedSize(600, 400);
     messageBox.exec();
 }
 CustomerInterface::CustomerInterface(QWidget *parent) : QWidget(parent) {
@@ -239,16 +239,16 @@ void CustomerInterface::addProductsData() {
         addProductsButton->setIconSize(QSize(35, 35));
         connect(addProductsButton, &QPushButton::clicked, [this, row]() { addProducts(row, false); });
 
-        QPushButton *addFavouriteButton = new QPushButton();
-        QIcon heartIcon("Resource/ICON/ICON1.png"); 
-        addFavouriteButton->setIcon(heartIcon);
-        addFavouriteButton->setIconSize(QSize(35, 35));
-        connect(addFavouriteButton, &QPushButton::clicked, [this, row]() { addFavouriteProducts(row); });
+        QPushButton *showDetailsButton = new QPushButton();
+        QIcon heartIcon("Resource/ICON/ICON10.png"); 
+        showDetailsButton->setIcon(heartIcon);
+        showDetailsButton->setIconSize(QSize(35, 35));
+        connect(showDetailsButton, &QPushButton::clicked, [this, row]() { showDetailsProducts(row); });
 
         QHBoxLayout *actionLayout = new QHBoxLayout();
         actionLayout->addWidget(addProductsButton);
         actionLayout->addSpacing(5);
-        actionLayout->addWidget(addFavouriteButton);
+        actionLayout->addWidget(showDetailsButton);
 
         QWidget *actionWidget = new QWidget();
         actionWidget->setLayout(actionLayout);
@@ -353,6 +353,7 @@ void CustomerInterface::ordersOrigin() {
     Orders orders = ordersData->loadOrdersData(customer->getUserId());
     
     customer->updateOrderHistory(orders);
+    ordersData->printOrdersToFile(orders);
 }
 
 
@@ -425,26 +426,33 @@ void CustomerInterface::clearCart() {
 }
 
 void CustomerInterface::showOverview() {
-    DataController *productData = new DataController();
-    Vector<Product> products = productData->loadProductData();
-    delete productData;
+    // Lấy thông tin lịch sử đơn hàng của khách hàng
+    Orders orders = customer->getOrderHistory();
+    Vector<Invoice*> invoices = orders.getInvoice();
 
-    QVector<QString> productIds;
+    QVector<QString> invoiceIDs;
     QVector<double> productQuantities;
+    double totalAmountSpent = 0.0;  // Biến lưu tổng số tiền đã chi tiêu
+    int totalOrders = invoices.getSize();  // Biến lưu số đơn hàng
 
-    for (int i = 0; i < products.getSize(); ++i) {
-        QString productId = QString::fromStdString(products[i].getProductId());
-        double quantity = products[i].getStock();
-        productIds.append(productId);
-        productQuantities.append(quantity);
+    // Lặp qua các hóa đơn để lấy ID sản phẩm và tổng số tiền
+    for (int i = 0; i < invoices.getSize(); ++i) {
+        QString productId = QString::fromStdString(invoices[i]->getInvoiceId());
+        double totalAmount = invoices[i]->getTotalAmount();
+        
+        invoiceIDs.append(productId);
+        productQuantities.append(totalAmount);
+
+        totalAmountSpent += totalAmount;  // Cộng dồn tổng số tiền
     }
 
+    // Tạo bộ dữ liệu cho biểu đồ
     QBarSet *set = new QBarSet("Product Quantity");
-
     for (double quantity : productQuantities) {
         *set << quantity;
     }
 
+    // Tạo biểu đồ
     QBarSeries *series = new QBarSeries();
     series->append(set);
 
@@ -454,7 +462,7 @@ void CustomerInterface::showOverview() {
     chart->setAnimationOptions(QChart::SeriesAnimations);
 
     QBarCategoryAxis *axisX = new QBarCategoryAxis();
-    axisX->append(productIds);
+    axisX->append(invoiceIDs);
     chart->setAxisX(axisX, series);
 
     QValueAxis *axisY = new QValueAxis();
@@ -465,13 +473,21 @@ void CustomerInterface::showOverview() {
     chartView->setRenderHint(QPainter::Antialiasing);
     chartView->resize(800, 600);
 
+    // Thêm các widget để hiển thị thông tin số đơn và tổng số tiền
+    QLabel *orderCountLabel = new QLabel("Total Orders: " + QString::number(totalOrders));
+    QLabel *totalAmountLabel = new QLabel("Total Amount Spent: " + QString::number(totalAmountSpent, 'f', 2));
+
+    // Cập nhật giao diện với biểu đồ và thông tin mới
     QVBoxLayout *layout = new QVBoxLayout(overviewBox);
+    layout->addWidget(orderCountLabel);
+    layout->addWidget(totalAmountLabel);
     layout->addWidget(chartView);
     overviewBox->setLayout(layout);
 
     overviewBox->show();
     stackWidget->setCurrentIndex(3);
 }
+
 
 
 
@@ -485,10 +501,32 @@ void CustomerInterface::showAccount() {
 }
 
 void CustomerInterface::checkout() {
+    this->close();
 }
 
-void CustomerInterface::addFavouriteProducts(int row){
+void CustomerInterface::showDetailsProducts(int row) {
+    DataController *productData = new DataController();
+    Vector<Product> products = productData->loadProductData();
+    delete productData;
 
+    if (row < 0 || row >= products.getSize()) {
+        QMessageBox::warning(this, "Error", "Invalid product selection.");
+        return;
+    }
+
+    Vector<string> details = products[row].getDetail();
+    
+    if (details.getSize() < 3) {
+        QMessageBox::warning(this, "Error", "Product details are incomplete.");
+        return;
+    }
+
+    QString productDetails = QString("Detail Information:\n   Screen: %1\n    Resolution: %2\n   Processor: %3")
+                             .arg(QString::fromStdString(details[0]))
+                             .arg(QString::fromStdString(details[1]))
+                             .arg(QString::fromStdString(details[2]));
+
+    showMessage(this, true,productDetails);
 }
 
 void CustomerInterface::showInvoice() { 
@@ -598,6 +636,17 @@ CustomerInterface::~CustomerInterface() {
 }
 
 
-void CustomerInterface::showInvoiceDetail( int i){
+void CustomerInterface::showInvoiceDetail(int row){
+    QString invoice_ID;
+    invoice_ID = ordersTable->item(row,1)->text();
+    string invoiceId = invoice_ID.toStdString();
 
+    string invoice;
+    unique_ptr<DataController> invoiceData = make_unique<DataController>();
+    if(invoiceData->findInvoiceByInvoiceID(customer->getUserId(),invoiceId,invoice)){
+        showMessage(this,true,QString::fromStdString(invoice));
+    }
+    else{
+        showMessage(this,false,QString::fromStdString("Not founnd"));
+    }
 }

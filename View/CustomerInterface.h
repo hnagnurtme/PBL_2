@@ -69,7 +69,7 @@ private:
     QGroupBox *overviewBox;
     void addProducts(int row, bool fromCart);
     void deleteProducts(int row, bool fromCart);
-    void addFavouriteProducts(int row);
+    void showDetailsProducts(int row);
     void addProductsData();
     void showInvoiceDetail(int row);
 };

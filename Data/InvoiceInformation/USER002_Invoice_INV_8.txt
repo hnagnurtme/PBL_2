@@ -1,0 +1,13 @@
+==================== INVOICE ====================
+Invoice ID       : INV_8
+Customer ID      : USER002
+Invoice Date     : 2024-11-08
+Delivery Date    : 2024-11-08
+Payment Method   : Cash on Delivery
+Total Amount     : $1450.00
+------------------------------------------------
+Products:                     Product Name                            | Quantity  
+------------------------------------------------
+Điện thoại Oppo Find X3                                          | 1         
+Điện thoại Vivo X60                                              | 1         
+================================================

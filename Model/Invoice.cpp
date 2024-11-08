@@ -37,20 +37,32 @@ Invoice::Invoice(const string& invoiceId, const string& customerId, const Vector
 
 string Invoice::displayInvoice() const {
     stringstream ss;
-    ss << "Invoice ID: " << invoiceId << "\n";
-    ss << "Customer ID: " << customerId << "\n";
-    ss << "Invoice Date: " << invoiceDate << "\n";
-    ss << "Delivery Date: " << deliveryDate << "\n";  
-    ss << "Payment Method: " << paymentMethod << "\n"; 
-    ss << "Total Amount: $" << totalAmount << "\n";
-    ss << "Products:\n";
+    ss << "======================== INVOICE ========================\n";
+    ss << left << setw(20) << "Invoice ID"      << ": " << invoiceId << "\n";
+    ss << left << setw(20) << "Customer ID"     << ": " << customerId << "\n";
+    ss << left << setw(20) << "Invoice Date"    << ": " << invoiceDate << "\n";
+    ss << left << setw(20) << "Delivery Date"   << ": " << deliveryDate << "\n";
+    ss << left << setw(20) << "Payment Method"  << ": " << paymentMethod << "\n";
+    ss << "\n--------------------------------------------------------------------------------------------\n";
+    
+    // Tiêu đề bảng sản phẩm
+    ss << left << setw(30) << "Product Name" << "| "
+       << setw(10) << "Quantity" << "| " << setw(10) << "Price" << "\n";
+    ss << "--------------------------------------------------------------------------------------------\n";
+    
+    // Liệt kê sản phẩm
     for (int i = 0; i < products.getSize(); ++i) {
-        ss << "- Product Name: " << products[i].getFirst()->getName() 
-           << ", Quantity: " << products[i].getSecond() << "\n";
+        ss << left << setw(30) << products[i].getFirst()->getName()
+           << "| " << setw(10) << products[i].getSecond()
+           << "| " << setw(10) << fixed << setprecision(2) << products[i].getFirst()->getPrice() << "\n";
     }
+
+    // Tổng số tiền
+    ss << "======================================================\n";
+    ss << right << setw(45) << "Total Amount     : $" << fixed << setprecision(2) << totalAmount << "\n";
+    
     return ss.str();
 }
-
 
 Vector<Pair<Product*, int>> Invoice:: getProducts() const{
     return products;

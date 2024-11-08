@@ -1,12 +1,12 @@
 #include "Model/Product.h"
 #include <iostream>
 Product::Product() 
-    : productId(""), name(""), category(""), price(0.0), stock(0), description(""), colors(), brand("") {}
+    : productId(""), name(""), category(""), price(0.0), stock(0), description(""), detail(), brand("") {}
 
 Product::Product(string id, const string& name, const string& category, double price, int stock,
-                const string& description, const Vector<string>& colors, const string& brand)
+                const string& description, const Vector<string>& detail, const string& brand)
     : productId(id), name(name), category(category), price(price), stock(stock),
-    description(description), colors(colors), brand(brand) {}
+    description(description), detail(detail), brand(brand) {}
 
 string Product::getProductId() const {
     return productId;
@@ -32,8 +32,8 @@ string Product::getDescription() const {
     return description;
 }
 
-Vector<string> Product::getColors() const {
-    return colors;
+Vector<string> Product::getDetail() const {
+    return detail;
 }
 
 string Product::getBrand() const {
@@ -67,8 +67,8 @@ void Product::displayInfo() const {
     cout << "Description: " << description << endl;
     cout << endl;
     cout << "Colors: ";
-    for (long i = 0; i < colors.getSize(); ++i) {
-        cout << colors[i] << " ";
+    for (long i = 0; i < detail.getSize(); ++i) {
+        cout << detail[i] << " ";
     }
     cout << endl;
     cout << "Brand: " << brand << endl;

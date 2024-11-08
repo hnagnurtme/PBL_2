@@ -28,11 +28,11 @@ void DataController::saveProductsData(const Vector<Product>& products) {
                 << product.getStock() << ";"
                 << product.getDescription() << ";";
 
-        Vector<string> colors = product.getColors();
+        Vector<string> detail = product.getDetail();
         tempFile << "{";
-        for (int j = 0; j < colors.getSize(); ++j) {
-            tempFile << colors[j];
-            if (j < colors.getSize() - 1) {
+        for (int j = 0; j < detail.getSize(); ++j) {
+            tempFile << detail[j];
+            if (j < detail.getSize() - 1) {
                 tempFile << ",";
             }
         }
@@ -64,7 +64,7 @@ Vector<Product> DataController::loadProductData() {
 
 Product DataController::parseProduct(const string& line) {
     istringstream ss(line);
-    string id, name, category, priceStr, stockStr, description, sizesStr, colorsStr, brand;
+    string id, name, category, priceStr, stockStr, description, sizesStr, detailStr, brand;
 
     getline(ss, id, ';');         
     getline(ss, name, ';');
@@ -72,26 +72,26 @@ Product DataController::parseProduct(const string& line) {
     getline(ss, priceStr, ';');
     getline(ss, stockStr, ';');
     getline(ss, description, ';');
-    getline(ss, colorsStr, ';');
+    getline(ss, detailStr, ';');
     getline(ss, brand, ';');
 
     double price = stod(priceStr);
     int stock = stoi(stockStr);
 
-    Vector<string> colors;
-    istringstream colorsStream(colorsStr);
-    string color;
+    Vector<string> details;
+    istringstream detailsStream(detailStr);
+    string detail;
 
-    while (getline(colorsStream, color, ',')) {
-        color.erase(remove(color.begin(), color.end(), '{'), color.end());
-        color.erase(remove(color.begin(), color.end(), '}'), color.end());
+    while (getline(detailsStream, detail, ',')) {
+        detail.erase(remove(detail.begin(), detail.end(), '{'), detail.end());
+        detail.erase(remove(detail.begin(), detail.end(), '}'), detail.end());
         
-        if (!color.empty()) {
-            colors.pushback(color); 
+        if (!detail.empty()) {
+            details.pushback(detail); 
         }
     }
 
-    return Product(id, name, category, price, stock, description,colors, brand);
+    return Product(id, name, category, price, stock, description,details, brand);
 }
 void DataController::removeProduct(const Invoice &invoice) {
     Vector<Pair<Product*, int>> invoiceProducts = invoice.getProducts();
@@ -342,7 +342,7 @@ void DataController::printOrdersToFile(const Orders& orders) {
     ofstream outFile(tempFilename);
 
     if (outFile.is_open()) {
-        outFile << "InvoiceID,PlaceOrderDate,DeliveryDate,TotalAmount,PaymentMethod\n";  // Tiêu đề file CSV
+        outFile << "InvoiceID,PlaceOrderDate,DeliveryDate,TotalAmount,PaymentMethod,Products\n";  // Tiêu đề file CSV
 
         Vector<Invoice*> invoices = orders.getInvoice();
         for (int i = 0; i < invoices.getSize(); i++) {
@@ -351,12 +351,43 @@ void DataController::printOrdersToFile(const Orders& orders) {
                     << invoice->getInvoiceDate() << ","
                     << invoice->getDeliveryDate() << ","
                     << invoice->getTotalAmount() << ","
-                    << invoice->getPaymentMethod() << "\n";
-        }
+                    << invoice->getPaymentMethod() << ",";
 
+            Vector<Pair<Product*, int>> products = invoice->getProducts();
+            outFile << "{";
+            for (int j = 0; j < products.getSize(); j++) {
+                outFile << "(";
+                outFile << products[j].getFirst()->getProductId(); // Sửa từ products[i] thành products[j]
+                outFile << "," << products[j].getSecond(); // Thêm dấu phẩy giữa ID sản phẩm và số lượng
+                outFile << ")";
+                if (j < products.getSize() - 1) {
+                    outFile << ","; // Thêm dấu phẩy chỉ giữa các sản phẩm, không phải sau sản phẩm cuối
+                }
+            }
+            outFile << "},";
+            outFile << "\n"; // Xuống dòng sau mỗi hóa đơn
+        }
         outFile.close();
         cout << "Orders data has been written to temp_orders_output.csv for verification." << endl;
-    } else {
+    } 
+    else {
         cout << "Unable to open file for writing." << endl;
     }
 }
+
+bool DataController::findInvoiceByInvoiceID(const string& userID, const string& invoiceID, string& invoice) {
+    string filename = "Data/InvoiceInformation/" + userID + "_Invoice_" + invoiceID + ".txt";
+    cout << "Looking for file: " << filename << endl;
+    ifstream inFile(filename);
+    if (!inFile) {
+        cout << "File does not exist or unable to open: " << filename << endl;
+        return false;
+    }
+    stringstream buffer;
+    buffer << inFile.rdbuf();
+    invoice = buffer.str();
+
+    inFile.close();
+    return true;
+}
+

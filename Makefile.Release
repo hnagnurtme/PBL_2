@@ -140,6 +140,7 @@ release/qrc_resources.cpp: Resource/resources.qrc \
 		Resource/ICON/ICON2.png \
 		Resource/ICON/ICON9.png \
 		Resource/ICON/ICON6.png \
+		Resource/ICON/ICON10.png \
 		Resource/ICON/ICON5.png \
 		Resource/ICON/ICON3.png \
 		Resource/ICON/ICON7.png \

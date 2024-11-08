@@ -1,0 +1,17 @@
+======================== INVOICE ========================
+Invoice ID          : INV_1
+Customer ID         : USER002
+Invoice Date        : 2024-11-08
+Delivery Date       : 2024-11-29
+Payment Method      : Bank Transfer
+
+--------------------------------------------------------------------------------------------
+Product Name                  | Quantity  | Price     
+--------------------------------------------------------------------------------------------
+Điện thoại Samsung Galaxy S21| 1         |    1000.00
+Điện thoại iPhone 13     | 1         |    1200.00
+Điện thoại Oppo Find X3  | 1         |     700.00
+Điện thoại Vivo X60      | 1         |     750.00
+Điện thoại LG Velvet     | 1         |     750.00
+======================================================
+                                   Total Amount     : $4400.00
