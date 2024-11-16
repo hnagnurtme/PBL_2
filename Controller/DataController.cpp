@@ -2,6 +2,9 @@
 #include "Datastructures/Vector.h"
 #include "Datastructures/Pair.h"
 #include "Model/Product.h"
+#include "Model/Customer.h"
+#include "Model/Employee.h"
+#include "Model/Manager.h"
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -12,7 +15,7 @@
 using namespace std;
 
 void DataController::saveProductsData(const Vector<Product>& products) {
-    const string newProductFileName = "D:\\PBL2\\Data\\ProductInformation.csv"; 
+    const string newProductFileName = "D:\\NEWPBL\\Data\\ProductInformation.csv"; 
     ofstream tempFile(newProductFileName, ios::out | ios::trunc);
     if (!tempFile.is_open()) {
         throw runtime_error("Không thể mở file để ghi: " + newProductFileName);
@@ -44,7 +47,7 @@ void DataController::saveProductsData(const Vector<Product>& products) {
 
 Vector<Product> DataController::loadProductData() {
     Vector<Product> products;
-    ifstream file("D:\\PBL2\\Data\\ProductInformation.csv");
+    ifstream file("D:\\NEWPBL\\Data\\ProductInformation.csv");
 
     cout << "Trying to open file: " << productFileName << endl; 
 
@@ -389,5 +392,168 @@ bool DataController::findInvoiceByInvoiceID(const string& userID, const string& 
 
     inFile.close();
     return true;
+}
+
+void ensureFileAndFolder(const string& folderPath, const string& filename, const string& header) {
+    if (!std::filesystem::exists(folderPath)) {
+        std::filesystem::create_directories(folderPath);
+    }
+
+    if (!std::filesystem::exists(filename)) {
+        ofstream file(filename);
+        if (!file.is_open()) {
+            throw runtime_error("Không thể tạo file: " + filename);
+        }
+        file << header << "\n";
+        file.close();
+    }
+}
+
+// Hàm đọc dữ liệu của khách hàng
+Vector<Customer> DataController::loadAllCustomersData() {
+    const string filename = "Data/CustomerInformation.csv";
+    const string header = "UserID;Name;Email;Phone;Password;Address";
+    ensureFileAndFolder("Data", filename, header);
+    
+    Vector<Customer> customers;
+    std::ifstream file(filename);
+
+    if (!file.is_open()) {
+        throw std::runtime_error("Không thể mở file để đọc: " + filename);
+    }
+
+    std::string line;
+    std::getline(file, line);  // Bỏ qua dòng tiêu đề
+    while (std::getline(file, line)) {
+        std::stringstream ss(line);
+        std::string userId, name, email, phone, password, address;
+
+        std::getline(ss, userId, ';');
+        std::getline(ss, name, ';');
+        std::getline(ss, email, ';');
+        std::getline(ss, phone, ';');
+        std::getline(ss, password, ';');
+        std::getline(ss, address);
+
+        Customer *newCus = new Customer(userId, name, email, phone, password, address);
+        // Tạo đối tượng Customer và thêm vào Vector
+        customers.pushback(*newCus);
+    }
+
+    return customers;
+}
+
+// Hàm ghi dữ liệu khách hàng
+void DataController::saveAllCustomersData(const Vector<Customer>& customers) {
+    const string filename = "Data/CustomerInformation.csv";
+    const string header = "UserID;Name;Email;Phone;Password;Address";
+    ofstream file(filename, ios::out | ios::trunc);
+    if (!file.is_open()) {
+        throw runtime_error("Không thể mở file để ghi: " + filename);
+    }
+
+    file << header << "\n";
+    for (int i = 0; i < customers.getSize(); ++i) {
+        const Customer& customer = customers[i];
+        file << customer.getUserId() << ";"
+             << customer.getName() << ";"
+             << customer.getEmail() << ";"
+             << customer.getPhone() << ";"
+             << customer.getPassword() << ";"
+             << customer.getAddress() << "\n";
+    }
+    file.close();
+}
+
+// Hàm thêm khách hàng
+void DataController::addCustomer(const Customer& customer) {
+    Vector<Customer> customers = loadAllCustomersData();
+    customers.pushback(customer);
+    saveAllCustomersData(customers);
+}
+
+// Hàm xóa khách hàng
+void DataController::deleteCustomer(const Customer& customer) {
+    Vector<Customer> customers = loadAllCustomersData();
+    for (int i = 0; i < customers.getSize(); ++i) {
+        if (customers[i].getUserId() == customer.getUserId()) {
+            customers.remove(i);
+            saveAllCustomersData(customers);
+            return;
+        }
+    }
+    throw runtime_error("Không tìm thấy customer với UserID: " + customer.getUserId());
+}
+
+
+// Hàm dành riêng cho Employee
+Vector<Employee> DataController::loadAllEmployeesData() {
+    
+    
+}
+
+void DataController::saveAllEmployeesData(const Vector<Employee>& employees) {
+   
+}
+
+void DataController::addEmployee(const Employee& employee) {
+   
+}
+
+void DataController::deleteEmployee(const Employee& employee) {
+   
+}
+
+
+Vector<Manager> DataController::loadAllManagersData() {
+   
+}
+
+void DataController::saveAllManagersData(const Vector<Manager>& managers) {
+    
+}
+
+void DataController::addManager(const Manager& manager) {
+    
+}
+
+void DataController::deleteManager(const Manager& manager) {
+    
+}
+void DataController::testLoadDataAndPrint() {
+    try {
+        // Tạo đối tượng DataController
+        DataController dataController;
+
+        // Load dữ liệu khách hàng từ file
+        Vector<Customer> customers = dataController.loadAllCustomersData(); // Gọi từ đối tượng
+
+        // Đường dẫn tới file tạm
+        const std::string tempFilename = "temp_customer_data_output.csv";
+
+        // Mở file tạm để ghi
+        std::ofstream outFile(tempFilename);
+        if (!outFile.is_open()) {
+            throw std::runtime_error("Không thể mở file tạm: " + tempFilename);
+        }
+
+        // Ghi dữ liệu vào file tạm
+        outFile << "UserID,Name,Email,Phone,Password,Address\n"; // Tiêu đề
+        for (int i = 0; i < customers.getSize(); ++i) {
+            const Customer& customer = customers[i];
+            outFile << customer.getUserId() << ","
+                    << customer.getName() << ","
+                    << customer.getEmail() << ","
+                    << customer.getPhone() << ","
+                    << customer.getPassword() << ","
+                    << customer.getAddress() << "\n";
+        }
+
+        outFile.close(); // Đóng file
+        std::cout << "Dữ liệu đã được ghi vào file tạm: " << tempFilename << std::endl;
+
+    } catch (const std::exception& ex) {
+        std::cerr << "Lỗi: " << ex.what() << std::endl;
+    }
 }
 

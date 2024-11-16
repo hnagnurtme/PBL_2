@@ -68,3 +68,4 @@ void Customer::updateOrderHistory(const Orders& newOrderHistory) {
 
     orderHistory = new Orders(newOrderHistory);
 }
+

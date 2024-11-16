@@ -1,7 +1,7 @@
-PRD001;Điện thoại Samsung Galaxy S21;Điện thoại;1000;99;Resource/SANPHAM/PRD001.png;{6.2 inch Dynamic AMOLED 2X, 1080 x 2400 pixels - 120Hz, Exynos 2100 - 8 nhân};Samsung
-PRD003;Điện thoại Xiaomi Mi 11;Điện thoại;800;99;Resource/SANPHAM/PRD003.png;{6.81 inch AMOLED, 1440 x 3200 pixels - 120Hz, Qualcomm Snapdragon 888 - 8 nhân};Xiaomi
-PRD005;Điện thoại Google Pixel 6;Điện thoại;900;99;Resource/SANPHAM/PRD005.png;{6.4 inch OLED, 1080 x 2400 pixels - 90Hz, Google Tensor - 8 nhân};Google
-PRD007;Điện thoại Oppo Find X3;Điện thoại;700;99;Resource/SANPHAM/PRD007.png;{6.7 inch AMOLED, 1440 x 3216 pixels - 120Hz, Qualcomm Snapdragon 888 - 8 nhân};Oppo
+PRD001;Điện thoại Samsung Galaxy S21;Điện thoại;1000;96;Resource/SANPHAM/PRD001.png;{6.2 inch Dynamic AMOLED 2X, 1080 x 2400 pixels - 120Hz, Exynos 2100 - 8 nhân};Samsung
+PRD003;Điện thoại Xiaomi Mi 11;Điện thoại;800;96;Resource/SANPHAM/PRD003.png;{6.81 inch AMOLED, 1440 x 3200 pixels - 120Hz, Qualcomm Snapdragon 888 - 8 nhân};Xiaomi
+PRD005;Điện thoại Google Pixel 6;Điện thoại;900;94;Resource/SANPHAM/PRD005.png;{6.4 inch OLED, 1080 x 2400 pixels - 90Hz, Google Tensor - 8 nhân};Google
+PRD007;Điện thoại Oppo Find X3;Điện thoại;700;95;Resource/SANPHAM/PRD007.png;{6.7 inch AMOLED, 1440 x 3216 pixels - 120Hz, Qualcomm Snapdragon 888 - 8 nhân};Oppo
 PRD008;Điện thoại Vivo X60;Điện thoại;750;700;Resource/SANPHAM/PRD008.png;{6.56 inch AMOLED, 1080 x 2376 pixels - 120Hz, Exynos 1080 - 8 nhân};Vivo
 PRD010;Điện thoại Realme GT;Điện thoại;600;290;Resource/SANPHAM/PRD010.png;{6.43 inch Super AMOLED, 1080 x 2400 pixels - 120Hz, Qualcomm Snapdragon 870 - 8 nhân};Realme
 PRD011;Điện thoại OnePlus 9 Pro;Điện thoại;1400;120;Resource/SANPHAM/PRD001.png;{6.7 inch Fluid AMOLED, 1440 x 3216 pixels - 120Hz, Qualcomm Snapdragon 888 - 8 nhân};OnePlus
@@ -10,6 +10,6 @@ PRD013;Điện thoại Motorola Edge 20;Điện thoại;950;180;Resource/SANPHAM
 PRD014;Điện thoại Nokia 8.3 5G;Điện thoại;1050;90;Resource/SANPHAM/PRD005.png;{6.81 inch IPS LCD, 1080 x 2400 pixels - 120Hz, Qualcomm Snapdragon 765G - 8 nhân};Nokia
 PRD015;Điện thoại Huawei P40 Pro;Điện thoại;1200;90;Resource/SANPHAM/PRD007.png;{6.58 inch OLED, 1200 x 2640 pixels - 90Hz, Huawei Kirin 990 5G - 8 nhân};Huawei
 PRD016;Điện thoại LG Velvet;Điện thoại;750;60;Resource/SANPHAM/PRD008.png;{6.8 inch P-OLED, 1080 x 2460 pixels - 60Hz, Qualcomm Snapdragon 765G - 8 nhân};LG
-PRD017;Điện thoại Asus ZenFone 8;Điện thoại;950;90;Resource/SANPHAM/PRD010.png;{5.9 inch AMOLED, 1080 x 2400 pixels - 120Hz, Qualcomm Snapdragon 888 - 8 nhân};Asus
+PRD017;Điện thoại Asus ZenFone 8;Điện thoại;950;86;Resource/SANPHAM/PRD010.png;{5.9 inch AMOLED, 1080 x 2400 pixels - 120Hz, Qualcomm Snapdragon 888 - 8 nhân};Asus
 PRD018;Điện thoại Xiaomi Redmi Note 10;Điện thoại;500;60;Resource/SANPHAM/PRD001.png;{6.43 inch AMOLED, 1080 x 2400 pixels - 60Hz, Qualcomm Snapdragon 678 - 8 nhân};Xiaomi
 PRD020;Điện thoại Vivo V21 5G;Điện thoại;780;10;Resource/SANPHAM/PRD003.png;{6.44 inch AMOLED, 1080 x 2400 pixels - 90Hz, MediaTek Dimensity 800U - 8 nhân};Vivo

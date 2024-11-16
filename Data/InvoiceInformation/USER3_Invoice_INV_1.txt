@@ -1,0 +1,17 @@
+======================== INVOICE ========================
+Invoice ID          : INV_1
+Customer ID         : USER3
+Invoice Date        : 2024-11-16
+Delivery Date       : 2024-11-23
+Payment Method      : Bank Transfer
+
+--------------------------------------------------------------------------------------------
+Product Name                  | Quantity  | Price     
+--------------------------------------------------------------------------------------------
+Điện thoại Samsung Galaxy S21| 1         | 1000.00   
+Điện thoại Xiaomi Mi 11  | 1         | 800.00    
+Điện thoại Google Pixel 6| 2         | 900.00    
+Điện thoại Oppo Find X3  | 2         | 700.00    
+Điện thoại Asus ZenFone 8| 2         | 950.00    
+======================================================
+                         Total Amount     : $6900.00

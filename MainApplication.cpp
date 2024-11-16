@@ -1,9 +1,10 @@
 #include <QApplication>
-#include "View/CustomerInterface.h"
+#include "View/LoginSignupInterface.h"
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
-    CustomerInterface window;
+    LoginSignupInterface window;
     window.show();
     return app.exec();
 }
+

@@ -24,7 +24,7 @@ class CustomerInterface : public QWidget {
     Q_OBJECT
 
 public:
-    CustomerInterface(QWidget *parent = nullptr);
+    CustomerInterface(QWidget *parent = nullptr,const string &customerid ="");
     void showMessage(QWidget *parent, bool status, const QString &message);
     ~CustomerInterface();
 private slots:

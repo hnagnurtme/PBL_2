@@ -43,8 +43,8 @@ void CustomerInterface::showMessage(QWidget *parent, bool status, const QString 
     messageBox.setFixedSize(600, 400);
     messageBox.exec();
 }
-CustomerInterface::CustomerInterface(QWidget *parent) : QWidget(parent) {
-    customer = new Customer("USER002");
+CustomerInterface::CustomerInterface(QWidget *parent,const string &customerid) : QWidget(parent) {
+    customer = new Customer(customerid);
 
     QFile file("Resource/style.qss");
     if (file.open(QFile::ReadOnly | QFile::Text)) {
