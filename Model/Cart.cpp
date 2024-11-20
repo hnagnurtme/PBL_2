@@ -111,5 +111,4 @@ bool Cart::isEmptyCart() {
 
 void Cart::addProductToCart(Product* product, int count){
     items.pushback(Pair<Product*, int>(const_cast<Product*>(product), count));
-    product->addCartToProduct(this);
 }

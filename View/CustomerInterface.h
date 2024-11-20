@@ -33,7 +33,7 @@ private slots:
     void filterProducts();
     void showCart();
     void showOrders();
-    void showAccount();
+    void showAccount(bool change = false);
     void showInvoice();
     void payment();
     void checkout();
@@ -67,6 +67,7 @@ private:
     QComboBox *paymentMethodComboBox; 
     QLabel *paymentMethodLabel;
     QGroupBox *overviewBox;
+    QGroupBox *customerInforBox;
     void addProducts(int row, bool fromCart);
     void deleteProducts(int row, bool fromCart);
     void showDetailsProducts(int row);

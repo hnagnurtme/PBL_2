@@ -60,36 +60,33 @@ string AppController::login(const string& email, const string& password, const s
 
 string AppController::signin(const string& name, const string& email, const string& phone, const string& password, const string& address, const string& role) {
     string id;
-    
-    // // Tạo con trỏ DataController
-    DataController* data = new DataController();  // Con trỏ DataController
+    DataController* data = new DataController();  
 
-    // // Dùng con trỏ để tạo đối tượng mới
     if (role == "Customer") {
         Vector<Customer> allCustomers = data->loadAllCustomersData();
         id = "USER"+ to_string(allCustomers.getSize() + 1);
         Customer *newCustomer = new Customer(id, name, email, phone, password, address);
-        data->addCustomer(*newCustomer);  // Thêm vào DataController
+        data->addCustomer(*newCustomer);  
     } 
     else if (role == "Manager") {
         Vector<Manager> allManagers = data->loadAllManagersData();
         id ="USER"+  to_string(allManagers.getSize() + 1);
         Manager *newManager = new Manager(id, name, email, phone, password, address);
-        data->addManager(*newManager);  // Thêm vào DataController
+        data->addManager(*newManager);  
     }
     else if (role == "Employee") {
         Vector<Employee> allEmployees = data->loadAllEmployeesData();
         id = "USER"+ to_string(allEmployees.getSize() + 1);
         Employee *newEmployee = new Employee(id, name, email, phone, password, address);
-        data->addEmployee(*newEmployee);  // Thêm vào DataController
+        data->addEmployee(*newEmployee); 
     }
     else {
-        delete data;  // Giải phóng bộ nhớ nếu vai trò không hợp lệ
+        delete data;  
         return "Vai trò không hợp lệ";
     }
 
-    delete data;  // Giải phóng bộ nhớ sau khi sử dụng con trỏ
-    return id;  // Trả về ID người dùng mới tạo
+    delete data; 
+    return id;  
 }
 
 

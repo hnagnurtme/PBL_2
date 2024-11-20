@@ -8,6 +8,18 @@
 #include <QTextStream>
 #include <QHBoxLayout>
 
+void LoginSignupInterface::showMessage(QWidget *parent, bool status, const QString &message) {
+    QMessageBox messageBox(parent);
+    QString icon_path = (status) ? "Resource/ICON/ICON12.png" : "Resource/ICON/ICON11.png";
+    QPixmap originalPixmap(icon_path);
+    QPixmap scaledPixmap = originalPixmap.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    messageBox.setIconPixmap(scaledPixmap);
+    messageBox.setText(message);
+    messageBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    messageBox.setFixedSize(600, 400);
+    messageBox.exec();
+}
+
 LoginSignupInterface::LoginSignupInterface(QWidget *parent)
     : QWidget(parent)
 {
@@ -21,14 +33,18 @@ LoginSignupInterface::LoginSignupInterface(QWidget *parent)
     setFixedSize(1000, 600);
     setWindowTitle("Login Signup Window");
 
-    QLabel *loginTitle = new QLabel("LOGIN HERE");
+    // ====== Giao diện Login ======
+    QLabel *loginTitle = new QLabel("WELCOME BACK");
     loginTitle->setAlignment(Qt::AlignCenter);
+    loginTitle->setObjectName("inputTitle"); // Đặt objectName cho tiêu đề Login
 
+    QLabel *emailLabel = new QLabel("Email:");
     emailInput = new QLineEdit();
-    emailInput->setPlaceholderText("Email");
+    emailInput->setPlaceholderText("Enter your email");
 
+    QLabel *passwordLabel = new QLabel("Password:");
     passwordInput = new QLineEdit();
-    passwordInput->setPlaceholderText("Password");
+    passwordInput->setPlaceholderText("Enter your password");
     passwordInput->setEchoMode(QLineEdit::Password);
 
     forgotPasswordLabel = new QLabel("<a href='#'>Forgot password?</a>");
@@ -39,90 +55,99 @@ LoginSignupInterface::LoginSignupInterface(QWidget *parent)
     loginButton = new QPushButton("LOGIN");
     connect(loginButton, &QPushButton::clicked, this, &LoginSignupInterface::login);
 
-    switchToSignupButton = new QPushButton("Switch to Signup");
+    switchToSignupButton = new QPushButton("Don't have an account yet? Create one now");
+    switchToSignupButton->setObjectName("cancelButton");
+
+    QHBoxLayout *loginButtonLayout = new QHBoxLayout();
+    loginButtonLayout->addWidget(switchToSignupButton); // Nút ngang hàng với nút Login
+    loginButtonLayout->addWidget(loginButton);
+    
 
     QVBoxLayout *loginLayout = new QVBoxLayout();
     loginLayout->addWidget(loginTitle);
+    loginLayout->addSpacing(10);
+    loginLayout->addWidget(emailLabel);
     loginLayout->addWidget(emailInput);
+    loginLayout->addSpacing(10);
+    loginLayout->addWidget(passwordLabel);
     loginLayout->addWidget(passwordInput);
+    loginLayout->addSpacing(10);
+    loginLayout->addWidget(forgotPasswordLabel);
+    loginLayout->addSpacing(20);
+    loginLayout->addLayout(loginButtonLayout);
 
-    QHBoxLayout *loginOptionsLayout = new QHBoxLayout();
-    loginOptionsLayout->addWidget(forgotPasswordLabel);
-    loginLayout->addLayout(loginOptionsLayout);
-    loginLayout->addWidget(loginButton);
-    loginLayout->addWidget(switchToSignupButton);
-
-    loginImage = new QLabel();
-    QPixmap loginPixmap("Resource/ICON/BACKGROUND3.png");
-    if (!loginPixmap.isNull()) {
-        loginImage->setPixmap(loginPixmap.scaled(500, 500, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    } else {
-        qDebug() << "Failed to load login background image.";
-    }
-
-    QHBoxLayout *loginGroupLayout = new QHBoxLayout();
-    loginGroupLayout->addLayout(loginLayout);
-    loginGroupLayout->addWidget(loginImage);
     QGroupBox *loginGroup = new QGroupBox();
-    loginGroup->setLayout(loginGroupLayout);
+    loginGroup->setLayout(loginLayout);
 
+    // ====== Giao diện Signup ======
     QLabel *signupTitle = new QLabel("SIGN UP HERE");
     signupTitle->setAlignment(Qt::AlignCenter);
+    signupTitle->setObjectName("inputTitle"); // Đặt objectName cho tiêu đề Signup
 
+    QLabel *nameLabel = new QLabel("Name:");
     nameInput = new QLineEdit();
-    nameInput->setPlaceholderText("Name");
+    nameInput->setPlaceholderText("Enter your name");
 
+    QLabel *signupEmailLabel = new QLabel("Email:");
     signupEmailInput = new QLineEdit();
-    signupEmailInput->setPlaceholderText("Email");
+    signupEmailInput->setPlaceholderText("Enter your email");
 
+    QLabel *phoneLabel = new QLabel("Phone:");
     phoneInput = new QLineEdit();
-    phoneInput->setPlaceholderText("Phone");
+    phoneInput->setPlaceholderText("Enter your phone number");
 
+    QLabel *signupPasswordLabel = new QLabel("Password:");
     signupPasswordInput = new QLineEdit();
-    signupPasswordInput->setPlaceholderText("Password");
+    signupPasswordInput->setPlaceholderText("Enter your password");
     signupPasswordInput->setEchoMode(QLineEdit::Password);
 
+    QLabel *confirmPasswordLabel = new QLabel("Confirm Password:");
     confirmSignupPasswordInput = new QLineEdit();
-    confirmSignupPasswordInput->setPlaceholderText("Confirm your password");
+    confirmSignupPasswordInput->setPlaceholderText("Re-enter your password");
     confirmSignupPasswordInput->setEchoMode(QLineEdit::Password);
 
+    QLabel *addressLabel = new QLabel("Address:");
     addressInput = new QLineEdit();
-    addressInput->setPlaceholderText("Address");
+    addressInput->setPlaceholderText("Enter your address");
 
     signupButton = new QPushButton("SIGN UP");
     connect(signupButton, &QPushButton::clicked, this, &LoginSignupInterface::signup);
 
-    switchToLoginButton = new QPushButton("Switch to Login");
+    switchToLoginButton = new QPushButton("You already have an account? Login here");
+    switchToLoginButton->setObjectName("cancelButton");
+
+    QHBoxLayout *signupButtonLayout = new QHBoxLayout();
+    signupButtonLayout->addWidget(switchToLoginButton); // Nút ngang hàng với nút Signup
+    signupButtonLayout->addWidget(signupButton);
+    
 
     QVBoxLayout *signupLayout = new QVBoxLayout();
     signupLayout->addWidget(signupTitle);
-
-    QHBoxLayout *userIdNameLayout = new QHBoxLayout();
-    userIdNameLayout->addWidget(nameInput);
-    signupLayout->addLayout(userIdNameLayout);
-
+    signupLayout->addSpacing(10);
+    signupLayout->addWidget(nameLabel);
+    signupLayout->addWidget(nameInput);
+    signupLayout->addSpacing(10);
+    signupLayout->addWidget(signupEmailLabel);
     signupLayout->addWidget(signupEmailInput);
+    signupLayout->addSpacing(10);
+    signupLayout->addWidget(phoneLabel);
     signupLayout->addWidget(phoneInput);
+    signupLayout->addSpacing(10);
+    signupLayout->addWidget(signupPasswordLabel);
     signupLayout->addWidget(signupPasswordInput);
+    signupLayout->addSpacing(10);
+    signupLayout->addWidget(confirmPasswordLabel);
     signupLayout->addWidget(confirmSignupPasswordInput);
+    signupLayout->addSpacing(10);
+    signupLayout->addWidget(addressLabel);
     signupLayout->addWidget(addressInput);
-    signupLayout->addWidget(signupButton);
-    signupLayout->addWidget(switchToLoginButton);
+    signupLayout->addSpacing(20);
+    signupLayout->addLayout(signupButtonLayout);
 
-    signupImage = new QLabel();
-    QPixmap signupPixmap("Resource/ICON//BACKGROUND3.png");
-    if (!signupPixmap.isNull()) {
-        signupImage->setPixmap(signupPixmap.scaled(500, 500, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    } else {
-        qDebug() << "Failed to load signup background image.";
-    }
-
-    QHBoxLayout *signupGroupLayout = new QHBoxLayout();
-    signupGroupLayout->addWidget(signupImage);  
-    signupGroupLayout->addLayout(signupLayout);    
     QGroupBox *signupGroup = new QGroupBox();
-    signupGroup->setLayout(signupGroupLayout);
+    signupGroup->setLayout(signupLayout);
 
+    // ====== Stacked Widget ======
     stackedWidget = new QStackedWidget();
     stackedWidget->addWidget(loginGroup);
     stackedWidget->addWidget(signupGroup);
@@ -133,9 +158,13 @@ LoginSignupInterface::LoginSignupInterface(QWidget *parent)
     mainLayout->addWidget(stackedWidget);
     setLayout(mainLayout);
 
+    // ====== Kết nối tín hiệu ======
     connect(switchToSignupButton, &QPushButton::clicked, this, &LoginSignupInterface::showSignupPage);
     connect(switchToLoginButton, &QPushButton::clicked, this, &LoginSignupInterface::showLoginPage);
 }
+
+
+
 
 LoginSignupInterface::~LoginSignupInterface() {}
 
@@ -148,52 +177,92 @@ void LoginSignupInterface::showLoginPage() {
 }
 
 void LoginSignupInterface::login() {
-    QString email = emailInput->text().trimmed();  // Loại bỏ khoảng trắng ở đầu và cuối email
-    QString password = passwordInput->text().trimmed();  // Loại bỏ khoảng trắng ở đầu và cuối password
-    
+    QString email = emailInput->text().trimmed(); 
+    QString password = passwordInput->text().trimmed();  
+    if (email.isEmpty() || password.isEmpty()) {
+        showMessage(this, false, "Please enter both email and password.");
+        return;
+    }
+    if (!email.contains("@") || !email.contains(".")) {
+        showMessage(this, false, "Invalid email format.");
+        return;
+    }
+
     AppController *appCon = new AppController();
-    Pair<string, string> result = appCon->allLogin(email.toStdString(), password.toStdString());  // Gọi một lần và lưu kết quả trả về
-    
+    Pair<string, string> result = appCon->allLogin(email.toStdString(), password.toStdString());  
+
     string role = result.getFirst();
     string userId = result.getSecond();
     
     if (role == "Customer") {
+        showMessage(this, true, "Login successful. Welcome, Customer!");
         CustomerInterface *view = new CustomerInterface(nullptr, userId);
         view->show();
         this->hide();
     }
     else if (role == "Manager") {
-        // Tạo cửa sổ cho Manager nếu cần
+        showMessage(this, true, "Login successful. Welcome, Manager!");
     }
     else if (role == "Employee") {
-        // Tạo cửa sổ cho Employee nếu cần
+        showMessage(this, true, "Login successful. Welcome, Employee!");
     }
     else {
-        // Xử lý trường hợp đăng nhập không thành công (role == "Invalid")
-        QMessageBox::warning(this, "Login Failed", "Invalid email or password.");
+        showMessage(this, false, "Login Failed: Invalid email or password.");
     }
     delete appCon;
 }
 
 
+
 void LoginSignupInterface::signup() {
-    QString name = nameInput->text();
-    QString email = signupEmailInput->text();
-    QString phone = phoneInput->text();
-    QString password = signupPasswordInput->text();
-    QString confirmPassword = confirmSignupPasswordInput->text();
-    QString address = addressInput->text();
+    QString name = nameInput->text().trimmed();
+    QString email = signupEmailInput->text().trimmed();
+    QString phone = phoneInput->text().trimmed();
+    QString password = signupPasswordInput->text().trimmed();
+    QString confirmPassword = confirmSignupPasswordInput->text().trimmed();
+    QString address = addressInput->text().trimmed();
+    
+    // Bước tiền xử lý: Kiểm tra dữ liệu đầu vào
+    if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || address.isEmpty()) {
+        showMessage(this, false, "All fields must be filled in.");
+        return;
+    }
+
+    // Kiểm tra định dạng email đơn giản (chỉ kiểm tra có chứa dấu '@')
+    if (!email.contains("@") || !email.contains(".")) {
+        showMessage(this, false, "Invalid email format.");
+        return;
+    }
+
+    // Kiểm tra định dạng số điện thoại (10 chữ số)
+    bool isPhoneValid = true;
+    for (int i = 0; i < phone.length(); ++i) {
+        if (!phone[i].isDigit()) {
+            isPhoneValid = false;
+            break;
+        }
+    }
+    if (!isPhoneValid || phone.length() != 10) {
+        showMessage(this, false, "Invalid phone number format.");
+        return;
+    }
+
+    // Kiểm tra mật khẩu và xác nhận mật khẩu
+    if (password != confirmPassword) {
+        showMessage(this, false, "Passwords do not match. Please try again.");
+        return;
+    }
     
     AppController *appCon = new AppController();
     DataController *data = new DataController();  
-    if( password == confirmPassword){
-        string role = "Customer";
-        string id = appCon->signin(name.QString::toStdString(),email.QString::toStdString(),phone.QString::toStdString(),password.QString::toStdString(),address.QString::toStdString(),role);
-        CustomerInterface *view = new CustomerInterface(nullptr, id);
-        view->show();
-    } 
+
+    string role = "Customer";
+    string id = appCon->signin(name.toStdString(), email.toStdString(), phone.toStdString(), password.toStdString(), address.toStdString(), role);
+
+    CustomerInterface *view = new CustomerInterface(nullptr, id);
+    view->show();
+    showMessage(this, true, "Signup successful! You can now login.");
     
     delete data;
     delete appCon;
 }
-

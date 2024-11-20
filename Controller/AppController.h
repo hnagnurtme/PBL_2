@@ -24,4 +24,5 @@ class AppController{
     Pair<string,string> allLogin(const string& email , const string& password);
     string login(const string& email , const string& password,const string& role);
     string signin( const string& name, const string& email, const string& phone, const string& password, const string& address,const string& role);
+    
 };

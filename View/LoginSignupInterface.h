@@ -13,6 +13,7 @@ class LoginSignupInterface : public QWidget {
 
 public:
     explicit LoginSignupInterface(QWidget *parent = nullptr);
+    void showMessage(QWidget *parent, bool status, const QString &message) ;
     ~LoginSignupInterface();
 
 private slots:

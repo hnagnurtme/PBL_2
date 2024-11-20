@@ -49,15 +49,11 @@ string Invoice::displayInvoice() const {
     ss << left << setw(30) << "Product Name" << "| "
        << setw(10) << "Quantity" << "| " << setw(10) << "Price" << "\n";
     ss << "--------------------------------------------------------------------------------------------\n";
-    
-    // Liệt kê sản phẩm
     for (int i = 0; i < products.getSize(); ++i) {
         ss << left << setw(30) << products[i].getFirst()->getName()
            << "| " << setw(10) << products[i].getSecond()
            << "| " << setw(10) << fixed << setprecision(2) << products[i].getFirst()->getPrice() << "\n";
     }
-
-    // Tổng số tiền
     ss << "======================================================\n";
     ss << right << setw(45) << "Total Amount     : $" << fixed << setprecision(2) << totalAmount << "\n";
     

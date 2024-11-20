@@ -34,7 +34,9 @@ public:
     Vector<Customer> loadAllCustomersData();
     void saveAllCustomersData(const Vector<Customer>& customers);
     void addCustomer(const Customer& customer);
-    void deleteCustomer(const Customer& customer);
+    void deleteCustomer(const string& customerID);
+    Customer findCustomerById(const string& customerID);
+    void updateCustomer(const Customer& customer);
 
     Vector<Employee> loadAllEmployeesData();
     void saveAllEmployeesData(const Vector<Employee>& Employees);
@@ -45,8 +47,6 @@ public:
     void saveAllManagersData(const Vector<Manager>& Managers);
     void addManager(const Manager& Manager);
     void deleteManager(const Manager& Manager);
-
-    void testLoadDataAndPrint();
 
 private:
     string invoicesFileName;

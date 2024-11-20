@@ -13,6 +13,8 @@ private:
     Orders *orderHistory;
     Vector<Product*> *favouriteProducts;
 public:
+    Customer();
+    Customer(const Customer&);
     Customer(const string& userId);
     Customer(const string& id, const string& name, const string& email, const string& phone, const string& password, const string& address);
     ~Customer();

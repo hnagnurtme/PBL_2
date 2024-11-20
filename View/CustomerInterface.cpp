@@ -30,8 +30,6 @@
 #include <QtCharts/QValueAxis>
 #include <QtGui/QPainter>
 
-
-
 void CustomerInterface::showMessage(QWidget *parent, bool status, const QString &message) {
     QMessageBox messageBox(parent);
     QString icon_path = (status) ? "Resource/ICON/ICON7.png" : "Resource/ICON/ICON6.png";
@@ -43,9 +41,14 @@ void CustomerInterface::showMessage(QWidget *parent, bool status, const QString 
     messageBox.setFixedSize(600, 400);
     messageBox.exec();
 }
-CustomerInterface::CustomerInterface(QWidget *parent,const string &customerid) : QWidget(parent) {
-    customer = new Customer(customerid);
 
+CustomerInterface::CustomerInterface(QWidget *parent,const string &customerid) : QWidget(parent) {
+    
+    DataController *customerData = new DataController();
+    Customer newCustomer =  customerData->findCustomerById(customerid);
+    customer = new Customer(newCustomer);
+    delete customerData;
+    
     QFile file("Resource/style.qss");
     if (file.open(QFile::ReadOnly | QFile::Text)) {
         QTextStream stream(&file);
@@ -179,11 +182,13 @@ CustomerInterface::CustomerInterface(QWidget *parent,const string &customerid) :
     ordersLayout->addWidget(ordersTable);
 
     overviewBox = new QGroupBox(this);
+    customerInforBox = new QGroupBox(this);
 
     stackWidget->addWidget(productGroupBox);
     stackWidget->addWidget(cartAndInvoiceBox);
     stackWidget->addWidget(ordersBox);
     stackWidget->addWidget(overviewBox);
+    stackWidget->addWidget(customerInforBox);
 
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
     QHBoxLayout *layout = new QHBoxLayout();
@@ -497,7 +502,150 @@ void CustomerInterface::filterProducts() {
 }
 
 
-void CustomerInterface::showAccount() {
+void CustomerInterface::showAccount(bool change) {
+    QLayout* oldLayout = customerInforBox->layout();
+    if (oldLayout) {
+        QLayoutItem* item;
+        while ((item = oldLayout->takeAt(0)) != nullptr) {
+            if (item->widget()) {
+                item->widget()->deleteLater(); // Đảm bảo widget bị xóa an toàn
+            }
+            delete item;
+        }
+        delete oldLayout;
+    }
+    // Lấy thông tin từ đối tượng customer
+    string name = customer->getName();
+    string email = customer->getEmail();
+    string address = customer->getAddress();
+    string phone = customer->getPhone();
+    string password = customer->getPassword();
+
+    // Tạo các QLabel để hiển thị thông tin
+    QLabel* nameLabelText = new QLabel("Name: ");
+    QLabel* nameLabel = new QLabel(QString::fromStdString(name));
+    QLineEdit* nameEdit = new QLineEdit(QString::fromStdString(name));
+    
+    QLabel* emailLabelText = new QLabel("Email: ");
+    QLabel* emailLabel = new QLabel(QString::fromStdString(email));
+    QLineEdit* emailEdit = new QLineEdit(QString::fromStdString(email));
+    
+    QLabel* addressLabelText = new QLabel("Address: ");
+    QLabel* addressLabel = new QLabel(QString::fromStdString(address));
+    QLineEdit* addressEdit = new QLineEdit(QString::fromStdString(address));
+    
+    QLabel* phoneLabelText = new QLabel("Phone: ");
+    QLabel* phoneLabel = new QLabel(QString::fromStdString(phone));
+    QLineEdit* phoneEdit = new QLineEdit(QString::fromStdString(phone));
+    
+    QLabel* passwordLabelText = new QLabel("Password: ");
+    QLabel* passwordLabel = new QLabel(QString::fromStdString(password));
+    QLineEdit* passwordEdit = new QLineEdit(QString::fromStdString(password));
+
+    // Đặt objectName cho các QLabel
+    nameLabelText->setObjectName("titleLabel");
+    nameLabel->setObjectName("inputArea");
+    nameEdit->setObjectName("inputArea");
+
+    emailLabelText->setObjectName("titleLabel");
+    emailLabel->setObjectName("inputArea");
+    emailEdit->setObjectName("inputArea");
+
+    addressLabelText->setObjectName("titleLabel");
+    addressLabel->setObjectName("inputArea");
+    addressEdit->setObjectName("inputArea");
+
+    phoneLabelText->setObjectName("titleLabel");
+    phoneLabel->setObjectName("inputArea");
+    phoneEdit->setObjectName("inputArea");
+
+    passwordLabelText->setObjectName("titleLabel");
+    passwordLabel->setObjectName("inputArea");
+    passwordEdit->setObjectName("inputArea");
+
+    // Tạo và cấu hình layout (sử dụng QGridLayout)
+    QGridLayout *layout = new QGridLayout(customerInforBox);
+    customerInforBox->setFixedSize(900, 300); // Ví dụ kích thước 700x300 pixels
+
+    // Đặt vị trí cố định trên màn hình (top-left corner)
+    customerInforBox->move(50, 50);
+
+    // Đặt các QLabel vào grid, cột 0 là label mô tả, cột 1 là thông tin, cột 2 là để thay đổi
+    layout->addWidget(nameLabelText, 0, 0);  // Đặt "Name:" tại (row 0, column 0)
+    layout->addWidget(nameLabel, 0, 1);      // Đặt tên tại (row 0, column 1)
+    layout->addWidget(nameEdit, 0, 2);       // Đặt ô nhập cho tên tại (row 0, column 2)
+    
+    layout->addWidget(emailLabelText, 1, 0); // Đặt "Email:" tại (row 1, column 0)
+    layout->addWidget(emailLabel, 1, 1);     // Đặt email tại (row 1, column 1)
+    layout->addWidget(emailEdit, 1, 2);      // Đặt ô nhập cho email tại (row 1, column 2)
+    
+    layout->addWidget(addressLabelText, 2, 0); // Đặt "Address:" tại (row 2, column 0)
+    layout->addWidget(addressLabel, 2, 1);     // Đặt địa chỉ tại (row 2, column 1)
+    layout->addWidget(addressEdit, 2, 2);      // Đặt ô nhập cho địa chỉ tại (row 2, column 2)
+    
+    layout->addWidget(phoneLabelText, 3, 0); // Đặt "Phone:" tại (row 3, column 0)
+    layout->addWidget(phoneLabel, 3, 1);     // Đặt điện thoại tại (row 3, column 1)
+    layout->addWidget(phoneEdit, 3, 2);      // Đặt ô nhập cho điện thoại tại (row 3, column 2)
+    
+    layout->addWidget(passwordLabelText, 4, 0); // Đặt "Password:" tại (row 4, column 0)
+    layout->addWidget(passwordLabel, 4, 1);     // Đặt mật khẩu tại (row 4, column 1)
+    layout->addWidget(passwordEdit, 4, 2);      // Đặt ô nhập cho mật khẩu tại (row 4, column 2)
+
+    // Tạo các nút Change và Apply Change
+    QPushButton* changeButton = new QPushButton("Change");
+    QPushButton* applyButton = new QPushButton("Apply Change");
+
+    connect(changeButton, &QPushButton::clicked, [this, nameEdit, emailEdit, addressEdit, phoneEdit, passwordEdit]() {
+        // Khi nhấn nút "Change", hiện các ô chỉnh sửa
+        nameEdit->setVisible(true);
+        emailEdit->setVisible(true);
+        addressEdit->setVisible(true);
+        phoneEdit->setVisible(true);
+        passwordEdit->setVisible(true);
+    });
+    
+    connect(applyButton, &QPushButton::clicked, [this, nameEdit, emailEdit, addressEdit, phoneEdit, passwordEdit]() {
+        // Khi nhấn nút "Apply Change", lưu thông tin thay đổi
+        customer->setName(nameEdit->text().toStdString());
+        customer->setEmail(emailEdit->text().toStdString());
+        customer->setAddress(addressEdit->text().toStdString());
+        customer->setPhone(phoneEdit->text().toStdString());
+        customer->setPassword(passwordEdit->text().toStdString());
+
+        DataController *accountData = new DataController();
+        accountData->updateCustomer(*customer);
+        delete accountData;
+
+        showAccount(false);
+
+    });
+
+    // Thêm các nút vào dưới cùng của layout
+    QHBoxLayout* buttonLayout = new QHBoxLayout();
+    buttonLayout->addWidget(changeButton);
+    buttonLayout->addWidget(applyButton);
+
+    // Thêm layout cho nút vào cuối cùng của QGridLayout
+    layout->addLayout(buttonLayout, 5, 0, 1, 3); // Đặt các nút ở dòng 5, chiếm hết 3 cột
+
+    // Cập nhật layout của customerInforBox
+    customerInforBox->setLayout(layout);
+
+    // Hiển thị customerInforBox
+    customerInforBox->show();
+
+    // Chuyển đến trang hiển thị thông tin (index 4)
+    stackWidget->setCurrentIndex(4);
+
+    // Áp dụng stylesheet cho các QLabel dựa trên objectName
+    if (!change) {
+        // Nếu không thay đổi, ẩn các ô nhập
+        nameEdit->setVisible(false);
+        emailEdit->setVisible(false);
+        addressEdit->setVisible(false);
+        phoneEdit->setVisible(false);
+        passwordEdit->setVisible(false);
+    }
 }
 
 void CustomerInterface::checkout() {

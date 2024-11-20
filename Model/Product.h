@@ -19,12 +19,6 @@ private:
     string description;
     Vector<string> detail;
     string brand;
-
-    Vector<Invoice*> productInInvoice;
-    void addInvoiceToProduct(Invoice*);
-    
-    Vector<Cart*> productInCart;
-    void addCartToProduct(Cart*);
 public:
     Product();
     Product(string id, const string& name, const string& category, double price, int stock,
@@ -44,6 +38,4 @@ public:
     void setDescription(const string& newDescription);
     void displayInfo() const;
     bool isAvailable(int requestedQuantity) const;
-    friend class Invoice;
-    friend class Cart;
 };

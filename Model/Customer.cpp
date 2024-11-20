@@ -1,5 +1,13 @@
 #include "Customer.h"
 #include <iostream>
+Customer :: Customer(){
+
+}
+Customer::Customer(const Customer& other) : User(other) { 
+    this->cart = new Cart(*other.cart);  
+    this->orderHistory = new Orders(*other.orderHistory);  
+    this->favouriteProducts = new Vector<Product*>(*other.favouriteProducts);  
+}
 
 Customer ::Customer(const string& userId) {
     cart = new Cart(userId);

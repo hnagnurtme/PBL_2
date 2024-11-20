@@ -3,7 +3,8 @@
     transition: all 0.3s ease; 
 }
 
-#inputTitle {
+
+#inputTitle  {
     background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
                                 stop:0 #114b5f, stop:1 #028090); 
     color: #fff; 

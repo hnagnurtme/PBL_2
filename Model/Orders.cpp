@@ -7,6 +7,7 @@ Orders::Orders(const string& customerId) : customerID(customerId) {}
 
 void Orders::addInvoice(Invoice* invoice) {
     invoices.pushback(invoice);
+
 }
 
 string Orders::getCustomerID() const {
@@ -34,6 +35,8 @@ string Orders::displayOrders() const {
         if (i < invoices.getSize() - 1) {
             ss << "\n";  
     }
+   
+    }
     return ss.str();
 }
-}
+

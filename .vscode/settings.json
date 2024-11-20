@@ -72,6 +72,8 @@
     "qwidget": "cpp",
     "qmainwindow": "cpp",
     "chrono": "cpp",
-    "new": "cpp"
+    "new": "cpp",
+    "*.tcc": "cpp",
+    "list": "cpp"
   }
 }
