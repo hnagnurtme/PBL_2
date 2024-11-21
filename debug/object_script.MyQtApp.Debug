@@ -10,7 +10,9 @@ debug/Customer.o
 debug/Employee.o
 debug/Manager.o
 debug/CustomerInterface.o
+debug/ManagerInterface.o
 debug/LoginSignupInterface.o
 debug/qrc_resources.o
 debug/moc_CustomerInterface.o
+debug/moc_ManagerInterface.o
 debug/moc_LoginSignupInterface.o

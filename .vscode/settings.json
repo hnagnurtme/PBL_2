@@ -74,6 +74,13 @@
     "chrono": "cpp",
     "new": "cpp",
     "*.tcc": "cpp",
-    "list": "cpp"
+    "list": "cpp",
+    "fstream": "cpp",
+    "memory": "cpp",
+    "mutex": "cpp",
+    "type_traits": "cpp",
+    "algorithm": "cpp",
+    "iosfwd": "cpp",
+    "stdexcept": "cpp"
   }
 }

@@ -24,6 +24,8 @@ public:
     Cart loadCartData(const string& customerID);
     void saveInvoiceData(const Invoice& invoice);
     Invoice loadInvoiceData(const string& invoiceID, const string& customerID);
+    void addToSoldProductData(const Invoice&invoice);
+    Vector<Pair<string, int>> loadSoldProductData();
     void saveOrdersData(const Orders & orders);
     Orders loadOrdersData(const string& customerID);
     
@@ -42,6 +44,7 @@ public:
     void saveAllEmployeesData(const Vector<Employee>& Employees);
     void addEmployee(const Employee& Employee);
     void deleteEmployee(const Employee& Employee);
+    Manager findManagerById(const string& managerID);
 
     Vector<Manager> loadAllManagersData();
     void saveAllManagersData(const Vector<Manager>& Managers);
@@ -52,5 +55,6 @@ private:
     string invoicesFileName;
     string productFileName;
     Product parseProduct(const string& line);   
+    
 };
 

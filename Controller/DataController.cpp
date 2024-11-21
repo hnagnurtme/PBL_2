@@ -1,5 +1,6 @@
 #include "Controller/DataController.h"
 #include "Datastructures/Vector.h"
+#include <unordered_map>
 #include "Datastructures/Pair.h"
 #include "Model/Product.h"
 #include "Model/Customer.h"
@@ -489,7 +490,14 @@ Customer DataController:: findCustomerById(const string& customerID){
         }
     throw runtime_error("Không tìm thấy nhân viên với ID: " + customerID);
 }
-
+Manager DataController::  findManagerById(const string& managerID){
+    Vector<Manager> managers = loadAllManagersData();
+    for (int i = 0; i < managers.getSize(); ++i) {
+        if (managers[i].getUserId() == managerID) {
+            return managers[i];
+            }
+            }
+}
 void DataController:: updateCustomer(const Customer& customer){
     string id = customer.getUserId();
     deleteCustomer(id);
@@ -639,5 +647,80 @@ void DataController::deleteManager(const Manager& manager) {
         }
     }
     throw runtime_error("Không tìm thấy customer với UserID: " + manager.getUserId());
+}
+
+void DataController::addToSoldProductData(const Invoice& invoice) {
+    const string soldProductFileName = "Data/AllSoldProduct.csv";
+    Vector<Pair<string, int>> soldProducts = loadSoldProductData();
+    Vector<Pair<Product*, int>> invoiceProducts = invoice.getProducts();
+
+    for (int i = 0; i < invoiceProducts.getSize(); ++i) {
+        Product* product = invoiceProducts[i].getFirst();
+        string productId = product->getProductId();
+        int quantity = invoiceProducts[i].getSecond();
+
+        bool found = false;
+        for (int j = 0; j < soldProducts.getSize(); ++j) {
+            if (soldProducts[j].getFirst() == productId) {
+                soldProducts[j].setSecond(soldProducts[j].getSecond() + quantity);
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            soldProducts.pushback(Pair<string,int>(productId, quantity));
+        }
+    }
+
+    ofstream outputFile(soldProductFileName, ios::out | ios::trunc);
+    if (!outputFile.is_open()) {
+        throw runtime_error("Không thể mở file để ghi: " + soldProductFileName);
+    }
+
+    outputFile << "ProductID,Quantity\n";
+    for (int i = 0; i < soldProducts.getSize(); ++i) {
+        outputFile << soldProducts[i].getFirst() << "," << soldProducts[i].getSecond() << "\n";
+    }
+
+    outputFile.close();
+}
+
+Vector<Pair<string, int>> DataController::loadSoldProductData() {
+    const string soldProductFileName = "Data/AllSoldProduct.csv";
+    ifstream inputFile(soldProductFileName);
+
+    if (!inputFile.is_open()) {
+        ofstream outputFile(soldProductFileName, ios::out);
+        if (!outputFile.is_open()) {
+            throw runtime_error("Không thể tạo file: " + soldProductFileName);
+        }
+        outputFile << "ProductID,Quantity\n";
+        outputFile.close();
+        return {};
+    }
+
+    Vector<Pair<string, int>> soldProducts;
+    string line;
+
+    if (!getline(inputFile, line)) {
+        inputFile.close();
+        throw runtime_error("File rỗng hoặc không đúng định dạng: " + soldProductFileName);
+    }
+
+    while (getline(inputFile, line)) {
+        istringstream iss(line);
+        string productId;
+        string quantityStr;
+
+        if (!getline(iss, productId, ',') || !getline(iss, quantityStr)) {
+            continue;
+        }
+
+        int quantity = stoi(quantityStr);
+        soldProducts.pushback(Pair<string, int>(productId, quantity));
+    }
+
+    inputFile.close();
+    return soldProducts;
 }
 

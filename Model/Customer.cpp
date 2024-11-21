@@ -43,6 +43,8 @@ void Customer::payment(const string& deliveryDate,const string& paymentMethod) {
     datacontroller->saveInvoiceData(*newInvoice);
     datacontroller->saveOrdersData(*orderHistory);
     datacontroller->removeProduct(*newInvoice);
+    datacontroller->addToSoldProductData(*newInvoice);
+    delete datacontroller;
 }
 
 void Customer:: reduceItem(const string& productId, int quantity){

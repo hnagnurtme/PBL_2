@@ -1,5 +1,6 @@
 #include "View/LoginSignupInterface.h"
 #include "View/CustomerInterface.h"
+#include "View/ManagerInterface.h"
 #include "Model/Customer.h"
 #include "Model/User.h"
 #include "Controller/DataController.h"
@@ -202,6 +203,9 @@ void LoginSignupInterface::login() {
     }
     else if (role == "Manager") {
         showMessage(this, true, "Login successful. Welcome, Manager!");
+        ManagerInterface *view = new ManagerInterface(nullptr,userId);
+        view->show();
+        this->hide();
     }
     else if (role == "Employee") {
         showMessage(this, true, "Login successful. Welcome, Employee!");
