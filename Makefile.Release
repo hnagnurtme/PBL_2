@@ -194,9 +194,10 @@ compiler_moc_header_make_all: release/moc_CustomerInterface.cpp release/moc_Mana
 compiler_moc_header_clean:
 	-$(DEL_FILE) release\moc_CustomerInterface.cpp release\moc_ManagerInterface.cpp release\moc_LoginSignupInterface.cpp
 release/moc_CustomerInterface.cpp: View/CustomerInterface.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/QMap \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qmap.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qiterator.h \
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/QWidget \
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/qwidget.h \
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
+		C:/QT/6.7.3/mingw_64/include/QtGui/qtguiglobal.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qglobal.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qtversionchecks.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qtconfiginclude.h \
@@ -241,24 +242,32 @@ release/moc_CustomerInterface.cpp: View/CustomerInterface.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qtresource.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qttranslation.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qversiontagging.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qlist.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qarraydatapointer.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qarraydataops.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qarraydata.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qpair.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qcontainertools_impl.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qxptype_traits.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/q20type_traits.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/q20functional.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/q20memory.h \
+		C:/QT/6.7.3/mingw_64/include/QtGui/qtgui-config.h \
+		C:/QT/6.7.3/mingw_64/include/QtGui/qtguiexports.h \
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/qtwidgets-config.h \
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/qtwidgetsexports.h \
+		C:/QT/6.7.3/mingw_64/include/QtGui/qwindowdefs.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qobjectdefs.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qnamespace.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qtmetamacros.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qhashfunctions.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qobjectdefs_impl.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qfunctionaltools_impl.h \
+		C:/QT/6.7.3/mingw_64/include/QtGui/qwindowdefs_win.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qobject.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qstring.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qchar.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qstringview.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qbytearray.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qrefcount.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qarraydata.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qpair.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qarraydatapointer.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qarraydataops.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qcontainertools_impl.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qxptype_traits.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/q20type_traits.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/q20functional.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/q20memory.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qbytearrayalgorithms.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qbytearrayview.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qstringfwd.h \
@@ -271,26 +280,13 @@ release/moc_CustomerInterface.cpp: View/CustomerInterface.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qstringbuilder.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qstringconverter.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qstringconverter_base.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qlist.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qhashfunctions.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qiterator.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qbytearraylist.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qstringlist.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qalgorithms.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qstringmatcher.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qshareddata.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qshareddata_impl.h \
-		C:/QT/6.7.3/mingw_64/include/QtWidgets/QWidget \
-		C:/QT/6.7.3/mingw_64/include/QtWidgets/qwidget.h \
-		C:/QT/6.7.3/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
-		C:/QT/6.7.3/mingw_64/include/QtGui/qtguiglobal.h \
-		C:/QT/6.7.3/mingw_64/include/QtGui/qtgui-config.h \
-		C:/QT/6.7.3/mingw_64/include/QtGui/qtguiexports.h \
-		C:/QT/6.7.3/mingw_64/include/QtWidgets/qtwidgets-config.h \
-		C:/QT/6.7.3/mingw_64/include/QtWidgets/qtwidgetsexports.h \
-		C:/QT/6.7.3/mingw_64/include/QtGui/qwindowdefs.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qobjectdefs.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qobjectdefs_impl.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qfunctionaltools_impl.h \
-		C:/QT/6.7.3/mingw_64/include/QtGui/qwindowdefs_win.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qobject.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qcoreevent.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qscopedpointer.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qmetatype.h \
@@ -320,6 +316,7 @@ release/moc_CustomerInterface.cpp: View/CustomerInterface.h \
 		C:/QT/6.7.3/mingw_64/include/QtGui/qcolor.h \
 		C:/QT/6.7.3/mingw_64/include/QtGui/qrgb.h \
 		C:/QT/6.7.3/mingw_64/include/QtGui/qrgba64.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qshareddata.h \
 		C:/QT/6.7.3/mingw_64/include/QtGui/qimage.h \
 		C:/QT/6.7.3/mingw_64/include/QtGui/qpixelformat.h \
 		C:/QT/6.7.3/mingw_64/include/QtGui/qtransform.h \
@@ -332,6 +329,8 @@ release/moc_CustomerInterface.cpp: View/CustomerInterface.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qcontiguouscache.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qsharedpointer.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qsharedpointer_impl.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qmap.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qshareddata_impl.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qset.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qhash.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qvarlengtharray.h \
@@ -416,7 +415,6 @@ release/moc_CustomerInterface.cpp: View/CustomerInterface.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qstackedwidget.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/QVector \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qvector.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/QStringList \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QTextEdit \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qtextedit.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QDateEdit \
@@ -692,15 +690,16 @@ release/moc_ManagerInterface.cpp: View/ManagerInterface.h \
 		Datastructures/Pair.h \
 		Model/Manager.h \
 		Model/Orders.h \
+		Controller/DataController.h \
+		Model/Customer.h \
+		Model/Employee.h \
+		Controller/AppController.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QComboBox \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qcombobox.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QMessageBox \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qmessagebox.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qdialog.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
-		Model/Customer.h \
-		Controller/DataController.h \
-		Model/Employee.h \
 		release/moc_predefs.h \
 		C:/QT/6.7.3/mingw_64/bin/moc.exe
 	C:\QT\6.7.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/PBL2/release/moc_predefs.h -IC:/QT/6.7.3/mingw_64/mkspecs/win32-g++ -ID:/PBL2 -IC:/QT/6.7.3/mingw_64/include -IC:/QT/6.7.3/mingw_64/include/QtCharts -IC:/QT/6.7.3/mingw_64/include/QtOpenGLWidgets -IC:/QT/6.7.3/mingw_64/include/QtWidgets -IC:/QT/6.7.3/mingw_64/include/QtOpenGL -IC:/QT/6.7.3/mingw_64/include/QtGui -IC:/QT/6.7.3/mingw_64/include/QtCore -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/mingw64/x86_64-w64-mingw32/include View\ManagerInterface.h -o release\moc_ManagerInterface.cpp
@@ -917,6 +916,18 @@ release/moc_LoginSignupInterface.cpp: View/LoginSignupInterface.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qgridlayout.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QGroupBox \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qgroupbox.h \
+		Controller/DataController.h \
+		Model/Product.h \
+		Model/User.h \
+		Model/Invoice.h \
+		Datastructures/Vector.h \
+		Datastructures/Pair.h \
+		Model/Cart.h \
+		Model/Orders.h \
+		Model/Customer.h \
+		Model/Employee.h \
+		Model/Manager.h \
+		Controller/AppController.h \
 		release/moc_predefs.h \
 		C:/QT/6.7.3/mingw_64/bin/moc.exe
 	C:\QT\6.7.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/PBL2/release/moc_predefs.h -IC:/QT/6.7.3/mingw_64/mkspecs/win32-g++ -ID:/PBL2 -IC:/QT/6.7.3/mingw_64/include -IC:/QT/6.7.3/mingw_64/include/QtCharts -IC:/QT/6.7.3/mingw_64/include/QtOpenGLWidgets -IC:/QT/6.7.3/mingw_64/include/QtWidgets -IC:/QT/6.7.3/mingw_64/include/QtOpenGL -IC:/QT/6.7.3/mingw_64/include/QtGui -IC:/QT/6.7.3/mingw_64/include/QtCore -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/mingw64/x86_64-w64-mingw32/include View\LoginSignupInterface.h -o release\moc_LoginSignupInterface.cpp
@@ -1152,7 +1163,19 @@ release/MainApplication.o: MainApplication.cpp C:/QT/6.7.3/mingw_64/include/QtWi
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qlayoutitem.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qgridlayout.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QGroupBox \
-		C:/QT/6.7.3/mingw_64/include/QtWidgets/qgroupbox.h
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/qgroupbox.h \
+		Controller/DataController.h \
+		Model/Product.h \
+		Model/User.h \
+		Model/Invoice.h \
+		Datastructures/Vector.h \
+		Datastructures/Pair.h \
+		Model/Cart.h \
+		Model/Orders.h \
+		Model/Customer.h \
+		Model/Employee.h \
+		Model/Manager.h \
+		Controller/AppController.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\MainApplication.o MainApplication.cpp
 
 release/DataController.o: Controller/DataController.cpp Controller/DataController.h \
@@ -1252,9 +1275,10 @@ release/Manager.o: Model/Manager.cpp Model/Manager.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\Manager.o Model\Manager.cpp
 
 release/CustomerInterface.o: View/CustomerInterface.cpp View/CustomerInterface.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/QMap \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qmap.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qiterator.h \
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/QWidget \
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/qwidget.h \
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
+		C:/QT/6.7.3/mingw_64/include/QtGui/qtguiglobal.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qglobal.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qtversionchecks.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qtconfiginclude.h \
@@ -1299,24 +1323,32 @@ release/CustomerInterface.o: View/CustomerInterface.cpp View/CustomerInterface.h
 		C:/QT/6.7.3/mingw_64/include/QtCore/qtresource.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qttranslation.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qversiontagging.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qlist.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qarraydatapointer.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qarraydataops.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qarraydata.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qpair.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qcontainertools_impl.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qxptype_traits.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/q20type_traits.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/q20functional.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/q20memory.h \
+		C:/QT/6.7.3/mingw_64/include/QtGui/qtgui-config.h \
+		C:/QT/6.7.3/mingw_64/include/QtGui/qtguiexports.h \
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/qtwidgets-config.h \
+		C:/QT/6.7.3/mingw_64/include/QtWidgets/qtwidgetsexports.h \
+		C:/QT/6.7.3/mingw_64/include/QtGui/qwindowdefs.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qobjectdefs.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qnamespace.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qtmetamacros.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qhashfunctions.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qobjectdefs_impl.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qfunctionaltools_impl.h \
+		C:/QT/6.7.3/mingw_64/include/QtGui/qwindowdefs_win.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qobject.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qstring.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qchar.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qstringview.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qbytearray.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qrefcount.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qarraydata.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qpair.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qarraydatapointer.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qarraydataops.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qcontainertools_impl.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qxptype_traits.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/q20type_traits.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/q20functional.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/q20memory.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qbytearrayalgorithms.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qbytearrayview.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qstringfwd.h \
@@ -1329,26 +1361,13 @@ release/CustomerInterface.o: View/CustomerInterface.cpp View/CustomerInterface.h
 		C:/QT/6.7.3/mingw_64/include/QtCore/qstringbuilder.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qstringconverter.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qstringconverter_base.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qlist.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qhashfunctions.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qiterator.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qbytearraylist.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qstringlist.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qalgorithms.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qstringmatcher.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qshareddata.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qshareddata_impl.h \
-		C:/QT/6.7.3/mingw_64/include/QtWidgets/QWidget \
-		C:/QT/6.7.3/mingw_64/include/QtWidgets/qwidget.h \
-		C:/QT/6.7.3/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
-		C:/QT/6.7.3/mingw_64/include/QtGui/qtguiglobal.h \
-		C:/QT/6.7.3/mingw_64/include/QtGui/qtgui-config.h \
-		C:/QT/6.7.3/mingw_64/include/QtGui/qtguiexports.h \
-		C:/QT/6.7.3/mingw_64/include/QtWidgets/qtwidgets-config.h \
-		C:/QT/6.7.3/mingw_64/include/QtWidgets/qtwidgetsexports.h \
-		C:/QT/6.7.3/mingw_64/include/QtGui/qwindowdefs.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qobjectdefs.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qobjectdefs_impl.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qfunctionaltools_impl.h \
-		C:/QT/6.7.3/mingw_64/include/QtGui/qwindowdefs_win.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/qobject.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qcoreevent.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qscopedpointer.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qmetatype.h \
@@ -1378,6 +1397,7 @@ release/CustomerInterface.o: View/CustomerInterface.cpp View/CustomerInterface.h
 		C:/QT/6.7.3/mingw_64/include/QtGui/qcolor.h \
 		C:/QT/6.7.3/mingw_64/include/QtGui/qrgb.h \
 		C:/QT/6.7.3/mingw_64/include/QtGui/qrgba64.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qshareddata.h \
 		C:/QT/6.7.3/mingw_64/include/QtGui/qimage.h \
 		C:/QT/6.7.3/mingw_64/include/QtGui/qpixelformat.h \
 		C:/QT/6.7.3/mingw_64/include/QtGui/qtransform.h \
@@ -1390,6 +1410,8 @@ release/CustomerInterface.o: View/CustomerInterface.cpp View/CustomerInterface.h
 		C:/QT/6.7.3/mingw_64/include/QtCore/qcontiguouscache.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qsharedpointer.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qsharedpointer_impl.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qmap.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/qshareddata_impl.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qset.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qhash.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qvarlengtharray.h \
@@ -1474,7 +1496,6 @@ release/CustomerInterface.o: View/CustomerInterface.cpp View/CustomerInterface.h
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qstackedwidget.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/QVector \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qvector.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/QStringList \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QTextEdit \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qtextedit.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QDateEdit \
@@ -1555,6 +1576,7 @@ release/CustomerInterface.o: View/CustomerInterface.cpp View/CustomerInterface.h
 		C:/QT/6.7.3/mingw_64/include/QtCharts/qbarseries.h \
 		C:/QT/6.7.3/mingw_64/include/QtCharts/QAbstractBarSeries \
 		C:/QT/6.7.3/mingw_64/include/QtCharts/qabstractbarseries.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/QStringList \
 		C:/QT/6.7.3/mingw_64/include/QtCharts/QBarCategoryAxis \
 		C:/QT/6.7.3/mingw_64/include/QtCharts/qbarcategoryaxis.h \
 		C:/QT/6.7.3/mingw_64/include/QtCharts/QValueAxis \
@@ -1805,16 +1827,16 @@ release/ManagerInterface.o: View/ManagerInterface.cpp View/ManagerInterface.h \
 		Datastructures/Pair.h \
 		Model/Manager.h \
 		Model/Orders.h \
+		Controller/DataController.h \
+		Model/Customer.h \
+		Model/Employee.h \
+		Controller/AppController.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QComboBox \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qcombobox.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QMessageBox \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qmessagebox.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qdialog.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
-		Model/Customer.h \
-		Controller/DataController.h \
-		Model/Employee.h \
-		Controller/AppController.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QVBoxLayout \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qboxlayout.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qlayout.h \
@@ -2086,8 +2108,19 @@ release/LoginSignupInterface.o: View/LoginSignupInterface.cpp View/LoginSignupIn
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qgridlayout.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QGroupBox \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qgroupbox.h \
+		Controller/DataController.h \
+		Model/Product.h \
+		Model/User.h \
+		Model/Invoice.h \
+		Datastructures/Vector.h \
+		Datastructures/Pair.h \
+		Model/Cart.h \
+		Model/Orders.h \
+		Model/Customer.h \
+		Model/Employee.h \
+		Model/Manager.h \
+		Controller/AppController.h \
 		View/CustomerInterface.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/QMap \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QTableWidget \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qtablewidget.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qtableview.h \
@@ -2108,7 +2141,6 @@ release/LoginSignupInterface.o: View/LoginSignupInterface.cpp View/LoginSignupIn
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qrubberband.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/QVector \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qvector.h \
-		C:/QT/6.7.3/mingw_64/include/QtCore/QStringList \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QTextEdit \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qtextedit.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QDateEdit \
@@ -2117,17 +2149,6 @@ release/LoginSignupInterface.o: View/LoginSignupInterface.cpp View/LoginSignupIn
 		C:/QT/6.7.3/mingw_64/include/QtCore/qdatetime.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qcalendar.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/QString \
-		Model/Cart.h \
-		Model/User.h \
-		Model/Product.h \
-		Model/Invoice.h \
-		Datastructures/Vector.h \
-		Datastructures/Pair.h \
-		Model/Customer.h \
-		Model/Orders.h \
-		Controller/DataController.h \
-		Model/Employee.h \
-		Model/Manager.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QComboBox \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qcombobox.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QMessageBox \
@@ -2135,7 +2156,8 @@ release/LoginSignupInterface.o: View/LoginSignupInterface.cpp View/LoginSignupIn
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qdialog.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
 		View/ManagerInterface.h \
-		Controller/AppController.h \
+		C:/QT/6.7.3/mingw_64/include/QtCore/QMap \
+		C:/QT/6.7.3/mingw_64/include/QtCore/QStringList \
 		C:/QT/6.7.3/mingw_64/include/QtCore/QFile \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qfile.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qfiledevice.h \

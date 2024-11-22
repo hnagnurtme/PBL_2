@@ -1,11 +1,4 @@
 #include "Controller/AppController.h"
-
-AppController::AppController() {
-}
-
-AppController::~AppController() {
-}
-
 Pair<string, string> AppController::allLogin(const string& email, const string& password) {
     Vector<string> role = {"Customer", "Manager", "Employee"};
     string userId;
@@ -91,35 +84,26 @@ string AppController::signin(const string& name, const string& email, const stri
 
 Vector<Invoice*> AppController::sortInvoiceByDate() {
     DataController* customerData = new DataController();
-    
-    // Tải tất cả khách hàng
     Vector<Customer> customers = customerData->loadAllCustomersData();
     Vector<Invoice*> allInvoices;
-    
-    // Lấy hóa đơn của tất cả khách hàng
     for (int i = 0; i < customers.getSize(); ++i) {
         Vector<Invoice*> invoices = customerData->loadOrdersData(customers[i].getUserId()).getInvoice();
         for (int j = 0; j < invoices.getSize(); ++j) {
             allInvoices.pushback(invoices[j]);
         }
     }
-
     for (int i = 0; i < allInvoices.getSize() - 1; ++i) {
-        int maxIndex = i; // Giả sử phần tử i là nhỏ nhất
+        int maxIndex = i;
         for (int j = i + 1; j < allInvoices.getSize(); ++j) {
-            // Nếu ngày của hóa đơn ở vị trí j nhỏ hơn ngày của hóa đơn ở vị trí maxIndex
             if (allInvoices[j]->getInvoiceDate() > allInvoices[maxIndex]->getInvoiceDate()) {
-                maxIndex = j; // Cập nhật maxIndex
+                maxIndex = j; 
             }
         }
-        
-        // Hoán đổi phần tử ở vị trí i với phần tử ở vị trí maxIndex
         if (maxIndex != i) {
             Invoice* temp = allInvoices[i];
             allInvoices[i] = allInvoices[maxIndex];
             allInvoices[maxIndex] = temp;
         }
     }
-
     return allInvoices;
 }

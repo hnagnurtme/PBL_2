@@ -23,12 +23,14 @@ public:
     void saveCartData(const Cart& cart);       
     Cart loadCartData(const string& customerID);
     void saveInvoiceData(const Invoice& invoice);
-    Invoice loadInvoiceData(const string& invoiceID, const string& customerID);
-    void addToSoldProductData(const Invoice&invoice);
+    
+    
     Vector<Pair<string, int>> loadSoldProductData();
     void saveOrdersData(const Orders & orders);
     Orders loadOrdersData(const string& customerID);
 
+    void addToSoldProductData(const Invoice&invoice);
+    Invoice loadInvoiceData(const string& invoiceID, const string& customerID);
     bool findInvoiceByInvoiceID(const string& userID, const string& invoiceID , string& invoice);
 
     Vector<Customer> loadAllCustomersData();

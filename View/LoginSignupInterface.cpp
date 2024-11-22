@@ -21,23 +21,21 @@ void LoginSignupInterface::showMessage(QWidget *parent, bool status, const QStri
     messageBox.exec();
 }
 
-LoginSignupInterface::LoginSignupInterface(QWidget *parent)
-    : QWidget(parent)
-{
+LoginSignupInterface::LoginSignupInterface(QWidget *parent): QWidget(parent) {
+    dataController = new DataController();
+    appController = new AppController();
     QFile file("Resource/style.qss");
     if (file.open(QFile::ReadOnly | QFile::Text)) {
         QTextStream stream(&file);
         QString style = stream.readAll();
         setStyleSheet(style);
     }
-
     setFixedSize(1000, 600);
     setWindowTitle("Login Signup Window");
 
-    // ====== Giao diện Login ======
     QLabel *loginTitle = new QLabel("WELCOME BACK");
     loginTitle->setAlignment(Qt::AlignCenter);
-    loginTitle->setObjectName("inputTitle"); // Đặt objectName cho tiêu đề Login
+    loginTitle->setObjectName("inputTitle"); 
 
     QLabel *emailLabel = new QLabel("Email:");
     emailInput = new QLineEdit();
@@ -60,9 +58,8 @@ LoginSignupInterface::LoginSignupInterface(QWidget *parent)
     switchToSignupButton->setObjectName("cancelButton");
 
     QHBoxLayout *loginButtonLayout = new QHBoxLayout();
-    loginButtonLayout->addWidget(switchToSignupButton); // Nút ngang hàng với nút Login
+    loginButtonLayout->addWidget(switchToSignupButton); 
     loginButtonLayout->addWidget(loginButton);
-    
 
     QVBoxLayout *loginLayout = new QVBoxLayout();
     loginLayout->addWidget(loginTitle);
@@ -80,10 +77,9 @@ LoginSignupInterface::LoginSignupInterface(QWidget *parent)
     QGroupBox *loginGroup = new QGroupBox();
     loginGroup->setLayout(loginLayout);
 
-    // ====== Giao diện Signup ======
     QLabel *signupTitle = new QLabel("SIGN UP HERE");
     signupTitle->setAlignment(Qt::AlignCenter);
-    signupTitle->setObjectName("inputTitle"); // Đặt objectName cho tiêu đề Signup
+    signupTitle->setObjectName("inputTitle"); 
 
     QLabel *nameLabel = new QLabel("Name:");
     nameInput = new QLineEdit();
@@ -118,10 +114,9 @@ LoginSignupInterface::LoginSignupInterface(QWidget *parent)
     switchToLoginButton->setObjectName("cancelButton");
 
     QHBoxLayout *signupButtonLayout = new QHBoxLayout();
-    signupButtonLayout->addWidget(switchToLoginButton); // Nút ngang hàng với nút Signup
+    signupButtonLayout->addWidget(switchToLoginButton);
     signupButtonLayout->addWidget(signupButton);
     
-
     QVBoxLayout *signupLayout = new QVBoxLayout();
     signupLayout->addWidget(signupTitle);
     signupLayout->addSpacing(10);
@@ -148,7 +143,6 @@ LoginSignupInterface::LoginSignupInterface(QWidget *parent)
     QGroupBox *signupGroup = new QGroupBox();
     signupGroup->setLayout(signupLayout);
 
-    // ====== Stacked Widget ======
     stackedWidget = new QStackedWidget();
     stackedWidget->addWidget(loginGroup);
     stackedWidget->addWidget(signupGroup);
@@ -159,15 +153,14 @@ LoginSignupInterface::LoginSignupInterface(QWidget *parent)
     mainLayout->addWidget(stackedWidget);
     setLayout(mainLayout);
 
-    // ====== Kết nối tín hiệu ======
     connect(switchToSignupButton, &QPushButton::clicked, this, &LoginSignupInterface::showSignupPage);
     connect(switchToLoginButton, &QPushButton::clicked, this, &LoginSignupInterface::showLoginPage);
 }
 
-
-
-
-LoginSignupInterface::~LoginSignupInterface() {}
+LoginSignupInterface::~LoginSignupInterface() {
+    delete appController;
+    delete dataController;
+}
 
 void LoginSignupInterface::showSignupPage() {
     stackedWidget->setCurrentIndex(1); 
@@ -188,13 +181,9 @@ void LoginSignupInterface::login() {
         showMessage(this, false, "Invalid email format.");
         return;
     }
-
-    AppController *appCon = new AppController();
-    Pair<string, string> result = appCon->allLogin(email.toStdString(), password.toStdString());  
-
+    Pair<string, string> result = appController->allLogin(email.toStdString(), password.toStdString());  
     string role = result.getFirst();
     string userId = result.getSecond();
-    
     if (role == "Customer") {
         showMessage(this, true, "Login successful. Welcome, Customer!");
         CustomerInterface *view = new CustomerInterface(nullptr, userId);
@@ -213,10 +202,7 @@ void LoginSignupInterface::login() {
     else {
         showMessage(this, false, "Login Failed: Invalid email or password.");
     }
-    delete appCon;
 }
-
-
 
 void LoginSignupInterface::signup() {
     QString name = nameInput->text().trimmed();
@@ -225,20 +211,14 @@ void LoginSignupInterface::signup() {
     QString password = signupPasswordInput->text().trimmed();
     QString confirmPassword = confirmSignupPasswordInput->text().trimmed();
     QString address = addressInput->text().trimmed();
-    
-    // Bước tiền xử lý: Kiểm tra dữ liệu đầu vào
     if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || address.isEmpty()) {
         showMessage(this, false, "All fields must be filled in.");
         return;
     }
-
-    // Kiểm tra định dạng email đơn giản (chỉ kiểm tra có chứa dấu '@')
     if (!email.contains("@") || !email.contains(".")) {
         showMessage(this, false, "Invalid email format.");
         return;
     }
-
-    // Kiểm tra định dạng số điện thoại (10 chữ số)
     bool isPhoneValid = true;
     for (int i = 0; i < phone.length(); ++i) {
         if (!phone[i].isDigit()) {
@@ -250,23 +230,15 @@ void LoginSignupInterface::signup() {
         showMessage(this, false, "Invalid phone number format.");
         return;
     }
-
-    // Kiểm tra mật khẩu và xác nhận mật khẩu
     if (password != confirmPassword) {
         showMessage(this, false, "Passwords do not match. Please try again.");
         return;
     }
     
-    AppController *appCon = new AppController();
-    DataController *data = new DataController();  
-
     string role = "Customer";
-    string id = appCon->signin(name.toStdString(), email.toStdString(), phone.toStdString(), password.toStdString(), address.toStdString(), role);
+    string id = appController->signin(name.toStdString(), email.toStdString(), phone.toStdString(), password.toStdString(), address.toStdString(), role);
 
     CustomerInterface *view = new CustomerInterface(nullptr, id);
     view->show();
     showMessage(this, true, "Signup successful! You can now login.");
-    
-    delete data;
-    delete appCon;
 }

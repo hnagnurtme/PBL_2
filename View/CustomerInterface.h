@@ -1,5 +1,4 @@
 #pragma once
-#include <QMap>
 #include <QWidget>
 #include <QTableWidget>
 #include <QLineEdit>
@@ -7,7 +6,6 @@
 #include <QGroupBox>
 #include <QStackedWidget>
 #include <QVector>
-#include <QStringList>
 #include <QTextEdit>
 #include <QDateEdit>
 #include <QLabel>
@@ -18,7 +16,7 @@
 #include <string>
 #include <QComboBox>
 #include <QMessageBox>
-#include "Model/Customer.h"
+#include "Controller/DataController.h"
 using namespace std;
 class CustomerInterface : public QWidget {
     Q_OBJECT
@@ -68,6 +66,7 @@ private:
     QLabel *paymentMethodLabel;
     QGroupBox *overviewBox;
     QGroupBox *customerInforBox;
+    DataController *dataController;
     void addProducts(int row, bool fromCart);
     void deleteProducts(int row, bool fromCart);
     void showDetailsProducts(int row);

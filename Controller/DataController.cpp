@@ -15,6 +15,71 @@
 #include <stdexcept>
 using namespace std;
 
+void ensureFileAndFolder(const string& folderPath, const string& filename, const string& header) {
+    if (!std::filesystem::exists(folderPath)) {
+        std::filesystem::create_directories(folderPath);
+    }
+
+    if (!std::filesystem::exists(filename)) {
+        ofstream file(filename);
+        if (!file.is_open()) {
+            throw runtime_error("Không thể tạo file: " + filename);
+        }
+        file << header << "\n";
+        file.close();
+    }
+}
+template <typename T>
+void saveAllData(const Vector<T>& items, const std::string& filename, 
+                    function<std::string(const T&)> serializeItem) {
+    const std::string header = "UserID;Name;Email;Phone;Password;Address";
+
+    std::ofstream file(filename, std::ios::out | std::ios::trunc);
+    if (!file.is_open()) {
+        throw std::runtime_error("Không thể mở file để ghi: " + filename);
+    }
+
+    file << header << "\n";
+    for (int i = 0; i < items.getSize(); ++i) {
+        file << serializeItem(items[i]) << "\n";
+    }
+    file.close();
+}
+
+template <typename T>
+Vector<T> loadAllData(
+    const string& filename,
+    function<T(const string&, const string&, const string&, const string&, const string&, const string&)> createObject
+) {
+    const std::string header = "UserID;Name;Email;Phone;Password;Address";
+    ensureFileAndFolder("Data", filename, header);
+
+    Vector<T> items;
+    ifstream file(filename);
+
+    if (!file.is_open()) {
+        throw runtime_error("Không thể mở file để đọc: " + filename);
+    }
+
+    string line;
+    getline(file, line);
+    while (getline(file, line)) {
+        stringstream ss(line);
+        string userId, name, email, phone, password, address;
+
+        getline(ss, userId, ';');
+        getline(ss, name, ';');
+        getline(ss, email, ';');
+        getline(ss, phone, ';');
+        getline(ss, password, ';');
+        getline(ss, address);
+
+        items.pushback(createObject(userId, name, email, phone, password, address));
+    }
+
+    return items;
+}
+
 void DataController::saveProductsData(const Vector<Product>& products) {
     const string newProductFileName = "D:\\NEWPBL\\Data\\ProductInformation.csv"; 
     ofstream tempFile(newProductFileName, ios::out | ios::trunc);
@@ -97,6 +162,7 @@ Product DataController::parseProduct(const string& line) {
 
     return Product(id, name, category, price, stock, description,details, brand);
 }
+
 void DataController::removeProduct(const Invoice &invoice) {
     Vector<Pair<Product*, int>> invoiceProducts = invoice.getProducts();
     Vector<Product> productList = loadProductData(); 
@@ -120,7 +186,6 @@ void DataController::removeProduct(const Invoice &invoice) {
     }
     saveProductsData(productList); 
 }
-
 
 void DataController::saveCartData(const Cart& cart) {
     string folderPath = "Data/CartInformation";
@@ -205,9 +270,6 @@ Invoice DataController::loadInvoiceData(const string& invoiceID, const string& c
 
     return invoice;
 }
-
-
-
 
 void DataController::saveInvoiceData(const Invoice& invoice) {
     string directory = "Data/InvoiceInformation";
@@ -302,7 +364,6 @@ Orders DataController::loadOrdersData(const string& customerID) {
     return orders; 
 }
 
-
 Cart DataController::loadCartData(const string& customerID) {
     Cart cart(customerID);
     string filePath = "Data/CartInformation/" + customerID + "_cart.csv";
@@ -357,72 +418,33 @@ bool DataController::findInvoiceByInvoiceID(const string& userID, const string& 
     return true;
 }
 
-void ensureFileAndFolder(const string& folderPath, const string& filename, const string& header) {
-    if (!std::filesystem::exists(folderPath)) {
-        std::filesystem::create_directories(folderPath);
-    }
-
-    if (!std::filesystem::exists(filename)) {
-        ofstream file(filename);
-        if (!file.is_open()) {
-            throw runtime_error("Không thể tạo file: " + filename);
-        }
-        file << header << "\n";
-        file.close();
-    }
-}
-
 Vector<Customer> DataController::loadAllCustomersData() {
-    const string filename = "Data/CustomerInformation.csv";
-    const string header = "UserID;Name;Email;Phone;Password;Address";
-    ensureFileAndFolder("Data", filename, header);
-    
-    Vector<Customer> customers;
-    std::ifstream file(filename);
+    const std::string filename = "Data/CustomerInformation.csv";
 
-    if (!file.is_open()) {
-        throw std::runtime_error("Không thể mở file để đọc: " + filename);
-    }
-
-    std::string line;
-    std::getline(file, line);  
-    while (std::getline(file, line)) {
-        std::stringstream ss(line);
-        std::string userId, name, email, phone, password, address;
-
-        std::getline(ss, userId, ';');
-        std::getline(ss, name, ';');
-        std::getline(ss, email, ';');
-        std::getline(ss, phone, ';');
-        std::getline(ss, password, ';');
-        std::getline(ss, address);
-
-        Customer *newCus = new Customer(userId, name, email, phone, password, address);
-        customers.pushback(*newCus);
-    }
-
-    return customers;
+    return loadAllData<Customer>(
+        filename,
+        [](const std::string& userId, const std::string& name, const std::string& email,
+           const std::string& phone, const std::string& password, const std::string& address) {
+            return Customer(userId, name, email, phone, password, address);
+        }
+    );
 }
 
 void DataController::saveAllCustomersData(const Vector<Customer>& customers) {
-    const string filename = "Data/CustomerInformation.csv";
-    const string header = "UserID;Name;Email;Phone;Password;Address";
-    ofstream file(filename, ios::out | ios::trunc);
-    if (!file.is_open()) {
-        throw runtime_error("Không thể mở file để ghi: " + filename);
-    }
+    const std::string filename = "Data/CustomerInformation.csv";
 
-    file << header << "\n";
-    for (int i = 0; i < customers.getSize(); ++i) {
-        const Customer& customer = customers[i];
-        file << customer.getUserId() << ";"
-             << customer.getName() << ";"
-             << customer.getEmail() << ";"
-             << customer.getPhone() << ";"
-             << customer.getPassword() << ";"
-             << customer.getAddress() << "\n";
-    }
-    file.close();
+    saveAllData<Customer>(
+        customers, 
+        filename, 
+        [](const Customer& customer) {
+            return customer.getUserId() + ";" + 
+                   customer.getName() + ";" + 
+                   customer.getEmail() + ";" + 
+                   customer.getPhone() + ";" + 
+                   customer.getPassword() + ";" + 
+                   customer.getAddress();
+        }
+    );
 }
 
 void DataController::addCustomer(const Customer& customer) {
@@ -452,6 +474,13 @@ Customer DataController:: findCustomerById(const string& customerID){
         }
     throw runtime_error("Không tìm thấy nhân viên với ID: " + customerID);
 }
+
+void DataController:: updateCustomer(const Customer& customer){
+    string id = customer.getUserId();
+    deleteCustomer(id);
+    addCustomer(customer);
+}
+
 Manager DataController::  findManagerById(const string& managerID){
     Vector<Manager> managers = loadAllManagersData();
     for (int i = 0; i < managers.getSize(); ++i) {
@@ -460,63 +489,32 @@ Manager DataController::  findManagerById(const string& managerID){
             }
             }
 }
-void DataController:: updateCustomer(const Customer& customer){
-    string id = customer.getUserId();
-    deleteCustomer(id);
-    addCustomer(customer);
-}
+
 Vector<Employee> DataController::loadAllEmployeesData() {
-    const string filename = "Data/EmployeeInformation.csv";
-    const string header = "UserID;Name;Email;Phone;Password;Address";
-    ensureFileAndFolder("Data", filename, header);
-    
-    Vector<Employee> employees;
-    std::ifstream file(filename);
-
-    if (!file.is_open()) {
-        throw std::runtime_error("Không thể mở file để đọc: " + filename);
-    }
-
-    std::string line;
-    std::getline(file, line);  
-    while (std::getline(file, line)) {
-        std::stringstream ss(line);
-        std::string userId, name, email, phone, password, address;
-
-        std::getline(ss, userId, ';');
-        std::getline(ss, name, ';');
-        std::getline(ss, email, ';');
-        std::getline(ss, phone, ';');
-        std::getline(ss, password, ';');
-        std::getline(ss, address);
-
-        Employee *newEmp = new Employee(userId, name, email, phone, password, address);
-        employees.pushback(*newEmp);
-    }
-
-    return employees;
+    const std::string filename = "Data/EmployeeInformation.csv";
+    return loadAllData<Employee>(
+        filename,
+        [](const std::string& userId, const std::string& name, const std::string& email,
+           const std::string& phone, const std::string& password, const std::string& address) {
+            return Employee(userId, name, email, phone, password, address);
+        }
+    );
 }
 
 void DataController::saveAllEmployeesData(const Vector<Employee>& employees) {
-    const string filename = "Data/EmployeeInformation.csv";
-    const string header = "UserID;Name;Email;Phone;Password;Address";
-    ofstream file(filename, ios::out | ios::trunc);
-    if (!file.is_open()) {
-        throw runtime_error("Không thể mở file để ghi: " + filename);
+const std::string filename = "Data/EmployeeInformation.csv";
+saveAllData<Employee>(
+    employees,
+    filename,
+    [](const Employee& employee) { 
+        return employee.getUserId() + ";" +
+               employee.getName() + ";" +
+               employee.getEmail() + ";" +
+               employee.getPhone() + ";" + 
+               employee.getPassword() + ";" +
+               employee.getAddress();
     }
-
-    file << header << "\n";
-    for (int i = 0; i < employees.getSize(); ++i) {
-        const Employee& employee = employees[i];
-        file << employee.getUserId() << ";"
-             << employee.getName() << ";"
-             << employee.getEmail() << ";"
-             << employee.getPhone() << ";"
-             << employee.getPassword() << ";"
-             << employee.getAddress() << "\n";
-    }
-    file.close();
-   
+);
 }
 
 void DataController::addEmployee(const Employee& employee) {
@@ -537,60 +535,31 @@ void DataController::deleteEmployee(const Employee& employee) {
     throw runtime_error("Không tìm thấy customer với UserID: " + employee.getUserId());
 }
 
-
 Vector<Manager> DataController::loadAllManagersData() {
     const string filename = "Data/ManagerInformation.csv";
-    const string header = "UserID;Name;Email;Phone;Password;Address";
-    ensureFileAndFolder("Data", filename, header);
-    
-    Vector<Manager> managers;
-    std::ifstream file(filename);
-
-    if (!file.is_open()) {
-        throw std::runtime_error("Không thể mở file để đọc: " + filename);
-    }
-
-    std::string line;
-    std::getline(file, line);  
-    while (std::getline(file, line)) {
-        std::stringstream ss(line);
-        std::string userId, name, email, phone, password, address;
-
-        std::getline(ss, userId, ';');
-        std::getline(ss, name, ';');
-        std::getline(ss, email, ';');
-        std::getline(ss, phone, ';');
-        std::getline(ss, password, ';');
-        std::getline(ss, address);
-
-        Manager *newManager = new Manager(userId, name, email, phone, password, address);
-        managers.pushback(*newManager);
-    }
-
-    return managers;
-   
+    return loadAllData<Manager>(
+        filename,
+        [](const std::string& userId, const std::string& name, const std::string& email,
+           const std::string& phone, const std::string& password, const std::string& address) {
+            return Manager(userId, name, email, phone, password, address);
+        }
+    );
 }
 
 void DataController::saveAllManagersData(const Vector<Manager>& managers) {
-    const string filename = "Data/ManagerInformation.csv";
-    const string header = "UserID;Name;Email;Phone;Password;Address";
-    ofstream file(filename, ios::out | ios::trunc);
-    if (!file.is_open()) {
-        throw runtime_error("Không thể mở file để ghi: " + filename);
+    const std::string filename = "Data/ManagerInformation.csv";
+saveAllData<Manager>(
+    managers,
+    filename,
+    [](const Manager& manager) {
+        return manager.getUserId() + ";" +
+               manager.getName() + ";" +
+               manager.getEmail() + ";" +
+               manager.getPhone() + ";" +
+               manager.getPassword() + ";" +
+               manager.getAddress();
     }
-
-    file << header << "\n";
-    for (int i = 0; i < managers.getSize(); ++i) {
-        const Manager& manager = managers[i];
-        file << manager.getUserId() << ";"
-             << manager.getName() << ";"
-             << manager.getEmail() << ";"
-             << manager.getPhone() << ";"
-             << manager.getPassword() << ";"
-             << manager.getAddress() << "\n";
-    }
-    file.close();
-    
+);   
 }
 
 void DataController::addManager(const Manager& manager) {
@@ -685,4 +654,7 @@ Vector<Pair<string, int>> DataController::loadSoldProductData() {
     inputFile.close();
     return soldProducts;
 }
+
+
+
 

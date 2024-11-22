@@ -43,20 +43,22 @@ void ManagerInterface::showMessage(QWidget *parent, bool status, const QString &
     messageBox.exec();
 }
 
+ManagerInterface:: ~ManagerInterface(){
+    delete manager;
+    delete appController;
+    delete dataController;
+}
+
 ManagerInterface::ManagerInterface(QWidget *parent,const string &managerid) : QWidget(parent) {
-    
-    DataController *managerData = new DataController();
-    Manager newManager =  managerData->findManagerById(managerid);
+    dataController = new DataController();
+    Manager newManager =  dataController->findManagerById(managerid);
     manager = new Manager(newManager);
-    delete managerData;
-    
     QFile file("Resource/style.qss");
     if (file.open(QFile::ReadOnly | QFile::Text)) {
         QTextStream stream(&file);
         QString style = stream.readAll();
         setStyleSheet(style);
     }
-
     setFixedSize(1500, 800);
     setWindowTitle("Manager Homepage");
 
@@ -130,23 +132,19 @@ ManagerInterface::ManagerInterface(QWidget *parent,const string &managerid) : QW
     stackWidget->addWidget(invoicesTable);
     stackWidget->addWidget(managerInforBox);
     
-
-
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
     QHBoxLayout *layout = new QHBoxLayout();
     layout->addWidget(menuWidget);
     layout->addWidget(stackWidget);
     mainLayout->addLayout(layout);
     setLayout(mainLayout);
-
     showProducts();
 }
 
-
 void ManagerInterface:: showOverview(){
     stackWidget->setCurrentIndex(0);
-
 }
+
 void ManagerInterface::showProducts(){
     productTable->clear();
     productTable->setRowCount(100);
@@ -163,23 +161,24 @@ void ManagerInterface::showProducts(){
     productTable->setColumnWidth(6,200);
     productTable->setColumnWidth(3,300);
     productTable->setColumnWidth(0,100);
-
-
-
     productTable->setHorizontalHeaderLabels({"No.", "Description", "Product ID", "Product Name", "Price", "Quantity", "Action"});
     addProductsData();
     stackWidget->setCurrentIndex(1);
 }
+
 void ManagerInterface::filterProducts(){
 
 }
+
 void ManagerInterface::checkout(){
     this->close();
 }
+
 void ManagerInterface::showAccount(){
 
     stackWidget->setCurrentIndex(4);
 }
+
 void ManagerInterface::showCustomers(){
     customersTable->clear();
     customersTable->setRowCount(100);
@@ -196,16 +195,13 @@ void ManagerInterface::showCustomers(){
     customersTable->setColumnWidth(6,100);
     customersTable->setColumnWidth(5,300);
     customersTable->setColumnWidth(3,200);
-    
     customersTable->setColumnWidth(0,50);
-
-
-
     customersTable->setHorizontalHeaderLabels({"No.", "CustomerID", "Name", "Email", "Phone", "Address","Total Price","Action"});
     addCustomersData();
 
     stackWidget->setCurrentIndex(2);
 }
+
 void ManagerInterface::showInvoices(){
     invoicesTable->clear();
     invoicesTable->setRowCount(100);
@@ -228,18 +224,13 @@ void ManagerInterface::showInvoices(){
 
     stackWidget->setCurrentIndex(3);
 }
+
 void ManagerInterface::addProductsData() {
     productTable->clearContents();
     productTable->setRowCount(0);
-
-    DataController *productData = new DataController();;
-    Vector<Product> products = productData->loadProductData(); 
-    delete productData;
+    Vector<Product> products = dataController->loadProductData(); 
     size_t productCount = products.getSize(); 
     int row = 0;
-
-    qDebug() << "Number of products loaded:" << productCount;
-
     for (size_t i = 0; i < productCount && row < 100; ++i) {
         productTable->insertRow(row);
         productTable->setItem(row, 0, new QTableWidgetItem(QString::number(row + 1))); 
@@ -247,8 +238,6 @@ void ManagerInterface::addProductsData() {
         productTable->setItem(row, 3, new QTableWidgetItem(QString::fromStdString(products[i].getName()))); 
         productTable->setItem(row, 4, new QTableWidgetItem(QString::number(products[i].getPrice()))); 
         productTable->setItem(row, 5, new QTableWidgetItem(QString::number(products[i].getStock()))); 
-
-        
         QString imagePath = QString::fromStdString(products[i].getDescription()); 
         QLabel* imageLabel = new QLabel();
         QPixmap pixmap(imagePath);
@@ -283,31 +272,26 @@ void ManagerInterface::addProductsData() {
         QWidget *actionWidget = new QWidget();
         actionWidget->setLayout(actionLayout);
         productTable->setCellWidget(row, 6, actionWidget); 
-
         row++; 
     }
-
     for (int i = 0; i < row; ++i) {
         productTable->setRowHeight(i, 150);
     }
-
     if (productTable->rowCount() == 0) {
         qDebug() << "Product table is empty.";
-    }
-    
+    } 
 }
 
 void ManagerInterface :: addProducts(int row, bool fromCart){
 
 }
+
 void ManagerInterface :: deleteProducts(int row, bool fromCart){
 
 }
-void ManagerInterface ::showDetailsProducts(int row){
-    DataController *productData = new DataController();
-    Vector<Product> products = productData->loadProductData();
-    delete productData;
 
+void ManagerInterface ::showDetailsProducts(int row){
+    Vector<Product> products = dataController->loadProductData();
     if (row < 0 || row >= products.getSize()) {
         QMessageBox::warning(this, "Error", "Invalid product selection.");
         return;
@@ -321,28 +305,19 @@ void ManagerInterface ::showDetailsProducts(int row){
     }
 
     QString productDetails = QString("Detail Information:\n   Screen: %1\n    Resolution: %2\n   Processor: %3")
-                             .arg(QString::fromStdString(details[0]))
-                             .arg(QString::fromStdString(details[1]))
-                             .arg(QString::fromStdString(details[2]));
+                                .arg(QString::fromStdString(details[0]))
+                                .arg(QString::fromStdString(details[1]))
+                                .arg(QString::fromStdString(details[2]));
 
     showMessage(this, true,productDetails);
 }
 
-
 void ManagerInterface::addCustomersData() {
     customersTable->clearContents();
     customersTable->setRowCount(0);
-    DataController * con = new DataController();
-
-    //"No.", "CustomerID", "Name", "Email", "Phone", "Address","Total Price","Action"
-    DataController *customerData = new DataController();;
-    Vector<Customer> customers = customerData->loadAllCustomersData();
-    delete customerData;
+    Vector<Customer> customers = dataController->loadAllCustomersData();
     size_t customerCount = customers.getSize(); 
     int row = 0;
-
-    qDebug() << "Number of customers loaded:" << customerCount;
-
     for (size_t i = 0; i < customerCount && row < 100; ++i) {
         customersTable->insertRow(row);
         customersTable->setItem(row, 0, new QTableWidgetItem(QString::number(row + 1))); 
@@ -351,10 +326,7 @@ void ManagerInterface::addCustomersData() {
         customersTable->setItem(row, 3, new QTableWidgetItem(QString::fromStdString(customers[i].getEmail()))); 
         customersTable->setItem(row, 4, new QTableWidgetItem(QString::fromStdString(customers[i].getPhone()))); 
         customersTable->setItem(row, 5, new QTableWidgetItem(QString::fromStdString(customers[i].getAddress()))); 
-
-        
-        
-        Vector<Invoice*> invoices = con->loadOrdersData(customers[i].getUserId()).getInvoice();
+        Vector<Invoice*> invoices = dataController->loadOrdersData(customers[i].getUserId()).getInvoice();
         double totalPrice = 0.0;
         for (size_t j = 0; j < invoices.getSize(); ++j) {
             totalPrice += invoices[j]->getTotalAmount();
@@ -376,26 +348,19 @@ void ManagerInterface::addCustomersData() {
 
         row++; 
     }
-
     for (int i = 0; i < row; ++i) {
         customersTable->setRowHeight(i, 70);
     }
-
     if (customersTable->rowCount() == 0) {
         qDebug() << "Customers table is empty.";
-    }
-
-    delete con;
-    
+    }  
 }
 
 void ManagerInterface:: deleteCustomer(int row){
     QString customerId;
     if (customersTable->item(row, 2) == nullptr) return;
     customerId = customersTable->item(row, 1)->text();
-    DataController * con = new DataController();
-    con->deleteCustomer(customerId.toStdString());
-    delete con;
+    dataController->deleteCustomer(customerId.toStdString());
     showMessage(this,true,"Delete Customer Complete");
     showCustomers(); 
 
@@ -404,8 +369,7 @@ void ManagerInterface:: deleteCustomer(int row){
 void ManagerInterface::addInvoicesData() {
     invoicesTable->clearContents();
     invoicesTable->setRowCount(0);
-    AppController *con = new AppController();
-    Vector<Invoice*> invoices = con->sortInvoiceByDate();
+    Vector<Invoice*> invoices = appController->sortInvoiceByDate();
     invoicesTable->setHorizontalHeaderLabels({"No.", "InvoiceID", "PlaceOrderDate", "DeliveryDate", "TotalAmount", "PaymentMehod","View"});
     invoicesTable->setRowCount(invoices.getSize());
     for (int i = 0; i < invoices.getSize(); ++i) {
@@ -451,8 +415,6 @@ void ManagerInterface:: showInvoiceDetail(int row) {
     string invoiceId = invoice_ID.toStdString();
 
     string invoice;
-    unique_ptr<DataController> invoiceData = make_unique<DataController>();
-
     showMessage(this,true,QString::fromStdString(invoice));
     
 }

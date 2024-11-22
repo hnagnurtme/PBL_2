@@ -15,6 +15,8 @@
 #include "Model/Cart.h"
 #include "Model/Manager.h"
 #include "Model/Invoice.h"
+#include "Controller/DataController.h"
+#include "Controller/AppController.h"
 #include <string>
 #include <QComboBox>
 #include <QMessageBox>
@@ -26,7 +28,8 @@ class ManagerInterface : public QWidget {
 public:
     ManagerInterface(QWidget *parent = nullptr,const string &managerid ="");
     void showMessage(QWidget *parent, bool status, const QString &message);
-private slots:
+    ~ManagerInterface();
+    private slots:
     void showOverview();
     void showProducts();
     void filterProducts();
@@ -58,4 +61,6 @@ private:
     void deleteCustomer(int row);
     void showDetailsProducts(int row);
     void showInvoiceDetail(int row);
+    DataController * dataController;
+    AppController * appController;
 };
