@@ -6,7 +6,7 @@
 #include <random>
 
 void Invoice::setInvoiceID(int count){
-    invoiceId = "INV_" + to_string(count);
+    invoiceId = customerId+ "INV_" + to_string(count);
 }
 
 Invoice::Invoice() : customerId(""), totalAmount(0.0) {
@@ -26,7 +26,7 @@ Invoice::Invoice(const Cart& cart) : customerId(cart.getCustomerID()), totalAmou
     }
 
     setInvoiceDate();
-    invoiceId = "INV_" + getInvoiceDate();
+    invoiceId = customerId+"INV_" + getInvoiceDate();
 }
 
 

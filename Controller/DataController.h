@@ -28,9 +28,7 @@ public:
     Vector<Pair<string, int>> loadSoldProductData();
     void saveOrdersData(const Orders & orders);
     Orders loadOrdersData(const string& customerID);
-    
-    void printOrdersToFile(const Orders& orders);
-    void print(const Vector<Employee>& Employees);
+
     bool findInvoiceByInvoiceID(const string& userID, const string& invoiceID , string& invoice);
 
     Vector<Customer> loadAllCustomersData();

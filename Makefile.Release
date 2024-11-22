@@ -160,6 +160,7 @@ release/qrc_resources.cpp: Resource/resources.qrc \
 		C:/QT/6.7.3/mingw_64/bin/rcc.exe \
 		Resource/style.qss \
 		Resource/ICON/ICON8.png \
+		Resource/ICON/ICON13.png \
 		Resource/ICON/ICON4.png \
 		Resource/ICON/ICON12.png \
 		Resource/ICON/ICON2.png \
@@ -1813,6 +1814,7 @@ release/ManagerInterface.o: View/ManagerInterface.cpp View/ManagerInterface.h \
 		Model/Customer.h \
 		Controller/DataController.h \
 		Model/Employee.h \
+		Controller/AppController.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QVBoxLayout \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qboxlayout.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qlayout.h \

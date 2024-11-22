@@ -341,44 +341,6 @@ Cart DataController::loadCartData(const string& customerID) {
     return cart;
 }
 
-void DataController::printOrdersToFile(const Orders& orders) {
-    string tempFilename = "Data/OrdersInfomation/temp_orders_output.csv";
-    ofstream outFile(tempFilename);
-
-    if (outFile.is_open()) {
-        outFile << "InvoiceID,PlaceOrderDate,DeliveryDate,TotalAmount,PaymentMethod,Products\n"; 
-
-        Vector<Invoice*> invoices = orders.getInvoice();
-        for (int i = 0; i < invoices.getSize(); i++) {
-            Invoice* invoice = invoices[i];
-            outFile << invoice->getInvoiceId() << ","
-                    << invoice->getInvoiceDate() << ","
-                    << invoice->getDeliveryDate() << ","
-                    << invoice->getTotalAmount() << ","
-                    << invoice->getPaymentMethod() << ",";
-
-            Vector<Pair<Product*, int>> products = invoice->getProducts();
-            outFile << "{";
-            for (int j = 0; j < products.getSize(); j++) {
-                outFile << "(";
-                outFile << products[j].getFirst()->getProductId();
-                outFile << "," << products[j].getSecond(); // Thêm dấu phẩy giữa ID sản phẩm và số lượng
-                outFile << ")";
-                if (j < products.getSize() - 1) {
-                    outFile << ","; // Thêm dấu phẩy chỉ giữa các sản phẩm, không phải sau sản phẩm cuối
-                }
-            }
-            outFile << "},";
-            outFile << "\n"; // Xuống dòng sau mỗi hóa đơn
-        }
-        outFile.close();
-        cout << "Orders data has been written to temp_orders_output.csv for verification." << endl;
-    } 
-    else {
-        cout << "Unable to open file for writing." << endl;
-    }
-}
-
 bool DataController::findInvoiceByInvoiceID(const string& userID, const string& invoiceID, string& invoice) {
     string filename = "Data/InvoiceInformation/" + userID + "_Invoice_" + invoiceID + ".txt";
     cout << "Looking for file: " << filename << endl;

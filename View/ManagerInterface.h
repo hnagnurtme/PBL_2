@@ -49,4 +49,13 @@ private:
     QTableWidget *customersTable;
     QTableWidget *invoicesTable;
     QGroupBox *overviewBox;
+    QGroupBox *managerInforBox;
+    void addProductsData();
+    void addCustomersData();
+    void addInvoicesData();
+    void addProducts(int row, bool fromCart);
+    void deleteProducts(int row, bool fromCart);
+    void deleteCustomer(int row);
+    void showDetailsProducts(int row);
+    void showInvoiceDetail(int row);
 };

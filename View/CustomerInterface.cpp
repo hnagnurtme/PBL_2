@@ -356,9 +356,7 @@ void CustomerInterface::cartOrigin() {
 void CustomerInterface::ordersOrigin() {
     unique_ptr<DataController> ordersData = make_unique<DataController>();
     Orders orders = ordersData->loadOrdersData(customer->getUserId());
-    
     customer->updateOrderHistory(orders);
-    ordersData->printOrdersToFile(orders);
 }
 
 
