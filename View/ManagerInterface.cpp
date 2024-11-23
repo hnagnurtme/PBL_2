@@ -22,6 +22,7 @@
 #include <QComboBox>
 #include <memory>
 #include <QDateEdit>
+#include <QLineSeries>
 #include <QtCharts/QChartView>
 #include <QtCharts/QBarSet>
 #include <QtCharts/QBarSeries>
@@ -139,10 +140,6 @@ ManagerInterface::ManagerInterface(QWidget *parent,const string &managerid) : QW
     mainLayout->addLayout(layout);
     setLayout(mainLayout);
     showProducts();
-}
-
-void ManagerInterface:: showOverview(){
-    stackWidget->setCurrentIndex(0);
 }
 
 void ManagerInterface::showProducts(){
@@ -413,8 +410,135 @@ void ManagerInterface:: showInvoiceDetail(int row) {
     QString invoice_ID;
     invoice_ID = invoicesTable->item(row,1)->text();
     string invoiceId = invoice_ID.toStdString();
+    
 
     string invoice;
+    dataController->findInvoiceByInvoiceID(invoiceId,invoice);
     showMessage(this,true,QString::fromStdString(invoice));
     
+}
+
+inline void drawChart(const Vector<Pair<QString, double>>& data, const QString& title, const QString& xLabel, const QString& yLabel, QWidget* container) {
+    QVector<QString> categories; 
+    QVector<double> values;     
+    for (int i = 0; i <data.getSize();++i) {
+        categories.append(data[i].getFirst());  
+        values.append(data[i].getSecond());    
+    }
+
+    QBarSet *set = new QBarSet(yLabel);
+    for (double value : values) {
+        *set << value;  
+    }
+
+    QBarSeries *series = new QBarSeries();
+    series->append(set);
+
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->setTitle(title);
+    chart->setAnimationOptions(QChart::SeriesAnimations);
+
+    QBarCategoryAxis *axisX = new QBarCategoryAxis();
+    axisX->append(categories);
+    chart->setAxisX(axisX, series);
+
+    QValueAxis *axisY = new QValueAxis();
+    axisY->setTitleText(yLabel);
+    axisY->setRange(0, *std::max_element(values.begin(), values.end()));
+    chart->setAxisY(axisY, series);
+
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+
+    QVBoxLayout *layout = new QVBoxLayout(container);
+    layout->addWidget(chartView);
+    container->setLayout(layout);
+}
+
+inline void drawLineChart(const Vector<Pair<QString, double>>& data, const QString& title, const QString& xLabel, const QString& yLabel, QWidget* container) {
+    QLayout* oldLayout = container->layout();
+    if (oldLayout) {
+        QLayoutItem* item;
+        while ((item = oldLayout->takeAt(0)) != nullptr) {
+            delete item->widget();
+            delete item;
+        }
+        delete oldLayout;
+    }
+
+    QVector<QString> categories;
+    QVector<double> values;
+    for (int i = 0; i < data.getSize(); ++i) {
+        categories.append(data[i].getFirst());
+        values.append(data[i].getSecond());
+    }
+
+    // Tạo QLineSeries để chứa các điểm và nối chúng bằng đường
+    QLineSeries* series = new QLineSeries();
+    for (int i = 0; i < values.size(); ++i) {
+        series->append(i, values[i]); // Thêm các điểm vào series
+    }
+    series->setName(yLabel);
+
+    // Tạo QChart
+    QChart* chart = new QChart();
+    chart->addSeries(series);
+    chart->setTitle(title);
+    chart->setAnimationOptions(QChart::SeriesAnimations);
+
+    // Trục X: Thêm các danh mục từ dữ liệu
+    QBarCategoryAxis* axisX = new QBarCategoryAxis();
+    axisX->append(categories);
+    chart->addAxis(axisX, Qt::AlignBottom);
+    series->attachAxis(axisX);
+
+    // Trục Y: Xác định phạm vi dựa trên giá trị
+    QValueAxis* axisY = new QValueAxis();
+    axisY->setTitleText(yLabel);
+    axisY->setRange(0, *std::max_element(values.begin(), values.end()) + 10); // Tăng một chút để có khoảng trống
+    chart->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisY);
+
+    // Tạo QChartView
+    QChartView* chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+
+    // Đặt layout mới cho container
+    QVBoxLayout* layout = new QVBoxLayout(container);
+    layout->addWidget(chartView);
+    container->setLayout(layout);
+}
+
+void ManagerInterface::showOverview() {
+    Vector<Pair<string, int>> soldProducts = dataController->loadSoldProductData();
+
+    Vector<Pair<QString, double>> data;  
+    double totalAmountSpent = 0.0;  
+    int totalOrders = soldProducts.getSize();  
+    int numberOfProduct = 0;  
+
+    for (int i = 0; i < soldProducts.getSize(); ++i) {
+        QString productId = QString::fromStdString(soldProducts[i].getFirst());
+        int quantity = soldProducts[i].getSecond();
+
+        Product product = dataController->findProductById(soldProducts[i].getFirst());
+        double totalAmount = product.getPrice() * quantity;
+        numberOfProduct += quantity;  
+        totalAmountSpent += totalAmount; 
+        data.pushback(Pair<QString, double>(productId, quantity));
+    }
+    QLabel *soldProductCountLabel = new QLabel("Total Products Sold: " + QString::number(numberOfProduct));
+    soldProductCountLabel->setObjectName("titleLabel");
+    QLabel *totalAmountLabel = new QLabel("Total Amount Earned: " + QString::number(totalAmountSpent, 'f', 2));
+    totalAmountLabel->setObjectName("titleLabel");
+    drawChart(data, "Total Revenue by Product ID", "Product ID", "Revenue", overviewBox);
+    QVBoxLayout *layout = new QVBoxLayout(overviewBox);
+    layout->addWidget(soldProductCountLabel);
+    layout->addSpacing(20);
+    layout->addWidget(totalAmountLabel);
+    layout->addSpacing(20);
+    overviewBox->setLayout(layout);
+    overviewBox->show();
+    stackWidget->setCurrentIndex(0);
 }

@@ -1,0 +1,17 @@
+======================== INVOICE ========================
+Invoice ID          : USER002INV_1
+Customer ID         : USER002
+Invoice Date        : 2024-11-22
+Delivery Date       : 2025-01-24
+Payment Method      : Credit Card
+
+--------------------------------------------------------------------------------------------
+Product Name                  | Quantity  | Price     
+--------------------------------------------------------------------------------------------
+Điện thoại Samsung Galaxy S21| 1         | 1000.00   
+Điện thoại Xiaomi Mi 11  | 2         | 800.00    
+Điện thoại Google Pixel 6| 1         | 900.00    
+Điện thoại Huawei P40 Pro| 1         | 1200.00   
+Điện thoại Nokia 8.3 5G  | 1         | 1050.00   
+======================================================
+                         Total Amount     : $5750.00

@@ -1,0 +1,16 @@
+======================== INVOICE ========================
+Invoice ID          : USER002INV_2
+Customer ID         : USER002
+Invoice Date        : 2024-11-22
+Delivery Date       : 2025-01-25
+Payment Method      : Bank Transfer
+
+--------------------------------------------------------------------------------------------
+Product Name                  | Quantity  | Price     
+--------------------------------------------------------------------------------------------
+Điện thoại Vivo V21 5G   | 1         | 780.00    
+Điện thoại Xiaomi Redmi Note 10| 2         | 500.00    
+Điện thoại Asus ZenFone 8| 2         | 950.00    
+Điện thoại LG Velvet     | 1         | 750.00    
+======================================================
+                         Total Amount     : $4430.00

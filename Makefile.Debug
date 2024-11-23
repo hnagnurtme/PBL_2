@@ -1238,7 +1238,12 @@ debug/Invoice.o: Model/Invoice.cpp Model/Invoice.h \
 		Datastructures/Pair.h \
 		Model/Product.h \
 		Model/User.h \
-		Model/Cart.h
+		Model/Cart.h \
+		Model/Customer.h \
+		Model/Orders.h \
+		Controller/DataController.h \
+		Model/Employee.h \
+		Model/Manager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\Invoice.o Model\Invoice.cpp
 
 debug/Customer.o: Model/Customer.cpp Model/Customer.h \
@@ -1854,19 +1859,25 @@ debug/ManagerInterface.o: View/ManagerInterface.cpp View/ManagerInterface.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/QDir \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qdir.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/qfileinfo.h \
-		C:/QT/6.7.3/mingw_64/include/QtCharts/QChartView \
-		C:/QT/6.7.3/mingw_64/include/QtCharts/qchartview.h \
-		C:/QT/6.7.3/mingw_64/include/QtCharts/QAbstractAxis \
-		C:/QT/6.7.3/mingw_64/include/QtCharts/qabstractaxis.h \
+		C:/QT/6.7.3/mingw_64/include/QtCharts/QLineSeries \
+		C:/QT/6.7.3/mingw_64/include/QtCharts/qlineseries.h \
 		C:/QT/6.7.3/mingw_64/include/QtCharts/QChartGlobal \
 		C:/QT/6.7.3/mingw_64/include/QtCharts/qchartglobal.h \
 		C:/QT/6.7.3/mingw_64/include/QtCharts/qtcharts-config.h \
 		C:/QT/6.7.3/mingw_64/include/QtCharts/qtchartsexports.h \
+		C:/QT/6.7.3/mingw_64/include/QtCharts/QXYSeries \
+		C:/QT/6.7.3/mingw_64/include/QtCharts/qxyseries.h \
+		C:/QT/6.7.3/mingw_64/include/QtCharts/QAbstractSeries \
+		C:/QT/6.7.3/mingw_64/include/QtCharts/qabstractseries.h \
+		C:/QT/6.7.3/mingw_64/include/QtCharts/QAbstractAxis \
+		C:/QT/6.7.3/mingw_64/include/QtCharts/qabstractaxis.h \
 		C:/QT/6.7.3/mingw_64/include/QtGui/QPen \
 		C:/QT/6.7.3/mingw_64/include/QtGui/QFont \
 		C:/QT/6.7.3/mingw_64/include/QtCore/QVariant \
-		C:/QT/6.7.3/mingw_64/include/QtCharts/QAbstractSeries \
-		C:/QT/6.7.3/mingw_64/include/QtCharts/qabstractseries.h \
+		C:/QT/6.7.3/mingw_64/include/QtGui/QBrush \
+		C:/QT/6.7.3/mingw_64/include/QtGui/QImage \
+		C:/QT/6.7.3/mingw_64/include/QtCharts/QChartView \
+		C:/QT/6.7.3/mingw_64/include/QtCharts/qchartview.h \
 		C:/QT/6.7.3/mingw_64/include/QtCharts/QChart \
 		C:/QT/6.7.3/mingw_64/include/QtCharts/qchart.h \
 		C:/QT/6.7.3/mingw_64/include/QtCharts/QLegend \
@@ -1876,7 +1887,6 @@ debug/ManagerInterface.o: View/ManagerInterface.cpp View/ManagerInterface.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qgraphicslayoutitem.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qgraphicsitem.h \
 		C:/QT/6.7.3/mingw_64/include/QtGui/qpainterpath.h \
-		C:/QT/6.7.3/mingw_64/include/QtGui/QBrush \
 		C:/QT/6.7.3/mingw_64/include/QtCore/QMargins \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QGraphicsView \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qgraphicsview.h \

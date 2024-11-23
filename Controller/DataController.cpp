@@ -211,9 +211,9 @@ void DataController::saveCartData(const Cart& cart) {
     file.close();
 }
 
-Invoice DataController::loadInvoiceData(const string& invoiceID, const string& customerID) {
+Invoice DataController::loadInvoiceData(const string& invoiceID) {
     string directory = "Data/InvoiceInformation";
-    string filename = directory + "/" + customerID + "_Invoice_" + invoiceID + ".txt"; 
+    string filename = directory + "/"  + "_Invoice_" + invoiceID + ".txt"; 
 
     Invoice invoice;
 
@@ -273,7 +273,7 @@ Invoice DataController::loadInvoiceData(const string& invoiceID, const string& c
 
 void DataController::saveInvoiceData(const Invoice& invoice) {
     string directory = "Data/InvoiceInformation";
-    string filename = directory + "/" + invoice.getCustomerId() + "_Invoice_" + invoice.getInvoiceId() + ".txt"; 
+    string filename = directory + "/" + "_Invoice_" + invoice.getInvoiceId() + ".txt"; 
 
     filesystem::create_directories(directory);
 
@@ -402,8 +402,10 @@ Cart DataController::loadCartData(const string& customerID) {
     return cart;
 }
 
-bool DataController::findInvoiceByInvoiceID(const string& userID, const string& invoiceID, string& invoice) {
-    string filename = "Data/InvoiceInformation/" + userID + "_Invoice_" + invoiceID + ".txt";
+bool DataController::findInvoiceByInvoiceID( const string& invoiceID, string& invoice) {
+    std::string filename = "Data/InvoiceInformation/";
+    filename.append("_Invoice_").append(invoiceID).append(".txt");
+
     cout << "Looking for file: " << filename << endl;
     ifstream inFile(filename);
     if (!inFile) {
@@ -655,6 +657,13 @@ Vector<Pair<string, int>> DataController::loadSoldProductData() {
     return soldProducts;
 }
 
-
+Product DataController:: findProductById(const string& productId){
+    Vector<Product> products = loadProductData();
+    for( int i = 0; i < products.getSize();i++){
+        if(products[i].getProductId() == productId){
+            return products[i];
+    }
+}
+}
 
 

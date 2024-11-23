@@ -89,7 +89,7 @@ CustomerInterface::CustomerInterface(QWidget *parent,const string &customerid) :
     menuLayout->addSpacing(50);
 
     stackWidget = new QStackedWidget(this);
-    QLineEdit *searchLineEdit = new QLineEdit(this);
+    searchLineEdit = new QLineEdit(this);
     searchLineEdit->setFixedHeight(50);
     QIcon searchIcon("Resource/ICON/ICON5.png"); 
     searchLineEdit->addAction(searchIcon, QLineEdit::LeadingPosition);
@@ -400,60 +400,101 @@ void CustomerInterface::clearCart() {
     showCart();
 }
 
-void CustomerInterface::showOverview() {
-    Orders orders = customer->getOrderHistory();
-    Vector<Invoice*> invoices = orders.getInvoice();
-    QVector<QString> invoiceIDs;
-    QVector<double> productQuantities;
-    double totalAmountSpent = 0.0;  
-    int totalOrders = invoices.getSize();  
-
-    for (int i = 0; i < invoices.getSize(); ++i) {
-        QString productId = QString::fromStdString(invoices[i]->getInvoiceId());
-        double totalAmount = invoices[i]->getTotalAmount();
-        
-        invoiceIDs.append(productId);
-        productQuantities.append(totalAmount);
-
-        totalAmountSpent += totalAmount;  
+void drawChart(const Vector<Pair<QString, double>>& data, const QString& title, const QString& xLabel, const QString& yLabel, QWidget* container) {
+    QVector<QString> categories; 
+    QVector<double> values;     
+    for (int i = 0; i <data.getSize();++i) {
+        categories.append(data[i].getFirst());  
+        values.append(data[i].getSecond());    
     }
 
-    QBarSet *set = new QBarSet("Product Quantity");
-    for (double quantity : productQuantities) {
-        *set << quantity;
+    QBarSet *set = new QBarSet(yLabel);
+    for (double value : values) {
+        *set << value;  
     }
+
     QBarSeries *series = new QBarSeries();
     series->append(set);
 
     QChart *chart = new QChart();
     chart->addSeries(series);
-    chart->setTitle("Product Quantities by Product ID");
+    chart->setTitle(title);
     chart->setAnimationOptions(QChart::SeriesAnimations);
 
     QBarCategoryAxis *axisX = new QBarCategoryAxis();
-    axisX->append(invoiceIDs);
+    axisX->append(categories);
     chart->setAxisX(axisX, series);
 
     QValueAxis *axisY = new QValueAxis();
-    axisY->setRange(0, *std::max_element(productQuantities.begin(), productQuantities.end()));
+    axisY->setTitleText(yLabel);
+    axisY->setRange(0, *std::max_element(values.begin(), values.end()));
     chart->setAxisY(axisY, series);
 
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
-    chartView->resize(800, 600);
+
+    QVBoxLayout *layout = new QVBoxLayout(container);
+    layout->addWidget(chartView);
+    container->setLayout(layout);
+}
+
+void CustomerInterface::showOverview() {
+    Orders orders = customer->getOrderHistory();
+    Vector<Invoice*> invoices = orders.getInvoice();
+
+    if (invoices.getSize() == 0) {
+        QMessageBox::information(this, "No orders", "You have no orders");
+        showProducts();
+        return;
+        } else {
+
+    Vector<Pair<QString, double>> data;  
+    double totalAmountSpent = 0.0;  
+    int totalOrders = invoices.getSize();  
+
+    for (int i = 0; i < invoices.getSize(); ++i) {
+        QString invoiceId = QString::fromStdString(invoices[i]->getInvoiceId());
+        double totalAmount = invoices[i]->getTotalAmount();
+        
+        data.pushback(Pair<QString, double>(invoiceId, totalAmount));
+        totalAmountSpent += totalAmount;
+    }
+
     QLabel *orderCountLabel = new QLabel("Total Orders: " + QString::number(totalOrders));
     QLabel *totalAmountLabel = new QLabel("Total Amount Spent: " + QString::number(totalAmountSpent, 'f', 2));
+
+    
+    drawChart(data, "Product Quantities by Product ID", "Product ID", "Quantity", overviewBox);
+
     QVBoxLayout *layout = new QVBoxLayout(overviewBox);
     layout->addWidget(orderCountLabel);
     layout->addWidget(totalAmountLabel);
-    layout->addWidget(chartView);
     overviewBox->setLayout(layout);
 
     overviewBox->show();
     stackWidget->setCurrentIndex(3);
+    }
 }
 
-void CustomerInterface::filterProducts() {}
+void CustomerInterface::filterProducts() {
+    QString searchTerm = searchLineEdit->text().trimmed();
+    if (searchTerm.isEmpty()) {
+        for (int row = 0; row < productTable->rowCount(); ++row) {
+            productTable->setRowHidden(row, false);
+        }
+        return;
+    }
+
+    for (int row = 0; row <productTable->rowCount(); ++row) {
+        QTableWidgetItem* item = productTable->item(row, 3);
+        if (item) {
+            bool matches = item->text().contains(searchTerm, Qt::CaseInsensitive);
+            productTable->setRowHidden(row, !matches);
+        } else {
+            productTable->setRowHidden(row, true);
+        }
+    }
+}
 
 void CustomerInterface::showAccount(bool change) {
     QLayout* oldLayout = customerInforBox->layout();
@@ -712,7 +753,7 @@ void CustomerInterface::showInvoiceDetail(int row){
     invoice_ID = ordersTable->item(row,1)->text();
     string invoiceId = invoice_ID.toStdString();
     string invoice;
-    if(dataController->findInvoiceByInvoiceID(customer->getUserId(),invoiceId,invoice)){
+    if(dataController->findInvoiceByInvoiceID(invoiceId,invoice)){
         showMessage(this,true,QString::fromStdString(invoice));
     }
     else{

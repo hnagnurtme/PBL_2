@@ -30,8 +30,8 @@ public:
     Orders loadOrdersData(const string& customerID);
 
     void addToSoldProductData(const Invoice&invoice);
-    Invoice loadInvoiceData(const string& invoiceID, const string& customerID);
-    bool findInvoiceByInvoiceID(const string& userID, const string& invoiceID , string& invoice);
+    Invoice loadInvoiceData(const string& invoiceID);
+    bool findInvoiceByInvoiceID(const string& invoiceID , string& invoice);
 
     Vector<Customer> loadAllCustomersData();
     void saveAllCustomersData(const Vector<Customer>& customers);

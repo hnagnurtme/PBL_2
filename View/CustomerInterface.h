@@ -52,6 +52,7 @@ private:
     QPushButton *showInvoicesButton;
     QPushButton *showAccountButton;
     QStackedWidget *stackWidget;
+    QLineEdit *searchLineEdit;
     QTextEdit *invoiceDisplay ;
     QPushButton *paymentButton;
     QPushButton *clearCartButton;

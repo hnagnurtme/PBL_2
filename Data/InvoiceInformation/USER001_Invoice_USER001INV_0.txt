@@ -1,0 +1,17 @@
+======================== INVOICE ========================
+Invoice ID          : USER001INV_0
+Customer ID         : USER001
+Invoice Date        : 2024-11-22
+Delivery Date       : 2024-11-30
+Payment Method      : Cash on Delivery
+
+--------------------------------------------------------------------------------------------
+Product Name                  | Quantity  | Price     
+--------------------------------------------------------------------------------------------
+Điện thoại Xiaomi Mi 11  | 1         | 800.00    
+Điện thoại Google Pixel 6| 1         | 900.00    
+Điện thoại Oppo Find X3  | 1         | 700.00    
+Điện thoại Nokia 8.3 5G  | 1         | 1050.00   
+Điện thoại Motorola Edge 20| 4         | 950.00    
+======================================================
+                         Total Amount     : $7250.00
