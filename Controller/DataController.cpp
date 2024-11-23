@@ -81,7 +81,7 @@ Vector<T> loadAllData(
 }
 
 void DataController::saveProductsData(const Vector<Product>& products) {
-    const string newProductFileName = "D:\\NEWPBL\\Data\\ProductInformation.csv"; 
+    const string newProductFileName = "Data/ProductInformation.csv"; 
     ofstream tempFile(newProductFileName, ios::out | ios::trunc);
     if (!tempFile.is_open()) {
         throw runtime_error("Không thể mở file để ghi: " + newProductFileName);
@@ -113,7 +113,7 @@ void DataController::saveProductsData(const Vector<Product>& products) {
 
 Vector<Product> DataController::loadProductData() {
     Vector<Product> products;
-    ifstream file("D:\\NEWPBL\\Data\\ProductInformation.csv");
+    ifstream file("Data/ProductInformation.csv");
 
     cout << "Trying to open file: " << productFileName << endl; 
 
