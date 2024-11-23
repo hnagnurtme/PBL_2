@@ -37,6 +37,8 @@ public:
     void showAccount();
     void showCustomers();
     void showInvoices();
+    void filterCustomer();
+    void filterInvoice();
 signals:
 private:
     Manager* manager;
@@ -45,6 +47,9 @@ private:
     QPushButton *checkoutButton;
     QPushButton *showCustomersButton;
     QPushButton *showInvoicesButton;
+    QLineEdit *searchProductLine;
+    QLineEdit *searchCustomerLine;
+    QLineEdit *searchInvoiceLine;
     QPushButton *showAccountButton;
     QStackedWidget *stackWidget;
     QTextEdit *invoiceDisplay ;

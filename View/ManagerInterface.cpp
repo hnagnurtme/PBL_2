@@ -97,11 +97,30 @@ ManagerInterface::ManagerInterface(QWidget *parent,const string &managerid) : QW
     menuLayout->addSpacing(50);
 
     stackWidget = new QStackedWidget(this);
+    searchProductLine = new QLineEdit(this);
+    searchProductLine->setFixedHeight(50);
+    QIcon searchIcon("Resource/ICON/ICON5.png"); 
+    searchProductLine->addAction(searchIcon, QLineEdit::LeadingPosition);
+    searchProductLine->setPlaceholderText("Search by product name...");
+    connect(searchProductLine, &QLineEdit::textChanged, this, &ManagerInterface::filterProducts);
+    searchCustomerLine = new QLineEdit(this);
+    searchCustomerLine->setFixedHeight(50);
+    searchCustomerLine->addAction(searchIcon, QLineEdit::LeadingPosition);
+    searchCustomerLine->setPlaceholderText("Search by customer name...");
+    connect(searchCustomerLine, &QLineEdit::textChanged, this, &ManagerInterface::filterCustomer);
+    searchInvoiceLine = new QLineEdit(this);
+    searchInvoiceLine->setFixedHeight(50);
+    searchInvoiceLine->addAction(searchIcon, QLineEdit::LeadingPosition);
+    searchInvoiceLine->setPlaceholderText("Search by customer name...");
+    connect(searchInvoiceLine, &QLineEdit::textChanged, this, &ManagerInterface::filterInvoice);
+    
+
     productTable = new QTableWidget(5, 6, this);
     productTable->setHorizontalHeaderLabels({"No.", "Description", "Product ID", "Product Name", "Price", "Quantity", "Change"});
 
     QGroupBox *productGroupBox = new QGroupBox(this);
     QVBoxLayout *productLayout = new QVBoxLayout(productGroupBox);
+    productLayout->addWidget(searchProductLine);
     productLayout->addSpacing(20);
     productLayout->addWidget(productTable);
     productTable->setFixedSize(1250, 700);
@@ -111,6 +130,7 @@ ManagerInterface::ManagerInterface(QWidget *parent,const string &managerid) : QW
 
     QGroupBox *customersGroupBox = new QGroupBox(this);
     QVBoxLayout *customersLayout = new QVBoxLayout(customersGroupBox);
+    customersLayout->addWidget(searchCustomerLine);
     customersLayout->addSpacing(20);
     customersLayout->addWidget(customersTable);
     customersTable->setFixedSize(1250,700);
@@ -120,6 +140,7 @@ ManagerInterface::ManagerInterface(QWidget *parent,const string &managerid) : QW
 
     QGroupBox *invoicesGroupBox = new QGroupBox(this);
     QVBoxLayout *invoicesLayout = new QVBoxLayout(invoicesGroupBox);
+    invoicesLayout->addWidget(searchInvoiceLine);
     invoicesLayout->addSpacing(20);
     invoicesLayout->addWidget(invoicesTable);
     invoicesTable->setFixedSize(1000,700);
@@ -130,7 +151,7 @@ ManagerInterface::ManagerInterface(QWidget *parent,const string &managerid) : QW
     stackWidget->addWidget(overviewBox);
     stackWidget->addWidget(productGroupBox);
     stackWidget->addWidget(customersGroupBox);
-    stackWidget->addWidget(invoicesTable);
+    stackWidget->addWidget(invoicesGroupBox);
     stackWidget->addWidget(managerInforBox);
     
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
@@ -161,10 +182,6 @@ void ManagerInterface::showProducts(){
     productTable->setHorizontalHeaderLabels({"No.", "Description", "Product ID", "Product Name", "Price", "Quantity", "Action"});
     addProductsData();
     stackWidget->setCurrentIndex(1);
-}
-
-void ManagerInterface::filterProducts(){
-
 }
 
 void ManagerInterface::checkout(){
@@ -541,4 +558,62 @@ void ManagerInterface::showOverview() {
     overviewBox->setLayout(layout);
     overviewBox->show();
     stackWidget->setCurrentIndex(0);
+}
+
+void  ManagerInterface:: filterProducts(){
+    QString searchTerm = searchProductLine->text().trimmed();
+    if (searchTerm.isEmpty()) {
+        for (int row = 0; row < productTable->rowCount(); ++row) {
+            productTable->setRowHidden(row, false);
+        }
+        return;
+    }
+
+    for (int row = 0; row <productTable->rowCount(); ++row) {
+        QTableWidgetItem* item = productTable->item(row, 3);
+        if (item) {
+            bool matches = item->text().contains(searchTerm, Qt::CaseInsensitive);
+            productTable->setRowHidden(row, !matches);
+        } else {
+            productTable->setRowHidden(row, true);
+        }
+    }
+}
+void  ManagerInterface::filterCustomer(){
+    QString searchTerm = searchCustomerLine->text().trimmed();
+    if (searchTerm.isEmpty()) {
+        for (int row = 0; row < customersTable->rowCount(); ++row) {
+            customersTable->setRowHidden(row, false);
+        }
+        return;
+    }
+
+    for (int row = 0; row <customersTable->rowCount(); ++row) {
+        QTableWidgetItem* item = customersTable->item(row, 3);
+        if (item) {
+            bool matches = item->text().contains(searchTerm, Qt::CaseInsensitive);
+            customersTable->setRowHidden(row, !matches);
+        } else {
+            customersTable->setRowHidden(row, true);
+        }
+    }
+}
+void  ManagerInterface::filterInvoice(){
+    QString searchTerm = searchInvoiceLine->text().trimmed();
+    if (searchTerm.isEmpty()) {
+        for (int row = 0; row < invoicesTable->rowCount(); ++row) {
+            invoicesTable->setRowHidden(row, false);
+        }
+        return;
+    }
+
+    for (int row = 0; row <invoicesTable->rowCount(); ++row) {
+        QTableWidgetItem* item =invoicesTable->item(row, 3);
+        if (item) {
+            bool matches = item->text().contains(searchTerm, Qt::CaseInsensitive);
+            invoicesTable->setRowHidden(row, !matches);
+        } else {
+            invoicesTable->setRowHidden(row, true);
+        }
+    }
 }
