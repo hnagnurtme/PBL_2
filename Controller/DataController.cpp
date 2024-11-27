@@ -163,6 +163,18 @@ Product DataController::parseProduct(const string& line) {
     return Product(id, name, category, price, stock, description,details, brand);
 }
 
+
+void DataController::deleteProduct(const string& productId) {
+    Vector<Product> productList = loadProductData();
+    for (int j = 0; j < productList.getSize(); ++j) {
+        if (productList[j].getProductId() == productId) {
+            productList.remove(j);  
+            saveProductsData(productList);
+            return;
+        }
+    }
+    throw runtime_error("Không tìm thấy product với ProductId: " + productId); 
+}
 void DataController::removeProduct(const Invoice &invoice) {
     Vector<Pair<Product*, int>> invoiceProducts = invoice.getProducts();
     Vector<Product> productList = loadProductData(); 
@@ -663,7 +675,8 @@ Product DataController:: findProductById(const string& productId){
         if(products[i].getProductId() == productId){
             return products[i];
     }
-}
+    }
+    return Product();
 }
 
 

@@ -279,6 +279,7 @@ void ManagerInterface::addProductsData() {
         deleteProductButton->setIcon(delIcon);
         deleteProductButton->setIconSize(QSize(35, 35));
         connect(deleteProductButton, &QPushButton::clicked, [this, row]() { deleteProduct(row); });
+        
 
         QPushButton *showDetailsButton = new QPushButton();
         QIcon heartIcon("Resource/ICON/ICON10.png"); 
@@ -309,9 +310,21 @@ void ManagerInterface :: addNewProduct(){
 }
 
 void ManagerInterface :: deleteProduct(int row){
-
+    QString productId;
+    if (productTable->item(row,2) == nullptr) return;
+    productId = productTable->item(row, 2)->text();
+    dataController->deleteProduct(productId.toStdString());
+    showMessage(this,true,"Delete Product Complete");
+    showProducts();
 }
-
+void ManagerInterface:: deleteCustomer(int row){
+    QString customerId;
+    if (customersTable->item(row, 1) == nullptr) return;
+    customerId = customersTable->item(row, 1)->text();
+    dataController->deleteCustomer(customerId.toStdString());
+    showMessage(this,true,"Delete Customer Complete");
+    showCustomers(); 
+}
 void ManagerInterface ::showDetailsProducts(int row){
     Vector<Product> products = dataController->loadProductData();
     if (row < 0 || row >= products.getSize()) {
@@ -378,15 +391,7 @@ void ManagerInterface::addCustomersData() {
     }  
 }
 
-void ManagerInterface:: deleteCustomer(int row){
-    QString customerId;
-    if (customersTable->item(row, 2) == nullptr) return;
-    customerId = customersTable->item(row, 1)->text();
-    dataController->deleteCustomer(customerId.toStdString());
-    showMessage(this,true,"Delete Customer Complete");
-    showCustomers(); 
 
-}
 
 void ManagerInterface::addInvoicesData() {
     invoicesTable->clearContents();
