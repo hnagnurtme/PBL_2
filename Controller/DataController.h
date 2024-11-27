@@ -21,6 +21,7 @@ public:
     Vector<Product> loadProductData(); 
     void removeProduct(const Invoice &invoice);
     void deleteProduct(const string& productId);
+    void addNewProduct(const Product& product);
     void saveCartData(const Cart& cart);       
     Cart loadCartData(const string& customerID);
     void saveInvoiceData(const Invoice& invoice);

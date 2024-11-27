@@ -1,4 +1,5 @@
 #include "View/ManagerInterface.h"
+#include "View/AddNewProduct.h"
 #include "Model/Product.h"
 #include "Model/Invoice.h"
 #include "Model/Orders.h"
@@ -111,7 +112,7 @@ ManagerInterface::ManagerInterface(QWidget *parent,const string &managerid) : QW
     searchInvoiceLine = new QLineEdit(this);
     searchInvoiceLine->setFixedHeight(50);
     searchInvoiceLine->addAction(searchIcon, QLineEdit::LeadingPosition);
-    searchInvoiceLine->setPlaceholderText("Search by customer name...");
+    searchInvoiceLine->setPlaceholderText("Search by placeorder date...");
     connect(searchInvoiceLine, &QLineEdit::textChanged, this, &ManagerInterface::filterInvoice);
 
     addNewProoductButton = new QPushButton(this);
@@ -306,7 +307,11 @@ void ManagerInterface::addProductsData() {
 }
 
 void ManagerInterface :: addNewProduct(){
-
+    AddProductWidget *addProductWidget = new AddProductWidget();
+    addProductWidget->show();
+    if(addProductWidget->getStatus()){
+        showProducts();
+    }
 }
 
 void ManagerInterface :: deleteProduct(int row){
@@ -621,7 +626,7 @@ void  ManagerInterface::filterInvoice(){
     }
 
     for (int row = 0; row <invoicesTable->rowCount(); ++row) {
-        QTableWidgetItem* item =invoicesTable->item(row, 3);
+        QTableWidgetItem* item =invoicesTable->item(row, 2);
         if (item) {
             bool matches = item->text().contains(searchTerm, Qt::CaseInsensitive);
             invoicesTable->setRowHidden(row, !matches);

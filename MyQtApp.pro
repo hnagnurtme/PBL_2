@@ -16,6 +16,7 @@ SOURCES += MainApplication.cpp \
            Model/Employee.cpp \
            Model/Manager.cpp \
            View/CustomerInterface.cpp \
+           View/AddNewProduct.cpp \
            View/ManagerInterface.cpp \
            View/LoginSignupInterface.cpp
 HEADERS +=  Controller/DataController.h \
@@ -32,6 +33,7 @@ HEADERS +=  Controller/DataController.h \
             Model/Manager.h \
             View/CustomerInterface.h \
             View/ManagerInterface.h \
+            View/AddNewProduct.h \
             View/LoginSignupInterface.h
            
 # Thêm thư viện cần thiết

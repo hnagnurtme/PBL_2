@@ -58,6 +58,16 @@ void Product::setDescription(const string& newDescription) {
     description = newDescription;
 }
 
+void  Product::setCategory(const string& newCategory){
+    category = newCategory;
+}
+void  Product::setDetail(const Vector<string> & newDetail){
+    detail = newDetail;
+}
+void  Product::setBrand(const string& newBrand){
+    brand = newBrand;
+}
+
 void Product::displayInfo() const {
     cout << "Product ID: " << productId << endl;
     cout << "Name: " << name << endl;

@@ -36,6 +36,9 @@ public:
     void setPrice(double newPrice);
     void setStock(int newStock);
     void setDescription(const string& newDescription);
+    void setCategory(const string& newCategory);
+    void setDetail(const Vector<string> & newDetail);
+    void setBrand(const string& newBrand);
     void displayInfo() const;
     bool isAvailable(int requestedQuantity) const;
 };

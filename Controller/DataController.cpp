@@ -111,6 +111,11 @@ void DataController::saveProductsData(const Vector<Product>& products) {
     tempFile.close();
 }
 
+void  DataController:: addNewProduct(const Product& product){
+    Vector<Product> products = loadProductData();
+    products.pushback(product);
+    saveProductsData(products);
+}
 Vector<Product> DataController::loadProductData() {
     Vector<Product> products;
     ifstream file("Data/ProductInformation.csv");

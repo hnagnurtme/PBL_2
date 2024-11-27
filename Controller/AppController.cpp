@@ -107,3 +107,16 @@ Vector<Invoice*> AppController::sortInvoiceByDate() {
     }
     return allInvoices;
 }
+string AppController::createProductId() {
+    DataController* data = new DataController();
+    Vector<Product> allProducts = data->loadProductData();
+    string lastId = allProducts[allProducts.getSize() - 1].getProductId();
+
+    string id;
+    do {
+        id = "PRD0" + std::to_string(allProducts.getSize() + 1);
+    } while (id == lastId); 
+
+    delete data;
+    return id;
+}

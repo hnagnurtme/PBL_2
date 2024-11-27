@@ -17,3 +17,30 @@ PRD016;Điện thoại LG Velvet;Điện thoại;750;60;Resource/SANPHAM/PRD016.
 PRD017;Điện thoại Asus ZenFone 8;Điện thoại;950;86;Resource/SANPHAM/PRD017.png;{5.9 inch AMOLED, 1080 x 2400 pixels - 120Hz, Qualcomm Snapdragon 888 - 8 nhân};Asus
 PRD018;Điện thoại Xiaomi Redmi Note 10;Điện thoại;500;60;Resource/SANPHAM/PRD018.png;{6.43 inch AMOLED, 1080 x 2400 pixels - 60Hz, Qualcomm Snapdragon 678 - 8 nhân};Xiaomi
 PRD019;Điện thoại Poco X3 Pro;Điện thoại;400;350;Resource/SANPHAM/PRD019.png;{6.67 inch IPS LCD, 1080 x 2400 pixels - 120Hz, Qualcomm Snapdragon 860 - 8 nhân};Poco
+PRD020;Điện thoại Vivo V21 5G;Điện thoại;780;10;Resource/SANPHAM/PRD020.png;{6.44 inch AMOLED, 1080 x 2400 pixels - 90Hz, MediaTek Dimensity 800U - 8 nhân};Vivo
+PRD021;Điện thoại TECNO Pova 6 NEO;Điện thoại;900;10;Resource/SANPHAM/PRD021.png;{6.78 inch IPS LCD, 1080 x 2460 pixels - 90Hz, MediaTek Helio G99 - 8 nhân};TECNO
+PRD022;Điện thoại INOI A54 Spectr;Điện thoại;880;20;Resource/SANPHAM/PRD022.png;{6.75 inch AMOLED, 1600 x 720 pixels - 90Hz, MediaTek Helio G88 - 8 nhân};ZTE
+PRD023;Điện thoại ZTE Blade A55;Điện thoại;950;40;Resource/SANPHAM/PRD023.png;{6.75 inch IPS LCD, 1600 x 720 pixels - 90Hz, Unisoc SC9863A - 8 nhân};ZTE
+PRD024;Điện thoại Realme C61;Điện thoại;800;50;Resource/SANPHAM/PRD024.png;{6.7 inch AMOLED, 1080 x 2400 pixels - 90Hz, Unisoc T612 - 8 nhân};
+PRD025;Điện thoại HONOR X6A;Điện thoại;750;10;Resource/SANPHAM/PRD025.png;{6.56 inch IPS LCD, 1672 x 720 pixels - 90Hz, MediaTek Helio G36 - 8 nhân};HONOR
+PRD026;Điện thoại Oppo A3;Điện thoại;900;80;Resource/SANPHAM/PRD026.png;{6.67 inch IPS LCD, 1604 x 720 pixels - 90Hz, Snapdragon 6s 4G - 8 nhân};Oppo
+PRD027;Điện thoại Oppo Reno10 5G;Điện thoại;900;50;Resource/SANPHAM/PRD027.png;{6.7 inch AMOLED, 1080 x 2412 pixels - 120Hz, MediaTek Dimensity 7050 5G - 8 nhân};Oppo
+PRD028;Điện thoại Vivo Y56 5G;Điện thoại;750;700;Resource/SANPHAM/PRD028.png;{6.58 inch IPS LCD, 1080 x 2408 pixels - 120Hz, Exynos 1080 - 8 nhân};Vivo
+PRD029;Điện thoại Vivo Y17;Điện thoại;750;100;Resource/SANPHAM/PRD029.png;{6.35 inch IPS LCD, 1080 x 2376 pixels - 120Hz, MediaTek Helio P35 - 8 nhân};Vivo
+PRD031;Điện thoại Nokia C30;Điện thoại;750;30;Resource/SANPHAM/PRD031.png;{6.82 inch IPS LCD, 1080 x 2400 pixels - 90Hz, Spreadtrum SC9863A - 8 nhân};Nokia
+PRD032;Điện thoại Nokia 110;Điện thoại;550;90;Resource/SANPHAM/PRD032.png;{1.77 inch IPS LCD, 120 x 160 pixels - 90Hz, Unisoc T107 - 8 nhân};Nokia
+PRD033;Điện thoại Xiaomi Mi 14C;Điện thoại;800;55;Resource/SANPHAM/PRD033.png;{6.88 inch IPS LCD, 640 x 720 pixels - 120Hz, MediaTek Helio G81 - 8 nhân};Xiaomi
+PRD034;Điện thoại Xiaomi Mi 14T Pro;Điện thoại;900;65;Resource/SANPHAM/PRD034.png;{6.67 inch IPS LCD, 2712 x 1220 pixels - 120Hz, MediaTek Dimensity 9300 - 8 nhân};Xiaomi
+PRD035;Điện thoại POCO X6 5G;Điện thoại;750;25;Resource/SANPHAM/PRD035.png;{6.67 inch AMOLED, 2712 x 1220 pixels - 90Hz, Snapdragon 7s Gen 2 - 8 nhân};POCO
+PRD036;Điện thoại Redmi Note 12 Pro;Điện thoại;1050;60;Resource/SANPHAM/PRD036.png;{6.67 inch AMOLED, 2400 x 1080 pixels - 120Hz, MediaTek Dimensity 1080 - 8 nhân};Redmi
+PRD037;Điện thoại Redmi A2+;Điện thoại;1000;10;Resource/SANPHAM/PRD037.png;{6.52 inch IPS LCD, 1600 x 720 pixels - 60Hz, MediaTek Dimensity 1080 - 8 nhân};Redmi
+PRD038;Điện thoại Samsung Galaxy Z Fold6;Điện thoại;1000;80;Resource/SANPHAM/PRD038.png;{6.3 inch Dynamic AMOLED 2X, 1856 x 2160 pixels - 120Hz, Exynos 2100 - 8 nhân};Samsung
+PRD039;Điện thoại Samsung Galaxy Z Flip6;Điện thoại;1050;50;Resource/SANPHAM/PRD039.png;{6.7 inch Dynamic AMOLED 2X, 1080 x 2640 pixels - 120Hz, Snapdragon 8 Gen 3 - 8 nhân};Samsung
+PRD040;Điện thoại Samsung Galaxy A55;Điện thoại;1000;35;Resource/SANPHAM/PRD040.png;{6.6 inch Dynamic AMOLED 2X, 1080 x 2400 pixels - 120Hz, Exynos 1480 - 8 nhân};Samsung
+PRD041;Điện thoại HTC Wildfire E5 Plus;Điện thoại;950;28;Resource/SANPHAM/PRD041.png;{6.745 inch IPS LCD, 1600 x 7200 pixels - 90Hz, Unisoc T606 - 8 nhân};HTC
+PRD042;Điện thoại HTC Wildfire E3 lite;Điện thoại;750;15;Resource/SANPHAM/PRD042.png;{6.51 inch IPS LCD, 1600 x 7200 pixels - 60Hz, Speadtrum SC98636 - 8 nhân};HTC
+PRD043;Điện thoại Infinix Note 40 Pro;Điện thoại;650;58;Resource/SANPHAM/PRD043.png;{6.78 inch AMOLED, 2436 x 1080 pixels - 120Hz, MediaTek Helio G99 - 8 nhân};Infinix
+PRD044;Điện thoại Infinix HOT 40i;Điện thoại;750;25;Resource/SANPHAM/PRD044.png;{6.56 inch IPS LCD, 1612 x 720 pixels - 90Hz, Unisoc T606 - 8 nhân};Infinix
+PRD045;Điện thoại TCL 503;Điện thoại;650;33;Resource/SANPHAM/PRD045.png;{6.6 inch V-notch, 720 x 1612 pixels - 60Hz, Unisoc SC9863A - 8 nhân};TCL
+PRD046;Điện thoại TCL 40 SE;Điện thoại;700;48;Resource/SANPHAM/PRD046.png;{6.75 inch IPS LCD, 1600 x 720 pixels - 90Hz, MediaTek Helio G37 - 8 nhân};TCL
+PRD048;Điện thoại OSCAL TIGER 12;Điện thoại;800;45;Resource/SANPHAM/PRD048.png;{6.78 inch IPS LCD, 2460 x 1080 pixels - 120Hz, MediaTek Helio G99 - 8 nhân};OSCAL

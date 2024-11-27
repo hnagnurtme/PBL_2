@@ -10,9 +10,11 @@ release/Customer.o
 release/Employee.o
 release/Manager.o
 release/CustomerInterface.o
+release/AddNewProduct.o
 release/ManagerInterface.o
 release/LoginSignupInterface.o
 release/qrc_resources.o
 release/moc_CustomerInterface.o
 release/moc_ManagerInterface.o
+release/moc_AddNewProduct.o
 release/moc_LoginSignupInterface.o
