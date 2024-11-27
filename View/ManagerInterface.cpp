@@ -113,7 +113,13 @@ ManagerInterface::ManagerInterface(QWidget *parent,const string &managerid) : QW
     searchInvoiceLine->addAction(searchIcon, QLineEdit::LeadingPosition);
     searchInvoiceLine->setPlaceholderText("Search by customer name...");
     connect(searchInvoiceLine, &QLineEdit::textChanged, this, &ManagerInterface::filterInvoice);
-    
+
+    addNewProoductButton = new QPushButton(this);
+    addNewProoductButton->setText("Add New Product");
+    QIcon addIcon("Resource/ICON/ICON4.png"); 
+    addNewProoductButton->setIcon(addIcon);
+    addNewProoductButton->setIconSize(QSize(35, 35));
+    connect(addNewProoductButton, &QPushButton::clicked, this,&ManagerInterface::addNewProduct);
 
     productTable = new QTableWidget(5, 6, this);
     productTable->setHorizontalHeaderLabels({"No.", "Description", "Product ID", "Product Name", "Price", "Quantity", "Change"});
@@ -121,7 +127,9 @@ ManagerInterface::ManagerInterface(QWidget *parent,const string &managerid) : QW
     QGroupBox *productGroupBox = new QGroupBox(this);
     QVBoxLayout *productLayout = new QVBoxLayout(productGroupBox);
     productLayout->addWidget(searchProductLine);
-    productLayout->addSpacing(20);
+    productLayout->addSpacing(10);
+    productLayout->addWidget(addNewProoductButton);
+    productLayout->addSpacing(10);
     productLayout->addWidget(productTable);
     productTable->setFixedSize(1250, 700);
 
@@ -266,11 +274,11 @@ void ManagerInterface::addProductsData() {
             productTable->setItem(row, 1, new QTableWidgetItem("Không có ảnh"));
         }
 
-        QPushButton *addProductsButton = new QPushButton();
-        QIcon addIcon("Resource/ICON/ICON2.png"); 
-        addProductsButton->setIcon(addIcon);
-        addProductsButton->setIconSize(QSize(35, 35));
-        connect(addProductsButton, &QPushButton::clicked, [this, row]() { addProducts(row, false); });
+        QPushButton *deleteProductButton = new QPushButton();
+        QIcon delIcon("Resource/ICON/ICON3.png"); 
+        deleteProductButton->setIcon(delIcon);
+        deleteProductButton->setIconSize(QSize(35, 35));
+        connect(deleteProductButton, &QPushButton::clicked, [this, row]() { deleteProduct(row); });
 
         QPushButton *showDetailsButton = new QPushButton();
         QIcon heartIcon("Resource/ICON/ICON10.png"); 
@@ -279,7 +287,7 @@ void ManagerInterface::addProductsData() {
         connect(showDetailsButton, &QPushButton::clicked, [this, row]() { showDetailsProducts(row); });
 
         QHBoxLayout *actionLayout = new QHBoxLayout();
-        actionLayout->addWidget(addProductsButton);
+        actionLayout->addWidget(deleteProductButton);
         actionLayout->addSpacing(5);
         actionLayout->addWidget(showDetailsButton);
 
@@ -296,11 +304,11 @@ void ManagerInterface::addProductsData() {
     } 
 }
 
-void ManagerInterface :: addProducts(int row, bool fromCart){
+void ManagerInterface :: addNewProduct(){
 
 }
 
-void ManagerInterface :: deleteProducts(int row, bool fromCart){
+void ManagerInterface :: deleteProduct(int row){
 
 }
 

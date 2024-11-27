@@ -39,6 +39,7 @@ public:
     void showInvoices();
     void filterCustomer();
     void filterInvoice();
+    void addNewProduct();
 signals:
 private:
     Manager* manager;
@@ -58,11 +59,11 @@ private:
     QTableWidget *invoicesTable;
     QGroupBox *overviewBox;
     QGroupBox *managerInforBox;
+    QPushButton *addNewProoductButton;
     void addProductsData();
     void addCustomersData();
     void addInvoicesData();
-    void addProducts(int row, bool fromCart);
-    void deleteProducts(int row, bool fromCart);
+    void deleteProduct(int row);
     void deleteCustomer(int row);
     void showDetailsProducts(int row);
     void showInvoiceDetail(int row);
