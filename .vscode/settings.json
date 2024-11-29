@@ -131,6 +131,7 @@
     "thread": "cpp",
     "typeinfo": "cpp",
     "variant": "cpp",
-    "qpushbutton": "cpp"
+    "qpushbutton": "cpp",
+    "qmessagebox": "cpp"
   }
 }

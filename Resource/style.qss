@@ -212,3 +212,53 @@ QMessageBox QPushButton:pressed {
     background-color: #017a7a;
     transform: scale(0.95);
 }
+
+/* Style chung cho QDoubleSpinBox và QSpinBox */
+QDoubleSpinBox, QSpinBox {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #028090, stop:1 #114b5f);
+    color: #fff; 
+    font-size: 16px;
+    border-radius: 5px; 
+    padding: 5px 10px;
+    border: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+/* Hover effect */
+QDoubleSpinBox:hover, QSpinBox:hover {
+    background-color: #50c9c3;
+    transform: scale(1.05);
+}
+
+/* Focus effect */
+QDoubleSpinBox:focus, QSpinBox:focus {
+    background-color: #b3e1e5;
+    transform: scale(1.05);
+}
+
+/* Nút tăng/giảm */
+QDoubleSpinBox::up-button, QSpinBox::up-button,
+QDoubleSpinBox::down-button, QSpinBox::down-button {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #50c9c3, stop:1 #028090);
+    border: none;
+    width: 16px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+/* Hover effect cho nút tăng/giảm */
+QDoubleSpinBox::up-button:hover, QSpinBox::up-button:hover,
+QDoubleSpinBox::down-button:hover, QSpinBox::down-button:hover {
+    background-color: #b3e1e5;
+}
+
+/* Mũi tên trong nút tăng/giảm */
+QDoubleSpinBox::up-arrow, QSpinBox::up-arrow,
+QDoubleSpinBox::down-arrow, QSpinBox::down-arrow {
+    width: 7px;
+    height: 7px;
+    image: url(:/INCON/ICON14.png); /* Icon mũi tên tăng */
+}

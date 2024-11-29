@@ -169,7 +169,9 @@ debug/qrc_resources.cpp: Resource/resources.qrc \
 		Resource/ICON/ICON13.png \
 		Resource/ICON/ICON4.png \
 		Resource/ICON/ICON12.png \
+		Resource/ICON/ICON14.png \
 		Resource/ICON/ICON2.png \
+		Resource/ICON/ICON15.png \
 		Resource/ICON/ICON9.png \
 		Resource/ICON/ICON6.png \
 		Resource/ICON/ICON11.png \
@@ -1552,7 +1554,10 @@ debug/Manager.o: Model/Manager.cpp Model/Manager.h \
 		Datastructures/Vector.h \
 		Datastructures/Pair.h \
 		Model/Cart.h \
-		Model/Orders.h
+		Model/Orders.h \
+		Controller/DataController.h \
+		Model/Customer.h \
+		Model/Employee.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\Manager.o Model\Manager.cpp
 
 debug/CustomerInterface.o: View/CustomerInterface.cpp View/CustomerInterface.h \

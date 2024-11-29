@@ -1,4 +1,5 @@
 #include "View/AddNewProduct.h"
+#include "Model/Manager.h"
 #include <QMessageBox>
 #include <QFile>
 
@@ -13,8 +14,7 @@ void AddProductWidget::showMessage(QWidget *parent, bool status, const QString &
     messageBox.setFixedSize(600, 400);
     messageBox.exec();
 }
-AddProductWidget::AddProductWidget(QWidget *parent) : QWidget(parent) {
-    check = false;
+AddProductWidget::AddProductWidget(QWidget *parent,Product *product) : QWidget(parent) {
     QFile file("Resource/style.qss");
     if (file.open(QFile::ReadOnly | QFile::Text)) {
         QTextStream stream(&file);
@@ -40,6 +40,22 @@ AddProductWidget::AddProductWidget(QWidget *parent) : QWidget(parent) {
     priceSpin->setDecimals(2);
     stockSpin->setRange(0, 1000000);
 
+    if (product) {
+    nameEdit->setText(QString::fromStdString(product->getName()));
+    categoryEdit->setText(QString::fromStdString(product->getCategory()));
+    priceSpin->setValue(product->getPrice());
+    stockSpin->setValue(product->getStock());
+    descriptionEdit->setText(QString::fromStdString(product->getDescription()));
+    QStringList detailsList;
+    Vector<string> details = product->getDetail();
+    for (int i = 0; i < details.getSize(); i++) {
+        detailsList.append(QString::fromStdString(details[i]));
+    }
+    detailEdit->setText(detailsList.join(','));
+
+    brandEdit->setText(QString::fromStdString(product->getBrand()));
+}
+
     formLayout->addRow("Name:", nameEdit);
     formLayout->addRow("Category:", categoryEdit);
     formLayout->addRow("Price:", priceSpin);
@@ -64,7 +80,7 @@ AddProductWidget::AddProductWidget(QWidget *parent) : QWidget(parent) {
 void AddProductWidget::onOkButtonClicked() {
     Product newProduct;
     AppController appController;
-    DataController dataController;
+    Manager manager;
 
     newProduct.setProductId(appController.createProductId());
     newProduct.setName(nameEdit->text().toStdString());
@@ -81,8 +97,8 @@ void AddProductWidget::onOkButtonClicked() {
     newProduct.setDetail(detailVector);
     newProduct.setBrand(brandEdit->text().toStdString());
 
-    dataController.addNewProduct(newProduct);
-    check = true;
+    manager.addNewProduct(newProduct);
+    emit productAdded(); 
     showMessage(this,true,"Add New Product Sucessfull");
     this->close();
 }
@@ -92,6 +108,3 @@ void AddProductWidget::onCancelButtonClicked() {
     this->close();
 }
 
-bool AddProductWidget:: getStatus(){
-    return check;
-}

@@ -26,7 +26,6 @@ public:
     Cart loadCartData(const string& customerID);
     void saveInvoiceData(const Invoice& invoice);
     
-    
     Vector<Pair<string, int>> loadSoldProductData();
     void saveOrdersData(const Orders & orders);
     Orders loadOrdersData(const string& customerID);

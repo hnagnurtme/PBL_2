@@ -168,7 +168,6 @@ Product DataController::parseProduct(const string& line) {
     return Product(id, name, category, price, stock, description,details, brand);
 }
 
-
 void DataController::deleteProduct(const string& productId) {
     Vector<Product> productList = loadProductData();
     for (int j = 0; j < productList.getSize(); ++j) {

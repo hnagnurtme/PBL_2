@@ -49,7 +49,7 @@ private:
     QPushButton *showCustomersButton;
     QPushButton *showInvoicesButton;
     QLineEdit *searchProductLine;
-    QLineEdit *searchCustomerLine;
+    QLineEdit *searchCustomerLine;z
     QLineEdit *searchInvoiceLine;
     QPushButton *showAccountButton;
     QStackedWidget *stackWidget;
@@ -63,7 +63,8 @@ private:
     void addProductsData();
     void addCustomersData();
     void addInvoicesData();
-    void deleteProduct(int row);
+    void deleteProductById(const QString& productId);
+    void updateProductById(const QString& productId);
     void deleteCustomer(int row);
     void showDetailsProducts(int row);
     void showInvoiceDetail(int row);

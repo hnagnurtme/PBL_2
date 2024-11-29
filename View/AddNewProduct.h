@@ -17,15 +17,16 @@ class AddProductWidget : public QWidget {
     Q_OBJECT
 
 public:
-    explicit AddProductWidget(QWidget *parent = nullptr);
+    explicit AddProductWidget(QWidget *parent = nullptr,Product *product = nullptr);
     void showMessage(QWidget *parent, bool status, const QString &message);
-    bool getStatus();
 private slots:
     void onOkButtonClicked();
     void onCancelButtonClicked();
+signals:
+    void productAdded();
 
 private:
-    bool check ;
+    Product *product;
     QLineEdit *nameEdit;
     QLineEdit *categoryEdit;
     QDoubleSpinBox *priceSpin;

@@ -10,4 +10,6 @@ class Manager : public User {
 public:
     Manager();
     Manager(const string& id, const string& name, const string& email, const string& phone, const string& password, const string& address);
+    void addNewProduct(Product& product);
+    bool removeProduct(const string& id);
 };

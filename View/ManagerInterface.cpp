@@ -152,7 +152,7 @@ ManagerInterface::ManagerInterface(QWidget *parent,const string &managerid) : QW
     invoicesLayout->addWidget(searchInvoiceLine);
     invoicesLayout->addSpacing(20);
     invoicesLayout->addWidget(invoicesTable);
-    invoicesTable->setFixedSize(1000,700);
+    invoicesTable->setFixedSize(1250, 700);
     
     overviewBox = new QGroupBox(this);
     managerInforBox = new QGroupBox(this);
@@ -173,7 +173,7 @@ ManagerInterface::ManagerInterface(QWidget *parent,const string &managerid) : QW
 }
 
 void ManagerInterface::showProducts(){
-    productTable->clear();
+    productTable->clearContents();
     productTable->setRowCount(100);
     productTable->setColumnCount(7);
 
@@ -279,8 +279,16 @@ void ManagerInterface::addProductsData() {
         QIcon delIcon("Resource/ICON/ICON3.png"); 
         deleteProductButton->setIcon(delIcon);
         deleteProductButton->setIconSize(QSize(35, 35));
-        connect(deleteProductButton, &QPushButton::clicked, [this, row]() { deleteProduct(row); });
-        
+        connect(deleteProductButton, &QPushButton::clicked, [this, productId = QString::fromStdString(products[i].getProductId())]() {
+            deleteProductById(productId);
+        });
+        QPushButton *updateProductButton = new QPushButton();
+        QIcon updateIcon("Resource/ICON/ICON15.png");
+        updateProductButton->setIcon(updateIcon);
+        updateProductButton->setIconSize(QSize(35,35));
+        connect (updateProductButton, &QPushButton::clicked, [this, productId = QString::fromStdString(products[i].getProductId())](){
+            updateProductById(productId);
+        });
 
         QPushButton *showDetailsButton = new QPushButton();
         QIcon heartIcon("Resource/ICON/ICON10.png"); 
@@ -292,6 +300,7 @@ void ManagerInterface::addProductsData() {
         actionLayout->addWidget(deleteProductButton);
         actionLayout->addSpacing(5);
         actionLayout->addWidget(showDetailsButton);
+        actionLayout->addWidget(updateProductButton);
 
         QWidget *actionWidget = new QWidget();
         actionWidget->setLayout(actionLayout);
@@ -306,22 +315,40 @@ void ManagerInterface::addProductsData() {
     } 
 }
 
-void ManagerInterface :: addNewProduct(){
+void ManagerInterface::addNewProduct() {
     AddProductWidget *addProductWidget = new AddProductWidget();
+    connect(addProductWidget, &AddProductWidget::productAdded, this, &ManagerInterface::showProducts);
     addProductWidget->show();
-    if(addProductWidget->getStatus()){
-        showProducts();
-    }
 }
 
-void ManagerInterface :: deleteProduct(int row){
-    QString productId;
-    if (productTable->item(row,2) == nullptr) return;
-    productId = productTable->item(row, 2)->text();
-    dataController->deleteProduct(productId.toStdString());
-    showMessage(this,true,"Delete Product Complete");
-    showProducts();
+void  ManagerInterface::updateProductById(const QString& productId) {
+    if (productId.isEmpty()) {
+        showMessage(this, false, "Invalid product selected");
+        return;
+    }
+    Product *product = new Product(dataController->findProductById(productId.toStdString()));
+    AddProductWidget *addProductWidget = new AddProductWidget(nullptr,product);
+    connect(addProductWidget, &AddProductWidget::productAdded, this, &ManagerInterface::showProducts);
+    addProductWidget->show();
 }
+
+void ManagerInterface::deleteProductById(const QString& productId) {
+    if (productId.isEmpty()) {
+        showMessage(this, false, "Invalid product selected");
+        return;
+    }
+
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Delete Product",
+                                  "Are you sure you want to delete this product?",
+                                  QMessageBox::Yes | QMessageBox::No);
+    if (reply != QMessageBox::Yes) return;
+
+    dataController->deleteProduct(productId.toStdString());
+    showMessage(this, true, "Delete Product Complete");
+    showProducts(); 
+}
+
 void ManagerInterface:: deleteCustomer(int row){
     QString customerId;
     if (customersTable->item(row, 1) == nullptr) return;
@@ -330,6 +357,7 @@ void ManagerInterface:: deleteCustomer(int row){
     showMessage(this,true,"Delete Customer Complete");
     showCustomers(); 
 }
+
 void ManagerInterface ::showDetailsProducts(int row){
     Vector<Product> products = dataController->loadProductData();
     if (row < 0 || row >= products.getSize()) {
@@ -396,8 +424,6 @@ void ManagerInterface::addCustomersData() {
     }  
 }
 
-
-
 void ManagerInterface::addInvoicesData() {
     invoicesTable->clearContents();
     invoicesTable->setRowCount(0);
@@ -429,15 +455,15 @@ void ManagerInterface::addInvoicesData() {
     }
 
     for (int row = 0; row < invoicesTable->rowCount(); ++row) {
-        invoicesTable->setRowHeight(row, 50);
+        invoicesTable->setRowHeight(row, 70);
     }
-    invoicesTable->setColumnWidth(0, 50); 
-    invoicesTable->setColumnWidth(1, 150);
-    invoicesTable->setColumnWidth(2, 150);
-    invoicesTable->setColumnWidth(3, 150);
-    invoicesTable->setColumnWidth(4, 180);
-    invoicesTable->setColumnWidth(5, 150);
-    invoicesTable->setColumnWidth(6, 80);
+    // invoicesTable->setColumnWidth(0, 50); 
+    // invoicesTable->setColumnWidth(1, 150);
+    // invoicesTable->setColumnWidth(2, 150);
+    // invoicesTable->setColumnWidth(3, 150);
+    // invoicesTable->setColumnWidth(4, 180);
+    // invoicesTable->setColumnWidth(5, 150);
+    // invoicesTable->setColumnWidth(6, 100);
     
 }
 
