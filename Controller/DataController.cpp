@@ -178,9 +178,16 @@ Product DataController::parseProduct(const string& line) {
     }
 }
 
-
-void  DataController:: addNewProduct(const Product& product){
+void DataController::addNewProduct(const Product& product) {
     Vector<Product> products = loadProductData();
+    for (int i = 0; i < products.getSize(); i++) {
+        if (products[i].getProductId() == product.getProductId()) {
+            products[i] = product;
+            saveProductsData(products);
+            return;
+        }
+    }
+
     products.pushback(product);
     saveProductsData(products);
 }

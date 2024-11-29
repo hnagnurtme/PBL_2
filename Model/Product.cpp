@@ -2,6 +2,16 @@
 #include <iostream>
 Product::Product() 
     : productId(""), name(""), category(""), price(0.0), stock(0), description(""), detail(), brand("") {}
+Product :: Product (const Product& other){
+    productId = other.productId;
+    name = other.name;
+    category = other.category;
+    price = other.price;
+    stock = other.stock;
+    description = other.description;
+    detail = other.detail;
+    brand = other.brand;
+}
 
 Product::Product(string id, const string& name, const string& category, double price, int stock,
                 const string& description, const Vector<string>& detail, const string& brand)
@@ -91,4 +101,18 @@ bool Product::isAvailable(int requestedQuantity) const {
 bool Product:: isEmpty() const {
         return productId.empty() || name.empty() || category.empty() ||
                price == 0.0 || stock == 0 || description.empty() || brand.empty();
+    }
+
+Product&  Product:: operator=(const Product& other) {
+        if (this != &other) {  
+            productId = other.productId;
+            name = other.name;
+            category = other.category;
+            price = other.price;
+            stock = other.stock;
+            description = other.description;
+            detail = other.detail;  
+            brand = other.brand;
+        }
+        return *this;
     }

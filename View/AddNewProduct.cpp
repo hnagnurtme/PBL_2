@@ -14,7 +14,10 @@ void AddProductWidget::showMessage(QWidget *parent, bool status, const QString &
     messageBox.setFixedSize(600, 400);
     messageBox.exec();
 }
-AddProductWidget::AddProductWidget(QWidget *parent,Product *product) : QWidget(parent) {
+AddProductWidget::AddProductWidget(QWidget *parent,Product *newproduct) : QWidget(parent) {
+    if (newproduct != nullptr) 
+    product = new Product(*newproduct);
+    else product = new Product();
     QFile file("Resource/style.qss");
     if (file.open(QFile::ReadOnly | QFile::Text)) {
         QTextStream stream(&file);
@@ -40,20 +43,20 @@ AddProductWidget::AddProductWidget(QWidget *parent,Product *product) : QWidget(p
     priceSpin->setDecimals(2);
     stockSpin->setRange(0, 1000000);
 
-    if (product) {
-    nameEdit->setText(QString::fromStdString(product->getName()));
-    categoryEdit->setText(QString::fromStdString(product->getCategory()));
-    priceSpin->setValue(product->getPrice());
-    stockSpin->setValue(product->getStock());
-    descriptionEdit->setText(QString::fromStdString(product->getDescription()));
+    if (newproduct) {
+    nameEdit->setText(QString::fromStdString(newproduct->getName()));
+    categoryEdit->setText(QString::fromStdString(newproduct->getCategory()));
+    priceSpin->setValue(newproduct->getPrice());
+    stockSpin->setValue(newproduct->getStock());
+    descriptionEdit->setText(QString::fromStdString(newproduct->getDescription()));
     QStringList detailsList;
-    Vector<string> details = product->getDetail();
+    Vector<string> details = newproduct->getDetail();
     for (int i = 0; i < details.getSize(); i++) {
         detailsList.append(QString::fromStdString(details[i]));
     }
     detailEdit->setText(detailsList.join(','));
 
-    brandEdit->setText(QString::fromStdString(product->getBrand()));
+    brandEdit->setText(QString::fromStdString(newproduct->getBrand()));
 }
 
     formLayout->addRow("Name:", nameEdit);
@@ -81,8 +84,11 @@ void AddProductWidget::onOkButtonClicked() {
     Product newProduct;
     AppController appController;
     Manager manager;
-
+    if (product != nullptr && !product->getProductId().empty()) {
+    newProduct.setProductId(product->getProductId());
+    } else {
     newProduct.setProductId(appController.createProductId());
+    }
     newProduct.setName(nameEdit->text().toStdString());
     newProduct.setCategory(categoryEdit->text().toStdString());
     newProduct.setPrice(priceSpin->value());

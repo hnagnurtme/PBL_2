@@ -21,6 +21,7 @@ private:
     string brand;
 public:
     Product();
+    Product(const Product&);
     Product(string id, const string& name, const string& category, double price, int stock,
             const string& description,const Vector<string>& detail, const string& brand);
     string getProductId() const;
@@ -42,4 +43,5 @@ public:
     void displayInfo() const;
     bool isAvailable(int requestedQuantity) const;
     bool isEmpty() const;
+    Product& operator=(const Product& other);
 };

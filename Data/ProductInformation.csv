@@ -1,5 +1,3 @@
-PRD001;Điện thoại Samsung Galaxy S21;Điện thoại;1000;96;Resource/SANPHAM/PRD001.png;{6.2 inch Dynamic AMOLED 2X, 1080 x 2400 pixels - 120Hz, Exynos 2100 - 8 nhân};Samsung
-PRD002;Điện thoại Apple iPhone 12;Điện thoại;1200;150;Resource/SANPHAM/PRD002.png;{6.1 inch Super Retina XDR OLED, 1170 x 2532 pixels - 60Hz, Apple A14 Bionic - 6 nhân};Apple
 PRD003;Điện thoại Xiaomi Mi 11;Điện thoại;800;95;Resource/SANPHAM/PRD003.png;{6.81 inch AMOLED, 1440 x 3200 pixels - 120Hz, Qualcomm Snapdragon 888 - 8 nhân};Xiaomi
 PRD004;Điện thoại Samsung Galaxy Z Fold 3;Điện thoại;1800;47;Resource/SANPHAM/PRD004.png;{7.6 inch Foldable Dynamic AMOLED 2X, 1768 x 2208 pixels - 120Hz, Qualcomm Snapdragon 888 - 8 nhân};Samsung
 PRD005;Điện thoại Google Pixel 6;Điện thoại;900;94;Resource/SANPHAM/PRD005.png;{6.4 inch OLED, 1080 x 2400 pixels - 90Hz, Google Tensor - 8 nhân};Google
@@ -48,3 +46,5 @@ PRD047;Điện thoại Realme 7 Pro;Điện thoại;400;150;Resource/SANPHAM/PRD
 PRD048;Điện thoại Motorola Moto G100;Điện thoại;500;200;Resource/SANPHAM/PRD048.png;{6.7 inch LCD, 1080 x 2520 pixels - 90Hz, Qualcomm Snapdragon 870 - 8 nhân};Motorola
 PRD049;Điện thoại Lenovo Legion Phone;Điện thoại;1300;10;Resource/SANPHAM/PRD049.png;{6.65 inch AMOLED, 1080 x 2340 pixels - 144Hz, Qualcomm Snapdragon 888 - 8 nhân};Lenovo
 PRD050;Điện thoại Nokia 5.3;Điện thoại;500;300;Resource/SANPHAM/PRD050.png;{6.55 inch IPS LCD, 1080 x 2400 pixels - 60Hz, Qualcomm Snapdragon 665 - 8 nhân};Nokia
+PRD001;Điện thoại Samsung Galaxy S21;Điện thoại;1000;100;Resource/SANPHAM/PRD001.png;{6.2 inch Dynamic AMOLED 2X,1080 x 2400 pixels - 120Hz,Exynos 2100 - 8 nhân};Samsung
+PRD002;Điện thoại Apple iPhone 12;Điện thoại;1200;160;Resource/SANPHAM/PRD002.png;{6.1 inch Super Retina XDR OLED,1170 x 2532 pixels - 60Hz,Apple A14 Bionic - 6 nhân};Apple
