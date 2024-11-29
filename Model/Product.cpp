@@ -88,3 +88,7 @@ bool Product::isAvailable(int requestedQuantity) const {
     return requestedQuantity <= stock;
 }
 
+bool Product:: isEmpty() const {
+        return productId.empty() || name.empty() || category.empty() ||
+               price == 0.0 || stock == 0 || description.empty() || brand.empty();
+    }

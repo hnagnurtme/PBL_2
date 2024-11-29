@@ -111,24 +111,22 @@ void DataController::saveProductsData(const Vector<Product>& products) {
     tempFile.close();
 }
 
-void  DataController:: addNewProduct(const Product& product){
-    Vector<Product> products = loadProductData();
-    products.pushback(product);
-    saveProductsData(products);
-}
+
 Vector<Product> DataController::loadProductData() {
     Vector<Product> products;
     ifstream file("Data/ProductInformation.csv");
 
-    cout << "Trying to open file: " << productFileName << endl; 
-
     if (!file.is_open()) {
-        throw runtime_error("Không thể mở file: " + productFileName);
+        throw runtime_error("Không thể mở file: Data/ProductInformation.csv");
     }
 
     string line;
     while (getline(file, line)) {
-        Product product = parseProduct(line);
+        Product product = parseProduct(line); 
+        if (product.isEmpty()) { 
+            cerr << "Dòng dữ liệu không hợp lệ, bỏ qua: " << line << endl;
+            continue;  
+        }
         products.pushback(product); 
     }
 
@@ -136,36 +134,55 @@ Vector<Product> DataController::loadProductData() {
     return products;
 }
 
+
+
 Product DataController::parseProduct(const string& line) {
-    istringstream ss(line);
-    string id, name, category, priceStr, stockStr, description, sizesStr, detailStr, brand;
+    try {
+        istringstream ss(line);
+        string id, name, category, priceStr, stockStr, description, sizesStr, detailStr, brand;
 
-    getline(ss, id, ';');         
-    getline(ss, name, ';');
-    getline(ss, category, ';');
-    getline(ss, priceStr, ';');
-    getline(ss, stockStr, ';');
-    getline(ss, description, ';');
-    getline(ss, detailStr, ';');
-    getline(ss, brand, ';');
+        if (!getline(ss, id, ';') || id.empty()) 
+            return Product(); // Trả về product rỗng nếu có lỗi
+        if (!getline(ss, name, ';') || name.empty()) 
+            return Product(); // Trả về product rỗng nếu có lỗi
+        if (!getline(ss, category, ';') || category.empty()) 
+            return Product(); // Trả về product rỗng nếu có lỗi
+        if (!getline(ss, priceStr, ';') || priceStr.empty()) 
+            return Product(); // Trả về product rỗng nếu có lỗi
+        if (!getline(ss, stockStr, ';') || stockStr.empty()) 
+            return Product(); // Trả về product rỗng nếu có lỗi
+        if (!getline(ss, description, ';')) 
+            return Product(); // Trả về product rỗng nếu có lỗi
+        if (!getline(ss, detailStr, ';')) 
+            return Product(); // Trả về product rỗng nếu có lỗi
+        if (!getline(ss, brand, ';')) 
+            return Product(); // Trả về product rỗng nếu có lỗi
+        double price = stod(priceStr);
+        int stock = stoi(stockStr);
+        Vector<string> details;
+        istringstream detailsStream(detailStr);
+        string detail;
 
-    double price = stod(priceStr);
-    int stock = stoi(stockStr);
+        while (getline(detailsStream, detail, ',')) {
+            detail.erase(remove(detail.begin(), detail.end(), '{'), detail.end());
+            detail.erase(remove(detail.begin(), detail.end(), '}'), detail.end());
 
-    Vector<string> details;
-    istringstream detailsStream(detailStr);
-    string detail;
-
-    while (getline(detailsStream, detail, ',')) {
-        detail.erase(remove(detail.begin(), detail.end(), '{'), detail.end());
-        detail.erase(remove(detail.begin(), detail.end(), '}'), detail.end());
-        
-        if (!detail.empty()) {
-            details.pushback(detail); 
+            if (!detail.empty()) {
+                details.pushback(detail);
+            }
         }
-    }
+        return Product(id, name, category, price, stock, description, details, brand);
+    } catch (...) {
 
-    return Product(id, name, category, price, stock, description,details, brand);
+        return Product();
+    }
+}
+
+
+void  DataController:: addNewProduct(const Product& product){
+    Vector<Product> products = loadProductData();
+    products.pushback(product);
+    saveProductsData(products);
 }
 
 void DataController::deleteProduct(const string& productId) {

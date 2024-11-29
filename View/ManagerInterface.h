@@ -49,7 +49,7 @@ private:
     QPushButton *showCustomersButton;
     QPushButton *showInvoicesButton;
     QLineEdit *searchProductLine;
-    QLineEdit *searchCustomerLine;z
+    QLineEdit *searchCustomerLine;
     QLineEdit *searchInvoiceLine;
     QPushButton *showAccountButton;
     QStackedWidget *stackWidget;

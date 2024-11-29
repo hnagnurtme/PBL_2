@@ -297,10 +297,11 @@ void ManagerInterface::addProductsData() {
         connect(showDetailsButton, &QPushButton::clicked, [this, row]() { showDetailsProducts(row); });
 
         QHBoxLayout *actionLayout = new QHBoxLayout();
-        actionLayout->addWidget(deleteProductButton);
-        actionLayout->addSpacing(5);
-        actionLayout->addWidget(showDetailsButton);
         actionLayout->addWidget(updateProductButton);
+        actionLayout->addWidget(deleteProductButton);
+        actionLayout->addSpacing(10);
+        actionLayout->addWidget(showDetailsButton);
+        
 
         QWidget *actionWidget = new QWidget();
         actionWidget->setLayout(actionLayout);

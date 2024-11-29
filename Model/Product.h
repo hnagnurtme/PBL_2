@@ -41,4 +41,5 @@ public:
     void setBrand(const string& newBrand);
     void displayInfo() const;
     bool isAvailable(int requestedQuantity) const;
+    bool isEmpty() const;
 };
