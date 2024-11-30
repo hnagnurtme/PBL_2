@@ -57,6 +57,7 @@ private:
     QLineEdit *searchInvoiceLine;
     QPushButton *showAccountButton;
     QStackedWidget *stackWidget;
+    QStackedWidget *diagramStack;
     QTextEdit *invoiceDisplay ;
     QTableWidget *productTable;
     QTableWidget *customersTable;

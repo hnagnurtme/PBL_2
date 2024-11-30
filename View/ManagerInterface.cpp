@@ -478,10 +478,23 @@ void ManagerInterface:: showInvoiceDetail(int row) {
     
 }
 
-void ManagerInterface:: drawChart(const Vector<Pair<QString, double>>& data, const QString& title, const QString& xLabel, const QString& yLabel, QWidget* container) {
+void ManagerInterface::drawChart(const Vector<Pair<QString, double>>& data, const QString& title, const QString& xLabel, const QString& yLabel, QWidget* container) {
+    QLayout *existingLayout = container->layout();
+    if (existingLayout) {
+        QLayoutItem *item;
+        while ((item = existingLayout->takeAt(0)) != nullptr) {
+            delete item->widget();  
+            delete item;  
+        }
+        delete existingLayout;  
+    }
+
     QVector<QString> categories; 
     QVector<double> values;     
-    for (int i = 0; i < data.getSize(); ++i) {
+    int dataSize = data.getSize();
+    int maxItems = std::min(dataSize, 20);
+
+    for (int i = 0; i < maxItems; ++i) {
         categories.append(data[i].getFirst());  
         values.append(data[i].getSecond());    
     }
@@ -494,8 +507,7 @@ void ManagerInterface:: drawChart(const Vector<Pair<QString, double>>& data, con
     QBarSeries *series = new QBarSeries();
     series->append(set);
 
-    // Hiển thị nhãn trên mỗi cột
-    series->setLabelsVisible(true);  // Sử dụng setLabelsVisible cho QBarSeries thay vì QBarSet
+    series->setLabelsVisible(true);  
 
     QChart *chart = new QChart();
     chart->addSeries(series);
@@ -521,6 +533,15 @@ void ManagerInterface:: drawChart(const Vector<Pair<QString, double>>& data, con
 }
 
 void ManagerInterface::showOverview() {
+    QLayout *existingLayout = overviewBox->layout();
+    if (existingLayout) {
+        QLayoutItem *item;
+        while ((item = existingLayout->takeAt(0)) != nullptr) {
+            delete item->widget();  
+            delete item;  
+        }
+        delete existingLayout;  
+    }
     Vector<Pair<string, int>> soldProducts = dataController->loadSoldProductData();
     Vector<Pair<QString, double>> data;  
     double totalAmountSpent = 0.0;  
@@ -536,18 +557,70 @@ void ManagerInterface::showOverview() {
         totalAmountSpent += totalAmount; 
         data.pushback(Pair<QString, double>(productId, quantity));
     }
-    QLabel *soldProductCountLabel = new QLabel("Total Products Sold: " + QString::number(numberOfProduct));
+    QGroupBox *box1 = new QGroupBox(this);
+    QVBoxLayout *Layout1 = new QVBoxLayout(box1);
+
+    QPushButton *soldProductCountButton = new  QPushButton(" Sold Product" );
+    QIcon Icon1(":/icon17"); 
+    soldProductCountButton->setIcon(Icon1);
+    soldProductCountButton->setIconSize(QSize(35, 35));
+    QLabel *soldProductCountLabel = new QLabel(QString::number(numberOfProduct));
+    soldProductCountLabel->setObjectName("titleLabel");
+    
+    Layout1->addWidget(soldProductCountButton);
+    Layout1->addWidget(soldProductCountLabel);
+
+    QGroupBox *box2 = new QGroupBox(this);
+    QVBoxLayout *Layout2 = new QVBoxLayout(box2);
+
+    QPushButton *totalAmountSpentButton = new QPushButton("Total Amount Spent");
+    QIcon Icon2(":/icon18");
+    totalAmountSpentButton->setIcon(Icon2);
+    totalAmountSpentButton->setIconSize(QSize(35, 35));
+    QLabel *totalAmountLabel = new QLabel( QString::number(totalAmountSpent, 'f', 2));
+    totalAmountLabel->setObjectName("titleLabel");
+    Layout2->addWidget(totalAmountSpentButton);
+    Layout2->addWidget(totalAmountLabel);
+
+    QGroupBox *box3 = new QGroupBox(this);
+    QVBoxLayout *Layout3 = new QVBoxLayout(box3);
+    QPushButton *totalCustomerButton = new QPushButton("Total Customers");
+    QIcon Icon3(":/icon16");
+    totalCustomerButton->setIcon(Icon3);
+    totalCustomerButton->setIconSize(QSize(35, 35));
+    int numCustomers = dataController->loadAllCustomersData().getSize();
+    QLabel *totalCustomerLabel = new QLabel( QString::number(numCustomers));
+    totalCustomerLabel->setObjectName("titleLabel");
+    Layout3->addWidget(totalCustomerButton);
+    Layout3->addWidget(totalCustomerLabel);
+
+    QGroupBox *box4 = new QGroupBox(this);
+    QVBoxLayout *Layout4 = new QVBoxLayout(box4);
+    QPushButton *totalInvoice = new QPushButton("Total Invoices");
+    QIcon Icon4(":/icon19");
+    totalInvoice->setIcon(Icon4);
+    totalInvoice->setIconSize(QSize(35, 35));
+    int numInvoice = appController->loadAllInvoice().getSize();
+    QLabel *totalInvoicesLabel = new QLabel( QString::number(numInvoice));
+    totalInvoicesLabel->setObjectName("titleLabel");
+    Layout4->addWidget(totalInvoice);
+    Layout4->addWidget(totalInvoicesLabel);
+
+    connect(totalCustomerButton, &QPushButton::clicked, this, &ManagerInterface::showCustomers);
+    connect(soldProductCountButton, &QPushButton::clicked, this, &ManagerInterface::showProducts);
+    connect(totalAmountSpentButton, &QPushButton::clicked, this, &ManagerInterface::showCustomers);
+    connect(totalInvoice, &QPushButton::clicked, this, &ManagerInterface::showInvoices);
+
     QGroupBox *soldProductCountBox = new QGroupBox(this);
     QHBoxLayout *soldProductCountLayout = new QHBoxLayout(soldProductCountBox);
-    soldProductCountLabel->setObjectName("titleLabel");
-    QLabel *totalAmountLabel = new QLabel("Total Amount Earned: " + QString::number(totalAmountSpent, 'f', 2));
-    totalAmountLabel->setObjectName("titleLabel");
-
     soldProductCountLayout->addSpacing(10);
-    soldProductCountLayout->addWidget(soldProductCountLabel);
+    soldProductCountLayout->addWidget(box1);
     soldProductCountLayout->addSpacing(10);
-    soldProductCountLayout->addWidget(totalAmountLabel);
+    soldProductCountLayout->addWidget(box2);
     soldProductCountLayout->addSpacing(10);
+    soldProductCountLayout->addWidget(box3);
+    soldProductCountLayout->addSpacing(10);
+    soldProductCountLayout->addWidget(box4);
 
     QPushButton *showSoldProductCountButton = new QPushButton("Show Sold Product Count");
     QPushButton *showInvoiceByDateButton = new QPushButton("Show Amount By Date");
@@ -569,9 +642,10 @@ void ManagerInterface::showOverview() {
     layout->addWidget(diagramBox);
     overviewBox->setLayout(layout);
     overviewBox->show();
+    showProductById();
     stackWidget->setCurrentIndex(0);
 }
-void ManagerInterface::  showProductById(){
+void ManagerInterface:: showProductById(){
     Vector<Pair<string, int>> soldProducts = dataController->loadSoldProductData();
     Vector<Pair<QString, double>> data;  
     for (int i = 0; i < soldProducts.getSize(); ++i) {
@@ -581,23 +655,45 @@ void ManagerInterface::  showProductById(){
     }
     drawChart(data, "Total Revenue by Product ID", "Product ID", "Revenue", diagramBox);
 }
-void ManagerInterface:: showAmountByDate(){
+void ManagerInterface::showAmountByDate() {
     Vector<Invoice*> invoicesData = appController->loadAllInvoice();
     Vector<Pair<QString, double>> data;
-    for( int i= 0; i <invoicesData.getSize();++i){
-        QString date = QString::fromStdString (invoicesData[i]->getInvoiceDate());
-        double amount = invoicesData[i]->getTotalAmount();
-        data.pushback(Pair<QString, double>(date,amount));
+
+    QDate endDate = QDate::currentDate();
+    QDate startDate = endDate.addDays(-14); 
+
+    QVector<QString> allDates;
+    QVector<double> allAmounts;
+
+    for (QDate date = startDate; date <= endDate; date = date.addDays(1)) {
+        allDates.append(date.toString("yyyy-MM-dd"));
+        allAmounts.append(0.0); 
     }
+
+    for (int i = 0; i < invoicesData.getSize(); ++i) {
+        QString invoiceDate = QString::fromStdString(invoicesData[i]->getInvoiceDate());
+        double amount = invoicesData[i]->getTotalAmount();
+
+        int index = allDates.indexOf(invoiceDate);
+        if (index != -1) {
+            allAmounts[index] += amount; 
+        }
+    }
+
+    for (int i = 0; i < allDates.size(); ++i) {
+        data.pushback(Pair<QString, double>(allDates[i], allAmounts[i]));
+    }
+
     drawChart(data, "Total Amount By Date", "Date", "Amount", diagramBox);
 }
+
 void ManagerInterface:: showCustomerByAmount(){
     Vector<Pair<QString, double>> data;
     Vector<Customer> customers = dataController->loadAllCustomersData();
     for(int i = 0; i <customers.getSize();i++){
         Vector<Invoice*> invoices = dataController->loadOrdersData(customers[i].getUserId()).getInvoice();
         double totalPrice = 0.0;
-        for (size_t j = 0; j < invoices.getSize(); ++j) {
+        for (int j = 0; j < invoices.getSize(); ++j) {
             totalPrice += invoices[j]->getTotalAmount();
         }
         if( totalPrice > 0.0 ){
