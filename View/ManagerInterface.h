@@ -28,6 +28,7 @@ class ManagerInterface : public QWidget {
 public:
     ManagerInterface(QWidget *parent = nullptr,const string &managerid ="");
     void showMessage(QWidget *parent, bool status, const QString &message);
+    void drawChart(const Vector<Pair<QString, double>>& data, const QString& title, const QString& xLabel, const QString& yLabel, QWidget* container);
     ~ManagerInterface();
     private slots:
     void showOverview();
@@ -40,6 +41,9 @@ public:
     void filterCustomer();
     void filterInvoice();
     void addNewProduct();
+    void showAmountByDate();
+    void showProductById();
+    void showCustomerByAmount();
 signals:
 private:
     Manager* manager;
@@ -59,7 +63,8 @@ private:
     QTableWidget *invoicesTable;
     QGroupBox *overviewBox;
     QGroupBox *managerInforBox;
-    QPushButton *addNewProoductButton;
+    QPushButton *addNewProductButton;
+    QGroupBox *diagramBox;
     void addProductsData();
     void addCustomersData();
     void addInvoicesData();

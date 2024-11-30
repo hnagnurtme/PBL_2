@@ -83,8 +83,23 @@ Vector<Invoice*> AppController::sortInvoiceByDate() {
             allInvoices[maxIndex] = temp;
         }
     }
+    delete customerData;
     return allInvoices;
 }
+Vector<Invoice*> AppController:: loadAllInvoice(){
+    DataController* customerData = new DataController();
+    Vector<Customer> customers = customerData->loadAllCustomersData();
+    Vector<Invoice*> allInvoices;
+    for (int i = 0; i < customers.getSize(); ++i) {
+        Vector<Invoice*> invoices = customerData->loadOrdersData(customers[i].getUserId()).getInvoice();
+        for (int j = 0; j < invoices.getSize(); ++j) {
+            allInvoices.pushback(invoices[j]);
+        }
+    }
+    delete customerData;
+    return allInvoices;
+}
+
 string AppController::createProductId() {
     DataController* data = new DataController();
     Vector<Product> allProducts = data->loadProductData();

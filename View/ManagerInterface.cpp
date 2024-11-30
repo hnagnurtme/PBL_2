@@ -115,12 +115,12 @@ ManagerInterface::ManagerInterface(QWidget *parent,const string &managerid) : QW
     searchInvoiceLine->setPlaceholderText("Search by placeorder date...");
     connect(searchInvoiceLine, &QLineEdit::textChanged, this, &ManagerInterface::filterInvoice);
 
-    addNewProoductButton = new QPushButton(this);
-    addNewProoductButton->setText("Add New Product");
+    addNewProductButton = new QPushButton(this);
+    addNewProductButton->setText(" Add New Product");
     QIcon addIcon("Resource/ICON/ICON4.png"); 
-    addNewProoductButton->setIcon(addIcon);
-    addNewProoductButton->setIconSize(QSize(35, 35));
-    connect(addNewProoductButton, &QPushButton::clicked, this,&ManagerInterface::addNewProduct);
+    addNewProductButton->setIcon(addIcon);
+    addNewProductButton->setIconSize(QSize(35, 35));
+    connect(addNewProductButton, &QPushButton::clicked, this,&ManagerInterface::addNewProduct);
 
     productTable = new QTableWidget(5, 6, this);
     productTable->setHorizontalHeaderLabels({"No.", "Description", "Product ID", "Product Name", "Price", "Quantity", "Change"});
@@ -128,9 +128,7 @@ ManagerInterface::ManagerInterface(QWidget *parent,const string &managerid) : QW
     QGroupBox *productGroupBox = new QGroupBox(this);
     QVBoxLayout *productLayout = new QVBoxLayout(productGroupBox);
     productLayout->addWidget(searchProductLine);
-    productLayout->addSpacing(10);
-    productLayout->addWidget(addNewProoductButton);
-    productLayout->addSpacing(10);
+    productLayout->addWidget(addNewProductButton);
     productLayout->addWidget(productTable);
     productTable->setFixedSize(1250, 700);
 
@@ -480,10 +478,10 @@ void ManagerInterface:: showInvoiceDetail(int row) {
     
 }
 
-inline void drawChart(const Vector<Pair<QString, double>>& data, const QString& title, const QString& xLabel, const QString& yLabel, QWidget* container) {
+void ManagerInterface:: drawChart(const Vector<Pair<QString, double>>& data, const QString& title, const QString& xLabel, const QString& yLabel, QWidget* container) {
     QVector<QString> categories; 
     QVector<double> values;     
-    for (int i = 0; i <data.getSize();++i) {
+    for (int i = 0; i < data.getSize(); ++i) {
         categories.append(data[i].getFirst());  
         values.append(data[i].getSecond());    
     }
@@ -496,15 +494,19 @@ inline void drawChart(const Vector<Pair<QString, double>>& data, const QString& 
     QBarSeries *series = new QBarSeries();
     series->append(set);
 
+    // Hiển thị nhãn trên mỗi cột
+    series->setLabelsVisible(true);  // Sử dụng setLabelsVisible cho QBarSeries thay vì QBarSet
+
     QChart *chart = new QChart();
     chart->addSeries(series);
     chart->setTitle(title);
     chart->setAnimationOptions(QChart::SeriesAnimations);
 
     QBarCategoryAxis *axisX = new QBarCategoryAxis();
+    axisX->setTitleText(xLabel);
     axisX->append(categories);
     chart->setAxisX(axisX, series);
-
+    
     QValueAxis *axisY = new QValueAxis();
     axisY->setTitleText(yLabel);
     axisY->setRange(0, *std::max_element(values.begin(), values.end()));
@@ -518,66 +520,10 @@ inline void drawChart(const Vector<Pair<QString, double>>& data, const QString& 
     container->setLayout(layout);
 }
 
-inline void drawLineChart(const Vector<Pair<QString, double>>& data, const QString& title, const QString& xLabel, const QString& yLabel, QWidget* container) {
-    QLayout* oldLayout = container->layout();
-    if (oldLayout) {
-        QLayoutItem* item;
-        while ((item = oldLayout->takeAt(0)) != nullptr) {
-            delete item->widget();
-            delete item;
-        }
-        delete oldLayout;
-    }
-
-    QVector<QString> categories;
-    QVector<double> values;
-    for (int i = 0; i < data.getSize(); ++i) {
-        categories.append(data[i].getFirst());
-        values.append(data[i].getSecond());
-    }
-
-    // Tạo QLineSeries để chứa các điểm và nối chúng bằng đường
-    QLineSeries* series = new QLineSeries();
-    for (int i = 0; i < values.size(); ++i) {
-        series->append(i, values[i]); // Thêm các điểm vào series
-    }
-    series->setName(yLabel);
-
-    // Tạo QChart
-    QChart* chart = new QChart();
-    chart->addSeries(series);
-    chart->setTitle(title);
-    chart->setAnimationOptions(QChart::SeriesAnimations);
-
-    // Trục X: Thêm các danh mục từ dữ liệu
-    QBarCategoryAxis* axisX = new QBarCategoryAxis();
-    axisX->append(categories);
-    chart->addAxis(axisX, Qt::AlignBottom);
-    series->attachAxis(axisX);
-
-    // Trục Y: Xác định phạm vi dựa trên giá trị
-    QValueAxis* axisY = new QValueAxis();
-    axisY->setTitleText(yLabel);
-    axisY->setRange(0, *std::max_element(values.begin(), values.end()) + 10); // Tăng một chút để có khoảng trống
-    chart->addAxis(axisY, Qt::AlignLeft);
-    series->attachAxis(axisY);
-
-    // Tạo QChartView
-    QChartView* chartView = new QChartView(chart);
-    chartView->setRenderHint(QPainter::Antialiasing);
-
-    // Đặt layout mới cho container
-    QVBoxLayout* layout = new QVBoxLayout(container);
-    layout->addWidget(chartView);
-    container->setLayout(layout);
-}
-
 void ManagerInterface::showOverview() {
     Vector<Pair<string, int>> soldProducts = dataController->loadSoldProductData();
-
     Vector<Pair<QString, double>> data;  
     double totalAmountSpent = 0.0;  
-    int totalOrders = soldProducts.getSize();  
     int numberOfProduct = 0;  
 
     for (int i = 0; i < soldProducts.getSize(); ++i) {
@@ -591,20 +537,76 @@ void ManagerInterface::showOverview() {
         data.pushback(Pair<QString, double>(productId, quantity));
     }
     QLabel *soldProductCountLabel = new QLabel("Total Products Sold: " + QString::number(numberOfProduct));
+    QGroupBox *soldProductCountBox = new QGroupBox(this);
+    QHBoxLayout *soldProductCountLayout = new QHBoxLayout(soldProductCountBox);
     soldProductCountLabel->setObjectName("titleLabel");
     QLabel *totalAmountLabel = new QLabel("Total Amount Earned: " + QString::number(totalAmountSpent, 'f', 2));
     totalAmountLabel->setObjectName("titleLabel");
-    drawChart(data, "Total Revenue by Product ID", "Product ID", "Revenue", overviewBox);
+
+    soldProductCountLayout->addSpacing(10);
+    soldProductCountLayout->addWidget(soldProductCountLabel);
+    soldProductCountLayout->addSpacing(10);
+    soldProductCountLayout->addWidget(totalAmountLabel);
+    soldProductCountLayout->addSpacing(10);
+
+    QPushButton *showSoldProductCountButton = new QPushButton("Show Sold Product Count");
+    QPushButton *showInvoiceByDateButton = new QPushButton("Show Amount By Date");
+    QPushButton *showCustomerByAmountButton = new QPushButton("Show Customer By Amount");
+    connect(showInvoiceByDateButton, &QPushButton::clicked, this, &ManagerInterface::showAmountByDate);
+    connect(showSoldProductCountButton, &QPushButton::clicked, this, &ManagerInterface::showProductById);
+    connect(showCustomerByAmountButton,&QPushButton::clicked,this, &ManagerInterface::showCustomerByAmount);
+    QGroupBox *dataBox = new QGroupBox(this);
+    QHBoxLayout *dataLayout = new QHBoxLayout(dataBox);
+    dataLayout->addWidget(showSoldProductCountButton);
+    dataLayout->addWidget(showInvoiceByDateButton);
+    dataLayout->addWidget(showCustomerByAmountButton);
+    diagramBox = new QGroupBox(this);
+
     QVBoxLayout *layout = new QVBoxLayout(overviewBox);
-    layout->addWidget(soldProductCountLabel);
+    layout->addWidget(soldProductCountBox);
     layout->addSpacing(20);
-    layout->addWidget(totalAmountLabel);
-    layout->addSpacing(20);
+    layout->addWidget(dataBox);
+    layout->addWidget(diagramBox);
     overviewBox->setLayout(layout);
     overviewBox->show();
     stackWidget->setCurrentIndex(0);
 }
-
+void ManagerInterface::  showProductById(){
+    Vector<Pair<string, int>> soldProducts = dataController->loadSoldProductData();
+    Vector<Pair<QString, double>> data;  
+    for (int i = 0; i < soldProducts.getSize(); ++i) {
+        QString productId = QString::fromStdString(soldProducts[i].getFirst());
+        int quantity = soldProducts[i].getSecond();
+        data.pushback(Pair<QString, double>(productId, quantity));
+    }
+    drawChart(data, "Total Revenue by Product ID", "Product ID", "Revenue", diagramBox);
+}
+void ManagerInterface:: showAmountByDate(){
+    Vector<Invoice*> invoicesData = appController->loadAllInvoice();
+    Vector<Pair<QString, double>> data;
+    for( int i= 0; i <invoicesData.getSize();++i){
+        QString date = QString::fromStdString (invoicesData[i]->getInvoiceDate());
+        double amount = invoicesData[i]->getTotalAmount();
+        data.pushback(Pair<QString, double>(date,amount));
+    }
+    drawChart(data, "Total Amount By Date", "Date", "Amount", diagramBox);
+}
+void ManagerInterface:: showCustomerByAmount(){
+    Vector<Pair<QString, double>> data;
+    Vector<Customer> customers = dataController->loadAllCustomersData();
+    for(int i = 0; i <customers.getSize();i++){
+        Vector<Invoice*> invoices = dataController->loadOrdersData(customers[i].getUserId()).getInvoice();
+        double totalPrice = 0.0;
+        for (size_t j = 0; j < invoices.getSize(); ++j) {
+            totalPrice += invoices[j]->getTotalAmount();
+        }
+        if( totalPrice > 0.0 ){
+        QString customerName = QString::fromStdString(customers[i].getName());
+        data.pushback(Pair<QString, double>(customerName, totalPrice));
+        }
+    }
+    drawChart(data, "Total Amount By Customer", "Customer", "Amount", diagramBox);
+}
 void  ManagerInterface:: filterProducts(){
     QString searchTerm = searchProductLine->text().trimmed();
     if (searchTerm.isEmpty()) {
