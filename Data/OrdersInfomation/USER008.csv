@@ -1,0 +1,2 @@
+InvoiceID,PlaceOrderDate,DeliveryDate,TotalAmount,PaymentMethod
+USER008INV_0,2024-11-23,2024-11-30,3400,Cash on Delivery

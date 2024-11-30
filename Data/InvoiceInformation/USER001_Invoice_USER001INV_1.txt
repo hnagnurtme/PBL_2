@@ -1,0 +1,19 @@
+======================== INVOICE ========================
+Invoice ID          : USER001INV_1
+Customer ID         : USER001
+Invoice Date        : 2024-11-22
+Delivery Date       : 2024-11-23
+Payment Method      : Cash on Delivery
+
+--------------------------------------------------------------------------------------------
+Product Name                  | Quantity  | Price     
+--------------------------------------------------------------------------------------------
+Điện thoại Samsung Galaxy S21| 1         | 1000.00   
+Điện thoại Xiaomi Mi 11  | 1         | 800.00    
+Điện thoại Google Pixel 6| 1         | 900.00    
+Điện thoại Oppo Find X3  | 1         | 700.00    
+Điện thoại Asus ZenFone 8| 1         | 950.00    
+Điện thoại LG Velvet     | 1         | 750.00    
+Điện thoại Huawei P40 Pro| 1         | 1200.00   
+======================================================
+                         Total Amount     : $6300.00

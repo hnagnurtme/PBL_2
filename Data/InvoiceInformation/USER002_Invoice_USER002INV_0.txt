@@ -1,0 +1,15 @@
+======================== INVOICE ========================
+Invoice ID          : USER002INV_0
+Customer ID         : USER002
+Invoice Date        : 2024-11-22
+Delivery Date       : 2024-12-28
+Payment Method      : Bank Transfer
+
+--------------------------------------------------------------------------------------------
+Product Name                  | Quantity  | Price     
+--------------------------------------------------------------------------------------------
+Điện thoại Samsung Galaxy S21| 1         | 1000.00   
+Điện thoại Google Pixel 6| 1         | 900.00    
+Điện thoại Oppo Find X3  | 1         | 700.00    
+======================================================
+                         Total Amount     : $2600.00

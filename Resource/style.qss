@@ -1,0 +1,264 @@
+
+* {
+    transition: all 0.3s ease; 
+}
+
+
+#inputTitle  {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #114b5f, stop:1 #028090); 
+    color: #fff; 
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid #028090; 
+    border-radius: 5px; 
+    padding: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#inputArea {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #e0f7f9, stop:1 #b3e1e5); 
+    color: #114b5f; 
+    border: 1px solid #b3e1e5;
+    border-radius: 5px; 
+    padding: 10px; 
+    font-size: 12px;
+}
+
+#titleLabel {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #028090, stop:1 #114b5f);
+    font-size: 20px;                            
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+QHeaderView::section {
+    background-color: #114b5f; 
+    padding: 4px;
+    font-size: 16px; 
+    font-weight: bold;
+    color: #f5f5f5; 
+    border: 1px solid #028090;
+}
+
+QTableWidget {
+    gridline-color: #dcdcdc; 
+    font-size: 16px; 
+    background-color: #f9f9f9; 
+}
+
+QTableWidget::item {
+    padding: 6px; 
+    border: 1px solid #e0e0e0;
+    font-size: 16px;
+}
+
+QTableWidget::item:selected {
+    background-color: #028090; 
+    color: white; 
+}
+
+QTableWidget::item:hover {
+    background-color: #B2BFC4; 
+}
+
+QPushButton {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #028090, stop:1 #114b5f);
+    color: #fff; 
+    font-size: 16px;
+    border-radius: 5px; 
+    padding: 10px 20px;
+    border: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+QPushButton:hover {
+    background-color: #50c9c3;
+    transform: scale(1.05);
+}
+
+QPushButton:pressed {
+    background-color: #b3e1e5;
+    transform: scale(0.95);
+}
+
+QPushButton#cancelButton {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #fff, stop:1 #e0f7f9);
+    color: #028090;
+    border: 1px solid #028090;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+QPushButton#cancelButton:hover {
+    background-color: #c3e8ea;
+    transform: scale(1.05);
+}
+
+QPushButton#cancelButton:pressed {
+    background-color: #b3e1e5;
+    transform: scale(0.95);
+}
+
+/* Confirm Button Style */
+QPushButton#confirmButton {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #028090, stop:1 #028099);
+    color: #e0f7f9;
+    border: 1px solid #e0f7f9;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+QPushButton#confirmButton:hover {
+    background-color: #00a3a3;
+    transform: scale(1.05);
+}
+
+QPushButton#confirmButton:pressed {
+    background-color: #017a7a;
+    transform: scale(0.95);
+}
+
+
+/* ComboBox Style */
+QComboBox {
+    background-color: #e0f7f9;
+    color: #495057;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 5px;
+    min-width: 150px;
+    transition: border-color 0.3s ease;
+}
+
+QComboBox:hover {
+    border-color: #028090;
+}
+
+/* DateEdit Style */
+QDateEdit {
+    border: 1px solid #5A5A5A;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: #fafafa;
+    color: #2f4f4f;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+QDateEdit:hover {
+    border-color: #028090;
+}
+
+QLineEdit {
+    background-color: #f0f0f0;             
+    border: 1px solid #028090;             
+    border-radius: 8px;                    
+    padding: 5px 10px;                
+    font-size: 16px; 
+    transition: border-color 0.3s ease;                     
+    color: #028090;                        
+}
+
+QMessageBox {
+    background-color: #f0f0f0;             
+    border: 1px solid #028090;             
+    border-radius: 8px;                    
+    padding: 5px 10px;                
+    font-size: 16px; 
+    transition: border-color 0.3s ease;                     
+    color: #028090;       
+    min-width: 400px;          
+    min-height: 200px;        
+}
+
+QMessageBox QLabel {
+
+    font-size: 16px;                            
+    color: #028090;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+QMessageBox QPushButton {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #028090, stop:1 #028099);
+    color: #e0f7f9;
+    border: 1px solid #e0f7f9;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+QMessageBox QPushButton:hover {
+    background-color: #00a3a3;
+    transform: scale(1.05);
+}
+
+
+QMessageBox QPushButton:pressed {
+    background-color: #017a7a;
+    transform: scale(0.95);
+}
+
+/* Style chung cho QDoubleSpinBox và QSpinBox */
+QDoubleSpinBox, QSpinBox {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #028090, stop:1 #114b5f);
+    color: #fff; 
+    font-size: 16px;
+    border-radius: 5px; 
+    padding: 5px 10px;
+    border: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+/* Hover effect */
+QDoubleSpinBox:hover, QSpinBox:hover {
+    background-color: #50c9c3;
+    transform: scale(1.05);
+}
+
+/* Focus effect */
+QDoubleSpinBox:focus, QSpinBox:focus {
+    background-color: #b3e1e5;
+    transform: scale(1.05);
+}
+
+/* Nút tăng/giảm */
+QDoubleSpinBox::up-button, QSpinBox::up-button,
+QDoubleSpinBox::down-button, QSpinBox::down-button {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #50c9c3, stop:1 #028090);
+    border: none;
+    width: 16px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+/* Hover effect cho nút tăng/giảm */
+QDoubleSpinBox::up-button:hover, QSpinBox::up-button:hover,
+QDoubleSpinBox::down-button:hover, QSpinBox::down-button:hover {
+    background-color: #b3e1e5;
+}
+
+/* Mũi tên trong nút tăng/giảm */
+QDoubleSpinBox::up-arrow, QSpinBox::up-arrow,
+QDoubleSpinBox::down-arrow, QSpinBox::down-arrow {
+    width: 7px;
+    height: 7px;
+    image: url(:/INCON/ICON14.png); /* Icon mũi tên tăng */
+}

@@ -1,0 +1,18 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "buildProject",
+            "type": "shell",
+            "command": "qmake && mingw32-make",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Biên dịch dự án Qt với qmake và mingw32-make"
+        }
+    ]
+}

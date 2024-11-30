@@ -1,0 +1,77 @@
+<RCC>
+    <qresource prefix="/">
+        <!-- File Style -->
+        <file alias="style">style.qss</file>
+        
+        <!-- ICON Resources -->
+        <file alias="icon1">ICON/ICON1.png</file>
+        <file alias="icon2">ICON/ICON2.png</file>
+        <file alias="icon3">ICON/ICON3.png</file>
+        <file alias="icon4">ICON/ICON4.png</file>
+        <file alias="icon5">ICON/ICON5.png</file>
+        <file alias="icon6">ICON/ICON6.png</file>
+        <file alias="icon7">ICON/ICON7.png</file>
+        <file alias="icon8">ICON/ICON8.png</file>
+        <file alias="icon9">ICON/ICON9.png</file>
+        <file alias="icon10">ICON/ICON10.png</file>
+        <file alias="icon11">ICON/ICON11.png</file>
+        <file alias="icon12">ICON/ICON12.png</file>
+        <file alias="icon13">ICON/ICON13.png</file>
+        <file alias="icon14">ICON/ICON14.png</file>
+        <file alias="icon15">ICON/ICON15.png</file>
+        <file alias="icon16">ICON/ICON16.png</file>
+        <file alias="icon17">ICON/ICON17.png</file>
+        <file alias="icon18">ICON/ICON18.png</file>
+        <file alias="icon19">ICON/ICON19.png</file>
+
+        <!-- SANPHAM Resources -->
+        <file alias="product1">SANPHAM/PRD001.png</file>
+        <file alias="product2">SANPHAM/PRD002.png</file>
+        <file alias="product3">SANPHAM/PRD003.png</file>
+        <file alias="product4">SANPHAM/PRD004.png</file>
+        <file alias="product5">SANPHAM/PRD005.png</file>
+        <file alias="product6">SANPHAM/PRD006.png</file>
+        <file alias="product7">SANPHAM/PRD007.png</file>
+        <file alias="product8">SANPHAM/PRD008.png</file>
+        <file alias="product9">SANPHAM/PRD009.png</file>
+        <file alias="product10">SANPHAM/PRD010.png</file>
+        <file alias="product11">SANPHAM/PRD011.png</file>
+        <file alias="product12">SANPHAM/PRD012.png</file>
+        <file alias="product13">SANPHAM/PRD013.png</file>
+        <file alias="product14">SANPHAM/PRD014.png</file>
+        <file alias="product15">SANPHAM/PRD015.png</file>
+        <file alias="product16">SANPHAM/PRD016.png</file>
+        <file alias="product17">SANPHAM/PRD017.png</file>
+        <file alias="product18">SANPHAM/PRD018.png</file>
+        <file alias="product19">SANPHAM/PRD019.png</file>
+        <file alias="product20">SANPHAM/PRD020.png</file>
+        <file alias="product21">SANPHAM/PRD021.png</file>
+        <file alias="product22">SANPHAM/PRD022.png</file>
+        <file alias="product23">SANPHAM/PRD023.png</file>
+        <file alias="product24">SANPHAM/PRD024.png</file>
+        <file alias="product25">SANPHAM/PRD025.png</file>
+        <file alias="product26">SANPHAM/PRD026.png</file>
+        <file alias="product27">SANPHAM/PRD027.png</file>
+        <file alias="product28">SANPHAM/PRD028.png</file>
+        <file alias="product29">SANPHAM/PRD029.png</file>
+        <file alias="product30">SANPHAM/PRD030.png</file>
+        <file alias="product31">SANPHAM/PRD031.png</file>
+        <file alias="product32">SANPHAM/PRD032.png</file>
+        <file alias="product33">SANPHAM/PRD033.png</file>
+        <file alias="product34">SANPHAM/PRD034.png</file>
+        <file alias="product35">SANPHAM/PRD035.png</file>
+        <file alias="product36">SANPHAM/PRD036.png</file>
+        <file alias="product37">SANPHAM/PRD037.png</file>
+        <file alias="product38">SANPHAM/PRD038.png</file>
+        <file alias="product39">SANPHAM/PRD039.png</file>
+        <file alias="product40">SANPHAM/PRD040.png</file>
+        <file alias="product41">SANPHAM/PRD041.png</file>
+        <file alias="product42">SANPHAM/PRD042.png</file>
+        <file alias="product45">SANPHAM/PRD045.png</file>
+        <file alias="product46">SANPHAM/PRD046.png</file>
+        <file alias="product47">SANPHAM/PRD047.png</file>
+        <file alias="product48">SANPHAM/PRD048.png</file>
+        <file alias="product49">SANPHAM/PRD049.png</file>
+        <file alias="product50">SANPHAM/PRD050.png</file>
+    </qresource>
+</RCC>

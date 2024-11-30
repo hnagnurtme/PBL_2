@@ -1,0 +1,17 @@
+======================== INVOICE ========================
+Invoice ID               : USER003INV_0
+Customer ID              : USER003
+Customer Name            : Nguyễn Văn Hùng
+Phone                    : 0768406237
+Email                    : hungnv@gmail.com
+Address                  : 12 Nguyễn Tri Phương, Thanh Khê, Đà Nẵng
+Invoice Date             : 2024-11-22
+Delivery Date            : 2024-11-30
+Payment Method           : Cash on Delivery
+------------------------------------------------------------------------------------------
+Product Name                                                Quantity       Price          Total          
+------------------------------------------------------------------------------------------
+Điện thoại Samsung Galaxy S21                          1              1000.00        1000.00        
+Điện thoại Xiaomi Mi 11                                1              800.00         800.00         
+========================================================
+                                                                      Total Amount     : $1800.00
