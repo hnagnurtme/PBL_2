@@ -7,7 +7,6 @@ release/User.o
 release/Orders.o
 release/Invoice.o
 release/Customer.o
-release/Employee.o
 release/Manager.o
 release/CustomerInterface.o
 release/AddNewProduct.o

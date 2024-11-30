@@ -1,12 +1,9 @@
 #include "Model/Manager.h"
 #include "Controller/DataController.h"
 
-Manager ::Manager (){
+Manager ::Manager (){}
 
-}
-Manager :: Manager(const string& id, const string& name, const string& email, const string& phone, const string& password, const string& address):User(id,name,email,phone,password,address){
-
-}
+Manager :: Manager(const string& id, const string& name, const string& email, const string& phone, const string& password, const string& address):User(id,name,email,phone,password,address){}
 
 void Manager::addNewProduct(Product& product) {
     DataController data;
@@ -18,10 +15,7 @@ void Manager::addNewProduct(Product& product) {
         }
     }
     
-    // Thêm sản phẩm mới vào danh sách
     listProducts.pushback(product);
-
-    // Lưu lại danh sách sản phẩm sau khi thay đổi
     data.saveProductsData(listProducts);
 }
 

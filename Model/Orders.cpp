@@ -18,7 +18,6 @@ void Orders::setCustomerID(const string& id) {
     customerID = id;
 }
 
-
 Vector<Invoice*> Orders::  getInvoice() const{
     return invoices;
 }
@@ -26,17 +25,5 @@ Vector<Invoice*> Orders::  getInvoice() const{
 Orders ::Orders(const Orders& other){
     customerID = other.customerID;
     invoices = other.invoices;
-}
-
-string Orders::displayOrders() const {
-    stringstream ss;
-    for (int i = 0; i < invoices.getSize(); ++i) {
-        ss << invoices[i]->displayInvoice();  
-        if (i < invoices.getSize() - 1) {
-            ss << "\n";  
-    }
-   
-    }
-    return ss.str();
 }
 

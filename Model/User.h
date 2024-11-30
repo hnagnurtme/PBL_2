@@ -13,9 +13,7 @@ public:
     User();
     User(string id, const string& name, const string& email, const string& phone, const string& password, const string& address);
     bool login(const string email, const string password);
-    void logout();
-    void displayInfo() const;
-
+    
     string getUserId() const;
     string getName() const;
     string getEmail() const;

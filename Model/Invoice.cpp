@@ -31,7 +31,6 @@ Invoice::Invoice(const Cart& cart) : customerId(cart.getCustomerID()), totalAmou
     invoiceId = customerId+"INV_" + getInvoiceDate();
 }
 
-
 Invoice::Invoice(const string& invoiceId, const string& customerId, const Vector<Pair<Product*, int>>& products, double totalAmount)
     : invoiceId(invoiceId), customerId(customerId), products(products), totalAmount(totalAmount) {
     setInvoiceDate();
@@ -83,7 +82,6 @@ string Invoice::displayInvoice() const {
 
     return ss.str();
 }
-
 
 Vector<Pair<Product*, int>> Invoice:: getProducts() const{
     return products;

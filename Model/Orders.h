@@ -19,6 +19,4 @@ public:
     string getCustomerID() const;
     void setCustomerID(const string& id);
     Vector<Invoice*> getInvoice() const;
-    string displayOrders() const;
-
 };

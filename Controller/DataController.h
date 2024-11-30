@@ -4,14 +4,12 @@
 #include "Model/Invoice.h"
 #include "Model/Orders.h"
 #include "Model/Customer.h"
-#include "Model/Employee.h"
 #include "Model/Manager.h"
 #include "Datastructures/Vector.h"
 #include <vector>
 #include <string>
 using namespace std; 
 class Customer;
-class Employee;
 class Manager;
 
 class DataController {
@@ -40,11 +38,6 @@ public:
     void deleteCustomer(const string& customerID);
     Customer findCustomerById(const string& customerID);
     void updateCustomer(const Customer& customer);
-
-    Vector<Employee> loadAllEmployeesData();
-    void saveAllEmployeesData(const Vector<Employee>& Employees);
-    void addEmployee(const Employee& Employee);
-    void deleteEmployee(const Employee& Employee);
     Manager findManagerById(const string& managerID);
 
     Vector<Manager> loadAllManagersData();
@@ -53,8 +46,6 @@ public:
     void deleteManager(const Manager& Manager);
 
 private:
-    string invoicesFileName;
-    string productFileName;
     Product parseProduct(const string& line);   
     
 };

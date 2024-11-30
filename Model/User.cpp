@@ -2,9 +2,8 @@
 #include <iostream>
 using namespace std;
 #include <stdexcept>
-User::User(){
-    
-}
+User::User(){}
+
 User::User(string id, const string& name, const string& email, const string& phone, const string& password,const string& address)
     : userId(id), name(name), email(email), phone(phone), password(password),address(address) {}
 
@@ -12,24 +11,6 @@ bool User::login(string email, string password) {
         if (this->email == email && this->password == password) 
             return true; 
         else return false; 
-}
-
-
-void User::logout() {
-    char choice;
-    cout << "Ban co muon dang xuat khong? (y/n): ";
-    cin >> choice;
-
-    if (choice == 'y' || choice == 'Y') {
-    cout << "User " << name << " has logged out." << endl;
-    }
-}
-
-void User::displayInfo() const {
-    cout << "User ID: " << userId << endl;
-    cout << "Name: " << name << endl;
-    cout << "Email: " << email << endl;
-    cout << "Phone: " << phone << endl;
 }
 
 string User::getUserId() const { return userId; }

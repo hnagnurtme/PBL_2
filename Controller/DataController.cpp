@@ -4,7 +4,6 @@
 #include "Datastructures/Pair.h"
 #include "Model/Product.h"
 #include "Model/Customer.h"
-#include "Model/Employee.h"
 #include "Model/Manager.h"
 #include <string>
 #include <fstream>
@@ -49,8 +48,7 @@ void saveAllData(const Vector<T>& items, const std::string& filename,
 template <typename T>
 Vector<T> loadAllData(
     const string& filename,
-    function<T(const string&, const string&, const string&, const string&, const string&, const string&)> createObject
-) {
+    function<T(const string&, const string&, const string&, const string&, const string&, const string&)> createObject) {
     const std::string header = "UserID;Name;Email;Phone;Password;Address";
     ensureFileAndFolder("Data", filename, header);
 
@@ -111,7 +109,6 @@ void DataController::saveProductsData(const Vector<Product>& products) {
     tempFile.close();
 }
 
-
 Vector<Product> DataController::loadProductData() {
     Vector<Product> products;
     ifstream file("Data/ProductInformation.csv");
@@ -134,29 +131,27 @@ Vector<Product> DataController::loadProductData() {
     return products;
 }
 
-
-
 Product DataController::parseProduct(const string& line) {
     try {
         istringstream ss(line);
         string id, name, category, priceStr, stockStr, description, sizesStr, detailStr, brand;
 
         if (!getline(ss, id, ';') || id.empty()) 
-            return Product(); // Trả về product rỗng nếu có lỗi
+            return Product(); 
         if (!getline(ss, name, ';') || name.empty()) 
-            return Product(); // Trả về product rỗng nếu có lỗi
+            return Product(); 
         if (!getline(ss, category, ';') || category.empty()) 
-            return Product(); // Trả về product rỗng nếu có lỗi
+            return Product(); 
         if (!getline(ss, priceStr, ';') || priceStr.empty()) 
-            return Product(); // Trả về product rỗng nếu có lỗi
+            return Product();
         if (!getline(ss, stockStr, ';') || stockStr.empty()) 
-            return Product(); // Trả về product rỗng nếu có lỗi
+            return Product(); 
         if (!getline(ss, description, ';')) 
-            return Product(); // Trả về product rỗng nếu có lỗi
+            return Product(); 
         if (!getline(ss, detailStr, ';')) 
-            return Product(); // Trả về product rỗng nếu có lỗi
+            return Product(); 
         if (!getline(ss, brand, ';')) 
-            return Product(); // Trả về product rỗng nếu có lỗi
+            return Product(); 
         double price = stod(priceStr);
         int stock = stoi(stockStr);
         Vector<string> details;
@@ -203,6 +198,7 @@ void DataController::deleteProduct(const string& productId) {
     }
     throw runtime_error("Không tìm thấy product với ProductId: " + productId); 
 }
+
 void DataController::removeProduct(const Invoice &invoice) {
     Vector<Pair<Product*, int>> invoiceProducts = invoice.getProducts();
     Vector<Product> productList = loadProductData(); 
@@ -530,51 +526,6 @@ Manager DataController::  findManagerById(const string& managerID){
             return managers[i];
             }
             }
-}
-
-Vector<Employee> DataController::loadAllEmployeesData() {
-    const std::string filename = "Data/EmployeeInformation.csv";
-    return loadAllData<Employee>(
-        filename,
-        [](const std::string& userId, const std::string& name, const std::string& email,
-           const std::string& phone, const std::string& password, const std::string& address) {
-            return Employee(userId, name, email, phone, password, address);
-        }
-    );
-}
-
-void DataController::saveAllEmployeesData(const Vector<Employee>& employees) {
-const std::string filename = "Data/EmployeeInformation.csv";
-saveAllData<Employee>(
-    employees,
-    filename,
-    [](const Employee& employee) { 
-        return employee.getUserId() + ";" +
-               employee.getName() + ";" +
-               employee.getEmail() + ";" +
-               employee.getPhone() + ";" + 
-               employee.getPassword() + ";" +
-               employee.getAddress();
-    }
-);
-}
-
-void DataController::addEmployee(const Employee& employee) {
-    Vector<Employee> employees = loadAllEmployeesData();
-    employees.pushback(employee);
-    saveAllEmployeesData(employees);
-}
-
-void DataController::deleteEmployee(const Employee& employee) {
-    Vector<Employee> employees = loadAllEmployeesData();
-    for (int i = 0; i < employees.getSize(); ++i) {
-        if (employees[i].getUserId() == employee.getUserId()) {
-            employees.remove(i);
-            saveAllEmployeesData(employees);
-            return;
-        }
-    }
-    throw runtime_error("Không tìm thấy customer với UserID: " + employee.getUserId());
 }
 
 Vector<Manager> DataController::loadAllManagersData() {

@@ -1,0 +1,18 @@
+======================== INVOICE ========================
+Invoice ID          : USER001INV_8                       
+Customer ID         : USER001                            
+Customer Name       : Nguyễn Văn Trung Ánh           
+Phone               : 0768406235                         
+Email               : trunganh@gmail.com                 
+Address             : 26 Đặng Chất, Hòa Khánh Bắc, Liên Chiểu, Đà Nẵng
+Invoice Date        : 2024-11-30                         
+Delivery Date       : 2024-12-25                         
+Payment Method      : Bank Transfer                      
+--------------------------------------------------------
+Product Name                            Quantity       Price          Total          
+--------------------------------------------------------
+Điện thoại Xiaomi Mi 11                 1              800.00         800.00         
+Điện thoại Samsung Galaxy Z Fold 3      1              1800.00        1800.00        
+Điện thoại Google Pixel 6               1              900.00         900.00         
+========================================================
+                                             Total Amount     : $3500.00

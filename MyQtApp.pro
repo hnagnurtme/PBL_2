@@ -13,7 +13,6 @@ SOURCES += MainApplication.cpp \
            Model/Orders.cpp \
            Model/Invoice.cpp \
            Model/Customer.cpp \
-           Model/Employee.cpp \
            Model/Manager.cpp \
            View/CustomerInterface.cpp \
            View/AddNewProduct.cpp \
@@ -29,7 +28,6 @@ HEADERS +=  Controller/DataController.h \
             Model/Orders.h \
             Model/Invoice.h \
             Model/Customer.h \
-            Model/Employee.h \
             Model/Manager.h \
             View/CustomerInterface.h \
             View/ManagerInterface.h \

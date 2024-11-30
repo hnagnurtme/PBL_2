@@ -7,7 +7,6 @@ debug/User.o
 debug/Orders.o
 debug/Invoice.o
 debug/Customer.o
-debug/Employee.o
 debug/Manager.o
 debug/CustomerInterface.o
 debug/AddNewProduct.o
