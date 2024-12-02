@@ -11,7 +11,6 @@ class Customer : public User {
 private:
     Cart *cart;
     Orders *orderHistory;
-    Vector<Product*> *favouriteProducts;
 public:
     Customer();
     Customer(const Customer&);
@@ -21,10 +20,9 @@ public:
     void addToCart(Product* product, int quantity);
     void reduceItem(const string& productId, int quantity);
     void removeItem(string productId);
-    void addToFavourite(Product* product);
     void payment(const string& deliveryDate,const string& paymentMethod);
     Cart*  getCart() const;
     Orders& getOrderHistory();
     void updateOrderHistory(const Orders& newOrderHistory);
-
+    Customer& operator=(const Customer& other);
 };

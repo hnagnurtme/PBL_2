@@ -38,15 +38,16 @@ public:
     void deleteCustomer(const string& customerID);
     Customer findCustomerById(const string& customerID);
     void updateCustomer(const Customer& customer);
-    Manager findManagerById(const string& managerID);
+    
 
     Vector<Manager> loadAllManagersData();
-    void saveAllManagersData(const Vector<Manager>& Managers);
-    void addManager(const Manager& Manager);
-    void deleteManager(const Manager& Manager);
+    void saveAllManagersData(const Vector<Manager>&);
+    void addManager(const Manager& );
+    void deleteManager(const string& );
+    Manager findManagerById(const string& );
+    void updateManager(const Manager&);
 
 private:
     Product parseProduct(const string& line);   
     
 };
-

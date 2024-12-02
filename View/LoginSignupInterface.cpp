@@ -30,12 +30,14 @@ LoginSignupInterface::LoginSignupInterface(QWidget *parent): QWidget(parent) {
         QString style = stream.readAll();
         setStyleSheet(style);
     }
-    setFixedSize(1000, 600);
+    setFixedWidth(1000);
     setWindowTitle("Login Signup Window");
 
-    QLabel *loginTitle = new QLabel("WELCOME BACK");
+    QLabel *loginTitle = new QLabel(this);
+    QPixmap pixmap(":/welcome");
+    QPixmap scaledPixmap = pixmap.scaled(pixmap.size() * 1.5, Qt::KeepAspectRatio);
+    loginTitle->setPixmap(scaledPixmap);
     loginTitle->setAlignment(Qt::AlignCenter);
-    loginTitle->setObjectName("inputTitle"); 
 
     QLabel *emailLabel = new QLabel("Email:");
     emailInput = new QLineEdit();
@@ -45,11 +47,6 @@ LoginSignupInterface::LoginSignupInterface(QWidget *parent): QWidget(parent) {
     passwordInput = new QLineEdit();
     passwordInput->setPlaceholderText("Enter your password");
     passwordInput->setEchoMode(QLineEdit::Password);
-
-    forgotPasswordLabel = new QLabel("<a href='#'>Forgot password?</a>");
-    forgotPasswordLabel->setTextFormat(Qt::RichText);
-    forgotPasswordLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
-    forgotPasswordLabel->setOpenExternalLinks(true);
 
     loginButton = new QPushButton("LOGIN");
     connect(loginButton, &QPushButton::clicked, this, &LoginSignupInterface::login);
@@ -70,8 +67,6 @@ LoginSignupInterface::LoginSignupInterface(QWidget *parent): QWidget(parent) {
     loginLayout->addWidget(passwordLabel);
     loginLayout->addWidget(passwordInput);
     loginLayout->addSpacing(10);
-    loginLayout->addWidget(forgotPasswordLabel);
-    loginLayout->addSpacing(20);
     loginLayout->addLayout(loginButtonLayout);
 
     QGroupBox *loginGroup = new QGroupBox();
@@ -188,21 +183,16 @@ void LoginSignupInterface::login() {
         showMessage(this, true, "Login successful. Welcome, Customer!");
         CustomerInterface *view = new CustomerInterface(nullptr, userId);
         view->show();
-        this->hide();
+        this->close(); 
     }
     else if (role == "Manager") {
         showMessage(this, true, "Login successful. Welcome, Manager!");
-        ManagerInterface *view = new ManagerInterface(nullptr,userId);
-        view->show();
-        this->hide();
-    }
-    else if (role == "Employee") {
-        showMessage(this, true, "Login successful. Welcome, Employee!");
-    }
-    else {
-        showMessage(this, false, "Login Failed: Invalid email or password.");
+        ManagerInterface *view = new ManagerInterface(nullptr, userId);
+        view->show(); 
+        this->close();
     }
 }
+
 
 void LoginSignupInterface::signup() {
     QString name = nameInput->text().trimmed();
@@ -237,8 +227,8 @@ void LoginSignupInterface::signup() {
     
     string role = "Customer";
     string id = appController->signin(name.toStdString(), email.toStdString(), phone.toStdString(), password.toStdString(), address.toStdString(), role);
-
+    showMessage(this, true, "Signup successful! You can now login.");
     CustomerInterface *view = new CustomerInterface(nullptr, id);
     view->show();
-    showMessage(this, true, "Signup successful! You can now login.");
+    this->close();
 }

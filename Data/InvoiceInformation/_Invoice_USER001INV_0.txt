@@ -1,0 +1,18 @@
+======================== INVOICE ========================
+Invoice ID          : USER001INV_0                       
+Customer ID         : USER001                            
+Customer Name       : Nguyễn Văn Trung Ánh           
+Phone               : 0768406235                         
+Email               : trunganh@gmail.com                 
+Address             : 26 Đặng Chất, Hòa Khánh Bắc, Liên Chiểu, Đà Nẵng
+Invoice Date        : 2024-12-02                         
+Delivery Date       : 2024-12-02                         
+Payment Method      : Credit Card                        
+--------------------------------------------------------
+Product Name                            Quantity       Price          Total          
+--------------------------------------------------------
+Điện thoại Google Pixel 6               1              900.00         900.00         
+Điện thoại Apple iPhone SE (2022)       1              500.00         500.00         
+Điện thoại Oppo Find X3                 1              700.00         700.00         
+========================================================
+                                             Total Amount     : $2100.00

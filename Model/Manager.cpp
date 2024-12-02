@@ -31,3 +31,15 @@ bool Manager ::removeProduct(const string& id){
     }
     return false;
 }
+
+void Manager :: updateProduct(Product& product){
+    DataController data;
+    Vector<Product> listProducts = data.loadProductData();
+    for(int i = 0; i < listProducts.getSize(); i++){
+        if(listProducts[i].getProductId() == product.getProductId()){
+            listProducts[i] = product;
+            data.saveProductsData(listProducts);
+            return;
+        }
+    }
+}

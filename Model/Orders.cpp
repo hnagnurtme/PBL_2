@@ -26,4 +26,3 @@ Orders ::Orders(const Orders& other){
     customerID = other.customerID;
     invoices = other.invoices;
 }
-

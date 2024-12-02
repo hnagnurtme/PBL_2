@@ -26,7 +26,6 @@ private:
     QLineEdit *emailInput;
     QLineEdit *passwordInput;
     QPushButton *loginButton;
-    QLabel *forgotPasswordLabel;
     QLabel *loginImage;
     QLineEdit *nameInput;
     QLineEdit *signupEmailInput;

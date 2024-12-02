@@ -64,13 +64,36 @@ ManagerInterface::ManagerInterface(QWidget *parent,const string &managerid) : QW
     setFixedSize(1500, 800);
     setWindowTitle("Manager Homepage");
 
-    showOverviewButton = new QPushButton("Overview", this);
-    showProductsButton = new QPushButton("Products", this);
-    showCustomersButton = new QPushButton("Customers", this);
-    showInvoicesButton = new QPushButton("Invoices", this);
-    showAccountButton = new QPushButton("Account", this);
-    checkoutButton = new QPushButton("Logout", this);
-    checkoutButton->setObjectName("cancelButton");
+    showOverviewButton = new QPushButton(" Overview", this);
+    showProductsButton = new QPushButton(" Products", this);
+    showCustomersButton = new QPushButton(" Customers", this);
+    showInvoicesButton = new QPushButton(" Invoices", this);
+    showAccountButton = new QPushButton(" Account", this);
+    checkoutButton = new QPushButton(" Logout", this);
+    QIcon icon1 = QIcon(":/icon22");
+    QIcon icon2 = QIcon(":/icon23");
+    QIcon icon3 = QIcon(":/icon27");
+    QIcon icon4 = QIcon(":/icon28");
+    QIcon icon5 = QIcon(":/icon24");
+    QIcon icon6 = QIcon(":/icon25");
+    showOverviewButton->setIcon(icon1);
+    showOverviewButton->setIconSize(QSize(45, 45));
+    showProductsButton->setIcon(icon2);
+    showProductsButton->setIconSize(QSize(45, 45));
+    showCustomersButton->setIcon(icon3);
+    showCustomersButton->setIconSize(QSize(45, 45));
+    showInvoicesButton->setIcon(icon4);
+    showInvoicesButton->setIconSize(QSize(45, 45));
+    showAccountButton->setIcon(icon5);
+    showAccountButton->setIconSize(QSize(45, 45));
+    checkoutButton->setIcon(icon6);
+    checkoutButton->setIconSize(QSize(45, 45));
+    showOverviewButton->setFixedSize(180, 70);
+    showProductsButton->setFixedSize(180, 70);
+    showCustomersButton->setFixedSize(180, 70);
+    showInvoicesButton->setFixedSize(180, 70);
+    showAccountButton->setFixedSize(180, 70);
+    checkoutButton->setFixedSize(180, 70);
 
     connect(showOverviewButton, &QPushButton::clicked, this, &ManagerInterface::showOverview);
     connect(showProductsButton, &QPushButton::clicked, this, &ManagerInterface::showProducts);
@@ -167,7 +190,7 @@ ManagerInterface::ManagerInterface(QWidget *parent,const string &managerid) : QW
     layout->addWidget(stackWidget);
     mainLayout->addLayout(layout);
     setLayout(mainLayout);
-    showProducts();
+    showOverview();
 }
 
 void ManagerInterface::showProducts(){
@@ -195,7 +218,127 @@ void ManagerInterface::checkout(){
     this->close();
 }
 
-void ManagerInterface::showAccount(){
+void ManagerInterface::showAccount(bool change ) {
+    QLayout* oldLayout = managerInforBox->layout();
+    if (oldLayout) {
+        QLayoutItem* item;
+        while ((item = oldLayout->takeAt(0)) != nullptr) {
+            if (item->widget()) {
+                item->widget()->deleteLater();
+            }
+            delete item;
+        }
+        delete oldLayout;
+    }
+
+    string name = manager->getName();
+    string email = manager->getEmail();
+    string address = manager->getAddress();
+    string phone = manager->getPhone();
+    string password = manager->getPassword();
+
+    QLabel* nameLabelText = new QLabel("Name: ");
+    QLabel* nameLabel = new QLabel(QString::fromStdString(name));
+    QLineEdit* nameEdit = new QLineEdit(QString::fromStdString(name));
+    
+    QLabel* emailLabelText = new QLabel("Email: ");
+    QLabel* emailLabel = new QLabel(QString::fromStdString(email));
+    QLineEdit* emailEdit = new QLineEdit(QString::fromStdString(email));
+    
+    QLabel* addressLabelText = new QLabel("Address: ");
+    QLabel* addressLabel = new QLabel(QString::fromStdString(address));
+    QLineEdit* addressEdit = new QLineEdit(QString::fromStdString(address));
+    
+    QLabel* phoneLabelText = new QLabel("Phone: ");
+    QLabel* phoneLabel = new QLabel(QString::fromStdString(phone));
+    QLineEdit* phoneEdit = new QLineEdit(QString::fromStdString(phone));
+    
+    QLabel* passwordLabelText = new QLabel("Password: ");
+    QLabel* passwordLabel = new QLabel(QString::fromStdString(password));
+    QLineEdit* passwordEdit = new QLineEdit(QString::fromStdString(password));
+
+    nameLabelText->setObjectName("titleLabel");
+    nameLabel->setObjectName("inputArea");
+    nameEdit->setObjectName("inputArea");
+
+    emailLabelText->setObjectName("titleLabel");
+    emailLabel->setObjectName("inputArea");
+    emailEdit->setObjectName("inputArea");
+
+    addressLabelText->setObjectName("titleLabel");
+    addressLabel->setObjectName("inputArea");
+    addressEdit->setObjectName("inputArea");
+
+    phoneLabelText->setObjectName("titleLabel");
+    phoneLabel->setObjectName("inputArea");
+    phoneEdit->setObjectName("inputArea");
+
+    passwordLabelText->setObjectName("titleLabel");
+    passwordLabel->setObjectName("inputArea");
+    passwordEdit->setObjectName("inputArea");
+
+    QGridLayout* layout = new QGridLayout(managerInforBox);
+    managerInforBox->setFixedSize(900, 300);
+
+    layout->addWidget(nameLabelText, 0, 0);
+    layout->addWidget(nameLabel, 0, 1);
+    layout->addWidget(nameEdit, 0, 2);
+    
+    layout->addWidget(emailLabelText, 1, 0);
+    layout->addWidget(emailLabel, 1, 1);
+    layout->addWidget(emailEdit, 1, 2);
+    
+    layout->addWidget(addressLabelText, 2, 0);
+    layout->addWidget(addressLabel, 2, 1);
+    layout->addWidget(addressEdit, 2, 2);
+    
+    layout->addWidget(phoneLabelText, 3, 0);
+    layout->addWidget(phoneLabel, 3, 1);
+    layout->addWidget(phoneEdit, 3, 2);
+    
+    layout->addWidget(passwordLabelText, 4, 0);
+    layout->addWidget(passwordLabel, 4, 1);
+    layout->addWidget(passwordEdit, 4, 2);
+
+    changeButton = new QPushButton("Change");
+    applyButton = new QPushButton("Apply Change");
+    applyButton->setVisible(false);
+
+    connect(changeButton, &QPushButton::clicked, [this, nameEdit, emailEdit, addressEdit, phoneEdit, passwordEdit]() {
+        nameEdit->setVisible(true);
+        emailEdit->setVisible(true);
+        addressEdit->setVisible(true);
+        phoneEdit->setVisible(true);
+        passwordEdit->setVisible(true);
+        applyButton->setVisible(true);
+        changeButton->setVisible(false);
+    });
+    
+    connect(applyButton, &QPushButton::clicked, [this, nameEdit, emailEdit, addressEdit, phoneEdit, passwordEdit]() {
+        manager->setName(nameEdit->text().toStdString());
+        manager->setEmail(emailEdit->text().toStdString());
+        manager->setAddress(addressEdit->text().toStdString());
+        manager->setPhone(phoneEdit->text().toStdString());
+        manager->setPassword(passwordEdit->text().toStdString());
+        dataController->updateManager(*manager);
+        showAccount(false);
+    });
+
+    QHBoxLayout* buttonLayout = new QHBoxLayout();
+    buttonLayout->addWidget(changeButton);
+    buttonLayout->addWidget(applyButton);
+    layout->addLayout(buttonLayout, 5, 0, 1, 3);
+    managerInforBox->setLayout(layout);
+    managerInforBox->show();
+    stackWidget->setCurrentIndex(4);
+
+    if (!change) {
+        nameEdit->setVisible(false);
+        emailEdit->setVisible(false);
+        addressEdit->setVisible(false);
+        phoneEdit->setVisible(false);
+        passwordEdit->setVisible(false);
+    }
 
     stackWidget->setCurrentIndex(4);
 }
@@ -382,23 +525,28 @@ void ManagerInterface ::showDetailsProducts(int row){
 void ManagerInterface::addCustomersData() {
     customersTable->clearContents();
     customersTable->setRowCount(0);
-    Vector<Customer> customers = dataController->loadAllCustomersData();
-    size_t customerCount = customers.getSize(); 
+
+    Vector<Pair<Customer, double>> customerTotalData = appController->sortCustomerByAmount();
+    size_t customerCount = customerTotalData.getSize();
     int row = 0;
+
+    if (customerCount == 0) {
+        qDebug() << "No customers to display.";
+        return;
+    }
+
     for (size_t i = 0; i < customerCount && row < 100; ++i) {
+        const Customer& customer = customerTotalData[i].getFirst();
+        double totalPrice = customerTotalData[i].getSecond();
+
         customersTable->insertRow(row);
-        customersTable->setItem(row, 0, new QTableWidgetItem(QString::number(row + 1))); 
-        customersTable->setItem(row, 1, new QTableWidgetItem(QString::fromStdString(customers[i].getUserId()))); 
-        customersTable->setItem(row, 2, new QTableWidgetItem(QString::fromStdString(customers[i].getName()))); 
-        customersTable->setItem(row, 3, new QTableWidgetItem(QString::fromStdString(customers[i].getEmail()))); 
-        customersTable->setItem(row, 4, new QTableWidgetItem(QString::fromStdString(customers[i].getPhone()))); 
-        customersTable->setItem(row, 5, new QTableWidgetItem(QString::fromStdString(customers[i].getAddress()))); 
-        Vector<Invoice*> invoices = dataController->loadOrdersData(customers[i].getUserId()).getInvoice();
-        double totalPrice = 0.0;
-        for (size_t j = 0; j < invoices.getSize(); ++j) {
-            totalPrice += invoices[j]->getTotalAmount();
-        }
-        customersTable->setItem(row, 6, new QTableWidgetItem(QString::number(totalPrice))); 
+        customersTable->setItem(row, 0, new QTableWidgetItem(QString::number(row + 1)));
+        customersTable->setItem(row, 1, new QTableWidgetItem(QString::fromStdString(customer.getUserId())));
+        customersTable->setItem(row, 2, new QTableWidgetItem(QString::fromStdString(customer.getName())));
+        customersTable->setItem(row, 3, new QTableWidgetItem(QString::fromStdString(customer.getEmail())));
+        customersTable->setItem(row, 4, new QTableWidgetItem(QString::fromStdString(customer.getPhone())));
+        customersTable->setItem(row, 5, new QTableWidgetItem(QString::fromStdString(customer.getAddress())));
+        customersTable->setItem(row, 6, new QTableWidgetItem(QString::number(totalPrice)));
 
         QPushButton *deleteCustomerButton = new QPushButton();
         QIcon addIcon("Resource/ICON/ICON13.png"); 
@@ -415,13 +563,16 @@ void ManagerInterface::addCustomersData() {
 
         row++; 
     }
+
     for (int i = 0; i < row; ++i) {
         customersTable->setRowHeight(i, 70);
     }
+
     if (customersTable->rowCount() == 0) {
         qDebug() << "Customers table is empty.";
-    }  
+    }
 }
+
 
 void ManagerInterface::addInvoicesData() {
     invoicesTable->clearContents();
@@ -456,13 +607,6 @@ void ManagerInterface::addInvoicesData() {
     for (int row = 0; row < invoicesTable->rowCount(); ++row) {
         invoicesTable->setRowHeight(row, 70);
     }
-    // invoicesTable->setColumnWidth(0, 50); 
-    // invoicesTable->setColumnWidth(1, 150);
-    // invoicesTable->setColumnWidth(2, 150);
-    // invoicesTable->setColumnWidth(3, 150);
-    // invoicesTable->setColumnWidth(4, 180);
-    // invoicesTable->setColumnWidth(5, 150);
-    // invoicesTable->setColumnWidth(6, 100);
     
 }
 
@@ -565,7 +709,7 @@ void ManagerInterface::showOverview() {
     soldProductCountButton->setIcon(Icon1);
     soldProductCountButton->setIconSize(QSize(35, 35));
     QLabel *soldProductCountLabel = new QLabel(QString::number(numberOfProduct));
-    soldProductCountLabel->setObjectName("titleLabel");
+    soldProductCountLabel->setObjectName("overral");
     
     Layout1->addWidget(soldProductCountButton);
     Layout1->addWidget(soldProductCountLabel);
@@ -578,7 +722,7 @@ void ManagerInterface::showOverview() {
     totalAmountSpentButton->setIcon(Icon2);
     totalAmountSpentButton->setIconSize(QSize(35, 35));
     QLabel *totalAmountLabel = new QLabel( QString::number(totalAmountSpent, 'f', 2));
-    totalAmountLabel->setObjectName("titleLabel");
+    totalAmountLabel->setObjectName("overral");
     Layout2->addWidget(totalAmountSpentButton);
     Layout2->addWidget(totalAmountLabel);
 
@@ -590,7 +734,7 @@ void ManagerInterface::showOverview() {
     totalCustomerButton->setIconSize(QSize(35, 35));
     int numCustomers = dataController->loadAllCustomersData().getSize();
     QLabel *totalCustomerLabel = new QLabel( QString::number(numCustomers));
-    totalCustomerLabel->setObjectName("titleLabel");
+    totalCustomerLabel->setObjectName("overral");
     Layout3->addWidget(totalCustomerButton);
     Layout3->addWidget(totalCustomerLabel);
 
@@ -602,13 +746,13 @@ void ManagerInterface::showOverview() {
     totalInvoice->setIconSize(QSize(35, 35));
     int numInvoice = appController->loadAllInvoice().getSize();
     QLabel *totalInvoicesLabel = new QLabel( QString::number(numInvoice));
-    totalInvoicesLabel->setObjectName("titleLabel");
+    totalInvoicesLabel->setObjectName("overral");
     Layout4->addWidget(totalInvoice);
     Layout4->addWidget(totalInvoicesLabel);
 
     connect(totalCustomerButton, &QPushButton::clicked, this, &ManagerInterface::showCustomers);
-    connect(soldProductCountButton, &QPushButton::clicked, this, &ManagerInterface::showProducts);
-    connect(totalAmountSpentButton, &QPushButton::clicked, this, &ManagerInterface::showCustomers);
+    connect(soldProductCountButton, &QPushButton::clicked, this, &ManagerInterface::showSoldProduct);
+    connect(totalAmountSpentButton, &QPushButton::clicked, this, &ManagerInterface::showSoldProduct);
     connect(totalInvoice, &QPushButton::clicked, this, &ManagerInterface::showInvoices);
 
     QGroupBox *soldProductCountBox = new QGroupBox(this);
@@ -622,9 +766,17 @@ void ManagerInterface::showOverview() {
     soldProductCountLayout->addSpacing(10);
     soldProductCountLayout->addWidget(box4);
 
-    QPushButton *showSoldProductCountButton = new QPushButton("Show Sold Product Count");
-    QPushButton *showInvoiceByDateButton = new QPushButton("Show Amount By Date");
-    QPushButton *showCustomerByAmountButton = new QPushButton("Show Customer By Amount");
+    QPushButton *showSoldProductCountButton = new QPushButton(" Show Sold Product Count");
+    QPushButton *showInvoiceByDateButton = new QPushButton(" Show Amount By Date");
+    QPushButton *showCustomerByAmountButton = new QPushButton(" Show Customer By Amount");
+    QIcon iconChart(":/icon21");
+    showSoldProductCountButton->setIcon(iconChart);
+    showInvoiceByDateButton->setIcon(iconChart);
+    showCustomerByAmountButton->setIcon(iconChart);
+    showSoldProductCountButton->setIconSize(QSize(35, 35));
+    showInvoiceByDateButton->setIconSize(QSize(35, 35));
+    showCustomerByAmountButton->setIconSize(QSize(35, 35));
+    
     connect(showInvoiceByDateButton, &QPushButton::clicked, this, &ManagerInterface::showAmountByDate);
     connect(showSoldProductCountButton, &QPushButton::clicked, this, &ManagerInterface::showProductById);
     connect(showCustomerByAmountButton,&QPushButton::clicked,this, &ManagerInterface::showCustomerByAmount);
@@ -653,6 +805,7 @@ void ManagerInterface:: showProductById(){
         int quantity = soldProducts[i].getSecond();
         data.pushback(Pair<QString, double>(productId, quantity));
     }
+    if(data.getSize()!=0)
     drawChart(data, "Total Revenue by Product ID", "Product ID", "Revenue", diagramBox);
 }
 void ManagerInterface::showAmountByDate() {
@@ -684,9 +837,9 @@ void ManagerInterface::showAmountByDate() {
         data.pushback(Pair<QString, double>(allDates[i], allAmounts[i]));
     }
 
+    if(data.getSize()!=0)
     drawChart(data, "Total Amount By Date", "Date", "Amount", diagramBox);
 }
-
 void ManagerInterface:: showCustomerByAmount(){
     Vector<Pair<QString, double>> data;
     Vector<Customer> customers = dataController->loadAllCustomersData();
@@ -701,6 +854,7 @@ void ManagerInterface:: showCustomerByAmount(){
         data.pushback(Pair<QString, double>(customerName, totalPrice));
         }
     }
+    if(data.getSize()!=0)
     drawChart(data, "Total Amount By Customer", "Customer", "Amount", diagramBox);
 }
 void  ManagerInterface:: filterProducts(){
@@ -759,4 +913,33 @@ void  ManagerInterface::filterInvoice(){
             invoicesTable->setRowHidden(row, true);
         }
     }
+}
+
+void ManagerInterface::showSoldProduct() {
+    Vector<Pair<string, int>> soldProducts = appController->sortSoldProducts();
+    QDialog *dialog = new QDialog(this);
+    dialog->setWindowTitle("Sold Products");
+    dialog->resize(800, 500);
+    QTableWidget *table = new QTableWidget(dialog);
+    table->setColumnCount(4);
+    table->setHorizontalHeaderLabels({"Product ID","Product Name" , "Quantity Sold","Price"});
+    table->setRowCount(soldProducts.getSize());
+    for (int i = 0; i < soldProducts.getSize(); ++i) {
+        const Pair<string, int> &product = soldProducts[i];
+        table->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(product.getFirst())));
+        string productname ;
+        int price = dataController->findProductById(product.getFirst()).getPrice();
+        productname = dataController->findProductById(product.getFirst()).getName();
+        table->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(productname)));
+        table->setItem(i, 3, new QTableWidgetItem(QString::number(product.getSecond())));
+        table->setItem(i, 2, new QTableWidgetItem(QString::number(price)));
+        
+    }
+    table->setColumnWidth(1,300);
+    table->setColumnWidth(2,150);
+    table->setColumnWidth(3,150);
+    QVBoxLayout *layout = new QVBoxLayout(dialog);
+    layout->addWidget(table);
+    dialog->setLayout(layout);
+    dialog->exec();
 }

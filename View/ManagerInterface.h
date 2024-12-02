@@ -35,7 +35,7 @@ public:
     void showProducts();
     void filterProducts();
     void checkout();
-    void showAccount();
+    void showAccount(bool change = false);
     void showCustomers();
     void showInvoices();
     void filterCustomer();
@@ -44,6 +44,7 @@ public:
     void showAmountByDate();
     void showProductById();
     void showCustomerByAmount();
+    void showSoldProduct();
 signals:
 private:
     Manager* manager;
@@ -66,6 +67,8 @@ private:
     QGroupBox *managerInforBox;
     QPushButton *addNewProductButton;
     QGroupBox *diagramBox;
+    QPushButton* applyButton;
+    QPushButton* changeButton;
     void addProductsData();
     void addCustomersData();
     void addInvoicesData();

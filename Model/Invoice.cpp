@@ -146,4 +146,3 @@ string Invoice::getDeliveryDate(){
 void Invoice:: setInvoiceDate(const string& date){
     invoiceDate = date;
 }
-

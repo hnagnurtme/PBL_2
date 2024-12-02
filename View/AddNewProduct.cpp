@@ -113,4 +113,3 @@ void AddProductWidget::onCancelButtonClicked() {
     showMessage(this,false,"Add New Product Failed ");
     this->close();
 }
-

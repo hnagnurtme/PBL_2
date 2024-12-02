@@ -5,7 +5,6 @@
 #include "Datastructures/Pair.h"
 #include <string>
 #include <iostream>
-
 using namespace std;
 class Product;
 class Cart {

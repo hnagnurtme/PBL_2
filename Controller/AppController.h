@@ -18,5 +18,7 @@ class AppController{
     string signin( const string& name, const string& email, const string& phone, const string& password, const string& address,const string& role);
     Vector<Invoice*> sortInvoiceByDate();
     Vector<Invoice*> loadAllInvoice();
+    Vector<Pair<string,int>> sortSoldProducts();
+    Vector<Pair<Customer, double>> sortCustomerByAmount();
     string createProductId();
 };

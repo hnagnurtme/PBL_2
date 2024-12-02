@@ -255,10 +255,12 @@ QDoubleSpinBox::down-button:hover, QSpinBox::down-button:hover {
     background-color: #b3e1e5;
 }
 
-/* Mũi tên trong nút tăng/giảm */
-QDoubleSpinBox::up-arrow, QSpinBox::up-arrow,
-QDoubleSpinBox::down-arrow, QSpinBox::down-arrow {
-    width: 7px;
-    height: 7px;
-    image: url(:/INCON/ICON14.png); /* Icon mũi tên tăng */
+#overral {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
+                                stop:0 #fff, stop:1 #e0f7f9);
+    color: #028090;
+    font-size: 26px;
+    font-weight: bold; /* Chữ đậm */
+    qproperty-alignment: 'AlignCenter'; /* Căn giữa theo cả trục ngang và trục dọc */
+    text-align: center; /* Chỉ áp dụng cho QLabel */
 }

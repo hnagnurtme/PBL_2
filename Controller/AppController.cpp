@@ -113,3 +113,49 @@ string AppController::createProductId() {
     delete data;
     return id;
 }
+Vector<Pair<string,int>>  AppController:: sortSoldProducts(){
+    DataController data;
+    Vector<Pair<string,int>> soldProducts = data.loadSoldProductData();
+    for (int i = 1; i < soldProducts.getSize(); ++i) {
+        Pair<std::string, int> key = soldProducts[i];
+        int j = i - 1;
+        while (j >= 0 && soldProducts[j].getSecond() < key.getSecond()) {
+            soldProducts[j + 1] = soldProducts[j];
+            --j;
+        }
+
+        soldProducts[j + 1] = key;
+    }
+    return soldProducts;
+}
+
+Vector<Pair<Customer, double>> AppController::sortCustomerByAmount() {
+    DataController data;
+    Vector<Customer> customers = data.loadAllCustomersData();
+    Vector<Pair<Customer, double>> customerTotalData;
+
+    for (int i = 0; i < customers.getSize(); i++) {
+        Vector<Invoice*> invoices = data.loadOrdersData(customers[i].getUserId()).getInvoice();
+        double totalPrice = 0.0;
+        for (int j = 0; j < invoices.getSize(); ++j) {
+            totalPrice += invoices[j]->getTotalAmount();
+        }
+        for (int j = 0; j < invoices.getSize(); j++) {
+            totalPrice += invoices[j]->getTotalAmount();
+        }
+        customerTotalData.pushback(Pair<Customer, double>(customers[i], totalPrice));
+    }
+
+    for (int i = 1; i < customerTotalData.getSize(); i++) {
+        Pair<Customer, double> keyPair = customerTotalData[i];
+        double keyTotal = keyPair.getSecond();
+        int j = i - 1;
+        while (j >= 0 && customerTotalData[j].getSecond() < keyTotal) {
+            customerTotalData[j + 1] = customerTotalData[j];
+            j--;
+        }
+        customerTotalData[j + 1] = keyPair;
+    }
+
+    return customerTotalData;
+}

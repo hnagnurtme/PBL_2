@@ -4,6 +4,7 @@
 #include "Model/Orders.h"
 #include "Datastructures/Vector.h"
 #include "Controller/DataController.h"
+#include "Controller/AppController.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QHeaderView>
@@ -55,13 +56,38 @@ CustomerInterface::CustomerInterface(QWidget *parent,const string &customerid) :
     setFixedSize(1500, 800);
     setWindowTitle("Customer Homepage");
     
-    showOverviewButton = new QPushButton("Overview", this);
-    showProductsButton = new QPushButton("Products", this);
-    showCartButton = new QPushButton("Cart", this);
-    showOrdersButton = new QPushButton("Orders", this);
-    showAccountButton = new QPushButton("Account", this);
-    checkoutButton = new QPushButton("Logout", this);
-    checkoutButton->setObjectName("cancelButton");
+    showOverviewButton = new QPushButton(" Overview", this);
+    showProductsButton = new QPushButton(" Products", this);
+    showCartButton = new QPushButton(" Cart", this);
+    showOrdersButton = new QPushButton(" Orders", this);
+    showAccountButton = new QPushButton(" Account", this);
+    checkoutButton = new QPushButton(" Logout", this);
+    
+    QIcon icon1 = QIcon(":/icon22");
+    QIcon icon2 = QIcon(":/icon23");
+    QIcon icon3 = QIcon(":/icon26");
+    QIcon icon4 = QIcon(":/icon28");
+    QIcon icon5 = QIcon(":/icon24");
+    QIcon icon6 = QIcon(":/icon25");
+    showOverviewButton->setIcon(icon1);
+    showOverviewButton->setIconSize(QSize(45, 45));
+    showProductsButton->setIcon(icon2);
+    showProductsButton->setIconSize(QSize(45, 45));
+    showCartButton->setIcon(icon3);
+    showCartButton->setIconSize(QSize(45, 45));
+    showOrdersButton->setIcon(icon4);
+    showOrdersButton->setIconSize(QSize(45, 45));
+    showAccountButton->setIcon(icon5);
+    showAccountButton->setIconSize(QSize(45, 45));
+    checkoutButton->setIcon(icon6);
+    checkoutButton->setIconSize(QSize(45, 45));
+    showOverviewButton->setFixedSize(180, 70);
+    showProductsButton->setFixedSize(180, 70);
+    showCartButton->setFixedSize(180, 70);
+    showOrdersButton->setFixedSize(180, 70);
+    showAccountButton->setFixedSize(180, 70);
+    checkoutButton->setFixedSize(180, 70);
+    checkoutButton->setObjectName(" cancelButton");
 
     connect(showOverviewButton, &QPushButton::clicked, this, &CustomerInterface::showOverview);
     connect(showProductsButton, &QPushButton::clicked, this, &CustomerInterface::showProducts);
@@ -224,13 +250,20 @@ void CustomerInterface::addProductsData() {
             productTable->setItem(row, 1, new QTableWidgetItem("Không có ảnh"));
         }
         QPushButton *addProductsButton = new QPushButton();
-        QIcon addIcon("Resource/ICON/ICON2.png"); 
-        addProductsButton->setIcon(addIcon);
+        if(products[i].getStock() == 0) {
+            QIcon soldOutIcon(":/icon20");
+            addProductsButton->setIcon(soldOutIcon);
+        }else {
+            QIcon addIcon("Resource/ICON/ICON2.png"); 
+            addProductsButton->setIcon(addIcon);
+        }
+        
         addProductsButton->setIconSize(QSize(35, 35));
         connect(addProductsButton, &QPushButton::clicked, [this, row]() { addProducts(row, false); });
         QPushButton *showDetailsButton = new QPushButton();
-        QIcon heartIcon("Resource/ICON/ICON10.png"); 
-        showDetailsButton->setIcon(heartIcon);
+        
+        QIcon showDetailIcon("Resource/ICON/ICON10.png"); 
+        showDetailsButton->setIcon(showDetailIcon);
         showDetailsButton->setIconSize(QSize(35, 35));
         connect(showDetailsButton, &QPushButton::clicked, [this, row]() { showDetailsProducts(row); });
         QHBoxLayout *actionLayout = new QHBoxLayout();
@@ -268,8 +301,6 @@ void CustomerInterface::showProducts() {
     productTable->setColumnWidth(3,300);
     productTable->setColumnWidth(0,100);
 
-
-
     productTable->setHorizontalHeaderLabels({"No.", "Description", "Product ID", "Product Name", "Price", "Quantity", "Add to Cart"});
     addProductsData();
     stackWidget->setCurrentIndex(0);
@@ -289,10 +320,14 @@ void CustomerInterface::addProducts(int row, bool fromCart) {
         giaSanPham = productTable->item(row, 4)->text();
         productId = productTable->item(row, 2)->text();
     }
-
-    Product *product = new Product(productId.toStdString(), tenSanPham.toStdString(), "", giaSanPham.toDouble(), 0, "", Vector<string>(), "");
-    customer->addToCart(product,1);
-
+    Product newProduct = dataController->findProductById(productId.toStdString());
+    int num = customer->getCart()->getItemQuantity(productId.toStdString());
+    if (newProduct.getStock() <= num || newProduct.getStock() <=0 ) {
+        QMessageBox::warning(this, "Out of Stock", "The product is out of stock!");
+        return;
+    }
+    Product *productCopy = new Product(newProduct);
+    customer->addToCart(productCopy, 1);
     if (fromCart) {
         showCart();
     }
@@ -439,41 +474,63 @@ void drawChart(const Vector<Pair<QString, double>>& data, const QString& title, 
 }
 
 void CustomerInterface::showOverview() {
+     QLayout *existingLayout = overviewBox->layout();
+    if (existingLayout) {
+        QLayoutItem *item;
+        while ((item = existingLayout->takeAt(0)) != nullptr) {
+            delete item->widget();  
+            delete item;  
+        }
+        delete existingLayout;  
+    }
     Orders orders = customer->getOrderHistory();
     Vector<Invoice*> invoices = orders.getInvoice();
-
-    if (invoices.getSize() == 0) {
-        QMessageBox::information(this, "No orders", "You have no orders");
-        showProducts();
-        return;
-        } else {
-
     Vector<Pair<QString, double>> data;  
     double totalAmountSpent = 0.0;  
     int totalOrders = invoices.getSize();  
-
-    for (int i = 0; i < invoices.getSize(); ++i) {
+    for (int i = 0; i < totalOrders; ++i) {
         QString invoiceId = QString::fromStdString(invoices[i]->getInvoiceId());
         double totalAmount = invoices[i]->getTotalAmount();
-        
         data.pushback(Pair<QString, double>(invoiceId, totalAmount));
         totalAmountSpent += totalAmount;
     }
 
-    QLabel *orderCountLabel = new QLabel("Total Orders: " + QString::number(totalOrders));
-    QLabel *totalAmountLabel = new QLabel("Total Amount Spent: " + QString::number(totalAmountSpent, 'f', 2));
 
-    
-    drawChart(data, "Product Quantities by Product ID", "Product ID", "Quantity", overviewBox);
+    QGroupBox *box1 = new QGroupBox(this);
+    QVBoxLayout *Layout1 = new QVBoxLayout(box1);
+    QPushButton *orderCountButton = new  QPushButton("Total Orders" );
+    QIcon Icon1(":/icon19"); 
+    orderCountButton->setIcon(Icon1);
+    orderCountButton->setIconSize(QSize(35, 35));
+    QLabel *orderCountLabel = new QLabel(QString::number(totalOrders));
+    orderCountLabel->setObjectName("overral");
+    Layout1->addWidget(orderCountButton);
+    Layout1->addWidget(orderCountLabel);
 
+    QGroupBox *box2 = new QGroupBox(this);
+    QVBoxLayout *Layout2 = new QVBoxLayout(box2);
+
+    QPushButton *totalAmountSpentButton = new QPushButton("Total Amount Spent");
+    QIcon Icon2(":/icon18");
+    totalAmountSpentButton->setIcon(Icon2);
+    totalAmountSpentButton->setIconSize(QSize(35, 35));
+    QLabel *totalAmountLabel = new QLabel( QString::number(totalAmountSpent, 'f', 2));
+    totalAmountLabel->setObjectName("overral");
+    Layout2->addWidget(totalAmountSpentButton);
+    Layout2->addWidget(totalAmountLabel);
+    diagramBox = new QGroupBox(this);
+    if(totalOrders != 0)
+        drawChart(data, "Invoice ID by Amount", "Invoice ID", "Amount", diagramBox);
+    QGroupBox *totalBox = new QGroupBox(this);
+    QHBoxLayout *totalLayout = new QHBoxLayout(totalBox);
+    totalLayout->addWidget(box1);
+    totalLayout->addWidget(box2);
     QVBoxLayout *layout = new QVBoxLayout(overviewBox);
-    layout->addWidget(orderCountLabel);
-    layout->addWidget(totalAmountLabel);
+    layout->addWidget(totalBox);
+    layout->addWidget(diagramBox);
     overviewBox->setLayout(layout);
-
     overviewBox->show();
     stackWidget->setCurrentIndex(3);
-    }
 }
 
 void CustomerInterface::filterProducts() {
@@ -502,7 +559,7 @@ void CustomerInterface::showAccount(bool change) {
         QLayoutItem* item;
         while ((item = oldLayout->takeAt(0)) != nullptr) {
             if (item->widget()) {
-                item->widget()->deleteLater(); // Đảm bảo widget bị xóa an toàn
+                item->widget()->deleteLater(); 
             }
             delete item;
         }
@@ -559,29 +616,29 @@ void CustomerInterface::showAccount(bool change) {
     QGridLayout *layout = new QGridLayout(customerInforBox);
     customerInforBox->setFixedSize(900, 300); 
 
-    customerInforBox->move(50, 50);
 
-    layout->addWidget(nameLabelText, 0, 0);  // Đặt "Name:" tại (row 0, column 0)
-    layout->addWidget(nameLabel, 0, 1);      // Đặt tên tại (row 0, column 1)
-    layout->addWidget(nameEdit, 0, 2);       // Đặt ô nhập cho tên tại (row 0, column 2)
+    layout->addWidget(nameLabelText, 0, 0);  
+    layout->addWidget(nameLabel, 0, 1);      
+    layout->addWidget(nameEdit, 0, 2);       
     
-    layout->addWidget(emailLabelText, 1, 0); // Đặt "Email:" tại (row 1, column 0)
-    layout->addWidget(emailLabel, 1, 1);     // Đặt email tại (row 1, column 1)
-    layout->addWidget(emailEdit, 1, 2);      // Đặt ô nhập cho email tại (row 1, column 2)
+    layout->addWidget(emailLabelText, 1, 0); 
+    layout->addWidget(emailLabel, 1, 1);     
+    layout->addWidget(emailEdit, 1, 2);      
     
-    layout->addWidget(addressLabelText, 2, 0); // Đặt "Address:" tại (row 2, column 0)
-    layout->addWidget(addressLabel, 2, 1);     // Đặt địa chỉ tại (row 2, column 1)
-    layout->addWidget(addressEdit, 2, 2);      // Đặt ô nhập cho địa chỉ tại (row 2, column 2)
+    layout->addWidget(addressLabelText, 2, 0); 
+    layout->addWidget(addressLabel, 2, 1);    
+    layout->addWidget(addressEdit, 2, 2);      
     
-    layout->addWidget(phoneLabelText, 3, 0); // Đặt "Phone:" tại (row 3, column 0)
-    layout->addWidget(phoneLabel, 3, 1);     // Đặt điện thoại tại (row 3, column 1)
-    layout->addWidget(phoneEdit, 3, 2);      // Đặt ô nhập cho điện thoại tại (row 3, column 2)
+    layout->addWidget(phoneLabelText, 3, 0); 
+    layout->addWidget(phoneLabel, 3, 1);     
+    layout->addWidget(phoneEdit, 3, 2);     
     
-    layout->addWidget(passwordLabelText, 4, 0); // Đặt "Password:" tại (row 4, column 0)
-    layout->addWidget(passwordLabel, 4, 1);     // Đặt mật khẩu tại (row 4, column 1)
-    layout->addWidget(passwordEdit, 4, 2);      // Đặt ô nhập cho mật khẩu tại (row 4, column 2)
-    QPushButton* changeButton = new QPushButton("Change");
-    QPushButton* applyButton = new QPushButton("Apply Change");
+    layout->addWidget(passwordLabelText, 4, 0); 
+    layout->addWidget(passwordLabel, 4, 1);     
+    layout->addWidget(passwordEdit, 4, 2);      
+    changeButton = new QPushButton("Change");
+    applyButton = new QPushButton("Apply Change");
+    applyButton->setVisible(false);
 
     connect(changeButton, &QPushButton::clicked, [this, nameEdit, emailEdit, addressEdit, phoneEdit, passwordEdit]() {
         nameEdit->setVisible(true);
@@ -589,6 +646,8 @@ void CustomerInterface::showAccount(bool change) {
         addressEdit->setVisible(true);
         phoneEdit->setVisible(true);
         passwordEdit->setVisible(true);
+        applyButton->setVisible(true);
+        changeButton->setVisible(false);
     });
     
     connect(applyButton, &QPushButton::clicked, [this, nameEdit, emailEdit, addressEdit, phoneEdit, passwordEdit]() {
@@ -659,11 +718,9 @@ void CustomerInterface::showInvoice() {
 
 void CustomerInterface::payment() {
     showMessage(this,true,"Successfully completed your purchase");
-    
     QDate deliveryDate = deliveryDateEdit->date();
     QString deliveryDateString = deliveryDate.toString("yyyy-MM-dd");
     QString paymentMethod = paymentMethodComboBox->currentText();
-
     customer->payment(deliveryDateString.toStdString(),paymentMethod.toStdString());
     invoiceDisplay->setText("");
     paymentMethodLabel->setVisible(false);
@@ -759,4 +816,58 @@ void CustomerInterface::showInvoiceDetail(int row){
     else{
         showMessage(this,false,QString::fromStdString("Not founnd"));
     }
+}
+
+void CustomerInterface::drawChart(const Vector<Pair<QString, double>>& data, const QString& title, const QString& xLabel, const QString& yLabel, QWidget* container) {
+    QLayout *existingLayout = container->layout();
+    if (existingLayout) {
+        QLayoutItem *item;
+        while ((item = existingLayout->takeAt(0)) != nullptr) {
+            delete item->widget();  
+            delete item;  
+        }
+        delete existingLayout;  
+    }
+
+    QVector<QString> categories; 
+    QVector<double> values;     
+    int dataSize = data.getSize();
+    int maxItems = std::min(dataSize, 20);
+
+    for (int i = 0; i < maxItems; ++i) {
+        categories.append(data[i].getFirst());  
+        values.append(data[i].getSecond());    
+    }
+
+    QBarSet *set = new QBarSet(yLabel);
+    for (double value : values) {
+        *set << value;  
+    }
+
+    QBarSeries *series = new QBarSeries();
+    series->append(set);
+
+    series->setLabelsVisible(true);  
+
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->setTitle(title);
+    chart->setAnimationOptions(QChart::SeriesAnimations);
+
+    QBarCategoryAxis *axisX = new QBarCategoryAxis();
+    axisX->setTitleText(xLabel);
+    axisX->append(categories);
+    chart->setAxisX(axisX, series);
+    
+    QValueAxis *axisY = new QValueAxis();
+    axisY->setTitleText(yLabel);
+    axisY->setRange(0, *std::max_element(values.begin(), values.end()));
+    chart->setAxisY(axisY, series);
+
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+
+    QVBoxLayout *layout = new QVBoxLayout(container);
+    layout->addWidget(chartView);
+    container->setLayout(layout);
 }

@@ -19,6 +19,20 @@
         <file alias="icon13">ICON/ICON13.png</file>
         <file alias="icon14">ICON/ICON14.png</file>
         <file alias="icon15">ICON/ICON15.png</file>
+        <file alias="icon16">ICON/ICON16.png</file>
+        <file alias="icon17">ICON/ICON17.png</file>
+        <file alias="icon18">ICON/ICON18.png</file>
+        <file alias="icon19">ICON/ICON19.png</file>
+        <file alias="icon20">ICON/ICON20.png</file>
+        <file alias="icon21">ICON/ICON21.png</file>
+        <file alias="icon22">ICON/ICON22.png</file>
+        <file alias="icon23">ICON/ICON23.png</file>
+        <file alias="icon24">ICON/ICON24.png</file>
+        <file alias="icon25">ICON/ICON25.png</file>
+        <file alias="icon26">ICON/ICON26.png</file>
+        <file alias="icon27">ICON/ICON27.png</file>
+        <file alias="icon28">ICON/ICON28.png</file>
+
 
         <!-- SANPHAM Resources -->
         <file alias="product1">SANPHAM/PRD001.png</file>
@@ -69,5 +83,7 @@
         <file alias="product48">SANPHAM/PRD048.png</file>
         <file alias="product49">SANPHAM/PRD049.png</file>
         <file alias="product50">SANPHAM/PRD050.png</file>
+
+        <file alias="welcome">WELCOME.png</file>
     </qresource>
 </RCC>

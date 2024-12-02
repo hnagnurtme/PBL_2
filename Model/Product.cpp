@@ -99,8 +99,7 @@ bool Product::isAvailable(int requestedQuantity) const {
 }
 
 bool Product:: isEmpty() const {
-        return productId.empty() || name.empty() || category.empty() ||
-               price == 0.0 || stock == 0 || description.empty() || brand.empty();
+        return productId.empty();
     }
 
 Product&  Product:: operator=(const Product& other) {
@@ -115,4 +114,4 @@ Product&  Product:: operator=(const Product& other) {
             brand = other.brand;
         }
         return *this;
-    }
+}

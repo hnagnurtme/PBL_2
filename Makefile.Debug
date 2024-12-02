@@ -161,69 +161,83 @@ compiler_rcc_clean:
 debug/qrc_resources.cpp: Resource/resources.qrc \
 		C:/QT/6.7.3/mingw_64/bin/rcc.exe \
 		Resource/SANPHAM/PRD033.png \
-		Resource/SANPHAM/PRD015.png \
 		Resource/SANPHAM/PRD039.png \
-		Resource/SANPHAM/PRD029.png \
-		Resource/SANPHAM/PRD035.png \
 		Resource/SANPHAM/PRD018.png \
-		Resource/ICON/ICON4.png \
 		Resource/ICON/ICON10.png \
 		Resource/ICON/ICON13.png \
+		Resource/ICON/ICON2.png \
+		Resource/ICON/ICON12.png \
+		Resource/SANPHAM/PRD016.png \
+		Resource/SANPHAM/PRD049.png \
+		Resource/ICON/ICON23.png \
+		Resource/ICON/ICON22.png \
+		Resource/ICON/ICON25.png \
+		Resource/ICON/ICON28.png \
+		Resource/SANPHAM/PRD008.png \
+		Resource/SANPHAM/PRD009.png \
+		Resource/SANPHAM/PRD032.png \
+		Resource/SANPHAM/PRD002.png \
+		Resource/SANPHAM/PRD017.png \
+		Resource/SANPHAM/PRD034.png \
+		Resource/SANPHAM/PRD045.png \
+		Resource/SANPHAM/PRD020.png \
+		Resource/SANPHAM/PRD037.png \
+		Resource/SANPHAM/PRD007.png \
+		Resource/ICON/ICON5.png \
+		Resource/SANPHAM/PRD030.png \
+		Resource/ICON/ICON11.png \
+		Resource/SANPHAM/PRD042.png \
+		Resource/SANPHAM/PRD013.png \
+		Resource/SANPHAM/PRD027.png \
+		Resource/SANPHAM/PRD031.png \
+		Resource/SANPHAM/PRD048.png \
+		Resource/SANPHAM/PRD003.png \
+		Resource/SANPHAM/PRD019.png \
+		Resource/ICON/ICON17.png \
+		Resource/SANPHAM/PRD011.png \
+		Resource/SANPHAM/PRD026.png \
+		Resource/ICON/ICON19.png \
+		Resource/ICON/ICON16.png \
+		Resource/SANPHAM/PRD015.png \
+		Resource/SANPHAM/PRD029.png \
+		Resource/ICON/ICON24.png \
+		Resource/SANPHAM/PRD035.png \
+		Resource/ICON/ICON4.png \
 		Resource/SANPHAM/PRD001.png \
 		Resource/SANPHAM/PRD006.png \
 		Resource/SANPHAM/PRD036.png \
-		Resource/ICON/ICON2.png \
-		Resource/ICON/ICON12.png \
 		Resource/ICON/ICON8.png \
-		Resource/SANPHAM/PRD016.png \
-		Resource/SANPHAM/PRD049.png \
+		Resource/WELCOME.png \
 		Resource/SANPHAM/PRD041.png \
 		Resource/SANPHAM/PRD028.png \
 		Resource/SANPHAM/PRD046.png \
 		Resource/SANPHAM/PRD047.png \
 		Resource/ICON/ICON3.png \
-		Resource/SANPHAM/PRD008.png \
 		Resource/ICON/ICON6.png \
-		Resource/SANPHAM/PRD009.png \
 		Resource/ICON/ICON9.png \
 		Resource/ICON/ICON14.png \
+		Resource/ICON/ICON18.png \
 		Resource/SANPHAM/PRD012.png \
-		Resource/SANPHAM/PRD032.png \
-		Resource/SANPHAM/PRD002.png \
-		Resource/SANPHAM/PRD017.png \
 		Resource/SANPHAM/PRD022.png \
-		Resource/SANPHAM/PRD034.png \
-		Resource/SANPHAM/PRD020.png \
-		Resource/SANPHAM/PRD045.png \
-		Resource/SANPHAM/PRD037.png \
-		Resource/SANPHAM/PRD007.png \
 		Resource/ICON/ICON1.png \
-		Resource/ICON/ICON5.png \
 		Resource/SANPHAM/PRD005.png \
 		Resource/style.qss \
-		Resource/SANPHAM/PRD030.png \
+		Resource/ICON/ICON21.png \
 		Resource/SANPHAM/PRD021.png \
-		Resource/ICON/ICON11.png \
+		Resource/ICON/ICON27.png \
 		Resource/SANPHAM/PRD023.png \
 		Resource/SANPHAM/PRD040.png \
-		Resource/SANPHAM/PRD042.png \
-		Resource/SANPHAM/PRD013.png \
-		Resource/SANPHAM/PRD027.png \
 		Resource/SANPHAM/PRD025.png \
-		Resource/SANPHAM/PRD031.png \
 		Resource/SANPHAM/PRD038.png \
 		Resource/ICON/ICON15.png \
 		Resource/SANPHAM/PRD004.png \
 		Resource/SANPHAM/PRD014.png \
-		Resource/SANPHAM/PRD003.png \
-		Resource/SANPHAM/PRD019.png \
-		Resource/SANPHAM/PRD048.png \
 		Resource/SANPHAM/PRD024.png \
 		Resource/SANPHAM/PRD050.png \
 		Resource/ICON/ICON7.png \
 		Resource/SANPHAM/PRD010.png \
-		Resource/SANPHAM/PRD011.png \
-		Resource/SANPHAM/PRD026.png
+		Resource/ICON/ICON20.png \
+		Resource/ICON/ICON26.png
 	C:\QT\6.7.3\mingw_64\bin\rcc.exe -name resources --no-zstd Resource\resources.qrc -o debug\qrc_resources.cpp
 
 compiler_moc_predefs_make_all: debug/moc_predefs.h
@@ -486,7 +500,7 @@ debug/moc_CustomerInterface.cpp: View/CustomerInterface.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
 		debug/moc_predefs.h \
 		C:/QT/6.7.3/mingw_64/bin/moc.exe
-	C:\QT\6.7.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/PBL_2/debug/moc_predefs.h -IC:/QT/6.7.3/mingw_64/mkspecs/win32-g++ -ID:/PBL_2 -IC:/QT/6.7.3/mingw_64/include -IC:/QT/6.7.3/mingw_64/include/QtCharts -IC:/QT/6.7.3/mingw_64/include/QtOpenGLWidgets -IC:/QT/6.7.3/mingw_64/include/QtWidgets -IC:/QT/6.7.3/mingw_64/include/QtOpenGL -IC:/QT/6.7.3/mingw_64/include/QtGui -IC:/QT/6.7.3/mingw_64/include/QtCore -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/mingw64/x86_64-w64-mingw32/include View\CustomerInterface.h -o debug\moc_CustomerInterface.cpp
+	C:\QT\6.7.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/FINAL-PBL2/debug/moc_predefs.h -IC:/QT/6.7.3/mingw_64/mkspecs/win32-g++ -ID:/FINAL-PBL2 -IC:/QT/6.7.3/mingw_64/include -IC:/QT/6.7.3/mingw_64/include/QtCharts -IC:/QT/6.7.3/mingw_64/include/QtOpenGLWidgets -IC:/QT/6.7.3/mingw_64/include/QtWidgets -IC:/QT/6.7.3/mingw_64/include/QtOpenGL -IC:/QT/6.7.3/mingw_64/include/QtGui -IC:/QT/6.7.3/mingw_64/include/QtCore -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/mingw64/x86_64-w64-mingw32/include View\CustomerInterface.h -o debug\moc_CustomerInterface.cpp
 
 debug/moc_ManagerInterface.cpp: View/ManagerInterface.h \
 		C:/QT/6.7.3/mingw_64/include/QtCore/QMap \
@@ -742,7 +756,7 @@ debug/moc_ManagerInterface.cpp: View/ManagerInterface.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
 		debug/moc_predefs.h \
 		C:/QT/6.7.3/mingw_64/bin/moc.exe
-	C:\QT\6.7.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/PBL_2/debug/moc_predefs.h -IC:/QT/6.7.3/mingw_64/mkspecs/win32-g++ -ID:/PBL_2 -IC:/QT/6.7.3/mingw_64/include -IC:/QT/6.7.3/mingw_64/include/QtCharts -IC:/QT/6.7.3/mingw_64/include/QtOpenGLWidgets -IC:/QT/6.7.3/mingw_64/include/QtWidgets -IC:/QT/6.7.3/mingw_64/include/QtOpenGL -IC:/QT/6.7.3/mingw_64/include/QtGui -IC:/QT/6.7.3/mingw_64/include/QtCore -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/mingw64/x86_64-w64-mingw32/include View\ManagerInterface.h -o debug\moc_ManagerInterface.cpp
+	C:\QT\6.7.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/FINAL-PBL2/debug/moc_predefs.h -IC:/QT/6.7.3/mingw_64/mkspecs/win32-g++ -ID:/FINAL-PBL2 -IC:/QT/6.7.3/mingw_64/include -IC:/QT/6.7.3/mingw_64/include/QtCharts -IC:/QT/6.7.3/mingw_64/include/QtOpenGLWidgets -IC:/QT/6.7.3/mingw_64/include/QtWidgets -IC:/QT/6.7.3/mingw_64/include/QtOpenGL -IC:/QT/6.7.3/mingw_64/include/QtGui -IC:/QT/6.7.3/mingw_64/include/QtCore -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/mingw64/x86_64-w64-mingw32/include View\ManagerInterface.h -o debug\moc_ManagerInterface.cpp
 
 debug/moc_AddNewProduct.cpp: View/AddNewProduct.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QWidget \
@@ -971,7 +985,7 @@ debug/moc_AddNewProduct.cpp: View/AddNewProduct.h \
 		Controller/AppController.h \
 		debug/moc_predefs.h \
 		C:/QT/6.7.3/mingw_64/bin/moc.exe
-	C:\QT\6.7.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/PBL_2/debug/moc_predefs.h -IC:/QT/6.7.3/mingw_64/mkspecs/win32-g++ -ID:/PBL_2 -IC:/QT/6.7.3/mingw_64/include -IC:/QT/6.7.3/mingw_64/include/QtCharts -IC:/QT/6.7.3/mingw_64/include/QtOpenGLWidgets -IC:/QT/6.7.3/mingw_64/include/QtWidgets -IC:/QT/6.7.3/mingw_64/include/QtOpenGL -IC:/QT/6.7.3/mingw_64/include/QtGui -IC:/QT/6.7.3/mingw_64/include/QtCore -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/mingw64/x86_64-w64-mingw32/include View\AddNewProduct.h -o debug\moc_AddNewProduct.cpp
+	C:\QT\6.7.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/FINAL-PBL2/debug/moc_predefs.h -IC:/QT/6.7.3/mingw_64/mkspecs/win32-g++ -ID:/FINAL-PBL2 -IC:/QT/6.7.3/mingw_64/include -IC:/QT/6.7.3/mingw_64/include/QtCharts -IC:/QT/6.7.3/mingw_64/include/QtOpenGLWidgets -IC:/QT/6.7.3/mingw_64/include/QtWidgets -IC:/QT/6.7.3/mingw_64/include/QtOpenGL -IC:/QT/6.7.3/mingw_64/include/QtGui -IC:/QT/6.7.3/mingw_64/include/QtCore -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/mingw64/x86_64-w64-mingw32/include View\AddNewProduct.h -o debug\moc_AddNewProduct.cpp
 
 debug/moc_LoginSignupInterface.cpp: View/LoginSignupInterface.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QWidget \
@@ -1198,7 +1212,7 @@ debug/moc_LoginSignupInterface.cpp: View/LoginSignupInterface.h \
 		Controller/AppController.h \
 		debug/moc_predefs.h \
 		C:/QT/6.7.3/mingw_64/bin/moc.exe
-	C:\QT\6.7.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/PBL_2/debug/moc_predefs.h -IC:/QT/6.7.3/mingw_64/mkspecs/win32-g++ -ID:/PBL_2 -IC:/QT/6.7.3/mingw_64/include -IC:/QT/6.7.3/mingw_64/include/QtCharts -IC:/QT/6.7.3/mingw_64/include/QtOpenGLWidgets -IC:/QT/6.7.3/mingw_64/include/QtWidgets -IC:/QT/6.7.3/mingw_64/include/QtOpenGL -IC:/QT/6.7.3/mingw_64/include/QtGui -IC:/QT/6.7.3/mingw_64/include/QtCore -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/mingw64/x86_64-w64-mingw32/include View\LoginSignupInterface.h -o debug\moc_LoginSignupInterface.cpp
+	C:\QT\6.7.3\mingw_64\bin\moc.exe $(DEFINES) --include D:/FINAL-PBL2/debug/moc_predefs.h -IC:/QT/6.7.3/mingw_64/mkspecs/win32-g++ -ID:/FINAL-PBL2 -IC:/QT/6.7.3/mingw_64/include -IC:/QT/6.7.3/mingw_64/include/QtCharts -IC:/QT/6.7.3/mingw_64/include/QtOpenGLWidgets -IC:/QT/6.7.3/mingw_64/include/QtWidgets -IC:/QT/6.7.3/mingw_64/include/QtOpenGL -IC:/QT/6.7.3/mingw_64/include/QtGui -IC:/QT/6.7.3/mingw_64/include/QtCore -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/mingw64/x86_64-w64-mingw32/include View\LoginSignupInterface.h -o debug\moc_LoginSignupInterface.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1783,6 +1797,7 @@ debug/CustomerInterface.o: View/CustomerInterface.cpp View/CustomerInterface.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qmessagebox.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qdialog.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
+		Controller/AppController.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/QVBoxLayout \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qboxlayout.h \
 		C:/QT/6.7.3/mingw_64/include/QtWidgets/qlayout.h \

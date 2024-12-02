@@ -17,8 +17,6 @@ Cart::Cart(const Cart& other) : customerID(other.customerID) {
     items = other.items; 
 }
 
-
-
 void Cart::addItem(Product* product, int quantity) {
     if (quantity <= 0) {
         cerr << "Quantity must be greater than 0." << endl;
@@ -94,7 +92,6 @@ void Cart::reduceItem(const string& productId, int quantity) {
         }
     }
 }
-
 
 int Cart::getItemQuantity(const string& productId) const {
     for (long i = 0; i < items.getSize(); ++i) {

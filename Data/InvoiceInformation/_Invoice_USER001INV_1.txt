@@ -1,0 +1,19 @@
+======================== INVOICE ========================
+Invoice ID          : USER001INV_1                       
+Customer ID         : USER001                            
+Customer Name       : Nguyễn Văn Trung Ánh           
+Phone               : 0768406235                         
+Email               : trunganh@gmail.com                 
+Address             : 26 Đặng Chất, Hòa Khánh Bắc, Liên Chiểu, Đà Nẵng
+Invoice Date        : 2024-12-02                         
+Delivery Date       : 2024-12-13                         
+Payment Method      : Bank Transfer                      
+--------------------------------------------------------
+Product Name                            Quantity       Price          Total          
+--------------------------------------------------------
+Điện thoại Vivo X60                     1              750.00         750.00         
+Điện thoại Realme Narzo 30              1              350.00         350.00         
+Điện thoại Realme GT                    1              600.00         600.00         
+Điện thoại Sony Xperia 1 II             1              1400.00        1400.00        
+========================================================
+                                             Total Amount     : $3100.00

@@ -24,6 +24,7 @@ class CustomerInterface : public QWidget {
 public:
     CustomerInterface(QWidget *parent = nullptr,const string &customerid ="");
     void showMessage(QWidget *parent, bool status, const QString &message);
+    void drawChart(const Vector<Pair<QString, double>>& data, const QString& title, const QString& xLabel, const QString& yLabel, QWidget* container);
     ~CustomerInterface();
 private slots:
     void showOverview();
@@ -68,6 +69,9 @@ private:
     QGroupBox *overviewBox;
     QGroupBox *customerInforBox;
     DataController *dataController;
+    QGroupBox *diagramBox;
+    QPushButton* applyButton;
+    QPushButton* changeButton;
     void addProducts(int row, bool fromCart);
     void deleteProducts(int row, bool fromCart);
     void showDetailsProducts(int row);

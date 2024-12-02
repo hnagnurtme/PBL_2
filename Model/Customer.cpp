@@ -1,30 +1,25 @@
-#include "Customer.h"
+#include "Model/Customer.h"
 #include <iostream>
 Customer :: Customer(){
-
 }
 Customer::Customer(const Customer& other) : User(other) { 
     this->cart = new Cart(*other.cart);  
     this->orderHistory = new Orders(*other.orderHistory);  
-    this->favouriteProducts = new Vector<Product*>(*other.favouriteProducts);  
 }
 
 Customer ::Customer(const string& userId) {
     cart = new Cart(userId);
     orderHistory = new Orders(userId);
-    favouriteProducts = new Vector<Product*>;
     this->setUserId(userId);
 }
 
 Customer::Customer(const string& id, const string& name, const string& email, const string& phone, const string& password, const string& address) : User(id,name,email,phone,password,address){
     cart = new Cart(userId);
     orderHistory = new Orders(userId);
-    favouriteProducts = new Vector<Product*>;
 }
 Customer :: ~Customer(){
     delete cart;
     delete orderHistory; 
-    delete favouriteProducts;
 }
 void Customer::addToCart(Product* product, int quantity) {
     cart->addItem(product, quantity);
@@ -54,14 +49,6 @@ void Customer::removeItem(string productId){
     cart->removeItem(productId);
 }
 
-void  Customer:: addToFavourite(Product* product){
-    if (favouriteProducts == nullptr) {
-        favouriteProducts = new Vector<Product*> ;
-        }
-        favouriteProducts->pushback(product);
-}
-
-
 Cart* Customer::getCart() const {
     return cart;
 }
@@ -79,3 +66,24 @@ void Customer::updateOrderHistory(const Orders& newOrderHistory) {
     orderHistory = new Orders(newOrderHistory);
 }
 
+Customer& Customer::operator=(const Customer& other) {
+    if (this == &other) {
+        return *this;
+    }
+    User::operator=(other);
+    delete cart;
+    delete orderHistory;
+
+    if (other.cart) {
+        cart = new Cart(*other.cart);
+    } else {
+        cart = nullptr;
+    }
+
+    if (other.orderHistory) {
+        orderHistory = new Orders(*other.orderHistory);
+    } else {
+        orderHistory = nullptr;
+    }
+    return *this;
+}

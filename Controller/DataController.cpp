@@ -200,8 +200,10 @@ void DataController::deleteProduct(const string& productId) {
 }
 
 void DataController::removeProduct(const Invoice &invoice) {
-    Vector<Pair<Product*, int>> invoiceProducts = invoice.getProducts();
-    Vector<Product> productList = loadProductData(); 
+    // Lấy danh sách sản phẩm trong hóa đơn
+    const Vector<Pair<Product*, int>>& invoiceProducts = invoice.getProducts();
+    // Lấy danh sách sản phẩm hiện tại
+    Vector<Product> productList = loadProductData();
 
     for (int i = 0; i < invoiceProducts.getSize(); ++i) {
         const string& productId = invoiceProducts[i].getFirst()->getProductId();
@@ -210,17 +212,21 @@ void DataController::removeProduct(const Invoice &invoice) {
         for (int j = 0; j < productList.getSize(); ++j) {
             if (productList[j].getProductId() == productId) {
                 int currentStock = productList[j].getStock();
-                if (currentStock <= quantityToRemove) {
-                    productList.remove(j); 
-                    --j; 
-                } else {
+
+                // Kiểm tra số lượng tồn kho
+                if (currentStock >= quantityToRemove) {
                     productList[j].setStock(currentStock - quantityToRemove);
+                } else {
+                    // Xử lý nếu số lượng yêu cầu vượt quá tồn kho
+                    productList[j].setStock(0);
+            
                 }
-                break; 
+                break;
             }
         }
+
     }
-    saveProductsData(productList); 
+    saveProductsData(productList);
 }
 
 void DataController::saveCartData(const Cart& cart) {
@@ -518,6 +524,11 @@ void DataController:: updateCustomer(const Customer& customer){
     deleteCustomer(id);
     addCustomer(customer);
 }
+void DataController::  updateManager(const Manager& manager){
+    string id = manager.getUserId();
+    deleteManager(id);
+    addManager(manager);
+}
 
 Manager DataController::  findManagerById(const string& managerID){
     Vector<Manager> managers = loadAllManagersData();
@@ -526,6 +537,7 @@ Manager DataController::  findManagerById(const string& managerID){
             return managers[i];
             }
             }
+    return Manager();
 }
 
 Vector<Manager> DataController::loadAllManagersData() {
@@ -561,16 +573,16 @@ void DataController::addManager(const Manager& manager) {
     saveAllManagersData(managers);
 }
 
-void DataController::deleteManager(const Manager& manager) {
+void DataController::deleteManager(const string& managerID) {
     Vector<Manager> managers = loadAllManagersData();
     for (int i = 0; i < managers.getSize(); ++i) {
-        if (managers[i].getUserId() == manager.getUserId()) {
+        if (managers[i].getUserId() == managerID) {
             managers.remove(i);
             saveAllManagersData(managers);
             return;
         }
     }
-    throw runtime_error("Không tìm thấy customer với UserID: " + manager.getUserId());
+    throw runtime_error("Không tìm thấy customer với UserID: " + managerID);
 }
 
 void DataController::addToSoldProductData(const Invoice& invoice) {
@@ -657,5 +669,3 @@ Product DataController:: findProductById(const string& productId){
     }
     return Product();
 }
-
-

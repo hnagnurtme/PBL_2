@@ -1,3 +1,0 @@
-InvoiceID,PlaceOrderDate,DeliveryDate,TotalAmount,PaymentMethod
-USER1INV_0,2024-11-22,2024-12-14,1800,Bank Transfer
-USER1INV_1,2024-11-22,2024-11-30,1600,Bank Transfer
