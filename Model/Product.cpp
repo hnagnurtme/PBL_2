@@ -77,23 +77,6 @@ void  Product::setDetail(const Vector<string> & newDetail){
 void  Product::setBrand(const string& newBrand){
     brand = newBrand;
 }
-
-void Product::displayInfo() const {
-    cout << "Product ID: " << productId << endl;
-    cout << "Name: " << name << endl;
-    cout << "Category: " << category << endl;
-    cout << "Price: $" << price << endl;
-    cout << "Stock: " << stock << endl;
-    cout << "Description: " << description << endl;
-    cout << endl;
-    cout << "Colors: ";
-    for (long i = 0; i < detail.getSize(); ++i) {
-        cout << detail[i] << " ";
-    }
-    cout << endl;
-    cout << "Brand: " << brand << endl;
-}
-
 bool Product::isAvailable(int requestedQuantity) const {
     return requestedQuantity <= stock;
 }

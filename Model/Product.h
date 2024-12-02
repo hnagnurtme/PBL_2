@@ -40,7 +40,6 @@ public:
     void setCategory(const string& newCategory);
     void setDetail(const Vector<string> & newDetail);
     void setBrand(const string& newBrand);
-    void displayInfo() const;
     bool isAvailable(int requestedQuantity) const;
     bool isEmpty() const;
     Product& operator=(const Product& other);

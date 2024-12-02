@@ -9,30 +9,23 @@ using namespace std;
 
 Cart::Cart(string id) : customerID(id) {}
 
-void Cart::setCartID(string id) {
-    customerID = id; 
-}
+void Cart::setCartID(string id) { customerID = id; }
 
-Cart::Cart(const Cart& other) : customerID(other.customerID) {
-    items = other.items; 
-}
+Cart::Cart(const Cart& other) : customerID(other.customerID) { items = other.items; }
 
 void Cart::addItem(Product* product, int quantity) {
     if (quantity <= 0) {
         cerr << "Quantity must be greater than 0." << endl;
         return;
     }
-    
     for (int i = 0; i < items.getSize(); ++i) {
         if (items[i].getFirst()->getProductId() == product->getProductId()) {
             items[i].setSecond(items[i].getSecond() + quantity);
             return;
         }
     }
-    
     items.pushback(Pair<Product*, int>(product, quantity));
 }
-
 
 void Cart::removeItem(string productId) {
     for (int i = 0; i < items.getSize(); ++i) {
@@ -50,26 +43,9 @@ void Cart::clearCart() {
     }
 }
 
-void Cart::displayCartItems() const {
-    if (items.isEmpty()) {
-        cout << "The cart is empty." << endl;
-        return;
-    }
-    cout << "Cart items:" << endl;
-    for (int i = 0; i < items.getSize(); ++i) {
-        cout << "Product ID: " << items[i].getFirst()->getProductId()
-            << ", Name: " << items[i].getFirst()->getName() 
-            << ", Quantity: " << items[i].getSecond() << endl;
-    }
-}
+Vector<Pair<Product*, int>> Cart::getItems() const { return items; }
 
-Vector<Pair<Product*, int>> Cart::getItems() const {
-    return items;
-}
-
-string Cart::getCustomerID() const {
-    return customerID;
-}
+string Cart::getCustomerID() const { return customerID; }
 
 bool Cart::contains(const string& productId) const {
     for (long i = 0; i < items.getSize(); ++i) {
@@ -79,6 +55,7 @@ bool Cart::contains(const string& productId) const {
     }
     return false; 
 }
+
 void Cart::reduceItem(const string& productId, int quantity) {
     for (long i = 0; i < items.getSize(); ++i) {
         if (items[i].getFirst()->getProductId() == productId) {

@@ -25,29 +25,24 @@ public:
     Invoice(const string& invoiceId, const string& customerId, const Vector<Pair<Product*, int>>& products, double totalAmount);
     
     string displayInvoice() const;
-    
+
     string getInvoiceId() const;
-    void setInvoiceId(const string& id);
-    
     string getCustomerId() const;
+    string getInvoiceDate() const;
+    double getTotalAmount() const;
+    Vector<Pair<Product*, int>> getProducts() const;
+    string getDeliveryDate() ;
+    string getPaymentMethod();
+    string generateCounterID();
+
+    void setInvoiceId(const string& id);
     void setCustomerId(const string& id);
-    
     void setInvoiceDate();
     void setInvoiceDate(const string& date);
-    string getInvoiceDate() const;
-
     void setTotalAmount(double amount);
-    double getTotalAmount() const;
-
-    Vector<Pair<Product*, int>> getProducts() const;
-
     void setDeliveryDate(const string& deliveryDate);
-    string getDeliveryDate() ;
     void setPaymentMethod(const string& paymentMethod);
-    string getPaymentMethod();
-
-    void  addProductToInvoice(Product* , int count);
-
     void setInvoiceID(int count);
-    string generateCounterID();
+    
+    void  addProductToInvoice(Product* , int count);
 };

@@ -1,7 +1,6 @@
 #include "Model/Customer.h"
 #include <iostream>
-Customer :: Customer(){
-}
+
 Customer::Customer(const Customer& other) : User(other) { 
     this->cart = new Cart(*other.cart);  
     this->orderHistory = new Orders(*other.orderHistory);  
@@ -53,7 +52,7 @@ Cart* Customer::getCart() const {
     return cart;
 }
 
-Orders& Customer::getOrderHistory()  {
+Orders& Customer::getOrderHistory() const {
     return *orderHistory;
 }
 

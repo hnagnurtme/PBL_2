@@ -18,7 +18,6 @@ Invoice::Invoice() : customerId(""), totalAmount(0.0) {
 
 Invoice::Invoice(const Cart& cart) : customerId(cart.getCustomerID()), totalAmount(0.0) {
     Vector<Pair<Product*, int>> productsInCart = cart.getItems(); 
-
     for (int i = 0; i < productsInCart.getSize(); ++i) {
         Product* product = productsInCart[i].getFirst();
         int quantity = productsInCart[i].getSecond();
@@ -26,7 +25,6 @@ Invoice::Invoice(const Cart& cart) : customerId(cart.getCustomerID()), totalAmou
         addProductToInvoice(product, quantity); 
         totalAmount += product->getPrice() * quantity;
     }
-
     setInvoiceDate();
     invoiceId = customerId+"INV_" + getInvoiceDate();
 }
@@ -44,9 +42,8 @@ string Invoice::displayInvoice() const {
 
     ss << "======================== INVOICE ========================\n";
 
-    // In thông tin hóa đơn và khách hàng với dấu ":" thẳng hàng
     auto printLine = [&](const string& label, const string& value) {
-        ss << left << setw(20) << label << ": " << setw(35) << value << "\n";  // Tăng độ rộng cột
+        ss << left << setw(20) << label << ": " << setw(35) << value << "\n"; 
     };
 
     printLine("Invoice ID", invoiceId);
@@ -61,7 +58,7 @@ string Invoice::displayInvoice() const {
 
     ss << "--------------------------------------------------------\n";
 
-    // Đảm bảo cột 'Product Name' có độ rộng cố định và thẳng hàng
+    
     ss << left << setw(40) << "Product Name"
        << setw(15) << "Quantity"
        << setw(15) << "Price"
@@ -70,15 +67,15 @@ string Invoice::displayInvoice() const {
 
     for (int i = 0; i < products.getSize(); ++i) {
         double total = products[i].getSecond() * products[i].getFirst()->getPrice();
-        ss << left << setw(45) << products[i].getFirst()->getName() // Đảm bảo độ rộng của tên sản phẩm là 40
+        ss << left << setw(55) << products[i].getFirst()->getName() 
            << setw(15) << products[i].getSecond()
-           << setw(15) << fixed << setprecision(2) << products[i].getFirst()->getPrice() // Định dạng Price với fixed
-           << setw(15) << fixed << setprecision(2) << total << "\n"; // Định dạng Total với fixed
+           << setw(15) << fixed << setprecision(2) << products[i].getFirst()->getPrice() 
+           << setw(15) << fixed << setprecision(2) << total << "\n"; 
     }
 
-    ss << "========================================================\n";
+    ss << "=====================================================\n";
     ss << right << setw(65) << "Total Amount     : $"
-       << fixed << setprecision(2) << totalAmount << "\n"; // Định dạng Total Amount với fixed
+       << fixed << setprecision(2) << totalAmount << "\n"; 
 
     return ss.str();
 }

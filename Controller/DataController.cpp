@@ -1,11 +1,5 @@
 #include "Controller/DataController.h"
 #include "Datastructures/Vector.h"
-#include <unordered_map>
-#include "Datastructures/Pair.h"
-#include "Model/Product.h"
-#include "Model/Customer.h"
-#include "Model/Manager.h"
-#include <string>
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -15,11 +9,10 @@
 using namespace std;
 
 void ensureFileAndFolder(const string& folderPath, const string& filename, const string& header) {
-    if (!std::filesystem::exists(folderPath)) {
-        std::filesystem::create_directories(folderPath);
+    if (!filesystem::exists(folderPath)) {
+        filesystem::create_directories(folderPath);
     }
-
-    if (!std::filesystem::exists(filename)) {
+    if (!filesystem::exists(filename)) {
         ofstream file(filename);
         if (!file.is_open()) {
             throw runtime_error("Không thể tạo file: " + filename);
@@ -28,14 +21,14 @@ void ensureFileAndFolder(const string& folderPath, const string& filename, const
         file.close();
     }
 }
-template <typename T>
-void saveAllData(const Vector<T>& items, const std::string& filename, 
-                    function<std::string(const T&)> serializeItem) {
-    const std::string header = "UserID;Name;Email;Phone;Password;Address";
 
-    std::ofstream file(filename, std::ios::out | std::ios::trunc);
+template <typename T>
+void saveAllData(const Vector<T>& items, const string& filename, 
+                    function<string(const T&)> serializeItem) {
+    const string header = "UserID;Name;Email;Phone;Password;Address";
+    ofstream file(filename, ios::out | ios::trunc);
     if (!file.is_open()) {
-        throw std::runtime_error("Không thể mở file để ghi: " + filename);
+        throw runtime_error("Không thể mở file để ghi: " + filename);
     }
 
     file << header << "\n";
@@ -49,32 +42,26 @@ template <typename T>
 Vector<T> loadAllData(
     const string& filename,
     function<T(const string&, const string&, const string&, const string&, const string&, const string&)> createObject) {
-    const std::string header = "UserID;Name;Email;Phone;Password;Address";
+    const string header = "UserID;Name;Email;Phone;Password;Address";
     ensureFileAndFolder("Data", filename, header);
-
     Vector<T> items;
     ifstream file(filename);
-
     if (!file.is_open()) {
         throw runtime_error("Không thể mở file để đọc: " + filename);
     }
-
     string line;
     getline(file, line);
     while (getline(file, line)) {
         stringstream ss(line);
         string userId, name, email, phone, password, address;
-
         getline(ss, userId, ';');
         getline(ss, name, ';');
         getline(ss, email, ';');
         getline(ss, phone, ';');
         getline(ss, password, ';');
         getline(ss, address);
-
         items.pushback(createObject(userId, name, email, phone, password, address));
     }
-
     return items;
 }
 
@@ -84,7 +71,6 @@ void DataController::saveProductsData(const Vector<Product>& products) {
     if (!tempFile.is_open()) {
         throw runtime_error("Không thể mở file để ghi: " + newProductFileName);
     }
-
     for (int i = 0; i < products.getSize(); ++i) {
         const Product& product = products[i];
         
@@ -94,7 +80,6 @@ void DataController::saveProductsData(const Vector<Product>& products) {
                 << product.getPrice() << ";"
                 << product.getStock() << ";"
                 << product.getDescription() << ";";
-
         Vector<string> detail = product.getDetail();
         tempFile << "{";
         for (int j = 0; j < detail.getSize(); ++j) {
@@ -112,11 +97,9 @@ void DataController::saveProductsData(const Vector<Product>& products) {
 Vector<Product> DataController::loadProductData() {
     Vector<Product> products;
     ifstream file("Data/ProductInformation.csv");
-
     if (!file.is_open()) {
         throw runtime_error("Không thể mở file: Data/ProductInformation.csv");
     }
-
     string line;
     while (getline(file, line)) {
         Product product = parseProduct(line); 
@@ -126,7 +109,6 @@ Vector<Product> DataController::loadProductData() {
         }
         products.pushback(product); 
     }
-
     file.close();
     return products;
 }
@@ -157,18 +139,15 @@ Product DataController::parseProduct(const string& line) {
         Vector<string> details;
         istringstream detailsStream(detailStr);
         string detail;
-
         while (getline(detailsStream, detail, ',')) {
             detail.erase(remove(detail.begin(), detail.end(), '{'), detail.end());
             detail.erase(remove(detail.begin(), detail.end(), '}'), detail.end());
-
             if (!detail.empty()) {
                 details.pushback(detail);
             }
         }
         return Product(id, name, category, price, stock, description, details, brand);
     } catch (...) {
-
         return Product();
     }
 }
@@ -182,7 +161,6 @@ void DataController::addNewProduct(const Product& product) {
             return;
         }
     }
-
     products.pushback(product);
     saveProductsData(products);
 }
@@ -200,31 +178,22 @@ void DataController::deleteProduct(const string& productId) {
 }
 
 void DataController::removeProduct(const Invoice &invoice) {
-    // Lấy danh sách sản phẩm trong hóa đơn
     const Vector<Pair<Product*, int>>& invoiceProducts = invoice.getProducts();
-    // Lấy danh sách sản phẩm hiện tại
     Vector<Product> productList = loadProductData();
-
     for (int i = 0; i < invoiceProducts.getSize(); ++i) {
         const string& productId = invoiceProducts[i].getFirst()->getProductId();
         int quantityToRemove = invoiceProducts[i].getSecond();
-
         for (int j = 0; j < productList.getSize(); ++j) {
             if (productList[j].getProductId() == productId) {
                 int currentStock = productList[j].getStock();
-
-                // Kiểm tra số lượng tồn kho
                 if (currentStock >= quantityToRemove) {
                     productList[j].setStock(currentStock - quantityToRemove);
                 } else {
-                    // Xử lý nếu số lượng yêu cầu vượt quá tồn kho
                     productList[j].setStock(0);
-            
                 }
                 break;
             }
         }
-
     }
     saveProductsData(productList);
 }
@@ -256,71 +225,51 @@ void DataController::saveCartData(const Cart& cart) {
 Invoice DataController::loadInvoiceData(const string& invoiceID) {
     string directory = "Data/InvoiceInformation";
     string filename = directory + "/"  + "_Invoice_" + invoiceID + ".txt"; 
-
     Invoice invoice;
-
     ifstream inFile(filename); 
-
     if (inFile.is_open()) {
         string line;
-
         getline(inFile, line);
         invoice.setInvoiceId(line.substr(12));
-
         getline(inFile, line);
         invoice.setCustomerId(line.substr(14));
-
         getline(inFile, line);
         invoice.setInvoiceDate(line.substr(14));
-
         getline(inFile, line);
         invoice.setDeliveryDate(line.substr(15));
-
         getline(inFile, line);
         invoice.setPaymentMethod(line.substr(16));
-
         getline(inFile, line);
         invoice.setTotalAmount(stod(line.substr(14)));
-
         while (getline(inFile, line)) {
             if (line.empty()) break;
-
             stringstream ss(line);
             string productName, productId;
             double price = 0.0;
             int quantity = 0;
-            
             getline(ss, productName, ',');  
             getline(ss, productId, ',');   
-
             if (!(ss >> price)) continue;  
             ss.ignore();  
-
             if (!(ss >> quantity)) continue; 
             ss.ignore(); 
-
             if (!productName.empty() && !productId.empty() && quantity > 0) {
                 Product* product = new Product(productId, productName, "", price, 0, "", Vector<string>(), "");
                 invoice.addProductToInvoice(product, quantity);
             }
         }
-
         inFile.close();
     } else {
         cout << "Unable to open file: " << filename << endl;
     }
-
     return invoice;
 }
 
 void DataController::saveInvoiceData(const Invoice& invoice) {
     string directory = "Data/InvoiceInformation";
     string filename = directory + "/" + "_Invoice_" + invoice.getInvoiceId() + ".txt"; 
-
     filesystem::create_directories(directory);
-
     ofstream outFile(filename); 
-
     if (outFile.is_open()) {
         outFile << invoice.displayInvoice(); 
         outFile.close(); 
@@ -332,30 +281,23 @@ void DataController::saveInvoiceData(const Invoice& invoice) {
 void DataController::saveOrdersData(const Orders& orders) {
     string directory = "Data/OrdersInfomation";
     string filename = directory + "/" + orders.getCustomerID() + ".csv";
-    
     filesystem::create_directories(directory);
-
     ofstream outFile(filename);  
-
     Vector<Invoice*> newInvoices = orders.getInvoice();
-    
     if (outFile.is_open()) {
         outFile << "InvoiceID,PlaceOrderDate,DeliveryDate,TotalAmount,PaymentMethod\n";
-
         for (int i = 0; i < newInvoices.getSize(); i++) {
             string invoiceID = newInvoices[i]->getInvoiceId();
             string invoiceDate = newInvoices[i]->getInvoiceDate();
             string invoiceDeliveryDate = newInvoices[i]->getDeliveryDate();
             double invoiceTotalAmount = newInvoices[i]->getTotalAmount();
-            string invoicePaymentMethod = newInvoices[i]->getPaymentMethod();
-            
+            string invoicePaymentMethod = newInvoices[i]->getPaymentMethod(); 
             outFile << invoiceID << ","
                     << invoiceDate << ","
                     << invoiceDeliveryDate << ","
                     << invoiceTotalAmount << ","
                     << invoicePaymentMethod << "\n";
         }
-        
         outFile.close();
     } else {
         cout << "Unable to open file for writing." << endl;
@@ -365,31 +307,24 @@ void DataController::saveOrdersData(const Orders& orders) {
 Orders DataController::loadOrdersData(const string& customerID) {
     string directory = "Data/OrdersInfomation";
     string filename = directory + "/" + customerID + ".csv";
-
     Orders orders(customerID); 
-
     ifstream inFile(filename);
     if (!inFile.is_open()) {
         cout << "Unable to open file for reading." << endl;
         return orders; 
     }
-
     string line;
     getline(inFile, line);  
-
     while (getline(inFile, line)) {
         stringstream ss(line);
         string invoiceID, invoiceDate, invoiceDeliveryDate, paymentMethod;
         double totalAmount;
-
         getline(ss, invoiceID, ',');
         getline(ss, invoiceDate, ',');
         getline(ss, invoiceDeliveryDate, ',');
-
         string totalAmountStr;
         getline(ss, totalAmountStr, ',');
         totalAmount = stod(totalAmountStr);
-
         getline(ss, paymentMethod, ',');
 
         Invoice* invoice = new Invoice();
@@ -401,7 +336,6 @@ Orders DataController::loadOrdersData(const string& customerID) {
 
         orders.addInvoice(invoice);
     }
-
     inFile.close();
     return orders; 
 }
@@ -439,13 +373,12 @@ Cart DataController::loadCartData(const string& customerID) {
             cart.addItem(product, quantity); 
         }
     }
-
     file.close();
     return cart;
 }
 
 bool DataController::findInvoiceByInvoiceID( const string& invoiceID, string& invoice) {
-    std::string filename = "Data/InvoiceInformation/";
+    string filename = "Data/InvoiceInformation/";
     filename.append("_Invoice_").append(invoiceID).append(".txt");
 
     cout << "Looking for file: " << filename << endl;
@@ -463,19 +396,19 @@ bool DataController::findInvoiceByInvoiceID( const string& invoiceID, string& in
 }
 
 Vector<Customer> DataController::loadAllCustomersData() {
-    const std::string filename = "Data/CustomerInformation.csv";
+    const string filename = "Data/CustomerInformation.csv";
 
     return loadAllData<Customer>(
         filename,
-        [](const std::string& userId, const std::string& name, const std::string& email,
-           const std::string& phone, const std::string& password, const std::string& address) {
+        [](const string& userId, const string& name, const string& email,
+           const string& phone, const string& password, const string& address) {
             return Customer(userId, name, email, phone, password, address);
         }
     );
 }
 
 void DataController::saveAllCustomersData(const Vector<Customer>& customers) {
-    const std::string filename = "Data/CustomerInformation.csv";
+    const string filename = "Data/CustomerInformation.csv";
 
     saveAllData<Customer>(
         customers, 
@@ -524,6 +457,7 @@ void DataController:: updateCustomer(const Customer& customer){
     deleteCustomer(id);
     addCustomer(customer);
 }
+
 void DataController::  updateManager(const Manager& manager){
     string id = manager.getUserId();
     deleteManager(id);
@@ -544,15 +478,15 @@ Vector<Manager> DataController::loadAllManagersData() {
     const string filename = "Data/ManagerInformation.csv";
     return loadAllData<Manager>(
         filename,
-        [](const std::string& userId, const std::string& name, const std::string& email,
-           const std::string& phone, const std::string& password, const std::string& address) {
+        [](const string& userId, const string& name, const string& email,
+           const string& phone, const string& password, const string& address) {
             return Manager(userId, name, email, phone, password, address);
         }
     );
 }
 
 void DataController::saveAllManagersData(const Vector<Manager>& managers) {
-    const std::string filename = "Data/ManagerInformation.csv";
+    const string filename = "Data/ManagerInformation.csv";
 saveAllData<Manager>(
     managers,
     filename,

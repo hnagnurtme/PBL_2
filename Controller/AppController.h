@@ -8,7 +8,6 @@
 #include "Datastructures/Vector.h"
 #include "Datastructures/Pair.h"
 #include "Controller/DataController.h"
-#include <vector>
 #include <string>
 using namespace std; 
 class AppController{

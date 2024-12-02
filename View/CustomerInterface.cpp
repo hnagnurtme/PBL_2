@@ -434,11 +434,23 @@ void CustomerInterface::clearCart() {
     dataController->saveCartData(*customer->getCart()); 
     showCart();
 }
+void CustomerInterface::drawChart(const Vector<Pair<QString, double>>& data, const QString& title, const QString& xLabel, const QString& yLabel, QWidget* container) {
+    QLayout *existingLayout = container->layout();
+    if (existingLayout) {
+        QLayoutItem *item;
+        while ((item = existingLayout->takeAt(0)) != nullptr) {
+            delete item->widget();  
+            delete item;  
+        }
+        delete existingLayout;  
+    }
 
-void drawChart(const Vector<Pair<QString, double>>& data, const QString& title, const QString& xLabel, const QString& yLabel, QWidget* container) {
     QVector<QString> categories; 
     QVector<double> values;     
-    for (int i = 0; i <data.getSize();++i) {
+    int dataSize = data.getSize();
+    int maxItems = std::min(dataSize, 20);
+
+    for (int i = 0; i < maxItems; ++i) {
         categories.append(data[i].getFirst());  
         values.append(data[i].getSecond());    
     }
@@ -451,19 +463,26 @@ void drawChart(const Vector<Pair<QString, double>>& data, const QString& title, 
     QBarSeries *series = new QBarSeries();
     series->append(set);
 
+    series->setLabelsVisible(true);  
+
     QChart *chart = new QChart();
     chart->addSeries(series);
     chart->setTitle(title);
     chart->setAnimationOptions(QChart::SeriesAnimations);
 
     QBarCategoryAxis *axisX = new QBarCategoryAxis();
+    axisX->setTitleText(xLabel);
     axisX->append(categories);
-    chart->setAxisX(axisX, series);
+    chart->addAxis(axisX, Qt::AlignLeft);
+    series->attachAxis(axisX);
 
+    
     QValueAxis *axisY = new QValueAxis();
     axisY->setTitleText(yLabel);
     axisY->setRange(0, *std::max_element(values.begin(), values.end()));
-    chart->setAxisY(axisY, series);
+    chart->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisY);
+
 
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
@@ -816,58 +835,4 @@ void CustomerInterface::showInvoiceDetail(int row){
     else{
         showMessage(this,false,QString::fromStdString("Not founnd"));
     }
-}
-
-void CustomerInterface::drawChart(const Vector<Pair<QString, double>>& data, const QString& title, const QString& xLabel, const QString& yLabel, QWidget* container) {
-    QLayout *existingLayout = container->layout();
-    if (existingLayout) {
-        QLayoutItem *item;
-        while ((item = existingLayout->takeAt(0)) != nullptr) {
-            delete item->widget();  
-            delete item;  
-        }
-        delete existingLayout;  
-    }
-
-    QVector<QString> categories; 
-    QVector<double> values;     
-    int dataSize = data.getSize();
-    int maxItems = std::min(dataSize, 20);
-
-    for (int i = 0; i < maxItems; ++i) {
-        categories.append(data[i].getFirst());  
-        values.append(data[i].getSecond());    
-    }
-
-    QBarSet *set = new QBarSet(yLabel);
-    for (double value : values) {
-        *set << value;  
-    }
-
-    QBarSeries *series = new QBarSeries();
-    series->append(set);
-
-    series->setLabelsVisible(true);  
-
-    QChart *chart = new QChart();
-    chart->addSeries(series);
-    chart->setTitle(title);
-    chart->setAnimationOptions(QChart::SeriesAnimations);
-
-    QBarCategoryAxis *axisX = new QBarCategoryAxis();
-    axisX->setTitleText(xLabel);
-    axisX->append(categories);
-    chart->setAxisX(axisX, series);
-    
-    QValueAxis *axisY = new QValueAxis();
-    axisY->setTitleText(yLabel);
-    axisY->setRange(0, *std::max_element(values.begin(), values.end()));
-    chart->setAxisY(axisY, series);
-
-    QChartView *chartView = new QChartView(chart);
-    chartView->setRenderHint(QPainter::Antialiasing);
-
-    QVBoxLayout *layout = new QVBoxLayout(container);
-    layout->addWidget(chartView);
-    container->setLayout(layout);
 }
