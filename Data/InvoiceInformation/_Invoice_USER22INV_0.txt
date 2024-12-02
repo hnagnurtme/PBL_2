@@ -1,0 +1,17 @@
+======================== INVOICE ========================
+Invoice ID          : USER22INV_0                        
+Customer ID         : USER22                             
+Customer Name       : Đoàn Kiều Ngân                
+Phone               : 0768406235                         
+Email               : ngan@gmail.com                     
+Address             : 67 Âu Cơ Liên Chiểu Đà Nẵng
+Invoice Date        : 2024-12-02                         
+Delivery Date       : 2024-12-19                         
+Payment Method      : Bank Transfer                      
+--------------------------------------------------------
+Product Name                            Quantity       Price          Total          
+--------------------------------------------------------
+Điện thoại Vivo X60                     1              750.00         750.00         
+Điện thoại Realme Narzo 30              1              350.00         350.00         
+========================================================
+                                             Total Amount     : $1100.00

@@ -81,14 +81,21 @@ AddProductWidget::AddProductWidget(QWidget *parent,Product *newproduct) : QWidge
 }
 
 void AddProductWidget::onOkButtonClicked() {
+    if (nameEdit->text().isEmpty() || categoryEdit->text().isEmpty() || priceSpin->value() == 0 ||  descriptionEdit->text().isEmpty() || detailEdit->text().isEmpty() || brandEdit->text().isEmpty()) {
+        showMessage(this, false, "All fields must be filled in!");
+        return;
+    }
+
     Product newProduct;
     AppController appController;
     Manager manager;
+
     if (product != nullptr && !product->getProductId().empty()) {
-    newProduct.setProductId(product->getProductId());
+        newProduct.setProductId(product->getProductId());
     } else {
-    newProduct.setProductId(appController.createProductId());
+        newProduct.setProductId(appController.createProductId());
     }
+
     newProduct.setName(nameEdit->text().toStdString());
     newProduct.setCategory(categoryEdit->text().toStdString());
     newProduct.setPrice(priceSpin->value());
@@ -104,10 +111,12 @@ void AddProductWidget::onOkButtonClicked() {
     newProduct.setBrand(brandEdit->text().toStdString());
 
     manager.addNewProduct(newProduct);
+
     emit productAdded(); 
-    showMessage(this,true,"Add New Product Sucessfull");
+    showMessage(this, true, "Add New Product Successful");
     this->close();
 }
+
 
 void AddProductWidget::onCancelButtonClicked() {
     showMessage(this,false,"Add New Product Failed ");

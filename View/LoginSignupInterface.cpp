@@ -191,6 +191,9 @@ void LoginSignupInterface::login() {
         view->show(); 
         this->close();
     }
+    else {
+        showMessage(this, false, "Invalid email or password. Please try again.");
+    }
 }
 
 

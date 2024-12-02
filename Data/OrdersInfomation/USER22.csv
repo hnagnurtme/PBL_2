@@ -1,0 +1,3 @@
+InvoiceID,PlaceOrderDate,DeliveryDate,TotalAmount,PaymentMethod
+USER22INV_0,2024-12-02,2024-12-19,1100,Bank Transfer
+USER22INV_1,2024-12-02,2024-12-28,1800,Cash on Delivery
