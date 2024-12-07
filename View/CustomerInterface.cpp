@@ -473,16 +473,12 @@ void CustomerInterface::drawChart(const Vector<Pair<QString, double>>& data, con
     QBarCategoryAxis *axisX = new QBarCategoryAxis();
     axisX->setTitleText(xLabel);
     axisX->append(categories);
-    chart->addAxis(axisX, Qt::AlignLeft);
-    series->attachAxis(axisX);
-
+    chart->setAxisX(axisX, series);
     
     QValueAxis *axisY = new QValueAxis();
     axisY->setTitleText(yLabel);
     axisY->setRange(0, *std::max_element(values.begin(), values.end()));
-    chart->addAxis(axisY, Qt::AlignLeft);
-    series->attachAxis(axisY);
-
+    chart->setAxisY(axisY, series);
 
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);

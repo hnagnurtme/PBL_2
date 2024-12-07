@@ -1,0 +1,17 @@
+======================== INVOICE ========================
+Invoice ID          : USER002INV_1                       
+Customer ID         : USER002                            
+Customer Name       : Trần Thị Thu Hà               
+Phone               : 0768406236                         
+Email               : thuhatr@gmail.com                  
+Address             : 15 Lê Văn Hiến, Ngũ Hành Sơn, Đà Nẵng
+Invoice Date        : 2024-12-08                         
+Delivery Date       : 2024-12-21                         
+Payment Method      : Cash on Delivery                   
+--------------------------------------------------------
+Product Name                            Quantity       Price          Total          
+--------------------------------------------------------
+Điện thoại RedMi Note 9                           1              678.00         678.00         
+Điện thoại Apple iPhone SE (2022)                 1              500.00         500.00         
+=====================================================
+                                             Total Amount     : $1178.00

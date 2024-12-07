@@ -1,0 +1,18 @@
+======================== INVOICE ========================
+Invoice ID          : USER001INV_4                       
+Customer ID         : USER001                            
+Customer Name       : Nguyễn Văn Trung Ánh           
+Phone               : 0768406235                         
+Email               : trunganh@gmail.com                 
+Address             : 26 Đặng Chất, Hòa Khánh Bắc, Liên Chiểu, Đà Nẵng
+Invoice Date        : 2024-12-05                         
+Delivery Date       : 2025-01-17                         
+Payment Method      : Bank Transfer                      
+--------------------------------------------------------
+Product Name                            Quantity       Price          Total          
+--------------------------------------------------------
+Điện thoại Oppo Find X3                           2              700.00         1400.00        
+Điện thoại Vivo X60                               2              750.00         1500.00        
+Điện thoại Samsung Galaxy A72                     2              650.00         1300.00        
+=====================================================
+                                             Total Amount     : $4200.00

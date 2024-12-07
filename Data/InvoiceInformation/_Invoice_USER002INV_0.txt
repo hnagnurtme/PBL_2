@@ -1,0 +1,18 @@
+======================== INVOICE ========================
+Invoice ID          : USER002INV_0                       
+Customer ID         : USER002                            
+Customer Name       : Trần Thị Thu Hà               
+Phone               : 0768406236                         
+Email               : thuhatr@gmail.com                  
+Address             : 15 Lê Văn Hiến, Ngũ Hành Sơn, Đà Nẵng
+Invoice Date        : 2024-12-08                         
+Delivery Date       : 2024-12-19                         
+Payment Method      : Bank Transfer                      
+--------------------------------------------------------
+Product Name                            Quantity       Price          Total          
+--------------------------------------------------------
+Điện thoại Vivo X60                               1              750.00         750.00         
+Điện thoại Realme Narzo 30                        1              350.00         350.00         
+Điện thoại Realme GT                              1              600.00         600.00         
+=====================================================
+                                             Total Amount     : $1700.00

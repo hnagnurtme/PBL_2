@@ -1,7 +1,6 @@
-PRD007;Điện thoại Oppo Find X3;Điện thoại;700;92;:/product7;{6.7 inch AMOLED, 1440 x 3216 pixels - 120Hz, Qualcomm Snapdragon 888 - 8 nhân};Oppo
-PRD008;Điện thoại Vivo X60;Điện thoại;750;696;:/product8;{6.56 inch AMOLED, 1080 x 2376 pixels - 120Hz, Exynos 1080 - 8 nhân};Vivo
-PRD009;Điện thoại Realme Narzo 30;Điện thoại;350;496;:/product9;{6.5 inch IPS LCD, 1080 x 2400 pixels - 90Hz, MediaTek Helio G95 - 8 nhân};Realme
-PRD010;Điện thoại Realme GT;Điện thoại;600;289;:/product10;{6.43 inch Super AMOLED, 1080 x 2400 pixels - 120Hz, Qualcomm Snapdragon 870 - 8 nhân};Realme
+PRD008;Điện thoại Vivo X60;Điện thoại;750;690;:/product8;{6.56 inch AMOLED, 1080 x 2376 pixels - 120Hz, Exynos 1080 - 8 nhân};Vivo
+PRD009;Điện thoại Realme Narzo 30;Điện thoại;350;495;:/product9;{6.5 inch IPS LCD, 1080 x 2400 pixels - 90Hz, MediaTek Helio G95 - 8 nhân};Realme
+PRD010;Điện thoại Realme GT;Điện thoại;600;288;:/product10;{6.43 inch Super AMOLED, 1080 x 2400 pixels - 120Hz, Qualcomm Snapdragon 870 - 8 nhân};Realme
 PRD011;Điện thoại Sony Xperia 1 II;Điện thoại;1400;29;:/product11;{6.5 inch OLED, 1644 x 3840 pixels - 90Hz, Qualcomm Snapdragon 865 - 8 nhân};Sony
 PRD012;Điện thoại LG Velvet;Điện thoại;750;100;:/product12;{6.8 inch P-OLED, 1080 x 2460 pixels - 60Hz, Qualcomm Snapdragon 765G - 8 nhân};LG
 PRD013;Điện thoại HTC Desire 20 Pro;Điện thoại;400;250;:/product13;{6.5 inch IPS LCD, 1080 x 2340 pixels - 60Hz, Qualcomm Snapdragon 665 - 8 nhân};HTC
@@ -23,10 +22,11 @@ PRD028;Điện thoại Vivo Y56 5G;Điện thoại;750;700;:/product28;{6.58 inc
 PRD029;Điện thoại Vivo Y17;Điện thoại;750;100;:/product29;{6.35 inch IPS LCD, 1080 x 2376 pixels - 120Hz, MediaTek Helio P35 - 8 nhân};Vivo
 PRD030;Điện thoại Xiaomi Redmi 9A;Điện thoại;250;800;:/product30;{6.53 inch IPS LCD, 720 x 1600 pixels - 60Hz, MediaTek Helio G25 - 8 nhân};Xiaomi
 PRD031;Điện thoại Nokia C30;Điện thoại;750;30;:/product31;{6.82 inch IPS LCD, 720 x 1600 pixels - 60Hz, Unisoc SC9863A - 8 nhân};Nokia
-PRD033;Điện thoại Honor Play 5T;Điện thoại;600;100;:/product33;{6.6 inch IPS LCD, 1080 x 2400 pixels - 90Hz, MediaTek Dimensity 700 - 8 nhân};Honor
-PRD035;Điện thoại Samsung Galaxy A72;Điện thoại;650;150;:/product35;{6.7 inch Super AMOLED, 1080 x 2400 pixels - 90Hz, Qualcomm Snapdragon 720G - 8 nhân};Samsung
-PRD038;Điện thoại Xiaomi Redmi Note 9 Pro;Điện thoại;400;500;:/product38;{6.67 inch IPS LCD, 1080 x 2400 pixels - 60Hz, Qualcomm Snapdragon 720G - 8 nhân};Xiaomi
-PRD039;Điện thoại Huawei Y7a;Điện thoại;350;150;:/product39;{6.67 inch IPS LCD, 1080 x 2400 pixels - 60Hz, Kirin 710A - 8 nhân};Huawei
+PRD035;Điện thoại Samsung Galaxy A72;Điện thoại;650;144;:/product35;{6.7 inch Super AMOLED, 1080 x 2400 pixels - 90Hz, Qualcomm Snapdragon 720G - 8 nhân};Samsung
+PRD038;Điện thoại Xiaomi Redmi Note 9 Pro;Điện thoại;400;498;:/product38;{6.67 inch IPS LCD, 1080 x 2400 pixels - 60Hz, Qualcomm Snapdragon 720G - 8 nhân};Xiaomi
+PRD039;Điện thoại Huawei Y7a;Điện thoại;350;149;:/product39;{6.67 inch IPS LCD, 1080 x 2400 pixels - 60Hz, Kirin 710A - 8 nhân};Huawei
 PRD040;Điện thoại Honor 9X Pro;Điện thoại;500;50;:/product40;{6.59 inch IPS LCD, 1080 x 2340 pixels - 60Hz, Kirin 810 - 8 nhân};Honor
-PRD037;Điện thoại RedMi Note 9;Điện thoại;678;23;:/product41;{None};RedMi
-PRD006;Điện thoại Apple iPhone SE (2022);Điện thoại;500;1;:/product6;{4.7 inch Retina IPS LCD,750 x 1334 pixels - 60Hz,Apple A15 Bionic - 6 nhân};Apple
+PRD037;Điện thoại RedMi Note 9;Điện thoại;678;22;:/product41;{None};RedMi
+PRD006;Điện thoại Apple iPhone SE (2022);Điện thoại;500;0;:/product6;{4.7 inch Retina IPS LCD,750 x 1334 pixels - 60Hz,Apple A15 Bionic - 6 nhân};Apple
+PRD007;Điện thoại Oppo Find X3;Điện thoại;700;58;:/product7;{6.7 inch AMOLED,1440 x 3216 pixels - 120Hz,Qualcomm Snapdragon 888 - 8 nhân};Oppo
+PRD033;Sam Sung Z Fold 10;Điện thoại;234;0;:/product6;{None};Sam Sung

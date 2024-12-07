@@ -1,0 +1,18 @@
+======================== INVOICE ========================
+Invoice ID          : USER23INV_1                        
+Customer ID         : USER23                             
+Customer Name       : Nguyễn Thị Thảo              
+Phone               : 0123456789                         
+Email               : thao@gmail.com                     
+Address             : 89 Liên Chiểu Đà Nẵng       
+Invoice Date        : 2024-12-02                         
+Delivery Date       : 2025-02-14                         
+Payment Method      : Credit Card                        
+--------------------------------------------------------
+Product Name                            Quantity       Price          Total          
+--------------------------------------------------------
+Điện thoại Honor Play 5T                          1              600.00         600.00         
+Điện thoại Xiaomi Redmi Note 9 Pro                1              400.00         400.00         
+Điện thoại Huawei Y7a                             1              350.00         350.00         
+=====================================================
+                                             Total Amount     : $1350.00

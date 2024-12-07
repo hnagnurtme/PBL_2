@@ -614,8 +614,6 @@ void ManagerInterface:: showInvoiceDetail(int row) {
     QString invoice_ID;
     invoice_ID = invoicesTable->item(row,1)->text();
     string invoiceId = invoice_ID.toStdString();
-    
-
     string invoice;
     dataController->findInvoiceByInvoiceID(invoiceId,invoice);
     showMessage(this,true,QString::fromStdString(invoice));
