@@ -1,9 +1,7 @@
 #pragma once
 #include <initializer_list>
 #include <stdexcept>
-
 using namespace std;
-
 template <typename DataType>
 class Node {
 public:
@@ -12,7 +10,6 @@ public:
     Node* prev;
     Node(const DataType& value) : data(value), next(nullptr), prev(nullptr) {}
 };
-
 template <typename DataType>
 class Vector {
 private:

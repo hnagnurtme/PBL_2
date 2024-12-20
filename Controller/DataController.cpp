@@ -415,11 +415,11 @@ void DataController::saveAllCustomersData(const Vector<Customer>& customers) {
         filename, 
         [](const Customer& customer) {
             return customer.getUserId() + ";" + 
-                   customer.getName() + ";" + 
-                   customer.getEmail() + ";" + 
-                   customer.getPhone() + ";" + 
-                   customer.getPassword() + ";" + 
-                   customer.getAddress();
+                    customer.getName() + ";" + 
+                    customer.getEmail() + ";" + 
+                    customer.getPhone() + ";" + 
+                    customer.getPassword() + ";" + 
+                    customer.getAddress();
         }
     );
 }

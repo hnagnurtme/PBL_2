@@ -1,0 +1,17 @@
+======================== INVOICE ========================
+Invoice ID          : USER006INV_0                       
+Customer ID         : USER006                            
+Customer Name       : Hoàng Văn Nam                    
+Phone               : 0768406240                         
+Email               : namhv@gmail.com                    
+Address             : 22 Hoàng Diệu, Hải Châu, Đà Nẵng
+Invoice Date        : 2024-12-20                         
+Delivery Date       : 2025-01-17                         
+Payment Method      : Credit Card                        
+--------------------------------------------------------
+Product Name                            Quantity       Price          Total          
+--------------------------------------------------------
+Điện thoại Samsung Galaxy Note 20                 1              950.00         950.00         
+Điện thoại iPhone 13 Pro                          1              1200.00        1200.00        
+=====================================================
+                                             Total Amount     : $2150.00

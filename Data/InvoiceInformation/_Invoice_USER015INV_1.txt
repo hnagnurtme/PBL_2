@@ -1,0 +1,17 @@
+======================== INVOICE ========================
+Invoice ID          : USER015INV_1                       
+Customer ID         : USER015                            
+Customer Name       : Võ Văn Lâm                      
+Phone               : 0768406249                         
+Email               : lamvo@gmail.com                    
+Address             : 19 Đống Đa, Hải Châu, Đà Nẵng
+Invoice Date        : 2024-12-20                         
+Delivery Date       : 2024-12-20                         
+Payment Method      : Credit Card                        
+--------------------------------------------------------
+Product Name                            Quantity       Price          Total          
+--------------------------------------------------------
+Điện thoại iPhone 13 Pro                          1              1200.00        1200.00        
+Điện thoại Xiaomi Mi 11                           1              800.00         800.00         
+=====================================================
+                                             Total Amount     : $2000.00

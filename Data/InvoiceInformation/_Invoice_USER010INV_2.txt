@@ -1,0 +1,17 @@
+======================== INVOICE ========================
+Invoice ID          : USER010INV_2                       
+Customer ID         : USER010                            
+Customer Name       : Trịnh Văn Hoàng                
+Phone               : 0768406244                         
+Email               : hoangtrinh@gmail.com               
+Address             : 7 Trần Phú, Hải Châu, Đà Nẵng
+Invoice Date        : 2024-12-20                         
+Delivery Date       : 2025-01-11                         
+Payment Method      : Bank Transfer                      
+--------------------------------------------------------
+Product Name                            Quantity       Price          Total          
+--------------------------------------------------------
+Điện thoại INOI A54 Spectr                        11             880.00         9680.00        
+Điện thoại TECNO Pova 6 NEO                       8              900.00         7200.00        
+=====================================================
+                                             Total Amount     : $16880.00

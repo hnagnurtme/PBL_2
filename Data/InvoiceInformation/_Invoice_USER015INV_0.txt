@@ -1,0 +1,19 @@
+======================== INVOICE ========================
+Invoice ID          : USER015INV_0                       
+Customer ID         : USER015                            
+Customer Name       : Võ Văn Lâm                      
+Phone               : 0768406249                         
+Email               : lamvo@gmail.com                    
+Address             : 19 Đống Đa, Hải Châu, Đà Nẵng
+Invoice Date        : 2024-12-20                         
+Delivery Date       : 2024-12-20                         
+Payment Method      : Bank Transfer                      
+--------------------------------------------------------
+Product Name                            Quantity       Price          Total          
+--------------------------------------------------------
+Điện thoại iPhone 13                              1              950.00         950.00         
+Điện thoại Samsung Galaxy S21New Update           1              233.00         233.00         
+Điện thoại Vivo V21 5G                            1              780.00         780.00         
+Điện thoại Poco X3 Pro                            1              400.00         400.00         
+=====================================================
+                                             Total Amount     : $2363.00
