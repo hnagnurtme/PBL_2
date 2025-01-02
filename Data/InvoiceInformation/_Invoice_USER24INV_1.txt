@@ -1,0 +1,19 @@
+======================== INVOICE ========================
+Invoice ID          : USER24INV_1                        
+Customer ID         : USER24                             
+Customer Name       : Lê Diệu Hương                 
+Phone               : 0123456789                         
+Email               : huong@gmail.com                    
+Address             : 23 Liên Chiểu Đà Nẵng       
+Invoice Date        : 2025-01-01                         
+Delivery Date       : 2025-01-16                         
+Payment Method      : Bank Transfer                      
+--------------------------------------------------------
+Product Name                            Quantity       Price          Total          
+--------------------------------------------------------
+Điện thoại iPhone 13                              1              950.00         950.00         
+Điện thoại Oppo Find X3                           2              700.00         1400.00        
+Điện thoại Vivo X60                               1              750.00         750.00         
+Điện thoại Realme Narzo 30                        1              350.00         350.00         
+=====================================================
+                                             Total Amount     : $3450.00

@@ -1,0 +1,19 @@
+======================== INVOICE ========================
+Invoice ID          : USER001INV_8                       
+Customer ID         : USER001                            
+Customer Name       : Nguyễn Văn Trung Ánh           
+Phone               : 0768406235                         
+Email               : trunganh@gmail.com                 
+Address             : 26 Đặng Chất, Hòa Khánh Bắc, Liên Chiểu, Đà Nẵng
+Invoice Date        : 2025-01-01                         
+Delivery Date       : 2025-01-09                         
+Payment Method      : Bank Transfer                      
+--------------------------------------------------------
+Product Name                            Quantity       Price          Total          
+--------------------------------------------------------
+Điện thoại Samsung Galaxy S21                     1              1000.00        1000.00        
+Điện thoại Samsung Galaxy Note 20                 2              950.00         1900.00        
+Điện thoại Xiaomi Mi 11                           3              800.00         2400.00        
+Điện thoại iPhone 13 Pro                          2              1200.00        2400.00        
+=====================================================
+                                             Total Amount     : $7700.00

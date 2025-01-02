@@ -1,0 +1,18 @@
+======================== INVOICE ========================
+Invoice ID          : USER25INV_0                        
+Customer ID         : USER25                             
+Customer Name       : Hương Nguyen                     
+Phone               : 0768406235                         
+Email               : huonghuong@gmail.com               
+Address             : Đà Nẵng                        
+Invoice Date        : 2025-01-01                         
+Delivery Date       : 2025-01-10                         
+Payment Method      : Bank Transfer                      
+--------------------------------------------------------
+Product Name                            Quantity       Price          Total          
+--------------------------------------------------------
+Điện thoại LG Velvet                              1              750.00         750.00         
+Điện thoại Sony Xperia 1 II                       1              1400.00        1400.00        
+Điện thoại INOI A54 Spectr                        1              880.00         880.00         
+=====================================================
+                                             Total Amount     : $3030.00

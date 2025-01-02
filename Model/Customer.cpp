@@ -5,7 +5,6 @@ Customer::Customer(const Customer& other) : User(other) {
     this->cart = new Cart(*other.cart);  
     this->orderHistory = new Orders(*other.orderHistory);  
 }
-
 Customer ::Customer(const string& userId) {
     cart = new Cart(userId);
     orderHistory = new Orders(userId);
