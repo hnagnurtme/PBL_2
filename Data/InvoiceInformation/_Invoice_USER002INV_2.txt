@@ -1,0 +1,18 @@
+======================== INVOICE ========================
+Invoice ID          : USER002INV_2                       
+Customer ID         : USER002                            
+Customer Name       : Trần Thị Thu Hà               
+Phone               : 0768406236                         
+Email               : thuhatr@gmail.com                  
+Address             : 15 Lê Văn Hiến, Ngũ Hành Sơn, Đà Nẵng
+Invoice Date        : 2025-01-03                         
+Delivery Date       : 2025-01-24                         
+Payment Method      : Bank Transfer                      
+--------------------------------------------------------
+Product Name                            Quantity       Price          Total          
+--------------------------------------------------------
+Điện thoại Xiaomi Mi 11                           1              800.00         800.00         
+Điện thoại iPhone 13 Pro                          1              1200.00        1200.00        
+Điện thoại Huawei P40 Pro                         3              1200.00        3600.00        
+=====================================================
+                                             Total Amount     : $5600.00

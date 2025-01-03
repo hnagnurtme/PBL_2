@@ -920,7 +920,7 @@ void ManagerInterface::showSoldProduct() {
     dialog->resize(800, 500);
     QTableWidget *table = new QTableWidget(dialog);
     table->setColumnCount(4);
-    table->setHorizontalHeaderLabels({"Product ID","Product Name" , "Quantity Sold","Price"});
+    table->setHorizontalHeaderLabels({"Product ID","Product Name" , "Price","Quantity Sold"});
     table->setRowCount(soldProducts.getSize());
     for (int i = 0; i < soldProducts.getSize(); ++i) {
         const Pair<string, int> &product = soldProducts[i];

@@ -1,0 +1,19 @@
+======================== INVOICE ========================
+Invoice ID          : USER26INV_0                        
+Customer ID         : USER26                             
+Customer Name       : Nguyễn Diệu Hiền             
+Phone               : 0123456786                         
+Email               : hienhien@gmail.com                 
+Address             : 78 Liên Chiểu Đà Nẵng       
+Invoice Date        : 2025-01-02                         
+Delivery Date       : 2025-01-02                         
+Payment Method      : Bank Transfer                      
+--------------------------------------------------------
+Product Name                            Quantity       Price          Total          
+--------------------------------------------------------
+Điện thoại Oppo A3                                1              900.00         900.00         
+Điện thoại HONOR X6A                              1              750.00         750.00         
+Điện thoại Realme C61                             1              800.00         800.00         
+Điện thoại Oppo Reno10 5G                         1              900.00         900.00         
+=====================================================
+                                             Total Amount     : $3350.00

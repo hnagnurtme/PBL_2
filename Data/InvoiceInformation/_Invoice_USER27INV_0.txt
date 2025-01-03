@@ -1,0 +1,19 @@
+======================== INVOICE ========================
+Invoice ID          : USER27INV_0                        
+Customer ID         : USER27                             
+Customer Name       : Nguyễn Ánh Non                  
+Phone               : 0123456789                         
+Email               : non@gmail.com                      
+Address             : 90 Hòa Khánh Liên Chiểu       
+Invoice Date        : 2025-01-03                         
+Delivery Date       : 2025-01-17                         
+Payment Method      : Bank Transfer                      
+--------------------------------------------------------
+Product Name                            Quantity       Price          Total          
+--------------------------------------------------------
+Điện thoại HONOR X6A                              1              750.00         750.00         
+Điện thoại Realme C61                             1              800.00         800.00         
+Điện thoại Honor 9X Pro                           1              500.00         500.00         
+Điện thoại Huawei Y7a                             1              350.00         350.00         
+=====================================================
+                                             Total Amount     : $2400.00

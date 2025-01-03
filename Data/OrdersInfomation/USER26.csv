@@ -1,0 +1,2 @@
+InvoiceID,PlaceOrderDate,DeliveryDate,TotalAmount,PaymentMethod
+USER26INV_0,2025-01-02,2025-01-02,3350,Bank Transfer
