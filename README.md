@@ -1,9 +1,7 @@
 # Hệ Thống Quản Lý Cửa Hàng Điện Thoại
-
+**Grade: 9.7/10**
 ## Giới Thiệu
-Dự án "Hệ Thống Quản Lý Cửa Hàng Điện Thoại" là bài tập lập trình cơ sở (PBL2) được thực hiện bởi hai sinh viên Nguyễn Văn Trung Anh và Đoàn Kiều Ngân, thuộc lớp 23T_DT1, khóa 2023, Khoa Công nghệ Thông tin, Trường Đại học Bách Khoa, Đại học Đà Nẵng. Dự án được hoàn thành dưới sự hướng dẫn của TS. Đặng Hoài Phương vào tháng 1 năm 2025.
-
-Hệ thống này là một nền tảng trực tuyến giúp quản lý cửa hàng điện thoại, hỗ trợ cả khách hàng và người quản lý. Mục tiêu là tối ưu hóa quy trình mua sắm, quản lý sản phẩm, đơn hàng và doanh thu, đồng thời nâng cao trải nghiệm người dùng trong bối cảnh thương mại điện tử ngày càng phát triển.
+Dự án "Hệ Thống Quản Lý Cửa Hàng Điện Thoại" là một nền tảng trực tuyến giúp quản lý cửa hàng điện thoại, hỗ trợ cả khách hàng và người quản lý. Mục tiêu là tối ưu hóa quy trình mua sắm, quản lý sản phẩm, đơn hàng và doanh thu, đồng thời nâng cao trải nghiệm người dùng trong bối cảnh thương mại điện tử ngày càng phát triển.
 
 ## Mục Tiêu Của Dự Án
 
@@ -102,12 +100,59 @@ Hệ thống này là một nền tảng trực tuyến giúp quản lý cửa h
 
 ### Giao Diện Khách Hàng:
 - **Đăng nhập/đăng ký**: Hiển thị thông báo "Login successful" hoặc "Invalid email or password".
+- ![image](https://github.com/user-attachments/assets/379f71e9-e366-455f-937e-597bb9072267)
+
 - **Danh sách sản phẩm**: Xem, tìm kiếm và thêm sản phẩm vào giỏ hàng.
+- ![image](https://github.com/user-attachments/assets/bd2cc368-7233-4cce-b274-604e7592da95)
+
+- ![image](https://github.com/user-attachments/assets/49b02eb9-9e6b-43a3-91b5-174fa7b60144)
+
+
+
 - **Giỏ hàng**: Thêm, giảm, xóa sản phẩm; hiển thị thông báo nếu hết hàng.
+
+- ![image](https://github.com/user-attachments/assets/ba4f5753-da99-4467-b29a-4567e7737ac5)
+- 
+- ![image](https://github.com/user-attachments/assets/c194875b-207d-4f01-b947-1a29b8e39b4a)
+
 - **Đặt hàng**: Chọn ngày giao, phương thức thanh toán, nhận thông báo "Mua hàng thành công".
+- ![image](https://github.com/user-attachments/assets/fa438e7b-03e0-4dd2-a683-620cff6c8afd)
+
+- ![image](https://github.com/user-attachments/assets/6717927f-e434-4050-8e9d-99ce8b397bda)
+
+- ![image](https://github.com/user-attachments/assets/46812a0b-4bcf-411a-bfe6-fdb480e3ca86)
+
+- **Chỉnh sửa**: Thêm , sửa xoá sản phẩm.
+- ![image](https://github.com/user-attachments/assets/641c3439-6af7-4c46-a081-737b55d16100)
+
+- ![image](https://github.com/user-attachments/assets/25d25010-c1a6-46ed-ad1e-f4cdbbeebf4b)
+
+- ![image](https://github.com/user-attachments/assets/0dae823b-2e3c-4da7-8916-accf158754ec)
+
+- ![image](https://github.com/user-attachments/assets/701fd47c-ed20-44c6-8e16-37e0c5f2fa30)
+
 - **Thống kê**: Biểu đồ cột hiển thị số tiền chi tiêu trên mỗi hóa đơn.
+
+- ![image](https://github.com/user-attachments/assets/dd386c4b-7f60-454f-bd61-593c31bca6c7)
+
+- ![image](https://github.com/user-attachments/assets/a34a2aad-3cd8-49ee-ad83-2f87a2dc3f2b)
+
+- ![image](https://github.com/user-attachments/assets/07102841-d454-4fec-922e-134484f0abca)
+
+- ![image](https://github.com/user-attachments/assets/102be7ac-741d-4618-bb47-54b2e78ddc9f)
+
+- ![image](https://github.com/user-attachments/assets/85181b55-8f26-409b-934e-659477e1a6a3)
+
+- ![image](https://github.com/user-attachments/assets/2bc4dbed-c0c2-4753-9595-1096bbfab1fd)
+
+- ![image](https://github.com/user-attachments/assets/97abb9a5-7bba-4a0f-abd7-1e18c0075a13)
 
 ---
 
 ## Liên Hệ
-Để biết thêm chi tiết hoặc hỗ trợ kỹ thuật, vui lòng liên hệ qua email: `support@bka.edu.vn`.
+Để biết thêm chi tiết hoặc hỗ trợ kỹ thuật, vui lòng liên hệ qua email: `102230174@sv1.dut.udn.vn`.
+
+## Tài Liệu Tham Khảo
+- **Video Demo PBL2**: [DEMO.mp4](https://drive.google.com/file/d/1REmA7QyUNxuU0Mn5X1wPcLwzD2soVSVG/view?usp=drive_link)
+- **Báo cáo PBL2**: [BAOCAO-FINAL.pdf](https://github.com/user-attachments/files/18299404/BAOCAO-FINAL.pdf)
+
