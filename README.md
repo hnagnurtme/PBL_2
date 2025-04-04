@@ -2,7 +2,7 @@
 
 ## Giới Thiệu
 Dự án "Hệ Thống Quản Lý Cửa Hàng Điện Thoại" là một nền tảng trực tuyến giúp quản lý cửa hàng điện thoại, hỗ trợ cả khách hàng và người quản lý. Mục tiêu là tối ưu hóa quy trình mua sắm, quản lý sản phẩm, đơn hàng và doanh thu, đồng thời nâng cao trải nghiệm người dùng trong bối cảnh thương mại điện tử ngày càng phát triển.
-**Grade: 9.7/10**
+- **Grade: 9.7/10**
 ## Mục Tiêu Của Dự Án
 
 ### Đối Với Khách Hàng:
